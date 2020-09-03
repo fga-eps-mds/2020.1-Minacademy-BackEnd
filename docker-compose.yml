@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+  server:
+    build: ./server
+    volumes:
+      - ./server:/node-app
+      - ./server/node_modules:/node-app/node_modules
+    environment:
+      NODE_ENV: development
+      MONGO_URL: mongodb://admin:admin@mongo:27017/db?authSource=admin
+      PORT: 9000
+      WAIT_HOSTS: mongo:27017
+    depends_on:
+      - mongo
+    ports:
+      - '9000:9000'
+    networks:
+      - client-server-network
+
+  mongo:
+    image: mongo:4.2.9
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    volumes:
+      - db:/data/db
+      - dump:/dump
+      - ./seeds:/seeds
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: db
+    networks:
+      - client-server-network
+  
+  seeder:
+    build: ./seeds
+    networks:
+      - client-server-network
+
+
+volumes:
+  db:
+  dump:
+
+networks:
+  client-server-network:
+    name: client-server-network
+# networks:
+#   client-server-network:
+#     external:
+#       name: client-server-network
+
+
