@@ -4,10 +4,10 @@ WORKDIR /node-app
 
 COPY ./package.json .
 
-RUN npm install --quiet
+RUN npm install --quiet --no-optional
 RUN npm install nodemon -g --quiet
 
-COPY . . 
+COPY . .
 
 EXPOSE 9000
 

@@ -5,7 +5,7 @@ services:
     build: ./server
     volumes:
       - ./server:/node-app
-      - ./server/node_modules:/node-app/node_modules
+      - /node-app/node_modules
     environment:
       NODE_ENV: development
       MONGO_URL: mongodb://admin:admin@mongo:27017/db?authSource=admin
@@ -33,7 +33,7 @@ services:
       MONGO_INITDB_DATABASE: db
     networks:
       - client-server-network
-  
+
   seeder:
     build: ./seeds
     networks:
