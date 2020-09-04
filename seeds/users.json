@@ -1,0 +1,32 @@
+[
+    {
+        "_id": {
+            "$oid": "5f4fedaefc13ae5380000000"
+        },
+        "name": "Rosalyn"
+    },
+    {
+        "_id": {
+            "$oid": "5f4fedaefc13ae5380000001"
+        },
+        "name": "Jacquie"
+    },
+    {
+        "_id": {
+            "$oid": "5f4fedaefc13ae5380000002"
+        },
+        "name": "Ami"
+    },
+    {
+        "_id": {
+            "$oid": "5f4fedaefc13ae5380000003"
+        },
+        "name": "Vassili"
+    },
+    {
+        "_id": {
+            "$oid": "5f4fedaefc13ae5380000004"
+        },
+        "name": "Ag"
+    }
+]
