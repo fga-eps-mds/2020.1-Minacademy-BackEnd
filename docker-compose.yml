@@ -17,6 +17,7 @@ services:
       - '9000:9000'
     networks:
       - client-server-network
+      - server-network
 
   mongo:
     image: mongo:4.2.9
@@ -32,12 +33,12 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: admin
       MONGO_INITDB_DATABASE: db
     networks:
-      - client-server-network
-
+      - server-network
+  
   seeder:
     build: ./seeds
     networks:
-      - client-server-network
+      - server-network
 
 
 volumes:
@@ -47,9 +48,8 @@ volumes:
 networks:
   client-server-network:
     name: client-server-network
-# networks:
-#   client-server-network:
-#     external:
-#       name: client-server-network
+  server-network:
+    name: server-network
+
 
 
