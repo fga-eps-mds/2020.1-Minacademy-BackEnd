@@ -1,4 +1,4 @@
-# Minacademy Frontend
+# Minacademy Backend
 
 Repositório do BackEnd do projeto [Minacademy](https://github.com/fga-eps-mds/2020.1-Grupo4).
 
