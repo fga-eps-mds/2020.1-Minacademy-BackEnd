@@ -11,7 +11,7 @@ module.exports = {
 
     async createUser(req, res, next){
         try{
-            const {email, username} = req.body;
+            const {email, name, password } = req.body;
             if(await User.findOne({email}))
                 return res.status(400).send({error: 'Email already used'});
             
