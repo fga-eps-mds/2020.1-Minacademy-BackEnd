@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const validator = require('validator')
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -11,12 +12,21 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        lowercase: true
+        lowercase: true,
+        validate(value) {
+            if (!validator.isEmail(value))
+                throw new Error('Email is invalid')
+        }
     },
     password: {
         type: String,
         required: true,
-        select: false
+        select: false,
+        minlength: 6,
+        validate(value) {
+            if (value.includes('password'))
+                throw new Error('Password must not contain "password"')
+        }
     },
     userType: {
         type: String,
@@ -35,10 +45,12 @@ const UserSchema = new Schema({
 UserSchema.pre('save', async function (next) {
     const user = this
     if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
+        user.password = await bcrypt.hash(user.password, 10)
     }
-    const hash = await bcrypt.hash(this.password, 10);
-    this.password = hash;
+    /**
+     const hash = await bcrypt.hash(this.password, 10);
+     this.password = hash;
+     */
     next();
 })
 

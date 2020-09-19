@@ -17,15 +17,15 @@ module.exports = {
             if (await User.findOne({ email }))
                 return res.status(400).send({ error: 'Email already used' });
 
-            const class_body = await User.create(req.body);
-            class_body.password = undefined;
+            const user = await User.create(req.body);
+            user.password = undefined;
             
-            const acessToken = jwt.sign({id: email}, userAuth.secret, {
+            const accessToken = jwt.sign({id: email}, userAuth.secret, {
                 expiresIn: 300
             });
-            return res.send({class_body, acessToken});
+            return res.status(201).send({user, accessToken});
         } catch (err) {
-            return res.status(400).send({ error: 'Register Failed' });
+            return res.status(400).send({ error: err.message });
         }
     },
 
@@ -42,25 +42,25 @@ module.exports = {
         user.password = undefined;
 
         try {
-            const acessToken = jwt.sign({id: email}, userAuth.secret, {
+            const accessToken = jwt.sign({id: email}, userAuth.secret, {
                 expiresIn: 300
             });
-            return res.send({ user, acessToken });
+            return res.status(201).send({ user, accessToken });
         } catch (err) {
             return res.status(400).send({ error: 'Login Failed' });
         }
     },
 
     async authLogout(req, res, next) {
-        res.send({ user, acesssToken: null });
+        res.send({ user, accessToken: null });
     },
     
     async removeUser(req, res, next) {
         try {
-            const { email } = req.body;
-            const class_body = await User.findOneAndDelete({ email });
-            return res.json(class_body);
-            class_body.password = undefined;
+            const { _id } = req.body;
+            const user = await User.findOneAndDelete({ _id });
+            user.password = undefined;
+            return res.status(201).json(user);
         } catch (err) {
             return res.status(400).send({ error: 'Remove Failed' });
         }
