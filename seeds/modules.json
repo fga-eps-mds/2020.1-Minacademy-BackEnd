@@ -1,0 +1,153 @@
+[
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000000"
+        },
+        "title":"Introdução"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000001"
+        },
+        "title":"Instalação"
+    },
+    {
+        "_id":{
+            "$oid":"5f652249fc13ae49f0000002"
+        },
+        "title":"Configuração do Chromebook"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000003"
+        },
+        "title":"Como a Internet funciona"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000004"
+        },
+        "title":"Introdução à linha de comando"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000005"
+        },
+        "title":"Instalação do Python"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000006"
+        },
+        "title":"Editor de Código"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000007"
+        },
+        "title":"Introdução ao Python"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000008"
+        },
+        "title":"O que é Django?"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000009"
+        },
+        "title":"Instalação do Django"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f000000a"
+        },
+        "title":"Seu primeiro projeto Django!"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f000000b"
+        },
+        "title":"Modelos do Django"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f000000c"
+        },
+        "title":"Django Admin"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f000000d"
+        },
+        "title":"Deploy!"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f000000e"
+        },
+        "title":"URLs"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f000000f"
+        },
+        "title":"Django views - hora de criar!"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000010"
+        },
+        "title":"Introdução ao HTML"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000011"
+        },
+        "title":"QuerySets e ORM do Django"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000012"
+        },
+        "title":"Dados dinâmicos em templates"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000013"
+        },
+        "title":"Templates do Django"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000014"
+        },
+        "title":"CSS - deixe tudo mais bonito!"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000015"
+        },
+        "title":"Estendendo os templates"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000016"
+        },
+        "title":"Amplie sua aplicação"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000017"
+        },
+        "title":"Formulários do Django"
+    },
+    {
+        "_id": {
+            "$oid":"5f652249fc13ae49f0000018"
+        },
+        "title":"O que vem agora?"
+    }
+
+]
