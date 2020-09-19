@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require("cors");
+const userRouter = require('./routes')
 require('dotenv').config();
 
 const app = express();
@@ -18,7 +19,7 @@ db.once('open', function () {
 });
 
 app.use(express.json());
-app.use(require('./routes'));
+app.use(userRouter);
 
 app.listen(process.env.PORT != null ? process.env.PORT : 9000, () => {
   console.log('Server started on port ' + process.env.PORT + '!');
