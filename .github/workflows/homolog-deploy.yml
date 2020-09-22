@@ -1,0 +1,27 @@
+name: Continuous Integration and Delivery
+
+on:
+  push:
+    branches: 
+      - develop
+      - 50-ci-cd
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          name: fga-eps-mds/2020.1-Minacademy-BackEnd/server
+          tags: homolog
+          context: ./server/
+          default_branch: develop
+          dockerfile: prod.Dockerfile
+
