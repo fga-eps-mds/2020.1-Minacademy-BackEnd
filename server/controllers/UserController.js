@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { restart } = require('nodemon');
 const User = require('../models/User');
 const userAuth = require('../config/userAuth')
 const { findOne } = require('../models/User');
