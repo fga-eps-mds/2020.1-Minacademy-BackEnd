@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  server:
+    build: 
+      context: ./server
+      dockerfile: ./prod.Dockerfile
+    depends_on:
+      - mongo
+    ports:
+      - '9000:9000'
+    env_file: 
+      - .env-prod
+    networks:
+      - client-server-network
+      - server-network
+
+  mongo:
+    image: mongo:4.2.9
+    restart: always
+    ports:
+      - 27017:27017
+    env_file: 
+      - .env-prod
+    volumes:
+      - db:/data/db
+      - dump:/dump
+    networks:
+      - server-network
+
+volumes:
+  db:
+  dump:
+
+networks:
+  client-server-network:
+    name: client-server-network
+  server-network:
+    name: server-network
+
+
+
