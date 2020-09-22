@@ -67,7 +67,8 @@ module.exports = {
     },
 
     async editUser(req, res) {
-        User.findByIdAndUpdate({ _id: req.params.id }, { name: req.body.name, email: req.body.email, about: req.body.about, profileImg: req.body.profileImg }, { new: true },
+        const update = { name: req.body.name, email: req.body.email, about: req.body.about, profileImg: req.body.profileImg }
+        User.findByIdAndUpdate({ _id: req.params.id },update,{ new: true, runValidators: true},
             function (err, result) {
                 if (err) {
                     res.send(err)
