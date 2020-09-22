@@ -12,6 +12,7 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true,
+        trim: true,
         lowercase: true,
         validate(value) {
             if (!validator.isEmail(value))
@@ -21,7 +22,6 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true,
-        select: false,
         minlength: 6,
         validate(value) {
             if (value.includes('password'))
@@ -30,7 +30,7 @@ const UserSchema = new Schema({
     },
     userType: {
         type: String,
-        required: true
+        required: false
     },
     isAdmin: {
         type: Boolean,
@@ -40,18 +40,30 @@ const UserSchema = new Schema({
         type: [String],
         select: false
     },
+    tokens: [{
+        accessToken: {
+           type: String
+        }
+     }]
 });
+
+UserSchema.methods.toJSON = function () {
+    const user = this
+    const userObject = user.toObject()
+
+    delete userObject.password
+    delete userObject.tokens
+
+    return userObject
+ }
 
 UserSchema.pre('save', async function (next) {
     const user = this
     if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 10)
     }
-    /**
-     const hash = await bcrypt.hash(this.password, 10);
-     this.password = hash;
-     */
     next();
 })
+
 
 module.exports = mongoose.model('User', UserSchema);
