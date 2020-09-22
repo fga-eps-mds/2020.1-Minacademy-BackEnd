@@ -37,7 +37,7 @@ module.exports = {
             const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
             user.tokens = user.tokens.concat({ accessToken })
             await user.save()
-            res.cookie('auth_token', accessToken, {httpOnly: false})
+            res.cookie('auth_token', accessToken, { httpOnly: false })
             res.send({ user, accessToken })
         } catch (err) {
             return res.status(400).send({ error: err.message });
@@ -49,10 +49,10 @@ module.exports = {
             req.user.tokens = req.user.tokens.filter(token => { return token.accessToken !== req.token })
             await req.user.save()
 
-            res.send({ logout: 'Logged out'})
-         } catch (error) {
+            res.send({ logout: 'Logged out' })
+        } catch (error) {
             res.status(500).send(error)
-         }
+        }
     },
 
     async removeUser(req, res) {
@@ -64,5 +64,18 @@ module.exports = {
         } catch (err) {
             return res.status(400).send({ error: 'Remove Failed' });
         }
+    },
+
+    async editUser(req, res) {
+        User.findByIdAndUpdate({ _id: req.params.id }, { name: req.body.name, email: req.body.email, about: req.body.about, profileImg: req.body.profileImg }, { new: true },
+            function (err, result) {
+                if (err) {
+                    res.send(err)
+                }
+                else {
+                    res.send(result)
+                }
+
+            })
     }
 };

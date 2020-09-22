@@ -32,6 +32,14 @@ const UserSchema = new Schema({
         type: String,
         required: false
     },
+    about: {
+        type: String,
+        required: false
+    },
+    profileImg: {
+        type: String,
+        required: false
+    },
     isAdmin: {
         type: Boolean,
         select: false
