@@ -37,7 +37,7 @@ module.exports = {
             const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
             user.tokens = user.tokens.concat({ accessToken })
             await user.save()
-            res.cookie('auth_token', accessToken, {httpOnly: false})
+            res.cookie('auth_token', accessToken)
             res.send({ user, accessToken })
         } catch (err) {
             return res.status(400).send({ error: err.message });

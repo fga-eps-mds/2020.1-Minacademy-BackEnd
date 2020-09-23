@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
 const userRouter = require('./routes')
+const questionRouter = require('./routers/question')
 require('dotenv').config();
 
 const app = express();
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(userRouter);
+app.use(questionRouter);
 
 app.listen(process.env.PORT != null ? process.env.PORT : 9000, () => {
   console.log('Server started on port ' + process.env.PORT + '!');
