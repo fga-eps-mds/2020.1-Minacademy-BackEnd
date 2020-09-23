@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const userAuth = require('../config/userAuth')
+const userAuth = require('../config/userAuth');
+const { find } = require('../models/User');
 
 module.exports = {
     async getUsers(req, res) {
@@ -67,8 +68,12 @@ module.exports = {
     },
 
     async editUser(req, res) {
+        const token = req.cookies['auth_token']
+        const decodedToken = jwt.verify(token, userAuth.secret)
+        const email = decodedToken.id;
+        const user = await User.findOne({ email })
         const update = { name: req.body.name, email: req.body.email, about: req.body.about, profileImg: req.body.profileImg }
-        User.findByIdAndUpdate({ _id: req.params.id },update,{ new: true, runValidators: true},
+        User.findByIdAndUpdate({ _id: user.id }, update, { new: true, runValidators: true },
             function (err, result) {
                 if (err) {
                     res.send(err)
