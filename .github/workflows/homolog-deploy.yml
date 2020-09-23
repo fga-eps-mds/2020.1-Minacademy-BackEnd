@@ -25,7 +25,7 @@ jobs:
           name: fga-eps-mds/2020.1-Minacademy-BackEnd/server
           tags: homolog
           workdir: server
-          default_branch: 50-ci-cd
+          default_branch: develop
           dockerfile: prod.Dockerfile
       
 
