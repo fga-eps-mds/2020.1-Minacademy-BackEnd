@@ -4,7 +4,7 @@
             "$oid": "5f6b93f56397f3e01b5a40fc"
         },
         "number": 1,
-        "module": "5f652249fc13ae49f0000000",
+        "module": {"$oid": "5f652249fc13ae49f0000000"},
         "description": "Julgue as seguintes assertivas diante do que foi apresentado: \nI. Ao fim desse tutorial você se tornará magicamente em uma programadora. \nII. É necessário meses, ou até mesmo anos de treino e prática para se tornar uma programadora excepcional. \nÉ correto o que se afirma somente em: ",
         "alternatives": {
             "a": "Apenas em I",
@@ -15,8 +15,11 @@
         "answer": "b"
     },
     {
+        "_id": {
+            "$oid": "5f6c5d369d1011f5031738d1"
+        },
         "number": 2,
-        "module": "5f652249fc13ae49f0000001",
+        "module": {"$oid":"5f652249fc13ae49f0000001"},
         "description": "Questão não elaborada",
         "alternatives": {
             "a": "A",
@@ -27,6 +30,9 @@
         "answer": "b"
     },
     {
+        "_id": {
+            "$oid": "5f6c5d369d1011f5031738d2"
+        },
         "number": 3,
         "module": 3,
         "description": "Questão não elaborada",
@@ -39,6 +45,9 @@
         "answer": "b"
     },
     {
+        "_id": {
+            "$oid": "5f6c5d369d1011f5031738d3"
+        },
         "number": 4,
         "module": 4,
         "description": "O que acontece ao apertar a tecla ‘ENTER’ após digitar um endereço host?",
@@ -51,6 +60,9 @@
         "answer": "a"
     },
     {
+        "_id": {
+            "$oid": "5f6c5d369d1011f5031738d4"
+        },
         "number": 5,
         "module": 5,
         "description": "Para que serve a linha de comando?",
@@ -63,6 +75,9 @@
         "answer": "c"
     },
     {
+        "_id": {
+            "$oid": "5f6c5d369d1011f5031738d5"
+        },
         "number": 6,
         "module": 6,
         "description": "Django é escrito em qual linguagem?",
@@ -75,6 +90,9 @@
         "answer": "c"
     },
     {
+        "_id": {
+            "$oid": "5f6c5d369d1011f5031738d6"
+        },
         "number": 7,
         "module": 7,
         "description": "Editores de códigos nativos são recomendáveis para codar?",
