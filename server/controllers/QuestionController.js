@@ -7,7 +7,7 @@ module.exports = {
       const query = req.query
       try {
          const module = await Module.findOne(query)
-         if (!module) res.send([])
+         if (!module) throw new Error('Modulo não encontrado')
          await module.populate('questions').execPopulate()
          res.send(module.questions)
       } catch (error) {
