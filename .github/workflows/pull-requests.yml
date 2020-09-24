@@ -1,0 +1,17 @@
+name: Continuous Integration - PR's Tests
+
+on:
+  pull_request:
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run tests
+        uses: mattallty/jest-github-action@v1
+        with:
+          working-directory: "server"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
