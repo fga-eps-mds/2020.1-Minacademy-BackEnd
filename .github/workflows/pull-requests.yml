@@ -10,6 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install Modules
+      working-directory: server
       run: npm install
     - name: Run Tests
+      working-directory: server
       run: npm test
