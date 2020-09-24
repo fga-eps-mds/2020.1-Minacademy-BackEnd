@@ -8,10 +8,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Run tests
-        uses: mattallty/jest-github-action@v1
-        with:
-          working-directory: "server"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+    - uses: actions/checkout@v2
+    - name: Install Modules
+      run: npm install
+    - name: Run Tests
+      run: npm test
