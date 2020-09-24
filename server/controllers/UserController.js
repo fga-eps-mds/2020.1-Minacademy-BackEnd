@@ -72,7 +72,7 @@ module.exports = {
         const decodedToken = jwt.verify(token, userAuth.secret)
         const email = decodedToken.id;
         const user = await User.findOne({ email })
-        const update = { name: req.body.name, email: req.body.email, about: req.body.about, profileImg: req.body.profileImg }
+        const update = { name: req.body.name, email: req.body.email, userType: req.body.userType, about: req.body.about, profileImg: req.body.profileImg }
         User.findByIdAndUpdate({ _id: user.id }, update, { new: true, runValidators: true },
             function (err, result) {
                 if (err) {
