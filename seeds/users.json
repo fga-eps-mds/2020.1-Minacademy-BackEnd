@@ -3,30 +3,35 @@
         "_id": {
             "$oid": "5f4fedaefc13ae5380000000"
         },
-        "name": "Rosalyn"
+        "name": "Rosalyn",
+        "email": "rosalyn@email.com"
     },
     {
         "_id": {
             "$oid": "5f4fedaefc13ae5380000001"
         },
-        "name": "Jacquie"
+        "name": "Jacquie",
+        "email": "jacquie@email.com"
     },
     {
         "_id": {
             "$oid": "5f4fedaefc13ae5380000002"
         },
-        "name": "Ami"
+        "name": "Ami",
+        "email": "ami@email.com"
     },
     {
         "_id": {
             "$oid": "5f4fedaefc13ae5380000003"
         },
-        "name": "Vassili"
+        "name": "Vassili",
+        "email": "vassili@email.com"
     },
     {
         "_id": {
             "$oid": "5f4fedaefc13ae5380000004"
         },
-        "name": "Ag"
+        "name": "Ag",
+        "email": "ag@email.com"
     }
 ]

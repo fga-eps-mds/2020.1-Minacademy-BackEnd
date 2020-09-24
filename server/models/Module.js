@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ModuleSchema = new Schema({
   title: String,
-  number: {
+  moduleNumber: {
     type: Number
   }
 })
@@ -14,4 +14,4 @@ ModuleSchema.virtual('questions', {
   foreignField: 'module'
 })
 
-module.exports = mongoose.model('Module', ModuleSchema);;
+module.exports = mongoose.model('Module', ModuleSchema);

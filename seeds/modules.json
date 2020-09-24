@@ -3,13 +3,15 @@
         "_id": {
             "$oid":"5f652249fc13ae49f0000000"
         },
-        "title":"Introdução"
+        "title":"Introdução",
+        "moduleNumber": 1
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000001"
         },
-        "title":"Instalação"
+        "title":"Instalação",
+        "moduleNumber": 2
     },
     {
         "_id":{
