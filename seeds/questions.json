@@ -1,107 +1,495 @@
 [
     {
         "_id": {
-            "$oid": "5f6b93f56397f3e01b5a40fc"
+            "$oid": "5f6cfbb6fc13ae3bc6000064"
         },
         "number": 1,
-        "module": {"$oid": "5f652249fc13ae49f0000000"},
-        "description": "Julgue as seguintes assertivas diante do que foi apresentado: \nI. Ao fim desse tutorial você se tornará magicamente em uma programadora. \nII. É necessário meses, ou até mesmo anos de treino e prática para se tornar uma programadora excepcional. \nÉ correto o que se afirma somente em: ",
+        "module": {
+            "$oid": "5f652249fc13ae49f0000000"
+        },
+        "description": "Julgue as seguintes assertivas diante do que foi apresentado. \nI. Ao fim desse tutorial você se tornará magicamente em uma programadora. \nII. São necessários meses, ou até mesmo anos de treino e prática para se tornar uma programadora excepcional. \nÉ correto o que se afirma somente em: ",
         "alternatives": {
-            "a": "Apenas em I",
-            "b": "Apenas em II",
-            "c": "I e II são corretas",
-            "d": "I e II são erradas"
+            "a": "I;",
+            "b": "II;",
+            "c": "Ambas as alternativas;",
+            "d": "Nenhuma das alternativas."
         },
         "answer": "b"
     },
     {
         "_id": {
-            "$oid": "5f6c5d369d1011f5031738d1"
+            "$oid": "5f6cfbb6fc13ae3bc6000065"
         },
         "number": 2,
-        "module": {"$oid":"5f652249fc13ae49f0000001"},
-        "description": "Questão não elaborada",
-        "alternatives": {
-            "a": "A",
-            "b": "B",
-            "c": "C",
-            "d": "D"
+        "module": {
+            "$oid": "5f652249fc13ae49f0000000"
         },
-        "answer": "b"
+        "description": "Qual é a proposta do Tutorial Django Girls?",
+        "alternatives": {
+            "a": "Te transformar em uma programadora;",
+            "b": "Ensinar a criar um website;",
+            "c": "Te mostrar que programação e a criação de websites não são tão complicados quanto parecem;",
+            "d": "Capacitar e ajudar mulheres a serem programadoras;"
+        },
+        "answer": "c"
     },
     {
         "_id": {
-            "$oid": "5f6c5d369d1011f5031738d2"
+            "$oid": "5f6cfbb6fc13ae3bc6000066"
         },
         "number": 3,
-        "module": 3,
-        "description": "Questão não elaborada",
-        "alternatives": {
-            "a": "A",
-            "b": "B",
-            "c": "C",
-            "d": "D"
+        "module": {
+            "$oid": "5f652249fc13ae49f0000001"
         },
-        "answer": "b"
+        "description": "Qual das alternativas abaixo não é um sistema operacional?",
+        "alternatives": {
+            "a": "Windows;",
+            "b": "Linux;",
+            "c": "IBM;",
+            "d": "Mac OS X."
+        },
+        "answer": "c"
     },
     {
         "_id": {
-            "$oid": "5f6c5d369d1011f5031738d3"
+            "$oid": "5f6cfbb6fc13ae3bc6000067"
         },
         "number": 4,
-        "module": 4,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000001"
+        },
+        "description": "Por que não usar o Word como editor de texto?",
+        "alternatives": {
+            "a": "Pois não compila python;",
+            "b": "Pois não destaca o código com cores de acordo com seu significado;",
+            "c": "Pois é um editor de texto rico;",
+            "d": "Pois é da Microsoft."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000068"
+        },
+        "number": 5,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000002"
+        },
+        "description": "Sobre o conhecimento em Ambiente Virtual, julgue as seguintes assertivas. \nI. O ambiente virtual permite uma aprendizagem dinâmica a distância para auxiliar uma montagem de um curso acessível por exemplo. \nII. A prática do ambiente virtual é somente voltada para o ensino assíncrono. \nÉ correto o que se afirma somente em:",
+        "alternatives": {
+            "a": "I;",
+            "b": "II;",
+            "c": "Ambas as alternativas;",
+            "d": "Nenhuma das alternativas."
+        },
+        "answer": "a"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000069"
+        },
+        "number": 6,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000003"
+        },
         "description": "O que acontece ao apertar a tecla ‘ENTER’ após digitar um endereço host?",
         "alternatives": {
-            "a": "Passa-se requisições por várias máquinas diferentes até ser possível ter acesso ao servidor onde o endereço host está alocado.",
-            "b": "Simplesmente aparece a página a ser carregada, sem nenhum protocolo a ser seguido.",
-            "c": "Endereços de IP, DNS, HTTP e hCG são palavras chaves quando se trata de endereço host.",
+            "a": "Passa-se requisições por várias máquinas diferentes até ser possível ter acesso ao servidor onde o endereço host está alocado;",
+            "b": "Simplesmente aparece a página a ser carregada, sem nenhum protocolo a ser seguido;",
+            "c": "Endereços de IP, DNS, HTTP e hCG são palavras chaves quando se trata de endereço host;",
             "d": "Nenhuma das alternativas anteriores."
         },
         "answer": "a"
     },
     {
         "_id": {
-            "$oid": "5f6c5d369d1011f5031738d4"
+            "$oid": "5f6cfbb6fc13ae3bc600006a"
         },
-        "number": 5,
-        "module": 5,
+        "number": 7,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000003"
+        },
+        "description": "O que é um DNS?",
+        "alternatives": {
+            "a": "Uma lista telefônica;",
+            "b": "Duck Needs Seeds;",
+            "c": "Tradutor do nome de domínio para o endereço IP;",
+            "d": "O endereço do seu computador."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600006b"
+        },
+        "number": 8,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000004"
+        },
         "description": "Para que serve a linha de comando?",
         "alternatives": {
-            "a": "Editar textos, como o Word, Google Docs, Bloco de Notas e afins.",
-            "b": "Para dar comandos ao computador.",
-            "c": "Para visualizar, manipular e manusear arquivos.",
+            "a": "Editar textos, como o Word, Google Docs, Bloco de Notas e afins;",
+            "b": "Para dar comandos ao computador;",
+            "c": "Para visualizar, manipular e manusear arquivos;",
             "d": "Para exportar arquivos com uma interface gráfica mais prática."
         },
         "answer": "c"
     },
     {
         "_id": {
-            "$oid": "5f6c5d369d1011f5031738d5"
+            "$oid": "5f6cfbb6fc13ae3bc600006c"
         },
-        "number": 6,
-        "module": 6,
+        "number": 9,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000005"
+        },
         "description": "Django é escrito em qual linguagem?",
         "alternatives": {
-            "a": "PHP",
-            "b": "HTML",
-            "c": "Python",
-            "d": "Java"
+            "a": "PHP;",
+            "b": "HTML;",
+            "c": "Python;",
+            "d": "Java."
         },
         "answer": "c"
     },
     {
         "_id": {
-            "$oid": "5f6c5d369d1011f5031738d6"
+            "$oid": "5f6cfbb6fc13ae3bc600006d"
         },
-        "number": 7,
-        "module": 7,
+        "number": 10,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000005"
+        },
+        "description": "O nome Python foi inspirado, a partir: ",
+        "alternatives": {
+            "a": "do réptil de mesmo nome;",
+            "b": "do sobrenome de seu criador;",
+            "c": "do grupo humorístico britânico Monty Python;",
+            "d": "da versatilidade da linguagem de programação."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600006e"
+        },
+        "number": 11,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000006"
+        },
         "description": "Editores de códigos nativos são recomendáveis para codar?",
         "alternatives": {
-            "a": "Editores de códigos nativos, embora mais simples e mais rápido, não são recomendáveis para desenvolver programas por não possuírem funcionalidades úteis, embora possam exercer tal função.",
-            "b": "Editores de códigos nativos, mais simples e mais rápido, são recomendáveis para desenvolver programas por possuírem funcionalidades úteis.",
-            "c": "Editores de códigos nativos, embora mais simples, porém menos rápido, não são recomendáveis para desenvolver programas mesmo possuindo funcionalidades úteis.",
+            "a": "Editores de códigos nativos, embora mais simples e mais rápido, não são recomendáveis para desenvolver programas por não possuírem funcionalidades úteis, embora possam exercer tal função;",
+            "b": "Editores de códigos nativos, mais simples e mais rápido, são recomendáveis para desenvolver programas por possuírem funcionalidades úteis;",
+            "c": "Editores de códigos nativos, embora mais simples, porém menos rápido, não são recomendáveis para desenvolver programas mesmo possuindo funcionalidades úteis;",
             "d": "Nenhuma das alternativas anteriores."
         },
         "answer": "a"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600006f"
+        },
+        "number": 12,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000006"
+        },
+        "description": "O que é texto puro?",
+        "alternatives": {
+            "a": "Texto em linguagem binária;",
+            "b": "Material textual sem acentos ou caracteres especiais;",
+            "c": "Material textual sem muito processamento;",
+            "d": "Texto sem estar criptografado."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000070"
+        },
+        "number": 13,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000007"
+        },
+        "description": "Julgue as seguintes assertivas diante do conhecimento sobre Strings. \nI. String é um vetor de caracteres. \nII. Como cada string é um vetor de caracteres, um vetor de strings é uma matriz de caracteres. \nÉ correto o que se afirma somente em:",
+        "alternatives": {
+            "a": "I;",
+            "b": "II;",
+            "c": "Ambas as alternativas, sendo II um complemento de I;",
+            "d": "Ambas as alternativas, porém II não complementa I."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000071"
+        },
+        "number": 14,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000007"
+        },
+        "description": "Dado a função a seguir, o que retorna se chamarmos fibonacci(6)? \ndef fibonacci(num)\n    if num == 1:\n        return 1\n    elif num <= 0:\n        return 0\n    else:\n        return fibonacci(num-1) + fibonacci(num-2)",
+        "alternatives": {
+            "a": "0;",
+            "b": "1;",
+            "c": "8;",
+            "d": "9."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000072"
+        },
+        "number": 15,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000008"
+        },
+        "description": "O que é um Framework?",
+        "alternatives": {
+            "a": "Uma parte do trabalho do programador;",
+            "b": "Uma coleção organizada de funcionalidade úteis;",
+            "c": "Uma abstração que une códigos comuns entre vários projetos de software provendo uma funcionalidade genérica;",
+            "d": "O que faz o FPS ficar alto."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000073"
+        },
+        "number": 16,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000009"
+        },
+        "description": "O Ambiente Virtual serve para:",
+        "alternatives": {
+            "a": "Criar repositórios da aplicação;",
+            "b": "Manter os arquivos do django girls numa pasta;",
+            "c": "Isolar seu código python em um ambiente organizado de projetos;",
+            "d": "Deixar o programa mais seguro, à prova de crackers."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000074"
+        },
+        "number": 17,
+        "module": {
+            "$oid": "5f652249fc13ae49f000000a"
+        },
+        "description": "Qual é o banco de dados padrão do Django?",
+        "alternatives": {
+            "a": "MySQL;",
+            "b": "MongoDB;",
+            "c": "SQLite3;",
+            "d": "Banco de Dados Oracle."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000075"
+        },
+        "number": 18,
+        "module": {
+            "$oid": "5f652249fc13ae49f000000a"
+        },
+        "description": "O que significa rodar o endereço http://127.0.0.1:8000/ no navegador?",
+        "alternatives": {
+            "a": "Significa rodar o projeto localmente na porta 8000;",
+            "b": "Significa rodar o projeto remotamente na porta 8000;",
+            "c": "Significa rodar o projeto localmente, mas sem nenhuma porta especificada;",
+            "d": "Não tem nenhum significado importante."
+        },
+        "answer": "a"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000076"
+        },
+        "number": 19,
+        "module": {
+            "$oid": "5f652249fc13ae49f000000b"
+        },
+        "description": "Qual elemento não é integrante da programação orientada a objetos?",
+        "alternatives": {
+            "a": "Objeto;",
+            "b": "Parâmetro;",
+            "c": "Atributo;",
+            "d": "Post."
+        },
+        "answer": "d"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000077"
+        },
+        "number": 20,
+        "module": {
+            "$oid": "5f652249fc13ae49f000000b"
+        },
+        "description": "Dado o seguinte modelo, defina qual é o nome do modelo e quais são seus atributos e métodos: \nclass Caneta(models.Model):\n    marca = models.CharField(max_length = 50)\n    cor = models.CharField(max_length = 50)\n    porcetagem_de_tinta = models.FloatField()\n    esta_tampada = models.BooleanField()\n    def tampar():\n        esta_tampada = true\n    def destampar():\n        esta_tampada = false\n    def rabiscar(tempo):\n        porceragem_de_tinta -= tempo/100.0",
+        "alternatives": {
+            "a": "Nome: Model; Atributos: marca, cor, porcetagem_de_tinta e esta_tampada; Métodos: tampar, destampar e rabiscar;",
+            "b": "Model; Atributos: tampar, destampar e rabiscar; Métodos: marca, cor, porcetagem_de_tinta e esta_tampada;",
+            "c": "Nome: Caneta; Atributos: marca, cor, porcetagem_de_tinta e esta_tampada; Métodos: tampar, destampar e rabiscar;",
+            "d": "Nome: Caneta; Atributos: tampar, destampar e rabiscar; Métodos: marca, cor, porcetagem_de_tinta e esta_tampada."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000078"
+        },
+        "number": 21,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000c"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000079"
+        },
+        "number": 22,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000c"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007a"
+        },
+        "number": 23,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000d"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007b"
+        },
+        "number": 24,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000d"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007c"
+        },
+        "number": 25,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000e"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007d"
+        },
+        "number": 26,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000e"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007e"
+        },
+        "number": 27,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000f"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007f"
+        },
+        "number": 28,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000010"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000080"
+        },
+        "number": 29,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000010"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000081"
+        },
+        "number": 30,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000011"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000082"
+        },
+        "number": 31,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000012"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000083"
+        },
+        "number": 32,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000013"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000084"
+        },
+        "number": 33,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000014"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000085"
+        },
+        "number": 34,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000015"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000086"
+        },
+        "number": 35,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000016"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000087"
+        },
+        "number": 36,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000017"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000088"
+        },
+        "number": 37,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000018"
+        }
     }
 ]
