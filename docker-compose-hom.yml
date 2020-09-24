@@ -19,7 +19,7 @@ services:
     ports:
       - 27017:27017
     env_file: 
-      - .env-prod
+      - .env-hom
     volumes:
       - db:/data/db
       - dump:/dump
