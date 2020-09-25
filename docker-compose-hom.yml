@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  server:
+    image: docker.pkg.github.com/fga-eps-mds/2020.1-minacademy-backend/server:homolog
+    depends_on:
+      - mongo
+    ports:
+      - '9000:9000'
+    env_file: 
+      - .env-hom
+    networks:
+      - client-server-network
+      - server-network
+
+  mongo:
+    image: mongo:4.2.9
+    restart: always
+    ports:
+      - 27017:27017
+    env_file: 
+      - .env-hom
+    volumes:
+      - db:/data/db
+      - dump:/dump
+    networks:
+      - server-network
+
+volumes:
+  db:
+  dump:
+
+networks:
+  client-server-network:
+    name: client-server-network
+  server-network:
+    name: server-network
+
+
+
