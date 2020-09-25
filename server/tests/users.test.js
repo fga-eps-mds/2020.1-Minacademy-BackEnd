@@ -15,7 +15,7 @@ describe('Users', () => {
             useCreateIndex: true,
             useFindAndModify: false,
         });
-        app.use('/editUser', cookieParser());
+        
     });
 
     afterAll(async (done) => {
