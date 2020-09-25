@@ -1,10 +1,9 @@
-name: Homolog Continuous Delivery
+name: Production Continuous Delivery
 
 on:
   push:
     branches: 
-      - develop
-      - 50-ci-cd
+      - master
 
 jobs:
   build:
@@ -20,9 +19,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           name: fga-eps-mds/2020.1-Minacademy-BackEnd/server
-          tags: homolog
+          tags: production
           workdir: server
-          default_branch: develop
+          default_branch: master
           dockerfile: prod.Dockerfile
 
   deploy:
@@ -36,15 +35,15 @@ jobs:
             GITHUB_USERNAME: ${{ github.actor }}
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          host: ${{ secrets.HOMOLOG_IP }}
-          username: ${{ secrets.HOMOLOG_USERNAME }}
-          password: ${{ secrets.HOMOLOG_PASSWORD }}
+          host: ${{ secrets.PRODUCTION_IP }}
+          username: ${{ secrets.PRODUCTION_USERNAME }}
+          password: ${{ secrets.PRODUCTION_PASSWORD }}
           envs: GITHUB_USERNAME, GITHUB_TOKEN
           script: |
             cd minacademy-backend
             docker login docker.pkg.github.com -u $GITHUB_USERNAME -p $GITHUB_TOKEN
-            docker pull docker.pkg.github.com/fga-eps-mds/2020.1-minacademy-backend/server:homolog
-            docker-compose -f docker-compose-hom.yml up -d
+            docker pull docker.pkg.github.com/fga-eps-mds/2020.1-minacademy-backend/server:production
+            docker-compose -f docker-compose-prod.yml up -d
 
       
 
