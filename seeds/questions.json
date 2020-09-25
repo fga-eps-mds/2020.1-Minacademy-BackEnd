@@ -346,7 +346,15 @@
         "number": 21,
         "module": {
             "$oid":"5f652249fc13ae49f000000c"
-        }
+        },
+        "description": "Julgue os itens abaixo\n    I. Superuser é o/a adminstrador(a) do site.\n    II. É possível ver a senha ao criar superuser.\n    III. O painel de controle de administração mostra todas as models criadas da sua aplicação Django",
+        "alternatives": {
+            "a": "Somente I é verdadeira",
+            "b": "Somente II é verdadeira",
+            "c": "Somente II é falsa",
+            "d": "II e III são verdadeiras"
+        },
+        "answer": ""
     },
     {
         "_id": {
@@ -355,7 +363,15 @@
         "number": 22,
         "module": {
             "$oid":"5f652249fc13ae49f000000c"
-        }
+        },
+        "description": "Julgue as seguinte assertivas diante do conhecimento Git",
+        "alternatives": {
+            "a": "É um sistema de criptografia de código",
+            "b": "É um sistema que exerce o papel de compilador do código",
+            "c": "É um sistema de controle de versão, muito utilizado entre os desenvolvdores",
+            "d": "É um sistema capaz de gerar um executável para o programa"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -364,7 +380,15 @@
         "number": 23,
         "module": {
             "$oid":"5f652249fc13ae49f000000d"
-        }
+        },
+        "description": "Dentre as seguintes opções, qual *não* é uma causa comum de erro no `pa_autoconfigure_django.py?`",
+        "alternatives": {
+            "a": "Esquecer de criar um token de API do PythonAnywhere",
+            "b": "Digitar a URL do seu GitHub incorretamente",
+            "c": "Ter o pip install em uma versão antiga",
+            "d": "Não adicionar todos os seus arquivos ao Git e/ou você não fez o push deles para o GitHub"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -373,7 +397,15 @@
         "number": 24,
         "module": {
             "$oid":"5f652249fc13ae49f000000d"
-        }
+        },
+        "description": "A o quê URL se refere?",
+        "alternatives": {
+            "a": "Uniform Resource Locator",
+            "b": "Uniform Restriction Location",
+            "c": "Universal Resistivity Local",
+            "d": "Universal Restructure Locator"
+        },
+        "answer": "a"
     },
     {
         "_id": {
@@ -382,7 +414,15 @@
         "number": 25,
         "module": {
             "$oid":"5f652249fc13ae49f000000e"
-        }
+        },
+        "description": "O que quer dizer o erro ao fim deste módulo?",
+        "alternatives": {
+            "a": "Que você executou errado o código",
+            "b": "Que o PythonAnywhere não achou o seu repositório no GitHub",
+            "c": "Não existe nenhum atributo `post_list` no módulo views",
+            "d": "Que você não sabe programar"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -391,7 +431,15 @@
         "number": 26,
         "module": {
             "$oid":"5f652249fc13ae49f000000e"
-        }
+        },
+        "description": "Opa! Um novo erro, pode nos dizer o que ele significa?",
+        "alternatives": {
+            "a": "Você esquecer de criar a view",
+            "b": "A view não foi renderizada",
+            "c": "Ainda não existe o Template",
+            "d": "Que você não sabe programar"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -400,7 +448,15 @@
         "number": 27,
         "module": {
             "$oid":"5f652249fc13ae49f000000f"
-        }
+        },
+        "description": "Sobre o conhecimento em HTML, julgue as seguintes assertivas\n    I. HTML é uma linguagem de programação\n    II. Os templates são view escritas em código HTML que são renderizadas e interpretadas no navegador.\nQual das seguintes alternativa esta correta?",
+        "alternatives": {
+            "a": "Apenas I é verdadeira",
+            "b": "Apenas II é verdadeira",
+            "c": "I e II são verdadeiras",
+            "d": "I e II são falsas"
+        },
+        "answer": "b"
     },
     {
         "_id": {
@@ -409,7 +465,15 @@
         "number": 28,
         "module": {
             "$oid":"5f652249fc13ae49f0000010"
-        }
+        },
+        "description": "Por que o HTML abaixo está errado?\n    <html>\n        <head></head>\n        <body>\n            <br>\n        </body>\n    <html>",
+        "alternatives": {
+            "a": "Não possui argumento no head",
+            "b": "Não possui argumento no body",
+            "c": "HTML não está sendo fechado",
+            "d": "Não possui </br>"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -418,7 +482,15 @@
         "number": 29,
         "module": {
             "$oid":"5f652249fc13ae49f0000010"
-        }
+        },
+        "description": "Como faz para ordenar uma lista de objetos?",
+        "alternatives": {
+            "a": "<Model>.objects.order_by()",
+            "b": "<Model>.objects.order()",
+            "c": "<Model>.objects.order_by(‘atributo’)",
+            "d": "<Model>.objects.order(‘atributo’)"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -427,7 +499,15 @@
         "number": 30,
         "module": {
             "$oid":"5f652249fc13ae49f0000011"
-        }
+        },
+        "description": "Qual o objetivo da views?",
+        "alternatives": {
+            "a": "Conectar o banco de dados e templates",
+            "b": "Conectar repositório e banco de dados",
+            "c": "Conectar modelos e templates",
+            "d": "Somente renderizar a interface de usuário"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -436,7 +516,15 @@
         "number": 31,
         "module": {
             "$oid":"5f652249fc13ae49f0000012"
-        }
+        },
+        "description": "Na função render, como fazemos para passar parâmetros além do request?",
+        "alternatives": {
+            "a": "render(request, ‘local_do_.html’, {parametro})",
+            "b": "render(request, ‘local_do_.html’, {‘parametro’)",
+            "c": "render(request, ‘local_do_.html’, {‘parametro’ : parametro})",
+            "d": "render(request, ‘local_do_.html’, {parametro : 'parametro'})"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -445,7 +533,15 @@
         "number": 32,
         "module": {
             "$oid":"5f652249fc13ae49f0000013"
-        }
+        },
+        "description": "O que são tags de template Django",
+        "alternatives": {
+            "a": "São tag usadas para utilizar parâmetros dentro do HTML",
+            "b": "São tags para transformar o HTML em python",
+            "c": "São tags usadas para exibir informações dinamicamente no HTML, utilizando Python",
+            "d": "São tags para deixar usar HTML5, em vez de HTML"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -454,7 +550,15 @@
         "number": 33,
         "module": {
             "$oid":"5f652249fc13ae49f0000014"
-        }
+        },
+        "description": "Sobre o uso de código CSS Externo, Interno e Inline, analise as afirmativas:\n    I. O uso de CSS torna o código HTML mais apresentável para o usuário\n    II. O CSS torna o código reusável, tendo em vista que pode-se referenciar vários arquivos ao mesmo tempo\nEstá correto o que se afirma em:",
+        "alternatives": {
+            "a": "Apenas I está correta",
+            "b": "Apenas II está correta",
+            "c": "I e II estão corretas",
+            "d": "I e II estão erradas"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -463,7 +567,15 @@
         "number": 34,
         "module": {
             "$oid":"5f652249fc13ae49f0000015"
-        }
+        },
+        "description": "O que são blocos?",
+        "alternatives": {
+            "a": "Tudo que está dentro de uma função",
+            "b": "Uma parte do código, que é estática, ou seja, não irá sofrer mundanças na aplicação",
+            "c": "Uma parte do código, que pode ser reaproveitada, sem a necessidade de repetir o código",
+            "d": "Uma parte do código que pode ser descartada, sem causar impactos no site"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -472,7 +584,15 @@
         "number": 35,
         "module": {
             "$oid":"5f652249fc13ae49f0000016"
-        }
+        },
+        "description": "O que é PK",
+        "alternatives": {
+            "a": "Principal Key, a chave principal do Django para acessar superuser",
+            "b": "Post Key, uma chave para poder acessar cada Post",
+            "c": "Primary Key, um identificador único de cada entrada do Banco de Dados",
+            "d": "Perma Key, um identificador imútavel do Django"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -481,7 +601,15 @@
         "number": 36,
         "module": {
             "$oid":"5f652249fc13ae49f0000017"
-        }
+        },
+        "description": "Para que serve o formulário",
+        "alternatives": {
+            "a": "Automatizar a postagem do blog",
+            "b": "Fazer o trabalho do admin de criar posts",
+            "c": "Adicionar ou editar uma Model, de acordo com os inputs do usuário",
+            "d": "Adicionar ou editar um Post, de acordo com os inputs do usuário"
+        },
+        "answer": "c"
     },
     {
         "_id": {
@@ -490,6 +618,14 @@
         "number": 37,
         "module": {
             "$oid":"5f652249fc13ae49f0000018"
-        }
+        },
+        "description": "Ao final desse curso, pode nos dizer o que não aprendemos?",
+        "alternatives": {
+            "a": "Criar nosso próprio blog",
+            "b": "Ser um programador profissional",
+            "c": "Uma introdução ao Django",
+            "d": "Criar um site e hospedar na nuvem"
+        },
+        "answer": ""
     }
 ]
