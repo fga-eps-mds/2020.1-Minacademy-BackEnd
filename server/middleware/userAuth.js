@@ -1,19 +1,22 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/User')
 const userAuth = require('../config/userAuth');
 
-module.exports = (req, res, next) => {
+const auth = async (req, res, next) => {
    try {
-      const token = req.header('Authorization').replace('Bearer', '').trim();
-      if(!token) return res.status(401).send({ Error: 'Token empty'});
-      
-      jwt.verify(token, userAuth.secret, (err, decoded) => {
-         if(err) return res.status(401).send({Error: 'Token Invalid'});
+      const token = req.cookies['auth_token']
+      const decodedToken = jwt.verify(token, userAuth.secret)
+      const user = await User.findOne({ email: decodedToken.id, 'tokens.accessToken': token })
 
-         req.userID = decoded.id;
-      });
-      return next();
+      if (!user)
+         throw new Error()
 
+      req.token = token
+      req.user = user
+      next();
   } catch (error) {
-      res.status(401).send({ Error: 'Please authenticate' })  //401: Unauthorized
+      res.status(401).send({ error: 'Não autorizado' })  //401: Unauthorized
    }
 }
+
+module.exports = auth
