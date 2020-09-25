@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@shelf/jest-mongodb": "^1.2.3",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -18,7 +19,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "jest --testEnvironment=node --verbose --forceExit --watchAll --maxWorkers=1"
+    "test": "jest --detectOpenHandles --testTimeout=10000 --coverage"
   },
   "keywords": [],
   "author": "",

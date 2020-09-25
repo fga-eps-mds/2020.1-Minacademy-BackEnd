@@ -1,33 +1,37 @@
-const request = require('supertest');
-const server = require('../index.js');
-const User = require('../models/User.js');
+const mongoose = require('mongoose');
+const supertest = require('supertest');
 
-beforeAll(async () => {
+const app = require('../app');
+const request = supertest(app);
 
-});
+describe('Users', () => {
+    beforeAll(async () => {
+        mongoose.connect(process.env.MONGO_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useFindAndModify: false,
+        });
+    });
 
-afterAll(() => {
-    User.findOneAndDelete({ email: 'jane_marie@gmail.com'});
-    server.close();
-    console.log('Testing ended!');
-});
+    afterAll(async (done) => {
+        await mongoose.connection.close();
+        done();
+    });
 
-describe('User testing', () => {
-    test('Create user ', async () => {
-        const response = await request(server)
-            .post('/users')
-            .send({
-                name: 'Jane Marie',
-                email: 'jane_marie@gmail.com',
-                password: 'janekajshdkajhd1234',
-                userType: 'learner'
-            });
+    it('should be able to create user', async () => {
+        const response = await request.post('/users')
+        .send({
+            name: 'Jane Marie',
+            email: 'jane_marie@gmail.com',
+            password: 'janekajshdkajhd1234',
+            userType: 'learner'
+        });
         expect(response.status).toEqual(201);
     });
 
-    test('Get users', async () => {
-        const response = await request(server).get('/users');
+    it('should be able to get all users', async () => {
+        const response = await request.get('/users');
         expect(response.status).toEqual(200);
     });
-
 });
