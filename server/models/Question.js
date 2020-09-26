@@ -12,7 +12,6 @@ const questionSchema = new mongoose.Schema({
    alternatives: {
       alternative: {
          type: String,
-         required: true
       }
    },
    module: {

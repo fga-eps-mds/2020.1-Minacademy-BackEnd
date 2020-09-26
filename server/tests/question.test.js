@@ -5,15 +5,19 @@ const app = require('../app')
 const request = supertest(app)
 
 const Module = require('../models/Module')
+const Question = require('../models/Question')
+const { questions, modules } = require('./fixtures/tutorial')
 
 describe('Questions', () => {
    beforeAll(async () => {
-      mongoose.connect(process.env.MONGO_URL, {
+      await mongoose.connect(process.env.MONGO_URL, {
          useNewUrlParser: true,
          useUnifiedTopology: true,
          useCreateIndex: true,
          useFindAndModify: false,
       });
+      await Question.insertMany(questions)
+      await Module.insertMany(modules)
    });
 
    afterAll(async (done) => {
