@@ -21,6 +21,7 @@ describe('Questions', () => {
    });
 
    afterAll(async (done) => {
+      await mongoose.connection.db.dropDatabase()
       await mongoose.connection.close();
       done();
    });

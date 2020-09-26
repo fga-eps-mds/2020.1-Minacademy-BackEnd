@@ -1,11 +1,31 @@
+const mongoose = require('mongoose');
 const request = require('supertest')
 const app = require('../app')
 
-test('Should return modules list', async (done) => {
-   const response = await request(app).get('/modules')
-      .send()
-      .expect(200)
+const Module = require('../models/Module')
+const { modules } = require('./fixtures/tutorial')
 
-      expect(response.body.length).not.toBeNull()
-      done()
-})
+describe('Modules', () => {
+   beforeAll(async () => {
+      await mongoose.connect(process.env.MONGO_URL, {
+         useNewUrlParser: true,
+         useUnifiedTopology: true,
+         useCreateIndex: true,
+         useFindAndModify: false,
+      });
+      await Module.insertMany(modules)
+   });
+
+   afterAll(async (done) => {
+      await mongoose.connection.close();
+      done();
+   });
+
+   it('Should return modules list', async () => {
+      const response = await request(app).get('/modules')
+         .send()
+         .expect(200)
+
+         expect(response.body.length).not.toBeNull()
+   })
+});
