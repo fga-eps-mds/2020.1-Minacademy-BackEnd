@@ -10,13 +10,11 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-  //To allow requests from client
-  origin: [
-    "http://localhost:3000"
-  ],
+  origin: true,
   credentials: true,
   exposedHeaders: ["set-cookie"]
 }));
+
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
