@@ -1,5 +1,8 @@
 const Module = require('../models/Module')
 const Question = require('../models/Question')
+const QuestionResult = require('../models/questionResult')
+const mongoose = require('mongoose');
+const User = require('../models/User');
 
 // GET /questions?module=1
 module.exports = {
@@ -14,5 +17,47 @@ module.exports = {
          console.log(error)
          res.status(400).send({ error: error.message })
       }
+   },
+   async answerQuestion(req, res) {
+      const question = await Question.findById(req.body.question)
+      if (!question) throw new Error('Questão nao encontrada')
+      const isCorrect = question.answer === req.body.alternative
+
+      try {
+         const previousQuestionResult = await req.user.execPopulate({
+            path: 'questionResults',
+            match: {
+               question: mongoose.Types.ObjectId(req.body.question)
+            }
+         }).then(user => user.questionResults.length === 1 ? user.questionResults[0] : null)
+
+         if (previousQuestionResult) {
+            previousQuestionResult.alternative = req.body.alternative
+            previousQuestionResult.isCorrect = isCorrect
+            await previousQuestionResult.save()
+            res.send(previousQuestionResult)
+         } else {
+            const questionResult = await new QuestionResult({
+               ...req.body,
+               isCorrect,
+               user: req.user._id,
+            })
+            await questionResult.save()
+            res.send(questionResult)
+         }
+      } catch (error) {
+         console.log(error)
+         res.send({ error: error.message })
+      }
+   },
+   async getQuestionsResults(req, res) {
+      try {
+         await req.user.populate('questionResults').execPopulate()
+         res.send(req.user.questionResults)
+      } catch (error) {
+         console.log(error)
+         res.send({ error: error.message })
+      }
+
    }
 }
