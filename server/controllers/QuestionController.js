@@ -47,17 +47,23 @@ module.exports = {
          }
       } catch (error) {
          console.log(error)
-         res.send({ error: error.message })
+         res.status(400).send({ error: error.message })
       }
    },
    async getQuestionsResults(req, res) {
+      const match = {}
+      if (req.query.questions)
+         match.question = { $in: req.query.questions }
+
       try {
-         await req.user.populate('questionResults').execPopulate()
+         await req.user.execPopulate({
+            path: 'questionResults',
+            match
+         })
          res.send(req.user.questionResults)
       } catch (error) {
          console.log(error)
-         res.send({ error: error.message })
+         res.status(400).send({ error: error.message })
       }
-
    }
 }
