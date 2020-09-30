@@ -48,6 +48,11 @@ const UserSchema = new Schema({
         type: [String],
         select: false
     },
+    completedModules: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Module',
+        required: true
+    },
     tokens: [{
         accessToken: {
            type: String
