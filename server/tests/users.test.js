@@ -18,8 +18,10 @@ describe('Users', () => {
         
     });
 
-    afterAll(async (done) => {
+    afterAll(async done => {
+        await mongoose.connection.dropDatabase()
         await mongoose.connection.close();
+        done();
     });
 
     it('should be able to create user', async () => {

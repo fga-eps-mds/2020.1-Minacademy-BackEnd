@@ -6,7 +6,10 @@ const request = supertest(app)
 
 const Module = require('../models/Module')
 const Question = require('../models/Question')
+const QuestionResult = require('../models/questionResult')
+const User = require('../models/User')
 const { questions, modules } = require('./fixtures/tutorial')
+const { userOne } = require('./fixtures/db')
 
 describe('Questions', () => {
    beforeAll(async () => {
@@ -16,12 +19,13 @@ describe('Questions', () => {
          useCreateIndex: true,
          useFindAndModify: false,
       });
+      await new User(userOne).save()
       await Question.insertMany(questions)
       await Module.insertMany(modules)
    });
 
-   afterAll(async (done) => {
-      await mongoose.connection.db.dropDatabase()
+   afterAll(async done => {
+      await mongoose.connection.dropDatabase()
       await mongoose.connection.close();
       done();
    });
@@ -52,5 +56,30 @@ describe('Questions', () => {
          .expect(400);
 
       expect(response.body.error).toEqual('Modulo não encontrado');
+   })
+
+   it('Should answer question correctly', async () => {
+      const response = await request
+      .post('/questions/result')
+      .send({
+         question: questions[0]._id,
+         alternative: 'b',
+         user: userOne._id
+      })
+      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
+      .expect(201)
+
+      const result = await QuestionResult.findById(response.body._id)
+      expect(result.isCorrect).toBe(true)
+   })
+
+   it('Should get question result for userOne', async () => {
+      const response = await request
+      .get('/questions/result')
+      .send()
+      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
+      .expect(200)
+
+      expect(response.body.length).not.toBeNull()
    })
 });

@@ -4,7 +4,8 @@
             "$oid": "5f4fedaefc13ae5380000000"
         },
         "name": "Rosalyn",
-        "email": "rosalyn@email.com"
+        "email": "rosalyn@email.com",
+        "password": "teste123"
     },
     {
         "_id": {

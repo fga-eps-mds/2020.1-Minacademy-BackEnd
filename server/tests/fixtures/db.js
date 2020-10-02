@@ -10,7 +10,7 @@ const userOne = {
     password: '44444dsasa',
     userType: 'aprendiz',
     tokens: [{
-        token: jwt.sign({ _id: userOneId}, userAuth.secret)
+        accessToken: jwt.sign({ id: 'maria@gmail.com' }, userAuth.secret)
     }]
 }
 
