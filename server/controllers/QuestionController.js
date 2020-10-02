@@ -21,10 +21,11 @@ module.exports = {
 
    async answerQuestion(req, res) {
       const question = await Question.findById(req.body.question)
-      if (!question) throw new Error('Questão nao encontrada')
-      const isCorrect = question.answer === req.body.alternative
-
+      
       try {
+         if (!question) throw new Error('Questão nao encontrada')
+         const isCorrect = question.answer === req.body.alternative
+
          const previousQuestionResult = await req.user.execPopulate({
             path: 'questionResults',
             match: {
@@ -44,7 +45,7 @@ module.exports = {
                user: req.user._id,
             })
             await questionResult.save()
-            res.send(questionResult)
+            res.status(201).send(questionResult)
          }
       } catch (error) {
          console.log(error)

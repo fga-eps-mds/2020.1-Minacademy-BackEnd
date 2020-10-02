@@ -20,9 +20,10 @@ const userTwo = {
     name: 'joao',
     email: 'joao@mail.com',
     password: "joao2727",
-    
+    tokens: [{
+        accessToken: jwt.sign({ id: 'joao@mail.com' }, userAuth.secret)
+    }]
 }
-
 
 module.exports = {
     userOne,

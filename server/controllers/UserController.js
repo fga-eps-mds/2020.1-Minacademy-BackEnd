@@ -53,7 +53,7 @@ module.exports = {
             res.clearCookie('auth_token')
             res.send({ logout: 'Logged out' })
         } catch (error) {
-            res.status(500).send(error)
+            res.status(401).send(error)
         }
     },
 
@@ -73,7 +73,8 @@ module.exports = {
         User.findByIdAndUpdate({ _id: req.user.id }, update, { new: true, runValidators: true },
             function (err, result) {
                 if (err) {
-                    res.send(err)
+                    console.log(err.message)
+                    res.status(400).send(err)
                 }
                 else {
                     res.send(result)
