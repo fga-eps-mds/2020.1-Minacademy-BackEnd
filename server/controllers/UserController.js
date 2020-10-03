@@ -39,7 +39,7 @@ module.exports = {
             const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
             user.tokens = user.tokens.concat({ accessToken })
             await user.save()
-            res.cookie('auth_token', accessToken, { httpOnly: false })
+            res.cookie('auth_token', accessToken, { httpOnly: true })
             res.send({ user, accessToken })
         } catch (err) {
             return res.status(400).send({ error: err.message });
@@ -50,10 +50,10 @@ module.exports = {
         try {
             req.user.tokens = req.user.tokens.filter(token => { return token.accessToken !== req.token })
             await req.user.save()
-
+            res.clearCookie('auth_token')
             res.send({ logout: 'Logged out' })
         } catch (error) {
-            res.status(500).send(error)
+            res.status(401).send(error)
         }
     },
 
@@ -73,7 +73,8 @@ module.exports = {
         User.findByIdAndUpdate({ _id: req.user.id }, update, { new: true, runValidators: true },
             function (err, result) {
                 if (err) {
-                    res.send(err)
+                    console.log(err.message)
+                    res.status(400).send(err)
                 }
                 else {
                     res.send(result)

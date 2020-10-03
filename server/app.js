@@ -1,15 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require("cors");
-const userRouter = require('./routes')
+const cookieParser = require('cookie-parser');
+const userRouter = require('./routers/user');
+const questionRouter = require('./routers/question');
+const moduleRouter = require('./routers/module');
 require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true,
+  exposedHeaders: ["set-cookie"]
+}));
+
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 let db = mongoose.connection;
@@ -19,7 +28,10 @@ db.once('open', function () {
 });
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
 app.use(userRouter);
+app.use(questionRouter);
+app.use(moduleRouter)
 
 module.exports = app;
-

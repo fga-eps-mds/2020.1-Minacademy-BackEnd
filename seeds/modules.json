@@ -3,151 +3,176 @@
         "_id": {
             "$oid":"5f652249fc13ae49f0000000"
         },
-        "title":"Introdução"
+        "title":"Introdução",
+        "moduleNumber": 1
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000001"
         },
-        "title":"Instalação"
+        "title":"Instalação",
+        "moduleNumber": 2
     },
     {
         "_id":{
             "$oid":"5f652249fc13ae49f0000002"
         },
-        "title":"Configuração do Chromebook"
+        "title":"Configuração do Chromebook",
+        "moduleNumber": 3
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000003"
         },
-        "title":"Como a Internet funciona"
+        "title":"Como a Internet funciona",
+        "moduleNumber": 4
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000004"
         },
-        "title":"Introdução à linha de comando"
+        "title":"Introdução à linha de comando",
+        "moduleNumber": 5
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000005"
         },
-        "title":"Instalação do Python"
+        "title":"Instalação do Python",
+        "moduleNumber": 6
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000006"
         },
-        "title":"Editor de Código"
+        "title":"Editor de Código",
+        "moduleNumber": 7
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000007"
         },
-        "title":"Introdução ao Python"
+        "title":"Introdução ao Python",
+        "moduleNumber": 8
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000008"
         },
-        "title":"O que é Django?"
+        "title":"O que é Django?",
+        "moduleNumber": 9
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000009"
         },
-        "title":"Instalação do Django"
+        "title":"Instalação do Django",
+        "moduleNumber": 10
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f000000a"
         },
-        "title":"Seu primeiro projeto Django!"
+        "title":"Seu primeiro projeto Django!",
+        "moduleNumber": 11
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f000000b"
         },
-        "title":"Modelos do Django"
+        "title":"Modelos do Django",
+        "moduleNumber": 12
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f000000c"
         },
-        "title":"Django Admin"
+        "title":"Django Admin",
+        "moduleNumber": 13
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f000000d"
         },
-        "title":"Deploy!"
+        "title":"Deploy!",
+        "moduleNumber": 14
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f000000e"
         },
-        "title":"URLs"
+        "title":"URLs",
+        "moduleNumber": 15
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f000000f"
         },
-        "title":"Django views - hora de criar!"
+        "title":"Django views - hora de criar!",
+        "moduleNumber": 16
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000010"
         },
-        "title":"Introdução ao HTML"
+        "title":"Introdução ao HTML",
+        "moduleNumber": 17
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000011"
         },
-        "title":"QuerySets e ORM do Django"
+        "title":"QuerySets e ORM do Django",
+        "moduleNumber": 18
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000012"
         },
-        "title":"Dados dinâmicos em templates"
+        "title":"Dados dinâmicos em templates",
+        "moduleNumber": 19
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000013"
         },
-        "title":"Templates do Django"
+        "title":"Templates do Django",
+        "moduleNumber": 20
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000014"
         },
-        "title":"CSS - deixe tudo mais bonito!"
+        "title":"CSS - deixe tudo mais bonito!",
+        "moduleNumber": 21
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000015"
         },
-        "title":"Estendendo os templates"
+        "title":"Estendendo os templates",
+        "moduleNumber": 22
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000016"
         },
-        "title":"Amplie sua aplicação"
+        "title":"Amplie sua aplicação",
+        "moduleNumber": 23
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000017"
         },
-        "title":"Formulários do Django"
+        "title":"Formulários do Django",
+        "moduleNumber": 24
     },
     {
         "_id": {
             "$oid":"5f652249fc13ae49f0000018"
         },
-        "title":"O que vem agora?"
+        "title":"O que vem agora?",
+        "moduleNumber": 25
     }
 
 ]

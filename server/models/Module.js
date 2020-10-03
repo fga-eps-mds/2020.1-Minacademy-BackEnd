@@ -3,6 +3,15 @@ const Schema = mongoose.Schema;
 
 const ModuleSchema = new Schema({
   title: String,
+  moduleNumber: {
+    type: Number
+  }
 })
 
-module.exports = mongoose.model('Module', ModuleSchema);;
+ModuleSchema.virtual('questions', {
+  ref: 'Question',
+  localField: '_id',
+  foreignField: 'module'
+})
+
+module.exports = mongoose.model('Module', ModuleSchema);

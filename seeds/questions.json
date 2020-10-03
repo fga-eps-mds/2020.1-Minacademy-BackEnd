@@ -1,0 +1,631 @@
+[
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000064"
+        },
+        "number": 1,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000000"
+        },
+        "description": "Julgue as seguintes assertivas diante do que foi apresentado. \nI. Ao fim desse tutorial você se tornará magicamente em uma programadora. \nII. São necessários meses, ou até mesmo anos de treino e prática para se tornar uma programadora excepcional. \nÉ correto o que se afirma somente em: ",
+        "alternatives": {
+            "a": "I;",
+            "b": "II;",
+            "c": "Ambas as alternativas;",
+            "d": "Nenhuma das alternativas."
+        },
+        "answer": "b"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000065"
+        },
+        "number": 2,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000000"
+        },
+        "description": "Qual é a proposta do Tutorial Django Girls?",
+        "alternatives": {
+            "a": "Te transformar em uma programadora;",
+            "b": "Ensinar a criar um website;",
+            "c": "Te mostrar que programação e a criação de websites não são tão complicados quanto parecem;",
+            "d": "Capacitar e ajudar mulheres a serem programadoras;"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000066"
+        },
+        "number": 3,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000001"
+        },
+        "description": "Qual das alternativas abaixo não é um sistema operacional?",
+        "alternatives": {
+            "a": "Windows;",
+            "b": "Linux;",
+            "c": "IBM;",
+            "d": "Mac OS X."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000067"
+        },
+        "number": 4,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000001"
+        },
+        "description": "Por que não usar o Word como editor de texto?",
+        "alternatives": {
+            "a": "Pois não compila python;",
+            "b": "Pois não destaca o código com cores de acordo com seu significado;",
+            "c": "Pois é um editor de texto rico;",
+            "d": "Pois é da Microsoft."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000068"
+        },
+        "number": 5,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000002"
+        },
+        "description": "Sobre o conhecimento em Ambiente Virtual, julgue as seguintes assertivas. \nI. O ambiente virtual permite uma aprendizagem dinâmica a distância para auxiliar uma montagem de um curso acessível por exemplo. \nII. A prática do ambiente virtual é somente voltada para o ensino assíncrono. \nÉ correto o que se afirma somente em:",
+        "alternatives": {
+            "a": "I;",
+            "b": "II;",
+            "c": "Ambas as alternativas;",
+            "d": "Nenhuma das alternativas."
+        },
+        "answer": "a"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000069"
+        },
+        "number": 6,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000003"
+        },
+        "description": "O que acontece ao apertar a tecla ‘ENTER’ após digitar um endereço host?",
+        "alternatives": {
+            "a": "Passa-se requisições por várias máquinas diferentes até ser possível ter acesso ao servidor onde o endereço host está alocado;",
+            "b": "Simplesmente aparece a página a ser carregada, sem nenhum protocolo a ser seguido;",
+            "c": "Endereços de IP, DNS, HTTP e hCG são palavras chaves quando se trata de endereço host;",
+            "d": "Nenhuma das alternativas anteriores."
+        },
+        "answer": "a"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600006a"
+        },
+        "number": 7,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000003"
+        },
+        "description": "O que é um DNS?",
+        "alternatives": {
+            "a": "Uma lista telefônica;",
+            "b": "Duck Needs Seeds;",
+            "c": "Tradutor do nome de domínio para o endereço IP;",
+            "d": "O endereço do seu computador."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600006b"
+        },
+        "number": 8,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000004"
+        },
+        "description": "Para que serve a linha de comando?",
+        "alternatives": {
+            "a": "Editar textos, como o Word, Google Docs, Bloco de Notas e afins;",
+            "b": "Para dar comandos ao computador;",
+            "c": "Para visualizar, manipular e manusear arquivos;",
+            "d": "Para exportar arquivos com uma interface gráfica mais prática."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600006c"
+        },
+        "number": 9,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000005"
+        },
+        "description": "Django é escrito em qual linguagem?",
+        "alternatives": {
+            "a": "PHP;",
+            "b": "HTML;",
+            "c": "Python;",
+            "d": "Java."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600006d"
+        },
+        "number": 10,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000005"
+        },
+        "description": "O nome Python foi inspirado, a partir: ",
+        "alternatives": {
+            "a": "do réptil de mesmo nome;",
+            "b": "do sobrenome de seu criador;",
+            "c": "do grupo humorístico britânico Monty Python;",
+            "d": "da versatilidade da linguagem de programação."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600006e"
+        },
+        "number": 11,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000006"
+        },
+        "description": "Editores de códigos nativos são recomendáveis para codar?",
+        "alternatives": {
+            "a": "Editores de códigos nativos, embora mais simples e mais rápido, não são recomendáveis para desenvolver programas por não possuírem funcionalidades úteis, embora possam exercer tal função;",
+            "b": "Editores de códigos nativos, mais simples e mais rápido, são recomendáveis para desenvolver programas por possuírem funcionalidades úteis;",
+            "c": "Editores de códigos nativos, embora mais simples, porém menos rápido, não são recomendáveis para desenvolver programas mesmo possuindo funcionalidades úteis;",
+            "d": "Nenhuma das alternativas anteriores."
+        },
+        "answer": "a"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600006f"
+        },
+        "number": 12,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000006"
+        },
+        "description": "O que é texto puro?",
+        "alternatives": {
+            "a": "Texto em linguagem binária;",
+            "b": "Material textual sem acentos ou caracteres especiais;",
+            "c": "Material textual sem muito processamento;",
+            "d": "Texto sem estar criptografado."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000070"
+        },
+        "number": 13,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000007"
+        },
+        "description": "Julgue as seguintes assertivas diante do conhecimento sobre Strings. \nI. String é um vetor de caracteres. \nII. Como cada string é um vetor de caracteres, um vetor de strings é uma matriz de caracteres. \nÉ correto o que se afirma somente em:",
+        "alternatives": {
+            "a": "I;",
+            "b": "II;",
+            "c": "Ambas as alternativas, sendo II um complemento de I;",
+            "d": "Ambas as alternativas, porém II não complementa I."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000071"
+        },
+        "number": 14,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000007"
+        },
+        "description": "Dado a função a seguir, o que retorna se chamarmos fibonacci(6)? \ndef fibonacci(num)\n    if num == 1:\n        return 1\n    elif num <= 0:\n        return 0\n    else:\n        return fibonacci(num-1) + fibonacci(num-2)",
+        "alternatives": {
+            "a": "0;",
+            "b": "1;",
+            "c": "8;",
+            "d": "9."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000072"
+        },
+        "number": 15,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000008"
+        },
+        "description": "O que é um Framework?",
+        "alternatives": {
+            "a": "Uma parte do trabalho do programador;",
+            "b": "Uma coleção organizada de funcionalidade úteis;",
+            "c": "Uma abstração que une códigos comuns entre vários projetos de software provendo uma funcionalidade genérica;",
+            "d": "O que faz o FPS ficar alto."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000073"
+        },
+        "number": 16,
+        "module": {
+            "$oid": "5f652249fc13ae49f0000009"
+        },
+        "description": "O Ambiente Virtual serve para:",
+        "alternatives": {
+            "a": "Criar repositórios da aplicação;",
+            "b": "Manter os arquivos do django girls numa pasta;",
+            "c": "Isolar seu código python em um ambiente organizado de projetos;",
+            "d": "Deixar o programa mais seguro, à prova de crackers."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000074"
+        },
+        "number": 17,
+        "module": {
+            "$oid": "5f652249fc13ae49f000000a"
+        },
+        "description": "Qual é o banco de dados padrão do Django?",
+        "alternatives": {
+            "a": "MySQL;",
+            "b": "MongoDB;",
+            "c": "SQLite3;",
+            "d": "Banco de Dados Oracle."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000075"
+        },
+        "number": 18,
+        "module": {
+            "$oid": "5f652249fc13ae49f000000a"
+        },
+        "description": "O que significa rodar o endereço http://127.0.0.1:8000/ no navegador?",
+        "alternatives": {
+            "a": "Significa rodar o projeto localmente na porta 8000;",
+            "b": "Significa rodar o projeto remotamente na porta 8000;",
+            "c": "Significa rodar o projeto localmente, mas sem nenhuma porta especificada;",
+            "d": "Não tem nenhum significado importante."
+        },
+        "answer": "a"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000076"
+        },
+        "number": 19,
+        "module": {
+            "$oid": "5f652249fc13ae49f000000b"
+        },
+        "description": "Qual elemento não é integrante da programação orientada a objetos?",
+        "alternatives": {
+            "a": "Objeto;",
+            "b": "Parâmetro;",
+            "c": "Atributo;",
+            "d": "Post."
+        },
+        "answer": "d"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000077"
+        },
+        "number": 20,
+        "module": {
+            "$oid": "5f652249fc13ae49f000000b"
+        },
+        "description": "Dado o seguinte modelo, defina qual é o nome do modelo e quais são seus atributos e métodos: \nclass Caneta(models.Model):\n    marca = models.CharField(max_length = 50)\n    cor = models.CharField(max_length = 50)\n    porcetagem_de_tinta = models.FloatField()\n    esta_tampada = models.BooleanField()\n    def tampar():\n        esta_tampada = true\n    def destampar():\n        esta_tampada = false\n    def rabiscar(tempo):\n        porceragem_de_tinta -= tempo/100.0",
+        "alternatives": {
+            "a": "Nome: Model; Atributos: marca, cor, porcetagem_de_tinta e esta_tampada; Métodos: tampar, destampar e rabiscar;",
+            "b": "Model; Atributos: tampar, destampar e rabiscar; Métodos: marca, cor, porcetagem_de_tinta e esta_tampada;",
+            "c": "Nome: Caneta; Atributos: marca, cor, porcetagem_de_tinta e esta_tampada; Métodos: tampar, destampar e rabiscar;",
+            "d": "Nome: Caneta; Atributos: tampar, destampar e rabiscar; Métodos: marca, cor, porcetagem_de_tinta e esta_tampada."
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000078"
+        },
+        "number": 21,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000c"
+        },
+        "description": "Julgue os itens abaixo\n    I. Superuser é o/a adminstrador(a) do site.\n    II. É possível ver a senha ao criar superuser.\n    III. O painel de controle de administração mostra todas as models criadas da sua aplicação Django",
+        "alternatives": {
+            "a": "Somente I é verdadeira",
+            "b": "Somente II é verdadeira",
+            "c": "Somente II é falsa",
+            "d": "II e III são verdadeiras"
+        },
+        "answer": ""
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000079"
+        },
+        "number": 22,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000c"
+        },
+        "description": "Julgue as seguinte assertivas diante do conhecimento Git",
+        "alternatives": {
+            "a": "É um sistema de criptografia de código",
+            "b": "É um sistema que exerce o papel de compilador do código",
+            "c": "É um sistema de controle de versão, muito utilizado entre os desenvolvdores",
+            "d": "É um sistema capaz de gerar um executável para o programa"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007a"
+        },
+        "number": 23,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000d"
+        },
+        "description": "Dentre as seguintes opções, qual *não* é uma causa comum de erro no `pa_autoconfigure_django.py?`",
+        "alternatives": {
+            "a": "Esquecer de criar um token de API do PythonAnywhere",
+            "b": "Digitar a URL do seu GitHub incorretamente",
+            "c": "Ter o pip install em uma versão antiga",
+            "d": "Não adicionar todos os seus arquivos ao Git e/ou você não fez o push deles para o GitHub"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007b"
+        },
+        "number": 24,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000d"
+        },
+        "description": "A o quê URL se refere?",
+        "alternatives": {
+            "a": "Uniform Resource Locator",
+            "b": "Uniform Restriction Location",
+            "c": "Universal Resistivity Local",
+            "d": "Universal Restructure Locator"
+        },
+        "answer": "a"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007c"
+        },
+        "number": 25,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000e"
+        },
+        "description": "O que quer dizer o erro ao fim deste módulo?",
+        "alternatives": {
+            "a": "Que você executou errado o código",
+            "b": "Que o PythonAnywhere não achou o seu repositório no GitHub",
+            "c": "Não existe nenhum atributo `post_list` no módulo views",
+            "d": "Que você não sabe programar"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007d"
+        },
+        "number": 26,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000e"
+        },
+        "description": "Opa! Um novo erro, pode nos dizer o que ele significa?",
+        "alternatives": {
+            "a": "Você esquecer de criar a view",
+            "b": "A view não foi renderizada",
+            "c": "Ainda não existe o Template",
+            "d": "Que você não sabe programar"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007e"
+        },
+        "number": 27,
+        "module": {
+            "$oid":"5f652249fc13ae49f000000f"
+        },
+        "description": "Sobre o conhecimento em HTML, julgue as seguintes assertivas\n    I. HTML é uma linguagem de programação\n    II. Os templates são view escritas em código HTML que são renderizadas e interpretadas no navegador.\nQual das seguintes alternativa esta correta?",
+        "alternatives": {
+            "a": "Apenas I é verdadeira",
+            "b": "Apenas II é verdadeira",
+            "c": "I e II são verdadeiras",
+            "d": "I e II são falsas"
+        },
+        "answer": "b"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc600007f"
+        },
+        "number": 28,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000010"
+        },
+        "description": "Por que o HTML abaixo está errado?\n    <html>\n        <head></head>\n        <body>\n            <br>\n        </body>\n    <html>",
+        "alternatives": {
+            "a": "Não possui argumento no head",
+            "b": "Não possui argumento no body",
+            "c": "HTML não está sendo fechado",
+            "d": "Não possui </br>"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000080"
+        },
+        "number": 29,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000010"
+        },
+        "description": "Como faz para ordenar uma lista de objetos?",
+        "alternatives": {
+            "a": "<Model>.objects.order_by()",
+            "b": "<Model>.objects.order()",
+            "c": "<Model>.objects.order_by(‘atributo’)",
+            "d": "<Model>.objects.order(‘atributo’)"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000081"
+        },
+        "number": 30,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000011"
+        },
+        "description": "Qual o objetivo da views?",
+        "alternatives": {
+            "a": "Conectar o banco de dados e templates",
+            "b": "Conectar repositório e banco de dados",
+            "c": "Conectar modelos e templates",
+            "d": "Somente renderizar a interface de usuário"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000082"
+        },
+        "number": 31,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000012"
+        },
+        "description": "Na função render, como fazemos para passar parâmetros além do request?",
+        "alternatives": {
+            "a": "render(request, ‘local_do_.html’, {parametro})",
+            "b": "render(request, ‘local_do_.html’, {‘parametro’)",
+            "c": "render(request, ‘local_do_.html’, {‘parametro’ : parametro})",
+            "d": "render(request, ‘local_do_.html’, {parametro : 'parametro'})"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000083"
+        },
+        "number": 32,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000013"
+        },
+        "description": "O que são tags de template Django",
+        "alternatives": {
+            "a": "São tag usadas para utilizar parâmetros dentro do HTML",
+            "b": "São tags para transformar o HTML em python",
+            "c": "São tags usadas para exibir informações dinamicamente no HTML, utilizando Python",
+            "d": "São tags para deixar usar HTML5, em vez de HTML"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000084"
+        },
+        "number": 33,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000014"
+        },
+        "description": "Sobre o uso de código CSS Externo, Interno e Inline, analise as afirmativas:\n    I. O uso de CSS torna o código HTML mais apresentável para o usuário\n    II. O CSS torna o código reusável, tendo em vista que pode-se referenciar vários arquivos ao mesmo tempo\nEstá correto o que se afirma em:",
+        "alternatives": {
+            "a": "Apenas I está correta",
+            "b": "Apenas II está correta",
+            "c": "I e II estão corretas",
+            "d": "I e II estão erradas"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000085"
+        },
+        "number": 34,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000015"
+        },
+        "description": "O que são blocos?",
+        "alternatives": {
+            "a": "Tudo que está dentro de uma função",
+            "b": "Uma parte do código, que é estática, ou seja, não irá sofrer mundanças na aplicação",
+            "c": "Uma parte do código, que pode ser reaproveitada, sem a necessidade de repetir o código",
+            "d": "Uma parte do código que pode ser descartada, sem causar impactos no site"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000086"
+        },
+        "number": 35,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000016"
+        },
+        "description": "O que é PK",
+        "alternatives": {
+            "a": "Principal Key, a chave principal do Django para acessar superuser",
+            "b": "Post Key, uma chave para poder acessar cada Post",
+            "c": "Primary Key, um identificador único de cada entrada do Banco de Dados",
+            "d": "Perma Key, um identificador imútavel do Django"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000087"
+        },
+        "number": 36,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000017"
+        },
+        "description": "Para que serve o formulário",
+        "alternatives": {
+            "a": "Automatizar a postagem do blog",
+            "b": "Fazer o trabalho do admin de criar posts",
+            "c": "Adicionar ou editar uma Model, de acordo com os inputs do usuário",
+            "d": "Adicionar ou editar um Post, de acordo com os inputs do usuário"
+        },
+        "answer": "c"
+    },
+    {
+        "_id": {
+            "$oid": "5f6cfbb6fc13ae3bc6000088"
+        },
+        "number": 37,
+        "module": {
+            "$oid":"5f652249fc13ae49f0000018"
+        },
+        "description": "Ao final desse curso, pode nos dizer o que não aprendemos?",
+        "alternatives": {
+            "a": "Criar nosso próprio blog",
+            "b": "Ser um programador profissional",
+            "c": "Uma introdução ao Django",
+            "d": "Criar um site e hospedar na nuvem"
+        },
+        "answer": "b"
+    }
+]
