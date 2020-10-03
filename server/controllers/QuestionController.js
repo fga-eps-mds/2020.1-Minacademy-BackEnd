@@ -21,7 +21,7 @@ module.exports = {
 
    async answerQuestion(req, res) {
       const question = await Question.findById(req.body.question)
-      
+
       try {
          if (!question) throw new Error('Questão nao encontrada')
          const isCorrect = question.answer === req.body.alternative
@@ -68,27 +68,5 @@ module.exports = {
          console.log(error)
          res.status(400).send({ error: error.message })
       }
-   },
-
-   async getCompletedModule(req, res) {
-       const match = {};
-       let isCompleted = true;
-       if (req.query.questions) match.question = {$in: req.query.questions};
-
-       try{
-           await req.user.execPopulate({
-               path: 'questionResults',
-               match
-           }).then(user => user.questionResults.length >= 1 ? user.questionResults : null);
-           const questionResults = req.user.questionResults;
-           if (!questionResults && req.query.questions.length === questionResults.length) isCompleted = false;
-           for(let i = 0; i < questionResults.length && isCompleted; i++){
-               isCompleted = (questionResults != null) ? (questionResults[i].isCorrect) : (false);
-           }
-           res.send(isCompleted);
-       } catch (error) {
-           console.log(error);
-           res.status(400).send({error: error.message});
-       }
    }
 }
