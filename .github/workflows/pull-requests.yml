@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test & publish code coverage
-      uses: paambaati/codeclimate-action@v2.7.4
-      env:
-        CC_TEST_REPORTER_ID: ${{secrets.CC_REPORTER_ID}}
-      with:
-        coverageCommand: npm run test
-        coverageLocations: server/coverage/lcov.info:lcov
+        uses: paambaati/codeclimate-action@v2.7.4
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_REPORTER_ID}}
+        with:
+          coverageCommand: npm run test
+          coverageLocations: server/coverage/lcov.info:lcov
     
