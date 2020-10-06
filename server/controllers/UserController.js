@@ -2,6 +2,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const userAuth = require('../config/userAuth');
+const auth = require('../middleware/userAuth')
+const { find } = require('../models/User');
+const transport = require('../mail/index');
 
 module.exports = {
   async getUsers(req, res) {
@@ -80,4 +83,42 @@ module.exports = {
         }
       });
   },
+
+  async forgotPassword(req, res){
+    const {email} = req.body;
+
+    User.findOne({email}, (err, user)=>{
+        if(err || !user){
+            return res.status(400).json({error: "User with this email does not exist."});
+        }
+
+        const resetToken = jwt.sign({ _id: user._id }, userAuth.secretResetPassword, {expiresIn: '60m'});
+        const data = {
+            from:'minAcademy@minAcademy.com',
+            to: email,
+            subject: 'Accont Activation Link',
+            html: ` 
+                    <h2>Please click on given link to reset your password</h2>
+                    <p>http://localhost:9000/resetPassword/${resetToken}</p>
+
+                  `
+        };
+
+        return user.updateOne({resetLink: resetToken}, (err, success)=>{
+            if(err){
+                return res.status(400).json({error: "reset password link error"});
+            } else {
+                transport.sendMail(data, (err, body)=>{
+                    if(err){
+                         return res.json({error: "Could not send Email."});
+                    }
+
+                    return res.json({message: "Email has sent"});
+                });
+            }
+
+        })
+    })
+}
 };
+

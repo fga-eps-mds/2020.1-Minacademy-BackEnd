@@ -56,6 +56,10 @@ const UserSchema = new Schema({
       type: String,
     },
   }],
+  resetLink: {
+      data: String,
+      default: ''
+  }
 });
 
 UserSchema.virtual('answers', {
