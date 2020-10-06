@@ -10,6 +10,9 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
+      - name: Install Modules
+        working-directory: server
+        run: npm install
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.4
         env:
