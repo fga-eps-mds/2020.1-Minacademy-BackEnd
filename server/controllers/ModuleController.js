@@ -16,7 +16,7 @@ module.exports = {
             }).then(user => user.questionResults);
 
             const obj = module.toObject()
-            obj.completed = questionResults.length > 0 ? questionResults.every(result => result.isCorrect === true) : false
+            obj.completed = questionResults.length === module.questions.length ? questionResults.every(result => result.isCorrect === true) : false
             if (obj.completed) {
                req.user.completedModules.includes(module._id) ? null : req.user.completedModules = req.user.completedModules.concat(module._id);
             };

@@ -2,8 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const userAuth = require('../config/userAuth');
-const auth = require('../middleware/userAuth')
-const { find } = require('../models/User');
 
 module.exports = {
     async getUsers(req, res) {

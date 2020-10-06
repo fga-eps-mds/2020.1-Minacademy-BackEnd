@@ -4,7 +4,6 @@ const QuestionResult = require('../models/questionResult')
 const mongoose = require('mongoose');
 const User = require('../models/User');
 
-// GET /questions?module=1
 module.exports = {
    async getQuestions(req, res) {
       const query = req.query
@@ -55,6 +54,9 @@ module.exports = {
 
    async getQuestionsResults(req, res) {
       const match = {}
+      if (req.query.completed)
+         match.isCorrect = req.query.completed === 'true'
+
       if (req.query.questions)
          match.question = { $in: req.query.questions }
 
