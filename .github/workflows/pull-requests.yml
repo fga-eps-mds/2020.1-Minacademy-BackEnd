@@ -1,11 +1,9 @@
 name: Continuous Integration - PR's Tests
 
 on:
-  # pull_request:
   push:
     branches: 
       - 68-code-climate
-
 jobs:
 
   test:
