@@ -10,15 +10,13 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: marsam/codeclimate-action@master
     - name: Install Modules
       run: npm install
       working-directory: server
     - name: Test & publish code coverage
       working-directory: server
-      uses: marsam/codeclimate-action@master
-      env:
-        with:
-          reporter-id: ${{ secrets.CC_REPORTER_ID }}
-          command: npm run test
+      with:
+        reporter-id: ${{ secrets.CC_REPORTER_ID }}
+        command: npm run test
     
