@@ -1,7 +1,10 @@
 name: Continuous Integration - PR's Tests
 
 on:
-  pull_request:
+  # pull_request:
+  push:
+    branches: 
+      - 68-code-climate
 
 jobs:
 
@@ -13,6 +16,13 @@ jobs:
     - name: Install Modules
       working-directory: server
       run: npm install
-    - name: Run Tests
+    - name: Test & publish code coverage
       working-directory: server
-      run: npm test
+      uses: paambaati/codeclimate-action@v2.7.4
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_REPORTER_ID }}
+      with:
+        coverageCommand: npm run test
+        coverageLocations: |
+          coverage/lcov.info
+    
