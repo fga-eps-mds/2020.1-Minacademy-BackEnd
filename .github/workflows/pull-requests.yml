@@ -10,13 +10,11 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-    - uses: marsam/codeclimate-action@master
-    - name: Install Modules
-      run: npm install
-      working-directory: server
-    - name: Test & publish code coverage
-      working-directory: server
+      - name: Test & publish code coverage
+      uses: paambaati/codeclimate-action@v2.7.4
+      env:
+        CC_TEST_REPORTER_ID: ${{secrets.CC_REPORTER_ID}}
       with:
-        reporter-id: ${{ secrets.CC_REPORTER_ID }}
-        command: npm run test
+        coverageCommand: npm run test
+        coverageLocations: server/coverage/lcov.info:lcov
     
