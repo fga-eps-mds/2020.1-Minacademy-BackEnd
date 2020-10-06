@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Modules
+        uses: actions/checkout@v2
         working-directory: server
         run: npm install
       - name: Test & publish code coverage
