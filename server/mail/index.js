@@ -6,4 +6,4 @@ const transport = nodemailer.createTransport({
   auth: null
 });
 
-module.exports = transport;
+module.exports = transport

@@ -133,9 +133,11 @@ module.exports = {
                 if(err){
                     return res.status(400).json({error: "reset password link error"});
                 } else {
-                    transport.sendMail(data, function(err, body){
+                    transport.sendMail(data, (err, data)=>{
                         if(err){
-                             return res.json({error: "Could not send Email."});
+                            console.log(err); 
+                            return res.json({error: "Could not send Email."});
+                             
                         }
 
                         return res.json({message: "Email has sent"});
