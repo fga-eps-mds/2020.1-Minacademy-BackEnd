@@ -25,6 +25,23 @@ jobs:
           default_branch: develop
           dockerfile: prod.Dockerfile
 
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Modules
+        working-directory: server
+        run: npm install
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.4
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_REPORTER_ID}}
+        with:
+          workingDirectory: server
+          coverageCommand: npm run test
+          coverageLocations: server/coverage/lcov.info:lcov
+
   deploy:
     name: Deploy package to DigitalOcean 
     needs: build
