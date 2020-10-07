@@ -117,6 +117,32 @@ module.exports = {
                 });
             }
 
+            const resetToken = jwt.sign({ _id: user._id }, userAuth.secretResetPassword, {expiresIn: '60m'});
+            const data = {
+                from:'minAcademy@minAcademy.com',
+                to: email,
+                subject: 'Accont Activation Link',
+                html: ` 
+                        <h2>Please click on given link to reset your password</h2>
+                        <p>http://localhost:9000/resetPassword/${resetToken}</p>
+
+                      `
+            };
+
+            return user.updateOne({resetLink: resetToken}, (error, success)=>{
+                if(err){
+                    return res.status(400).json({error: "reset password link error"});
+                } else {
+                    transport.sendMail(data, function(err, body){
+                        if(err){
+                             return res.json({error: "Could not send Email."});
+                        }
+
+                        return res.json({message: "Email has sent"});
+                    });
+                }
+
+            })
         })
     })
 }
