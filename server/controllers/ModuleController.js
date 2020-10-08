@@ -10,13 +10,16 @@ module.exports = {
             const match = {}
             match.question = { $in: module.questions };
 
-            const questionResults = await req.user.execPopulate({
-               path: 'questionResults',
-               match
-            }).then(user => user.questionResults);
-
+            const answerKeys = await req.user.execPopulate('answers').then(user => user.answers)
             const obj = module.toObject()
-            obj.completed = questionResults.length === module.questions.length ? questionResults.every(result => result.isCorrect === true) : false
+            const questions = module.questions.map(question => JSON.parse(JSON.stringify(question._id)))
+            if (answerKeys) {
+               const filteredAnswers = answerKeys.answers.filter(answer => questions.includes(JSON.parse(JSON.stringify(answer.question))))
+               obj.completed = filteredAnswers.length ===  module.questions.length ? filteredAnswers.every(result => result.isCorrect === true) : false
+            } else {
+               obj.completed = false
+            }
+
             if (obj.completed) {
                req.user.completedModules.includes(module._id) ? null : req.user.completedModules = req.user.completedModules.concat(module._id);
             };
