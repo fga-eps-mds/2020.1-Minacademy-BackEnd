@@ -48,10 +48,10 @@ const UserSchema = new Schema({
         type: [String],
         select: false
     },
-    completedModules: {
-        type: [mongoose.Schema.Types.ObjectId],
+    completedModules: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Module',
-    },
+    }],
     tokens: [{
         accessToken: {
            type: String
@@ -59,11 +59,12 @@ const UserSchema = new Schema({
      }]
 });
 
-UserSchema.virtual('questionResults', {
-    ref: 'QuestionResult',
+UserSchema.virtual('answers', {
+    ref: 'AnswerKeys',
     localField: '_id',
-    foreignField: 'user'
-  })
+    foreignField: 'user',
+    justOne: true
+})
 
 UserSchema.methods.toJSON = function () {
     const user = this
