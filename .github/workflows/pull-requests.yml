@@ -14,7 +14,6 @@ jobs:
         working-directory: server
         run: npm install
       - name: ESLint
-        working-directory: server
         env:
           CI: true
         run: npm run lint
