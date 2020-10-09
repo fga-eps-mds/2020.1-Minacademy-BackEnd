@@ -124,7 +124,7 @@ module.exports = {
                 subject: 'Accont Activation Link',
                 html: ` 
                         <h2>Please click on given link to reset your password</h2>
-                        <p>http://localhost:9000/resetPassword/${resetToken}</p>
+                        <p>http://localhost:3000/change/${resetToken}</p>
 
                       `
             };
@@ -140,13 +140,56 @@ module.exports = {
                              
                         }
 
-                        return res.json({message: "Email has sent"});
+                        return res.send({resetToken: resetToken});
                     });
                 }
 
             })
         })
     })
-}
+  },
+    async resetPassword(req, res){
+      const {password, resetLink} = req.body;
+      //console.log("PPPPPAAARAMENTOS: ", req.params);
+      //const {resetLink} = req.params;
+      console.log(req.user);
+      if(resetLink){
+          //console.log("resetLink existe");
+          jwt.verify(resetLink, userAuth.secretResetPassword, (err, decodedData)=>{
+              if(err){
+                  //console.log(err); 
+                  console.log("resetLink errado");
+                  return res.json({error: "Incorrect token or it is expired."}); 
+              }
+              User.findOne({resetLink}, (err, user)=>{
+                  if(err || !user){
+                      return res.status(400).json({error: "User with this token does not exist."});
+                  }
+                  const obj = {
+                      password: password,
+                      resetLink: '' 
+                  }
+
+                  user.password = password;
+                  user.save((err, result)=>{
+                      if(err){
+                          return res.status(400).json({error: "reset password error"});
+                      } else {
+                          return res.status(200).json({message: 'Your password has been changed'})
+              
+                      }
+                  })
+              })
+          })
+      } else{
+          console.log("resetLink nao existe");
+          return res.status(401).json({error: "Authentication error"});
+      }
+
+    }
 };
+
+
+    
+
 
