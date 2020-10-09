@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require("cors");
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const router = require('./routers/index')
+const router = require('./routers/index');
 require('dotenv').config();
 
 const app = express();
@@ -10,24 +10,23 @@ const app = express();
 app.use(cors({
   origin: true,
   credentials: true,
-  exposedHeaders: ["set-cookie"]
+  exposedHeaders: ['set-cookie'],
 }));
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
-let db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DB connection error:'));
-db.once('open', function () {
-  console.log("DB connected");
+db.once('open', () => {
+  console.log('DB connected');
 });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(router)
-
+app.use(router);
 
 module.exports = app;
