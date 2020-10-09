@@ -2,10 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
-const userRouter = require('./routers/user');
-const questionRouter = require('./routers/question');
-const moduleRouter = require('./routers/module');
-const asnwerRouter = require('./routers/answer');
+const router = require('./routers/index')
 require('dotenv').config();
 
 const app = express();
@@ -30,9 +27,7 @@ db.once('open', function () {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(userRouter);
-app.use(questionRouter);
-app.use(moduleRouter);
-app.use(asnwerRouter);
+app.use(router)
+
 
 module.exports = app;

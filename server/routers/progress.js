@@ -1,9 +1,9 @@
 const { Router } = require('express');
-const AnswerController = require('../controllers/answersController');
+const progressController = require('../controllers/progressController');
 const auth = require('../middleware/userAuth')
 
 const router = new Router();
 
-router.post('/answer', auth, AnswerController.answerQuestion);
+router.get('/progress', auth, progressController.getProgress);
 
 module.exports = router;
