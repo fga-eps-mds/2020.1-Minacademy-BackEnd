@@ -4,7 +4,7 @@
       "es6": true,
       "node": true
     },
-    "extends": ["airbnb-base"],
+    "extends": ["airbnb"],
     "globals": {
       "Atomics": "readonly",
       "SharedArrayBuffer": "readonly"
