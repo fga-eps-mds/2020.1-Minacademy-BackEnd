@@ -33,7 +33,8 @@
   },
   "scripts": {
     "test": "jest --detectOpenHandles --testTimeout=10000 --coverage",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",

@@ -7,23 +7,17 @@ on:
       - 50-ci-cd
 
 jobs:
-  build:
-    name: Push Docker image to GitHub Packages
+  lint:
+    name: Run Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          name: fga-eps-mds/2020.1-Minacademy-BackEnd/server
-          tags: homolog
-          workdir: server
-          default_branch: develop
-          dockerfile: prod.Dockerfile
+      - uses: actions/checkout@v2
+      - name: Install Modules
+        run: npm install
+      - name: ESLint
+        env:
+          CI: true
+        run: npm run lint
 
   test:
     name: Run tests
@@ -41,6 +35,25 @@ jobs:
           workingDirectory: server
           coverageCommand: npm run test
           coverageLocations: server/coverage/lcov.info:lcov
+
+  build:
+    name: Push Docker image to GitHub Packages
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          name: fga-eps-mds/2020.1-Minacademy-BackEnd/server
+          tags: homolog
+          workdir: server
+          default_branch: develop
+          dockerfile: prod.Dockerfile
 
   deploy:
     name: Deploy package to DigitalOcean 
