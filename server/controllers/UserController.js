@@ -2,8 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const userAuth = require('../config/userAuth');
-const auth = require('../middleware/userAuth')
-const { find } = require('../models/User');
 
 module.exports = {
     async getUsers(req, res) {
@@ -62,7 +60,7 @@ module.exports = {
             const { _id } = req.body;
             const user = await User.findOneAndDelete({ _id });
             user.password = undefined;
-            return res.status(201).json(user);
+            return res.status(200).json(user);
         } catch (err) {
             return res.status(400).send({ error: 'Remove Failed' });
         }

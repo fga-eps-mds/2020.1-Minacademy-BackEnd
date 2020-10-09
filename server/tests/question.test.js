@@ -6,7 +6,6 @@ const request = supertest(app)
 
 const Module = require('../models/Module')
 const Question = require('../models/Question')
-const QuestionResult = require('../models/questionResult')
 const User = require('../models/User')
 const { questions, modules } = require('./fixtures/tutorial')
 const { userOne } = require('./fixtures/db')
@@ -56,70 +55,5 @@ describe('Questions', () => {
          .expect(400);
 
       expect(response.body.error).toEqual('Modulo não encontrado');
-   })
-
-   it('Should answer question 1 incorrectly', async () => {
-      const response = await request
-      .post('/questions/result')
-      .send({
-         question: questions[0]._id,
-         alternative: 'a',
-         user: userOne._id
-      })
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
-      // .expect("OK")
-
-      expect(response.ok).toBe(true)
-      const result = await QuestionResult.findById(response.body._id)
-      expect(result.isCorrect).toBe(false)
-   })
-
-   it('Should answer question 1 correctly', async () => {
-      const response = await request
-      .post('/questions/result')
-      .send({
-         question: questions[0]._id,
-         alternative: 'b',
-         user: userOne._id
-      })
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
-      // .expect("ok")
-
-      expect(response.ok).toBe(true)
-      const result = await QuestionResult.findById(response.body._id)
-      expect(result.isCorrect).toBe(true)
-   })
-
-   it('Should not answer question', async () => {
-      const response = await request
-      .post('/questions/result')
-      .send({
-         question: '5f652249fc13ae49f0000000',
-         alternative: 'a',
-         user: userOne._id
-      })
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
-      .expect(400)
-   })
-
-
-   it('Should get question result for userOne', async () => {
-      const response = await request
-      .get('/questions/result')
-      .send()
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
-      .expect(200)
-
-      expect(response.body.length).not.toBeNull()
-   })
-
-   it('Should get question result for question 1', async () => {
-      const response = await request
-      .get(`/questions/result?questions=${questions[0]._id}`)
-      .send()
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
-      .expect(200)
-
-      expect(response.body.length).toBe(1)
    })
 });
