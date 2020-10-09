@@ -116,4 +116,27 @@ describe('Users', () => {
         expect(response.status).toEqual(200);
     });
 
+    it('Should not be able to logout', async () => {
+        const response = await request.post('/users/logout')
+            .send()
+            .set('Cookie', [`auth_token=${jwt.sign({ id: 'invalidEmail@gmail.com' }, userAuth.secret)}`])
+        expect(response.status).toEqual(401);
+    });
+
+    it('Should delete user', async () => {
+        const response = await request.delete('/users')
+            .send({
+                _id: userOne._id
+            })
+            .expect(200)
+    });
+
+    it('Should not delete user', async () => {
+        const response = await request.delete('/users')
+            .send({
+                _id: "5f6cfbb6fc13ae3bc6000067"
+            })
+            .expect(400)
+    });
+
 });

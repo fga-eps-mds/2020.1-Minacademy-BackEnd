@@ -14,6 +14,15 @@ const userOne = {
     }]
 }
 
+const answerKey = {
+    user: userOneId,
+    answers: [{
+        question: mongoose.Types.ObjectId("5f6cfbb6fc13ae3bc6000067"),
+        alternative: 'a',
+        isCorrect: false
+    }]
+}
+
 const userTwoId = new mongoose.Types.ObjectId()
 const userTwo = {
     _id: userTwoId,
@@ -30,4 +39,5 @@ module.exports = {
     userOneId,
     userTwo,
     userTwoId,
+    answerKey
 }
