@@ -121,12 +121,20 @@ module.exports = {
             const data = {
                 from:'minAcademy@minAcademy.com',
                 to: email,
-                subject: 'Accont Activation Link',
+                //template: 'forgotPassword',
+                subject: 'Redefinição de Senha',
+                //template: 'forgotPassword'
                 html: ` 
-                        <h2>Please click on given link to reset your password</h2>
-                        <p>http://localhost:3000/change/${resetToken}</p>
-
-                      `
+                    <div >
+                        <div>
+                            <div class="box_text"> 
+                                <h1>Redefinição de senha</h1>
+                                <p>Você solicitou a redefinição de senha. Click <a href="http://localhost:3000/change/${resetToken}">aqui</a> para redefinir sua senha.</p>
+                            </div>
+                        </div>
+            
+                    </div>
+                      ` 
             };
 
             return user.updateOne({resetLink: resetToken}, (error, success)=>{
@@ -140,7 +148,7 @@ module.exports = {
                              
                         }
 
-                        return res.send({resetToken: resetToken});
+                        return res.status(200).json({message: 'A e-mail has sent to you, verify it'})
                     });
                 }
 
@@ -149,42 +157,44 @@ module.exports = {
     })
   },
     async resetPassword(req, res){
-      const {password, resetLink} = req.body;
-      //console.log("PPPPPAAARAMENTOS: ", req.params);
-      //const {resetLink} = req.params;
-      console.log(req.user);
-      if(resetLink){
-          //console.log("resetLink existe");
-          jwt.verify(resetLink, userAuth.secretResetPassword, (err, decodedData)=>{
-              if(err){
-                  //console.log(err); 
-                  console.log("resetLink errado");
-                  return res.json({error: "Incorrect token or it is expired."}); 
-              }
-              User.findOne({resetLink}, (err, user)=>{
-                  if(err || !user){
-                      return res.status(400).json({error: "User with this token does not exist."});
-                  }
-                  const obj = {
-                      password: password,
-                      resetLink: '' 
-                  }
+        const {password, resetLink} = req.body;
+        //console.log("PPPPPAAARAMENTOS: ", req.params);
+        //const {resetLink} = req.params;
+        //console.log(req.user);
+        if(resetLink){
+            //console.log("resetLink existe");
+            jwt.verify(resetLink, userAuth.secretResetPassword, (err, decodedData)=>{
+                if(err){
+                    //console.log(err); 
+                    console.log("resetLink errado");
+                    return res.json({error: "Incorrect token or it is expired."}); 
+                }
+                User.findOne({resetLink}, (err, user)=>{
+                    if(err || !user){
+                        console.log(user);
+                        return res.status(400).json({error: "User with this token does not exist."});
+                    }
+                    const obj = {
+                        password: password,
+                        resetLink: '' 
+                    }
 
-                  user.password = password;
-                  user.save((err, result)=>{
-                      if(err){
-                          return res.status(400).json({error: "reset password error"});
-                      } else {
-                          return res.status(200).json({message: 'Your password has been changed'})
-              
-                      }
-                  })
-              })
-          })
-      } else{
-          console.log("resetLink nao existe");
-          return res.status(401).json({error: "Authentication error"});
-      }
+                    user.password = password;
+                    user.save((err, result)=>{
+                        if(err){
+                            console.log(err);
+                            return res.status(400).json({error: "reset password error"});
+                        } else {
+                            return res.status(200).json({message: 'Your password has been changed'})
+                
+                        }
+                    })
+                })
+            })
+        } else{
+            console.log("resetLink nao existe");
+            return res.status(401).json({error: "Authentication error"});
+        }
 
     }
 };

@@ -4,6 +4,7 @@ const userAuth = require('../../config/userAuth.json');
 
 const userOneId = new mongoose.Types.ObjectId();
 const userOne = {
+<<<<<<< HEAD
   _id: userOneId,
   name: 'Maria',
   email: 'maria@gmail.com',
@@ -13,6 +14,18 @@ const userOne = {
     accessToken: jwt.sign({ id: 'maria@gmail.com' }, userAuth.secret),
   }],
 };
+=======
+    _id: userOneId,
+    name: 'Maria',
+    email: 'maria@gmail.com',
+    password: '44444dsasa',
+    userType: 'aprendiz',
+    tokens: [{
+        accessToken: jwt.sign({ id: 'maria@gmail.com' }, userAuth.secret)
+    }],
+    resetLink: jwt.sign({ id: 'maria@gmail.com' }, userAuth.secretResetPassword)
+}
+>>>>>>> personalização do email
 
 const answerKey = {
   user: userOneId,
@@ -25,6 +38,7 @@ const answerKey = {
 
 const userTwoId = new mongoose.Types.ObjectId();
 const userTwo = {
+<<<<<<< HEAD
   _id: userTwoId,
   name: 'joao',
   email: 'joao@mail.com',
@@ -33,6 +47,17 @@ const userTwo = {
     accessToken: jwt.sign({ id: 'joao@mail.com' }, userAuth.secret),
   }],
 };
+=======
+    _id: userTwoId,
+    name: 'joao',
+    email: 'joao@mail.com',
+    password: "joao2727",
+    tokens: [{
+        accessToken: jwt.sign({ id: 'joao@mail.com' }, userAuth.secret)
+    }],
+    resetLink: jwt.sign({ id: 'joao@mail.com'}, userAuth.secretResetPassword)
+}
+>>>>>>> personalização do email
 
 module.exports = {
   userOne,
