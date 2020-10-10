@@ -14,7 +14,6 @@ module.exports = {
          answerKeys.answers.forEach(async answer => {
             const question = await Question.findById(answer.question)
             answer.isCorrect = question.answer == answer.alternative.toString()
-            console.log("RESPOSTA: ", answer.isCorrect)
          })
          await answerKeys.save()
 

@@ -130,7 +130,6 @@ describe('Users', () => {
       .expect(200);
   });
 
-<<<<<<< HEAD
   it('Should not delete user', async () => {
     const response = await request.delete('/users')
       .send({
@@ -138,7 +137,7 @@ describe('Users', () => {
       })
       .expect(400);
   });
-=======
+  
     it('Should be able to send a e-mail', async () => {
         const response = await request.put('/forgotPassword')
             .send({
@@ -147,5 +146,4 @@ describe('Users', () => {
         expect(response.status).toEqual(200);
     });
 
->>>>>>> personalização do email
 });
