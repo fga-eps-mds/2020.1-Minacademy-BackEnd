@@ -7,119 +7,94 @@ const { find } = require('../models/User');
 const transport = require('../mail/index');
 
 module.exports = {
-  async getUsers(req, res) {
-    const users = await User.find();
-    return res.json(users);
-  },
+    async getUsers(req, res) {
+        const users = await User.find();
+        return res.json(users);
+    },
 
-  async createUser(req, res) {
-    try {
-      const user = await User.create(req.body);
-      const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
-      user.tokens = user.tokens.concat({ accessToken });
-      await user.save();
-      res.cookie('auth_token', accessToken);
-      return res.status(201).send({ user, accessToken });
-    } catch (err) {
-      return res.status(400).send({ error: err.message });
-    }
-  },
-
-  async authLogin(req, res) {
-    const { email, password } = req.body;
-    try {
-      const user = await User.findOne({ email });
-      if (!user) {
-        throw new Error('Invalid Email or Password');
-      }
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        throw new Error('Invalid Email or Password');
-      }
-
-      const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
-      user.tokens = user.tokens.concat({ accessToken });
-      await user.save();
-      res.cookie('auth_token', accessToken, { httpOnly: true });
-      res.send({ user, accessToken });
-    } catch (err) {
-      return res.status(400).send({ error: err.message });
-    }
-  },
-
-  async authLogout(req, res) {
-    try {
-      req.user.tokens = req.user.tokens.filter((token) => token.accessToken !== req.token);
-      await req.user.save();
-      res.clearCookie('auth_token');
-      res.send({ logout: 'Logged out' });
-    } catch (error) {
-      res.status(401).send(error);
-    }
-  },
-
-  async removeUser(req, res) {
-    try {
-      const { _id } = req.body;
-      const user = await User.findOneAndDelete({ _id });
-      user.password = undefined;
-      return res.status(200).json(user);
-    } catch (err) {
-      return res.status(400).send({ error: 'Remove Failed' });
-    }
-  },
-
-  async editUser(req, res) {
-    const update = {
-      name: req.body.name, email: req.body.email, about: req.body.about, profileImg: req.body.profileImg,
-    };
-    User.findByIdAndUpdate({ _id: req.user.id }, update, { new: true, runValidators: true },
-      (err, result) => {
-        if (err) {
-          console.log(err.message);
-          res.status(400).send(err);
-        } else {
-          res.send(result);
+    async createUser(req, res) {
+        try {
+            const user = await User.create(req.body);
+            const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
+            user.tokens = user.tokens.concat({ accessToken });
+            await user.save();
+            res.cookie('auth_token', accessToken);
+            return res.status(201).send({ user, accessToken });
+        } catch (err) {
+            return res.status(400).send({ error: err.message });
         }
-      });
-  },
+    },
 
-  async forgotPassword(req, res){
-    const {email} = req.body;
-
-    User.findOne({email}, (err, user)=>{
-        if(err || !user){
-            return res.status(400).json({error: "User with this email does not exist."});
-        }
-
-        const resetToken = jwt.sign({ _id: user._id }, userAuth.secretResetPassword, {expiresIn: '60m'});
-        const data = {
-            from:'minAcademy@minAcademy.com',
-            to: email,
-            subject: 'Accont Activation Link',
-            html: ` 
-                    <h2>Please click on given link to reset your password</h2>
-                    <p>http://localhost:9000/resetPassword/${resetToken}</p>
-
-                  `
-        };
-
-        return user.updateOne({resetLink: resetToken}, (err, success)=>{
-            if(err){
-                return res.status(400).json({error: "reset password link error"});
-            } else {
-                transport.sendMail(data, (err, body)=>{
-                    if(err){
-                         return res.json({error: "Could not send Email."});
-                    }
-
-                    return res.json({message: "Email has sent"});
-                });
+    async authLogin(req, res) {
+        const { email, password } = req.body;
+        try {
+            const user = await User.findOne({ email });
+            if (!user) {
+                throw new Error('Invalid Email or Password');
+            }
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch) {
+                throw new Error('Invalid Email or Password');
             }
 
-            const resetToken = jwt.sign({ _id: user._id }, userAuth.secretResetPassword, {expiresIn: '60m'});
+            const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
+            user.tokens = user.tokens.concat({ accessToken });
+            await user.save();
+            res.cookie('auth_token', accessToken, { httpOnly: true });
+            res.send({ user, accessToken });
+        } catch (err) {
+            return res.status(400).send({ error: err.message });
+        }
+    },
+
+    async authLogout(req, res) {
+        try {
+            req.user.tokens = req.user.tokens.filter((token) => token.accessToken !== req.token);
+            await req.user.save();
+            res.clearCookie('auth_token');
+            res.send({ logout: 'Logged out' });
+        } catch (error) {
+            res.status(401).send(error);
+        }
+    },
+
+    async removeUser(req, res) {
+        try {
+            const { _id } = req.body;
+            const user = await User.findOneAndDelete({ _id });
+            user.password = undefined;
+            return res.status(200).json(user);
+        } catch (err) {
+            return res.status(400).send({ error: 'Remove Failed' });
+        }
+    },
+
+    async editUser(req, res) {
+        const update = {
+            name: req.body.name, email: req.body.emaiu, about: req.body.about, profileImg: req.body.profileImg,
+        };
+        User.findByIdAndUpdate({ _id: req.user.id }, update, { new: true, runValidators: true },
+            (err, result) => {
+                if (err) {
+                    console.log(err.message);
+                    res.status(400).send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+    },
+
+    async forgotPassword(req, res) {
+        const { email } = req.body;
+
+        User.findOne({ email }, (err, user) => {
+            if (err || !user) {
+                return res.status(400).json({ error: "User with this email does not exist." });
+            }
+
+            const resetToken = jwt.sign({ _id: user._id }, userAuth.secretResetPassword, { expiresIn: '60m' });
             const data = {
-                from:'minAcademy@minAcademy.com',
+                from: 'minAcademy@minAcademy.com',
                 to: email,
                 //template: 'forgotPassword',
                 subject: 'Redefinição de Senha',
@@ -134,72 +109,72 @@ module.exports = {
                         </div>
             
                     </div>
-                      ` 
+                      `
             };
 
-            return user.updateOne({resetLink: resetToken}, (error, success)=>{
-                if(err){
-                    return res.status(400).json({error: "reset password link error"});
+            return user.updateOne({ resetLink: resetToken }, (error, success) => {
+                if (err) {
+                    return res.status(400).json({ error: "reset password link error" });
                 } else {
-                    transport.sendMail(data, (err, data)=>{
-                        if(err){
-                            console.log(err); 
-                            return res.json({error: "Could not send Email."});
-                             
+                    transport.sendMail(data, (err, data) => {
+                        if (err) {
+                            console.log(err);
+                            return res.json({ error: "Could not send Email." });
+
                         }
 
-                        return res.status(200).json({message: 'A e-mail has sent to you, verify it'})
+                        return res.status(200).json({ message: 'A e-mail has sent to you, verify it' })
                     });
                 }
 
-            })
-        })
-    })
-  },
-    async resetPassword(req, res){
-        const {password, resetLink} = req.body;
+            });
+        });
+    },
+
+    async resetPassword(req, res) {
+        const { password, resetLink } = req.body;
         //console.log("PPPPPAAARAMENTOS: ", req.params);
         //const {resetLink} = req.params;
         //console.log(req.user);
-        if(resetLink){
+        if (resetLink) {
             //console.log("resetLink existe");
-            jwt.verify(resetLink, userAuth.secretResetPassword, (err, decodedData)=>{
-                if(err){
+            jwt.verify(resetLink, userAuth.secretResetPassword, (err, decodedData) => {
+                if (err) {
                     //console.log(err); 
                     console.log("resetLink errado");
-                    return res.json({error: "Incorrect token or it is expired."}); 
+                    return res.json({ error: "Incorrect token or it is expired." });
                 }
-                User.findOne({resetLink}, (err, user)=>{
-                    if(err || !user){
+                User.findOne({ resetLink }, (err, user) => {
+                    if (err || !user) {
                         console.log(user);
-                        return res.status(400).json({error: "User with this token does not exist."});
+                        return res.status(400).json({ error: "User with this token does not exist." });
                     }
                     const obj = {
                         password: password,
-                        resetLink: '' 
+                        resetLink: ''
                     }
 
                     user.password = password;
-                    user.save((err, result)=>{
-                        if(err){
+                    user.save((err, result) => {
+                        if (err) {
                             console.log(err);
-                            return res.status(400).json({error: "reset password error"});
+                            return res.status(400).json({ error: "reset password error" });
                         } else {
-                            return res.status(200).json({message: 'Your password has been changed'})
-                
+                            return res.status(200).json({ message: 'Your password has been changed' })
+
                         }
                     })
                 })
             })
-        } else{
+        } else {
             console.log("resetLink nao existe");
-            return res.status(401).json({error: "Authentication error"});
+            return res.status(401).json({ error: "Authentication error" });
         }
 
     }
 };
 
 
-    
+
 
 
