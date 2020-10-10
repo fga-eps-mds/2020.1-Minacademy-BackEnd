@@ -81,7 +81,7 @@ module.exports = {
                 } else {
                     res.send(result);
                 }
-            });
+            })
     },
 
     async forgotPassword(req, res) {

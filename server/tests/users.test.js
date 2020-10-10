@@ -18,6 +18,7 @@ describe('Users', () => {
     });
 
     await new User(userOne).save();
+    await new User(userTwo).save();
   });
 
   afterAll(async (done) => {
@@ -25,18 +26,19 @@ describe('Users', () => {
     await mongoose.connection.close();
     done();
   });
-
   it('should be able to create user', async () => {
     const response = await request.post('/users')
       .send({
         name: 'Teste',
+        lastname: 'Aprendiz',
+        gender: 'Female',
         email: 'teste@gmail.com',
         password: '44444dsasa',
         userType: 'aprendiz',
-      });
+      }
+      );
     expect(response.status).toEqual(201);
   });
-
   it('Should not be able to create user', async () => {
     const response = await request.post('/users')
       .send({
@@ -110,10 +112,17 @@ describe('Users', () => {
 
   it('Should be able to send a e-mail', async () => {
     const response = await request.put('/forgotPassword')
-        .send({
-            email: userOne.email
-        })
+      .send({
+        email: userOne.email
+      })
     expect(response.status).toEqual(200);
+  });
+
+  it('Should be able to change to Learner if a female register as Mentor', async () => {
+    const response = await request.post('/changeToLearner')
+      .send()
+      .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`])
+    expect(response.status).toEqual(400)
   });
 
   it('Should be able to logout', async () => {
@@ -146,5 +155,9 @@ describe('Users', () => {
       .expect(400);
   });
 
-
+  it('Should be able to check if email is used', async () => {
+    const response = await request.get('/isEmailUsed?email=maria@gmail.com')
+      .send()
+    expect(response.status).toEqual(200);
+  });
 });
