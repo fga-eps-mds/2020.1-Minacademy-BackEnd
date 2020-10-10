@@ -11,6 +11,7 @@ services:
       MONGO_URL: mongodb://admin:admin@mongo:27017/db?authSource=admin
       PORT: 9000
       WAIT_HOSTS: mongo:27017
+      MAILHOG_HOST: mailhog
     depends_on:
       - mongo
     ports:
@@ -40,6 +41,14 @@ services:
         - ./seeds:/seeds
     networks:
       - server-network
+  
+  mailhog:
+    image: mailhog/mailhog
+    ports: 
+      - 1025:1025
+      - 8025:8025
+    networks: 
+     - server-network
 
 
 volumes:

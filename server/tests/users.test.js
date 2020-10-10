@@ -62,6 +62,20 @@ describe('Users', () => {
     expect(response.status).toEqual(200);
   });
 
+  it('Should be able to edit User', async () => {
+    const response = await request.post('/editUser')
+      .send({
+        name: 'Cleiton',
+        email: userOne.email,
+        password: 'novasenha',
+        profileImg: '',
+        about: '',
+      })
+      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
+    expect(response.status).toEqual(200);
+    expect(response.body.name).toEqual('Cleiton');
+  });
+
   it('Should not be able to login unregisterd user', async () => {
     const response = await request.post('/users/login')
       .send({
@@ -80,20 +94,6 @@ describe('Users', () => {
     expect(response.status).toEqual(400);
   });
 
-  it('Should be able to edit User', async () => {
-    const response = await request.post('/editUser')
-      .send({
-        name: 'Cleiton',
-        email: userOne.email,
-        password: 'novasenha',
-        profileImg: '',
-        about: '',
-      })
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
-    expect(response.status).toEqual(200);
-    expect(response.body.name).toEqual('Cleiton');
-  });
-
   it('Should not be able to edit User', async () => {
     const response = await request.post('/editUser')
       .send({
@@ -106,6 +106,14 @@ describe('Users', () => {
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
 
     expect(response.status).toEqual(400);
+  });
+
+  it('Should be able to send a e-mail', async () => {
+    const response = await request.put('/forgotPassword')
+        .send({
+            email: userOne.email
+        })
+    expect(response.status).toEqual(200);
   });
 
   it('Should be able to logout', async () => {
@@ -137,4 +145,6 @@ describe('Users', () => {
       })
       .expect(400);
   });
+
+
 });
