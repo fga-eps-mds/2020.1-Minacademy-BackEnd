@@ -25,6 +25,7 @@ describe('Users', () => {
         await mongoose.connection.close();
         done();
     });
+
     it('should be able to create user', async () => {
         const response = await request.post('/users')
             .send({
@@ -34,8 +35,7 @@ describe('Users', () => {
                 email: 'teste@gmail.com',
                 password: '44444dsasa',
                 userType: 'aprendiz',
-            }
-            );
+            });
         expect(response.status).toEqual(201);
     });
 
@@ -43,8 +43,6 @@ describe('Users', () => {
         const response = await request.post('/users')
             .send({
                 name: 'Teste',
-                lastname: 'Aprendiz',
-                gender: 'Male',
                 email: 'invalid_email',
                 password: '44444dsasa',
                 userType: 'aprendiz',
@@ -84,11 +82,20 @@ describe('Users', () => {
         expect(response.status).toEqual(400);
     });
 
+    it('Should be able to change to Learner if a female register as Mentor', async () => {
+        const response = await request.post('/changeToLearner')
+            .send()
+            .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
+        expect(response.status).toEqual(200)
+    });
+
+
     it('Should be able to edit User', async () => {
         const response = await request.post('/editUser')
             .send({
                 name: 'Cleiton',
                 email: userOne.email,
+                gender: 'Male',
                 password: 'novasenha',
                 profileImg: '',
                 about: '',
@@ -112,6 +119,19 @@ describe('Users', () => {
         expect(response.status).toEqual(400);
     });
 
+    it('Should be able to check if email is used', async () => {
+        const response = await request.get('/isEmailUsed?email=maria@gmail.com')
+            .send()
+        expect(response.status).toEqual(200);
+    });
+
+    it('Should be able to logout', async () => {
+        const response = await request.post('/users/logout')
+            .send()
+            .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
+        expect(response.status).toEqual(200);
+    });
+
     it('Should not be able to logout', async () => {
         const response = await request.post('/users/logout')
             .send()
@@ -126,6 +146,18 @@ describe('Users', () => {
             })
             .expect(200);
     });
+    
+    it('Should not be able to change to Learner if a male register as Mentor', async () => {
+        await request.post('/users/login')
+            .send({
+                email: userTwo.email,
+                password: userTwo.password,
+            });
+        const response = await request.post('/changeToLearner')
+            .send()
+            .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`])
+        expect(response.status).toEqual(400)
+    });
 
     it('Should not delete user', async () => {
         const response = await request.delete('/users')
@@ -133,31 +165,5 @@ describe('Users', () => {
                 _id: '5f6cfbb6fc13ae3bc6000067',
             })
             .expect(400);
-    });
-    it('Should be able to check if email is used', async () => {
-        const response = await request.get('/isEmailUsed?email=maria@gmail.com')
-            .send()
-        expect(response.status).toEqual(200);
-    });
-
-    it('Should be able to change to Learner if a female register as Mentor', async () => {
-        const response = await request.post('/changeToLearner')
-            .send()
-            .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
-        expect(response.status).toEqual(200)
-    });
-
-    it('Should be able to change to Learner if a female register as Mentor', async () => {
-        const response = await request.post('/changeToLearner')
-            .send()
-            .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`])
-        expect(response.status).toEqual(400)
-    });
-
-    it('Should be able to logout', async () => {
-        const response = await request.post('/users/logout')
-            .send()
-            .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
-        expect(response.status).toEqual(200);
     });
 });
