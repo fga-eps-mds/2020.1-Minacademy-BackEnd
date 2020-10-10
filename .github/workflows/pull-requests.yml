@@ -5,6 +5,20 @@ on:
 
 jobs:
 
+  lint:
+    name: Run Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Modules
+        working-directory: server
+        run: npm install
+      - name: ESLint
+        working-directory: server
+        env:
+          CI: true
+        run: npm run lint
+
   test:
     name: Run tests
     runs-on: ubuntu-latest

@@ -1,4 +1,5 @@
 # Minacademy Backend
+[![Maintainability](https://api.codeclimate.com/v1/badges/7e9dd952c8498b2ecdf8/maintainability)](https://codeclimate.com/github/fga-eps-mds/2020.1-Minacademy-BackEnd/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/7e9dd952c8498b2ecdf8/test_coverage)](https://codeclimate.com/github/fga-eps-mds/2020.1-Minacademy-BackEnd/test_coverage)
 
 Repositório do BackEnd do projeto [Minacademy](https://github.com/fga-eps-mds/2020.1-Grupo4).
 
