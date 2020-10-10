@@ -11,12 +11,10 @@ module.exports = {
 
     async getIsEmailUsed(req, res) {
         try {
-            console.log(req.query);
             const { email } = req.query
             const user = await User.findOne({ email });
             const isUsed = user ? true : false;
-            console.log(isUsed);
-            res.status(201).send(isUsed);
+            res.send(isUsed);
         } catch (err) {
             return res.status(400).send({ error: err.message });
         }
@@ -91,6 +89,21 @@ module.exports = {
                 } else {
                     res.send(result);
                 }
-            });
+            })
     },
-};
+
+    async changeToLearner(req, res) {
+        console.log(req.user.gender);
+        req.user.gender === "Female" ? User.findByIdAndUpdate(
+            { _id: req.user.id }, { userType: "learner" },
+            { new: true, runValidators: true },
+            function (err, result) {
+                if (err) {
+                    res.status(400).send(err)
+                }
+                else {
+                    res.send(result)
+                }
+            }) : res.status(400).send({ err: "Male can't be a learner" });
+    }
+}
