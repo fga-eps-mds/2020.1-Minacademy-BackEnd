@@ -6,5 +6,6 @@ const router = new Router();
 
 
 router.get('/mentors', MentorController.getMentors);
+router.patch('/mentors', MentorController.assignLearner);
 
 module.exports = router;

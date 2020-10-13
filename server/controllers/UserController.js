@@ -24,7 +24,6 @@ module.exports = {
     async createUser(req, res) {
         try {
             req.body.gender == "Male" ? req.body.userType = "Mentor" : null;
-            req.body.userType == "Mentor" ? req.body.isValidated = false : null;
             const user = await User.create(req.body);
             const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
             user.tokens = user.tokens.concat({ accessToken });

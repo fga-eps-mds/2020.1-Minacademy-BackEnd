@@ -8,5 +8,9 @@ module.exports = {
     async getMentors(req, res) {
         const mentor = await Mentor.find();
         return res.json(mentor);
+    },
+
+    async assignLearner(req, res){
+        res.send(req.user)
     }
 }

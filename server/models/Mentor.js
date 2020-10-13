@@ -1,14 +1,18 @@
 const User = require('./User');
 const mongoose = require('mongoose');
+const Learner = require('./Learner')
 const { Schema } = mongoose;
 
-const MentorSchema = User.discriminator('Mentor', new Schema({
+const MentorSchema = new Schema({
     isValidated: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
-    Learners: {
-        type: []
-    }
-}));
+    Learners: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Learner"
+    }]
+});
 
-module.exports = mongoose.model('Mentor');
+const Mentor = User.discriminator('Mentor', MentorSchema)
+module.exports = Mentor
