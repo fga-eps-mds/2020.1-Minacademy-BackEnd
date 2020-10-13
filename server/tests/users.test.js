@@ -96,13 +96,6 @@ describe('Users', () => {
     expect(response.status).toEqual(400);
   });
 
-  it('Should be able to change to Learner if a female register as Mentor', async () => {
-    const response = await request.post('/changeToLearner')
-      .send()
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
-    expect(response.status).toEqual(200)
-  });
-
   it('Should not be able to edit User', async () => {
     const response = await request.post('/editUser')
       .send({
@@ -118,15 +111,9 @@ describe('Users', () => {
   });
 
   it('Should be able to check if email is used', async () => {
-    const response = await request.get('/isEmailUsed?email=maria@gmail.com')
+    const response = await request.get('/users?email=teste@gmail.com')
       .send()
-    expect(response.status).toEqual(200);
-  });
-
-  it('Should be able to check if email is used', async () => {
-    const response = await request.get('/isEmailUsed?email=maria@gmail.com')
-      .send()
-    expect(response.status).toEqual(200);
+    expect(response.body).toBe(true);
   });
 
   it('Should be able to send a e-mail', async () => {
@@ -135,13 +122,6 @@ describe('Users', () => {
         email: userOne.email
       })
     expect(response.status).toEqual(200);
-  });
-
-  it('Should be able to change to Learner if a female register as Mentor', async () => {
-    const response = await request.post('/changeToLearner')
-      .send()
-      .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`])
-    expect(response.status).toEqual(400)
   });
 
   it('Should be able to logout', async () => {
@@ -158,18 +138,6 @@ describe('Users', () => {
     expect(response.status).toEqual(401);
   });
 
-  it('Should not be able to change to Learner if a male register as Mentor', async () => {
-    await request.post('/users/login')
-      .send({
-        email: userTwo.email,
-        password: userTwo.password,
-      });
-    const response = await request.post('/changeToLearner')
-      .send()
-      .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`])
-    expect(response.status).toEqual(400)
-  });
-
   it('Should delete user', async () => {
     const response = await request.delete('/users')
       .send({
@@ -184,5 +152,15 @@ describe('Users', () => {
         _id: '5f6cfbb6fc13ae3bc6000067',
       })
       .expect(400);
+  });
+
+  it('should be able to get all learners', async () => {
+    const response = await request.get('/learners');
+    expect(response.status).toEqual(200);
+  });
+
+  it('should be able to get all mentors', async () => {
+    const response = await request.get('/mentors');
+    expect(response.status).toEqual(200);
   });
 });

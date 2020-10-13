@@ -5,7 +5,6 @@ const auth = require('../middleware/userAuth');
 const router = new Router();
 
 
-router.get('/mentor', MentorController.getMentors);
-router.post('/mentor/change', MentorController.changeToLearner)
+router.get('/mentors', MentorController.getMentors);
 
 module.exports = router;

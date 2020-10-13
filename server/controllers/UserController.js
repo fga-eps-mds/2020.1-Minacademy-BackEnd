@@ -10,13 +10,15 @@ const transport = require('../mail/index');
 
 module.exports = {
     async getUsers(req, res) {
-        if(req.query.email){
+        if (req.query.email) {
             const { email } = req.query;
             const user = await User.findOne({ email });
             user ? res.send(true) : res.send(false);
         }
-        const users = await User.find();
-        return res.json(users);
+        else {
+            const users = await User.find();
+            return res.json(users);
+        }
     },
 
     async createUser(req, res) {
