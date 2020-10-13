@@ -16,8 +16,8 @@ describe('Users', () => {
       useCreateIndex: true,
       useFindAndModify: false,
     });
-
     await new User(userOne).save();
+    await new User(userTwo).save();
   });
 
   afterAll(async (done) => {
@@ -30,9 +30,11 @@ describe('Users', () => {
     const response = await request.post('/users')
       .send({
         name: 'Teste',
+        lastname: 'Aprendiz',
+        gender: 'Female',
         email: 'teste@gmail.com',
         password: '44444dsasa',
-        userType: 'aprendiz',
+        userType: 'Learner',
       });
     expect(response.status).toEqual(201);
   });
@@ -43,7 +45,7 @@ describe('Users', () => {
         name: 'Teste',
         email: 'invalid_email',
         password: '44444dsasa',
-        userType: 'aprendiz',
+        userType: 'Learner',
       });
     expect(response.status).toEqual(400);
   });
@@ -108,11 +110,17 @@ describe('Users', () => {
     expect(response.status).toEqual(400);
   });
 
+  it('Should be able to check if email is used', async () => {
+    const response = await request.get('/users?email=teste@gmail.com')
+      .send()
+    expect(response.body).toBe(true);
+  });
+
   it('Should be able to send a e-mail', async () => {
     const response = await request.put('/forgotPassword')
-        .send({
-            email: userOne.email
-        })
+      .send({
+        email: userOne.email
+      })
     expect(response.status).toEqual(200);
   });
 
@@ -146,5 +154,13 @@ describe('Users', () => {
       .expect(400);
   });
 
+  it('should be able to get all learners', async () => {
+    const response = await request.get('/learners');
+    expect(response.status).toEqual(200);
+  });
 
+  it('should be able to get all mentors', async () => {
+    const response = await request.get('/mentors');
+    expect(response.status).toEqual(200);
+  });
 });

@@ -8,7 +8,7 @@ const request = supertest(app)
 
 const Module = require('../models/Module')
 const Question = require('../models/Question')
-const AnswerKey = require('../models/answerKey')
+const AnswerKey = require('../models/AnswerKey')
 const User = require('../models/User')
 const { questions, modules } = require('./fixtures/tutorial')
 const { userOne } = require('./fixtures/db')

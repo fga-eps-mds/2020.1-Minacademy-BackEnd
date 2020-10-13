@@ -6,9 +6,11 @@ const userOneId = new mongoose.Types.ObjectId();
 const userOne = {
     _id: userOneId,
     name: 'Maria',
+    lastname: 'Cleia',
+    gender: 'Female',
     email: 'maria@gmail.com',
     password: '44444dsasa',
-    userType: 'aprendiz',
+    userType: 'Learner',
     tokens: [{
         accessToken: jwt.sign({ id: 'maria@gmail.com' }, userAuth.secret)
     }],
@@ -29,6 +31,9 @@ const userTwo = {
     _id: userTwoId,
     name: 'joao',
     email: 'joao@mail.com',
+    lastname: 'Pedro',
+    gender: 'Male',
+    userType: 'Mentor',
     password: "joao2727",
     tokens: [{
         accessToken: jwt.sign({ id: 'joao@mail.com' }, userAuth.secret)

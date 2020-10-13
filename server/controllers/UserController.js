@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Learner = require('../models/Learner');
+const Mentor = require('../models/Mentor');
 const userAuth = require('../config/userAuth');
 const auth = require('../middleware/userAuth')
 const { find } = require('../models/User');
@@ -8,12 +10,21 @@ const transport = require('../mail/index');
 
 module.exports = {
     async getUsers(req, res) {
-        const users = await User.find();
-        return res.json(users);
+        if (req.query.email) {
+            const { email } = req.query;
+            const user = await User.findOne({ email });
+            user ? res.send(true) : res.send(false);
+        }
+        else {
+            const users = await User.find();
+            return res.json(users);
+        }
     },
 
     async createUser(req, res) {
         try {
+            req.body.gender == "Male" ? req.body.userType = "Mentor" : null;
+            req.body.userType == "Mentor" ? req.body.isValidated = false : null;
             const user = await User.create(req.body);
             const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
             user.tokens = user.tokens.concat({ accessToken });
@@ -70,10 +81,8 @@ module.exports = {
     },
 
     async editUser(req, res) {
-        const update = {
-            name: req.body.name, email: req.body.email, about: req.body.about, profileImg: req.body.profileImg,
-        };
-        User.findByIdAndUpdate({ _id: req.user.id }, update, { new: true, runValidators: true },
+        const update = req.body;
+        User.findOneAndUpdate({ _id: req.user.id }, update, { new: true, runValidators: true },
             (err, result) => {
                 if (err) {
                     console.log(err.message);
@@ -81,7 +90,7 @@ module.exports = {
                 } else {
                     res.send(result);
                 }
-            });
+            })
     },
 
     async forgotPassword(req, res) {
@@ -170,7 +179,6 @@ module.exports = {
             console.log("resetLink nao existe");
             return res.status(401).json({ error: "Authentication error" });
         }
-
     }
 };
 

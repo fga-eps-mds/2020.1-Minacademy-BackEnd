@@ -12,4 +12,6 @@ router.post('/users/logout', auth, UserController.authLogout);
 router.post('/editUser', auth, UserController.editUser);
 router.put('/forgotPassword', UserController.forgotPassword);
 router.put('/resetPassword', UserController.resetPassword);
+router.patch('/users', auth, UserController.editUser);
+
 module.exports = router;
