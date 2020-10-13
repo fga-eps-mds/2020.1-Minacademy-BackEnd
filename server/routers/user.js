@@ -5,7 +5,6 @@ const auth = require('../middleware/userAuth');
 const router = new Router();
 
 router.get('/users', UserController.getUsers);
-router.get('/isEmailUsed', UserController.getIsEmailUsed);
 router.post('/users', UserController.createUser);
 router.delete('/users', UserController.removeUser);
 router.post('/users/login', UserController.authLogin);
@@ -13,4 +12,6 @@ router.post('/users/logout', auth, UserController.authLogout);
 router.post('/editUser', auth, UserController.editUser);
 router.put('/forgotPassword', UserController.forgotPassword);
 router.put('/resetPassword', UserController.resetPassword);
+router.patch('/users', auth, UserController.editUser);
+
 module.exports = router;

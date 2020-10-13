@@ -34,7 +34,7 @@ describe('Users', () => {
         gender: 'Female',
         email: 'teste@gmail.com',
         password: '44444dsasa',
-        userType: 'aprendiz',
+        userType: 'Learner',
       });
     expect(response.status).toEqual(201);
   });
@@ -45,7 +45,7 @@ describe('Users', () => {
         name: 'Teste',
         email: 'invalid_email',
         password: '44444dsasa',
-        userType: 'aprendiz',
+        userType: 'Learner',
       });
     expect(response.status).toEqual(400);
   });
@@ -123,6 +123,12 @@ describe('Users', () => {
     expect(response.status).toEqual(200);
   });
 
+  it('Should be able to check if email is used', async () => {
+    const response = await request.get('/isEmailUsed?email=maria@gmail.com')
+      .send()
+    expect(response.status).toEqual(200);
+  });
+
   it('Should be able to send a e-mail', async () => {
     const response = await request.put('/forgotPassword')
       .send({
@@ -178,11 +184,5 @@ describe('Users', () => {
         _id: '5f6cfbb6fc13ae3bc6000067',
       })
       .expect(400);
-  });
-
-  it('Should be able to check if email is used', async () => {
-    const response = await request.get('/isEmailUsed?email=maria@gmail.com')
-      .send()
-    expect(response.status).toEqual(200);
   });
 });

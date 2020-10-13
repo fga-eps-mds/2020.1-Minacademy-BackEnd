@@ -58,13 +58,13 @@ const UserSchema = new Schema({
             type: String,
         },
     }],
-});
+}, {discriminatorKey: 'userType'});
 
 UserSchema.virtual('answers', {
     ref: 'AnswerKeys',
     localField: '_id',
     foreignField: 'user',
-    justOne: true,
+    justOne: true
 });
 
 UserSchema.methods.toJSON = function () {
