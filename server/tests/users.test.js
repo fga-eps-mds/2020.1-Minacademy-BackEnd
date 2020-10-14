@@ -124,6 +124,18 @@ describe('Users', () => {
     expect(response.status).toEqual(200);
   });
 
+  it('should be able to get all learners', async () => {
+    const response = await request.get('/learners');
+    expect(response.status).toEqual(200);
+  });
+
+  it('should be able to get all mentors', async () => {
+    const response = await request
+    .get('/mentors')
+    .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
+    expect(response.status).toEqual(200);
+  });
+
   it('Should be able to logout', async () => {
     const response = await request.post('/users/logout')
       .send()
@@ -152,15 +164,5 @@ describe('Users', () => {
         _id: '5f6cfbb6fc13ae3bc6000067',
       })
       .expect(400);
-  });
-
-  it('should be able to get all learners', async () => {
-    const response = await request.get('/learners');
-    expect(response.status).toEqual(200);
-  });
-
-  it('should be able to get all mentors', async () => {
-    const response = await request.get('/mentors');
-    expect(response.status).toEqual(200);
   });
 });
