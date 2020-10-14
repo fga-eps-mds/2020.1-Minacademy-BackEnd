@@ -8,11 +8,23 @@ const MentorSchema = new Schema({
         type: Boolean,
         default: false
     },
-    Learners: [{
+    isAvailable: {
+        type: Boolean,
+        default: false
+    },
+    learners: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Learner"
+        ref: "Learner",
     }]
 });
+
+MentorSchema.path('learners').validate(async function (value, respond) {
+    console.log("VALOR: ", value[value.length -1])
+    if (this.learners.length === 0) return true
+    const exists = await Learner.exists({_id: value[value.length -1]})
+    console.log("EXISSysadyda:", exists)
+    return exists
+}, 'Learner does not exists');
 
 const Mentor = User.discriminator('Mentor', MentorSchema)
 module.exports = Mentor

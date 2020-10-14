@@ -1,8 +1,5 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const Learner = require('../models/Learner');
 const Mentor = require('../models/Mentor');
-const userAuth = require('../config/userAuth');
 
 module.exports = {
     async getMentors(req, res) {
@@ -10,7 +7,32 @@ module.exports = {
         return res.json(mentor);
     },
 
-    async assignLearner(req, res){
-        res.send(req.user)
+    async assignLearner(req, res) {
+        const user = req.user
+        user.isAvailable = true
+        try{
+            // TODO: find(somente aprendizes disponiveis)
+            const learner = (await Learner.find().sort({createdAt: 'asc'}))[0]
+            if (!learner) throw new Error("There's no available learners")
+            user.learners = [...user.learners, learner._id]
+            await user.save()
+            res.send(user)
+        } catch (error) {
+            console.log(error.message)
+            res.status(400).send({ error: error.message})
+        }
+    },
+
+    async changeAvailability(req, res) {
+        const user = req.user
+        try {
+            user.isAvailable = !user.isAvailable
+            await user.save()
+            res.send(user)
+        } catch (error) {
+            console.log(error)
+            res.status(400).send({ error: error.message})
+        }
     }
+
 }

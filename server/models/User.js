@@ -58,7 +58,7 @@ const UserSchema = new Schema({
             type: String,
         },
     }],
-}, {discriminatorKey: 'userType'});
+}, { timestamps: true, discriminatorKey: 'userType'});
 
 UserSchema.virtual('answers', {
     ref: 'AnswerKeys',
