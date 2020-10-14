@@ -4,7 +4,7 @@ const User = require('../models/User');
 const Learner = require('../models/Learner');
 const Mentor = require('../models/Mentor');
 const userAuth = require('../config/userAuth');
-const auth = require('../middleware/userAuth')
+const auth = require('../middleware/authentication')
 const { find } = require('../models/User');
 const transport = require('../mail/index');
 
