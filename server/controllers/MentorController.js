@@ -3,22 +3,28 @@ const Mentor = require('../models/Mentor');
 
 
 module.exports = {
-    async getMentors(req, res) {
-        const mentor = await Mentor.find();
-        return res.json(mentor);
+    async getLearners(req, res) {
+        const user = req.user
+
+        try {
+            await user.execPopulate('learners')
+            res.send(user.learners)
+        } catch (error) {
+            res.status(400).send({ error: error.message })
+        }
     },
 
     async assignLearner(req, res) {
         const user = req.user
         user.isAvailable = true
-        try{
-            // TODO: find(somente aprendizes disponiveis)
-            const learner = (await Learner.find().sort({createdAt: 'asc'}))[0]
+        try {
+            const learner = (await Learner.find({ mentor_request: true }).sort({createdAt: 'asc'}))[0]
             if (!learner) throw new Error("There's no available learners")
-            user.learners = [...user.learners, learner._id]
+            user.learners = user.learners.concat(learner._id)
+            user.isAvailable = false
             await user.execPopulate('learners')
             await user.save()
-            res.send(user.learners)
+            res.send({ learner: user.learners[user.learners.length - 1], isAvailable: user.isAvailable })
         } catch (error) {
             console.log(error.message)
             res.status(400).send({ error: error.message})
@@ -44,7 +50,7 @@ module.exports = {
         try {
             user.isAvailable = !user.isAvailable
             await user.save()
-            res.send(user)
+            res.send(user.isAvailable)
         } catch (error) {
             console.log(error)
             res.status(400).send({ error: error.message})
