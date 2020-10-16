@@ -6,6 +6,7 @@ const userAuth = require('../../config/userAuth.json');
 const learnerOneId = new mongoose.Types.ObjectId();
 const learnerOne = {
     mentor: null,
+    mentor_request: true,
     _id: learnerOneId,
     name: 'Renata',
     lastname: 'Santos',
@@ -22,6 +23,7 @@ const learnerOne = {
 const learnerTwoId = new mongoose.Types.ObjectId();
 const learnerTwo = {
     mentor: null,
+    mentor_request: false,
     _id: learnerTwoId,
     name: 'Luisa',
     lastname: 'Sousa',
@@ -38,6 +40,7 @@ const learnerTwo = {
 const learnerThreeId = new mongoose.Types.ObjectId();
 const learnerThree = {
     mentor: null,
+    mentor_request: false,
     _id: learnerThreeId,
     name: 'Vanessa',
     lastname: 'Carvalho',
@@ -54,6 +57,7 @@ const learnerThree = {
 const learnerFourId = new mongoose.Types.ObjectId();
 const learnerFour = {
     mentor: null,
+    mentor_request: false,
     _id: learnerFourId,
     name: 'Helen',
     lastname: 'Rodrigues',
@@ -70,6 +74,7 @@ const learnerFour = {
 const learnerFiveId = new mongoose.Types.ObjectId();
 const learnerFive = {
     mentor: null,
+    mentor_request: false,
     _id: learnerFiveId,
     name: 'Camila',
     lastname: 'Porto',

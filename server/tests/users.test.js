@@ -124,11 +124,6 @@ describe('Users', () => {
     expect(response.status).toEqual(200);
   });
 
-  it('should be able to get all learners', async () => {
-    const response = await request.get('/learners');
-    expect(response.status).toEqual(200);
-  });
-
   it('should be able to get all mentors', async () => {
     const response = await request
     .get('/mentors')

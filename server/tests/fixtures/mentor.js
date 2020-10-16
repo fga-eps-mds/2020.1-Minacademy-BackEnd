@@ -57,9 +57,27 @@ const mentorThree = {
     resetLink: jwt.sign({ id: 'tiago@gmail.com'}, userAuth.secretResetPassword)
 }
 
+const mentorFourId = new mongoose.Types.ObjectId();
+const mentorFour = {
+    isValidated: false,
+    isAvailable: false,
+    _id: mentorFourId,
+    name: 'Teste',
+    lastname: 'Teste',
+    gender: 'Female',
+    email: 'teste@gmail.com',
+    password: 'Tiago12@',
+    userType: 'Mentor',
+    tokens: [{
+        accessToken: jwt.sign({ id: 'teste@gmail.com' }, userAuth.secret)
+    }],
+    resetLink: jwt.sign({ id: 'teste@gmail.com'}, userAuth.secretResetPassword)
+}
+
 
 module.exports = {
     mentorOne,
     mentorTwo,
     mentorThree,
+    mentorFour
   };
