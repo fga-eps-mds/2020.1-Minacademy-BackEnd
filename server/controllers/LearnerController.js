@@ -12,8 +12,8 @@ module.exports = {
 
     async mentorRequest(req, res){
         try {
-            const {email} = req.user;
-            console.log(email)
+            //const {email} = req.user;
+            //console.log(email)
             //Mentor.populate("learners")
             const avaliableMentors = await (Mentor.find({isAvailable:true}));
             //console.log(avaliableMentors);
@@ -62,7 +62,7 @@ module.exports = {
             console.log(chosen_mentor.learners)
             await chosen_mentor.save()
             
-            return res.status(200).send(chosen_mentor);
+            return res.status(200).send(req.user.mentor);
             
         } catch (err) {
             return res.status(400).send({ error: err.message });
