@@ -19,10 +19,8 @@ const MentorSchema = new Schema({
 });
 
 MentorSchema.path('learners').validate(async function (value, respond) {
-    console.log("VALOR: ", value[value.length -1])
     if (this.learners.length === 0) return true
     const exists = await Learner.exists({_id: value[value.length -1]})
-    console.log("EXISSysadyda:", exists)
     return exists
 }, 'Learner does not exists');
 

@@ -5,8 +5,8 @@ const permit = require('../middleware/authorization');
 
 const router = new Router();
 
-
 router.get('/mentors', auth, MentorController.getMentors);
 router.patch('/mentors', auth, permit("Mentor"), MentorController.assignLearner);
+router.delete('/mentors', auth, permit("Mentor"), MentorController.unassignLearner);
 
 module.exports = router;
