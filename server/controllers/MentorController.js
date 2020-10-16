@@ -22,8 +22,10 @@ module.exports = {
             if (!learner) throw new Error("There's no available learners")
             user.learners = user.learners.concat(learner._id)
             user.isAvailable = false
+            learner.mentor_request = false
             await user.execPopulate('learners')
             await user.save()
+            await learner.save()
             res.send({ learner: user.learners[user.learners.length - 1], isAvailable: user.isAvailable })
         } catch (error) {
             console.log(error.message)
@@ -35,6 +37,7 @@ module.exports = {
         const user = req.user
         const { learnerID } = req.query
         try {
+            if (!learnerID) throw new Error("Invalid learner ID")
             await user.execPopulate('learners')
             user.learners = user.learners.filter(learner => learner._id.toString() !== learnerID)
             await user.save()
