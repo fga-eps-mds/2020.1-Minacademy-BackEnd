@@ -5,10 +5,6 @@ const Mentor = require('../models/Mentor');
 const userAuth = require('../config/userAuth');
 
 module.exports = {
-    async getLearners(req, res) {
-        const learner = await Learner.find();
-        return res.json(learner);
-    },
 
     async mentorRequest(req, res){
         try {
