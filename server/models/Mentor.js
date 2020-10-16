@@ -6,16 +6,16 @@ const { Schema } = mongoose;
 const MentorSchema = new Schema({
     isValidated: {
         type: Boolean,
-        default: false
+        default: true
     },
     isAvailable: {
         type: Boolean,
-        default: false
+        default: true
     },
     learners: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Learner",
-    }]
+        ref: "Learner"
+    }],
 });
 
 MentorSchema.path('learners').validate(async function (value, respond) {
