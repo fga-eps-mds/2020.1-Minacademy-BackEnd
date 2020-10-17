@@ -6,63 +6,56 @@ const userAuth = require('../config/userAuth');
 
 module.exports = {
 
-    async mentorRequest(req, res){
-        try {
-            //const {email} = req.user;
-            //console.log(email)
-            //Mentor.populate("learners")
-            const avaliableMentors = await (Mentor.find({isAvailable:true}));
-            //console.log(avaliableMentors);
-            if(avaliableMentors.length==0){
-                throw new Error('there are no monitors available at the moment');
-            }
+  async getMentor(req, res) {
+    const mentor = await Mentor.findById(req.user.mentor);
+    console.log(mentor);
+    return res.json(mentor);
+  },
 
-            function min(arr){
-                arr[0].execPopulate('learners')
-                //console.log("entrou na função")
-                let min = arr[0].learners.length
-                let minObject = arr[0]
-               /*  console.log("Valor inicial do minimo")
-                console.log(min)
-                console.log("Quantidade de mentores")
-                console.log(arr.length) */
+  async mentorRequest(req, res) {
+    try {
+      const avaliableMentors = await Mentor.find({ isAvailable: true });
 
-                for(let i = 1; i<arr.length; i++){
-                    //console.log("entrou no for")
-                    arr[i].execPopulate('learners')
-                    //console.log("Valor comparado com o minimo")
-                    //console.log(arr[i].learners.length)
-                    if(arr[i].learners.length<min){
-                        //console.log("entrou no if")
-                        min = arr[i].learners.length
-                        minObject = arr[i]
+      if (req.user.mentor != null) {
+        throw new Error('You already have a mentor');
+      }
 
-                    }
-                }
-                return minObject
-            }
+      if (avaliableMentors.length == 0) {
+        throw new Error('there are no monitors available at the moment');
+      }
 
-            const chosen_mentor = min(avaliableMentors)
-            //console.log("Mentor escolhido")
-            //console.log(chosen_mentor)
-            
-            req.user.mentor = chosen_mentor._id
-            await req.user.save()
-           
-            // console.log("Mentor escolhido antes de salvar o id do aluno")
-            //console.log(chosen_mentor.learners)
-           
-            chosen_mentor.learners = [...chosen_mentor.learners, req.user._id]
-            //console.log("Mentor escolhido depois de salvar o id do aluno")
-           
-            console.log(chosen_mentor.learners)
-            await chosen_mentor.save()
-            
-            return res.status(200).send(req.user.mentor);
-            
-        } catch (err) {
-            return res.status(400).send({ error: err.message });
+      function min(arr) {
+        arr[0].execPopulate('learners');
+        let min = arr[0].learners.length;
+        let minObject = arr[0];
+
+        for (let i = 1; i < arr.length; i++) {
+          arr[i].execPopulate('learners');
+          if (arr[i].learners.length < min) {
+            //console.log("entrou no if")
+            min = arr[i].learners.length;
+            minObject = arr[i];
+          }
         }
-    },
+        return minObject;
+      }
 
-}
+      const chosen_mentor = min(avaliableMentors);
+
+      req.user.mentor = chosen_mentor._id;
+      req.user.mentor_request = true
+      await req.user.save();
+
+      chosen_mentor.learners = [...chosen_mentor.learners, req.user._id];
+
+      console.log(chosen_mentor.learners);
+      await chosen_mentor.save();
+      const mentor = await Mentor.findById(chosen_mentor);
+      console.log(mentor);
+
+      return res.status(200).send(mentor);
+    } catch (err) {
+      return res.status(400).send({ error: err.message });
+    }
+  },
+};

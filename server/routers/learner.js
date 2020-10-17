@@ -5,5 +5,6 @@ const auth = require('../middleware/authentication');
 const router = new Router();
 
 router.patch('/learners',auth, LearnerController.mentorRequest);
+router.get('/learners', auth, LearnerController.getMentor);
 
 module.exports = router;
