@@ -108,8 +108,11 @@ describe('Users', () => {
   });
 
   it('Should be able to check if email is used', async () => {
-    const response = await request.get('/users?email=teste@gmail.com').send();
-    expect(response.body).toBe(true);
+    const response = await request.get('/users?email=teste@gmail.com')
+      .send()
+      .expect(200)
+
+    expect(response.body.user.email).toEqual('teste@gmail.com');
   });
 
   it('Should be able to send a e-mail', async () => {

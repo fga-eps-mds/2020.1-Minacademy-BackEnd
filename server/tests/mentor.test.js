@@ -61,7 +61,6 @@ describe('Learner', () => {
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(200);
 
-    console.log('APRENDIZ!!!: ', response.body);
     expect(response.body.learner).not.toBeNull();
   });
 
@@ -72,7 +71,7 @@ describe('Learner', () => {
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(400);
 
-    expect(response.body.error).toEqual('Theres no available learners');
+    expect(response.body.error).toEqual("There's no available learners");
   });
 
   it('Should unassign a learner to mentor one', async () => {
