@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
 const jwt = require('jsonwebtoken');
+const app = require('../app');
+const userAuth = require('../config/userAuth');
 const { userOne, userTwo } = require('./fixtures/db');
 const User = require('../models/User');
-const app = require('../app');
 
 const request = supertest(app);
-const userAuth = require('../config/userAuth');
 
 describe('Users', () => {
   beforeAll(async () => {
@@ -27,26 +27,24 @@ describe('Users', () => {
   });
 
   it('should be able to create user', async () => {
-    const response = await request.post('/users')
-      .send({
-        name: 'Teste',
-        lastname: 'Aprendiz',
-        gender: 'Female',
-        email: 'teste@gmail.com',
-        password: '44444dsasa',
-        userType: 'Learner',
-      });
+    const response = await request.post('/users').send({
+      name: 'Teste',
+      lastname: 'Aprendiz',
+      gender: 'Female',
+      email: 'teste@gmail.com',
+      password: '44444dsasa',
+      userType: 'Learner',
+    });
     expect(response.status).toEqual(201);
   });
 
   it('Should not be able to create user', async () => {
-    const response = await request.post('/users')
-      .send({
-        name: 'Teste',
-        email: 'invalid_email',
-        password: '44444dsasa',
-        userType: 'Learner',
-      });
+    const response = await request.post('/users').send({
+      name: 'Teste',
+      email: 'invalid_email',
+      password: '44444dsasa',
+      userType: 'Learner',
+    });
     expect(response.status).toEqual(400);
   });
 
@@ -56,16 +54,16 @@ describe('Users', () => {
   });
 
   it('should be able to login', async () => {
-    const response = await request.post('/users/login')
-      .send({
-        email: userOne.email,
-        password: userOne.password,
-      });
+    const response = await request.post('/users/login').send({
+      email: userOne.email,
+      password: userOne.password,
+    });
     expect(response.status).toEqual(200);
   });
 
   it('Should be able to edit User', async () => {
-    const response = await request.post('/editUser')
+    const response = await request
+      .post('/editUser')
       .send({
         name: 'Cleiton',
         email: userOne.email,
@@ -79,25 +77,24 @@ describe('Users', () => {
   });
 
   it('Should not be able to login unregisterd user', async () => {
-    const response = await request.post('/users/login')
-      .send({
-        email: 'invallid_email',
-        password: userOne.password,
-      });
+    const response = await request.post('/users/login').send({
+      email: 'invallid_email',
+      password: userOne.password,
+    });
     expect(response.status).toEqual(400);
   });
 
   it('Should not be able to login with wrong password', async () => {
-    const response = await request.post('/users/login')
-      .send({
-        email: userOne.email,
-        password: 'invalid_password',
-      });
+    const response = await request.post('/users/login').send({
+      email: userOne.email,
+      password: 'invalid_password',
+    });
     expect(response.status).toEqual(400);
   });
 
   it('Should not be able to edit User', async () => {
-    const response = await request.post('/editUser')
+    const response = await request
+      .post('/editUser')
       .send({
         name: userOne.name,
         email: 'invalid_email',
@@ -111,53 +108,64 @@ describe('Users', () => {
   });
 
   it('Should be able to check if email is used', async () => {
-    const response = await request.get('/users?email=teste@gmail.com')
-      .send()
+    const response = await request.get('/users?email=teste@gmail.com').send();
     expect(response.body).toBe(true);
   });
 
   it('Should be able to send a e-mail', async () => {
-    const response = await request.put('/forgotPassword')
-      .send({
-        email: userOne.email
-      })
+    const response = await request.put('/forgotPassword').send({
+      email: userOne.email,
+    });
     expect(response.status).toEqual(200);
   });
 
   it('should be able to get all mentors', async () => {
     const response = await request
-    .get('/mentors')
-    .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
+      .get('/mentors')
+      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
     expect(response.status).toEqual(200);
   });
 
   it('Should be able to logout', async () => {
-    const response = await request.post('/users/logout')
+    const response = await request
+      .post('/users/logout')
       .send()
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
     expect(response.status).toEqual(200);
   });
 
   it('Should not be able to logout', async () => {
-    const response = await request.post('/users/logout')
+    const response = await request
+      .post('/users/logout')
       .send()
-      .set('Cookie', [`auth_token=${jwt.sign({ id: 'invalidEmail@gmail.com' }, userAuth.secret)}`]);
+      .set('Cookie', [
+        `auth_token=${jwt.sign(
+          { id: 'invalidEmail@gmail.com' },
+          userAuth.secret,
+        )}`,
+      ]);
     expect(response.status).toEqual(401);
   });
 
-  it('Should delete user', async () => {
-    const response = await request.delete('/users')
-      .send({
-        _id: userOne._id,
-      })
-      .expect(200);
-  });
-
   it('Should not delete user', async () => {
-    const response = await request.delete('/users')
+    const response = await request
+      .delete('/users')
       .send({
         _id: '5f6cfbb6fc13ae3bc6000067',
       })
       .expect(400);
+
+    expect(response.body.error).toEqual('Remove Failed');
+  });
+
+  it('Should delete user', async () => {
+    const response = await request
+      .delete('/users')
+      .send({
+        _id: userOne._id,
+      })
+      .expect(200);
+
+    expect(response.body).not.toBeNull();
   });
 });

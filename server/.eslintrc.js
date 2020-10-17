@@ -13,6 +13,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
   },
+  ignorePatterns: ['tests/*'],
   rules: {
     'no-underscore-dangle': 'off',
     'no-undef': 'warn',

@@ -6,7 +6,10 @@ const auth = async (req, res, next) => {
   try {
     const token = req.cookies.auth_token;
     const decodedToken = jwt.verify(token, userAuth.secret);
-    const user = await User.findOne({ email: decodedToken.id, 'tokens.accessToken': token });
+    const user = await User.findOne({
+      email: decodedToken.id,
+      'tokens.accessToken': token,
+    });
 
     if (!user) throw new Error();
 

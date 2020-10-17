@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGO_URL, {
   useFindAndModify: false,
 });
 
+// eslint-disable no-console
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DB connection error:'));
 db.once('open', () => {

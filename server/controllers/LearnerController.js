@@ -32,7 +32,7 @@ module.exports = {
         for (let i = 1; i < arr.length; i++) {
           arr[i].execPopulate('learners');
           if (arr[i].learners.length < min) {
-            //console.log("entrou no if")
+            // console.log("entrou no if")
             min = arr[i].learners.length;
             minObject = arr[i];
           }
@@ -43,7 +43,7 @@ module.exports = {
       const chosen_mentor = min(avaliableMentors);
 
       req.user.mentor = chosen_mentor._id;
-      req.user.mentor_request = true
+      req.user.mentor_request = true;
       await req.user.save();
 
       chosen_mentor.learners = [...chosen_mentor.learners, req.user._id];

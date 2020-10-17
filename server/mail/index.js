@@ -1,19 +1,18 @@
 const nodemailer = require('nodemailer');
-const  hbs = require('nodemailer-express-handlebars');
-const path = require('path');
+const hbs = require('nodemailer-express-handlebars');
 
 const transport = nodemailer.createTransport({
   host: process.env.MAILHOG_HOST,
   port: '1025',
-  auth: null
+  auth: null,
 });
 
- const handlebarsOptions = {
+const handlebarsOptions = {
   viewEngine: 'express-handlebars',
-  viewPath: './templates/'
-  //extName: '.html'
+  viewPath: './templates/',
+  // extName: '.html'
 };
 
-transport.use('compile', hbs(handlebarsOptions)); 
+transport.use('compile', hbs(handlebarsOptions));
 
-module.exports = transport
+module.exports = transport;
