@@ -15,31 +15,25 @@ module.exports = {
             .execPopulate('answers')
             .then((user) => user.answers);
           const obj = module.toObject();
-          const questions = module.questions.map((question) =>
-            question._id.toString()
-          );
+          const questions = module.questions
+            .map((question) => question._id.toString());
           if (answerKeys) {
             const filteredAnswers = answerKeys.answers
-            .filter((answer) =>
-              questions.includes(answer.question.toString())
-            );
-            obj.completed =
-              filteredAnswers.length === module.questions.length
-                ? filteredAnswers.every((result) => result.isCorrect === true)
-                : false;
+              .filter((answer) => questions.includes(answer.question.toString()));
+            obj.completed = (filteredAnswers.length === module.questions.length)
+              ? (filteredAnswers.every((result) => result.isCorrect === true))
+              : (false);
           } else {
             obj.completed = false;
           }
 
           if (obj.completed) {
             req.user.completedModules.includes(module._id)
-              ? null
-              : (req.user.completedModules = req.user.completedModules.concat(
-                  module._id
-                ));
+              ? (null)
+              : (req.user.completedModules = req.user.completedModules.concat(module._id));
           }
           return obj;
-        })
+        }),
       );
 
       await req.user.save();

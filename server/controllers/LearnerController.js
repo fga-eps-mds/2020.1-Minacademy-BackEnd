@@ -1,14 +1,8 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const Learner = require('../models/Learner');
 const Mentor = require('../models/Mentor');
-const userAuth = require('../config/userAuth');
 
 module.exports = {
-
   async getMentor(req, res) {
     const mentor = await Mentor.findById(req.user.mentor);
-    console.log(mentor);
     return res.json(mentor);
   },
 
@@ -20,7 +14,7 @@ module.exports = {
         throw new Error('You already have a mentor');
       }
 
-      if (avaliableMentors.length == 0) {
+      if (avaliableMentors.length === 0) {
         throw new Error('there are no monitors available at the moment');
       }
 
@@ -40,18 +34,16 @@ module.exports = {
         return minObject;
       }
 
-      const chosen_mentor = min(avaliableMentors);
+      const chosenMentor = min(avaliableMentors);
 
-      req.user.mentor = chosen_mentor._id;
+      req.user.mentor = chosenMentor._id;
       req.user.mentor_request = true;
       await req.user.save();
 
-      chosen_mentor.learners = [...chosen_mentor.learners, req.user._id];
+      chosenMentor.learners = [...chosenMentor.learners, req.user._id];
 
-      console.log(chosen_mentor.learners);
-      await chosen_mentor.save();
-      const mentor = await Mentor.findById(chosen_mentor);
-      console.log(mentor);
+      await chosenMentor.save();
+      const mentor = await Mentor.findById(chosenMentor);
 
       return res.status(200).send(mentor);
     } catch (err) {

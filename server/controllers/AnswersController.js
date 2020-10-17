@@ -6,7 +6,7 @@ module.exports = {
     try {
       const question = await Question.findById(req.body.question);
       if (!question) throw new Error('Question not found');
-      const answer = {
+      const newAnswer = {
         question: req.body.question,
         alternative: req.body.alternative,
         isCorrect: question.answer === req.body.alternative,
@@ -15,19 +15,18 @@ module.exports = {
         .execPopulate('answers')
         .then((user) => user.answers);
       if (answerKeys) {
-        answerKeys.answers = answerKeys.answers.filter(
-          (answer) => answer.question.toString() != question._id,
-        );
-        answerKeys.answers = answerKeys.answers.concat(answer);
+        answerKeys.answers = answerKeys.answers
+          .filter((answer) => answer.question.toString() !== question._id.toString());
+        answerKeys.answers = answerKeys.answers.concat(newAnswer);
       } else {
         answerKeys = await new AnswerKeys({
           user: req.user._id,
-          answers: answer,
+          answers: newAnswer,
         });
       }
 
       await answerKeys.save();
-      res.send(answer);
+      res.send(newAnswer);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
       res.status(400).send({ error: error.message });

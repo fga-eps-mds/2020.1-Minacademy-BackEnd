@@ -2,7 +2,7 @@ const Learner = require('../models/Learner');
 
 module.exports = {
   async getLearners(req, res) {
-    const user = req.user;
+    const { user } = req;
 
     try {
       await user.execPopulate('learners');
@@ -13,7 +13,7 @@ module.exports = {
   },
 
   async assignLearner(req, res) {
-    const user = req.user;
+    const { user } = req;
     user.isAvailable = true;
     try {
       const learner = (
@@ -38,13 +38,13 @@ module.exports = {
   },
 
   async unassignLearner(req, res) {
-    const user = req.user;
+    const { user } = req;
     const { learnerID } = req.query;
     try {
       if (!learnerID) throw new Error('Invalid learner ID');
       user.learners = user.learners.filter(
-        (learner) => learner.toString() !== learnerID
-        );
+        (learner) => learner.toString() !== learnerID,
+      );
       await user.save();
       await user.execPopulate('learners');
       res.send(user.learners);
@@ -55,7 +55,7 @@ module.exports = {
   },
 
   async changeAvailability(req, res) {
-    const user = req.user;
+    const { user } = req;
     try {
       user.isAvailable = !user.isAvailable;
       await user.save();

@@ -9,18 +9,16 @@ module.exports = {
       const answerKeys = await req.user
         .execPopulate('answers')
         .then((user) => user.answers);
-      if (!answerKeys)
-        throw new Error('User does not have any answered question');
+      if (!answerKeys) throw new Error('User does not have any answered question');
+      /* eslint-disable no-param-reassign */
       answerKeys.answers.forEach(async (answer) => {
         const question = await Question.findById(answer.question);
-        answer.isCorrect =
-          question.answer.toString() === answer.alternative.toString();
+        answer.isCorrect = question.answer.toString() === answer.alternative.toString();
       });
       await answerKeys.save();
 
-      const correctAnswers = answerKeys.answers.filter(
-        (answer) => answer.isCorrect
-      );
+      const correctAnswers = answerKeys.answers
+        .filter((answer) => answer.isCorrect);
 
       if (req.query.moduleNumber) {
         const module = await Module.findOne({
@@ -30,15 +28,12 @@ module.exports = {
           .execPopulate('questions')
           .then((doc) => doc.questions);
         questions = questions.map((question) => question._id.toString());
-        queryAnswers = answerKeys.answers.filter((answer) =>
-          questions.includes(answer.question.toString())
-        );
+        queryAnswers = answerKeys.answers
+          .filter((answer) => questions.includes(answer.question.toString()));
       }
 
       const totalQuestions = await Question.find({});
-      const totalProgress = Math.floor(
-        (correctAnswers.length / totalQuestions.length) * 100
-      );
+      const totalProgress = Math.floor((correctAnswers.length / totalQuestions.length) * 100);
 
       const payload = req.query.moduleNumber
         ? { correctAnswers: correctAnswers.length, totalProgress, queryAnswers }
