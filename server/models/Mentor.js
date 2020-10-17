@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 const MentorSchema = new Schema({
     isValidated: {
         type: Boolean,
-        default: true
+        default: false,
     },
     isAvailable: {
         type: Boolean,
