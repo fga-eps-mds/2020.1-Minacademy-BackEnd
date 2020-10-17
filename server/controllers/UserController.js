@@ -18,7 +18,7 @@ module.exports = {
 
   async createUser(req, res) {
     try {
-      req.body.gender === 'Male' ? (req.body.userType = 'Mentor') : null;
+      if (req.body.gender === 'Male') req.body.userType = 'Mentor';
       const user = await User.create(req.body);
       const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
       user.tokens = user.tokens.concat({ accessToken });
@@ -54,9 +54,8 @@ module.exports = {
 
   async authLogout(req, res) {
     try {
-      req.user.tokens = req.user.tokens.filter(
-        (token) => token.accessToken !== req.token,
-      );
+      req.user.tokens = req.user.tokens
+        .filter((token) => token.accessToken !== req.token);
       await req.user.save();
       res.clearCookie('auth_token');
       res.send({ logout: 'Logged out' });
@@ -77,110 +76,123 @@ module.exports = {
   },
 
   async editUser(req, res) {
-    const update = req.body;
-    User.findOneAndUpdate(
-      { _id: req.user.id },
-      update,
-      { new: true, runValidators: true },
-      (err, result) => {
-        if (err) {
-          console.log(err.message);
-          res.status(400).send(err);
-        } else {
-          res.send(result);
-        }
-      },
-    );
+    const updates = Object.keys(req.body);
+    const allowedUpdates = [
+      'name',
+      'email',
+      'password',
+      'profileImage',
+      'about',
+    ];
+    const isValidOperation = updates.every((item) => allowedUpdates.includes(item));
+
+    if (!isValidOperation) return res.status(400).send({ Error: 'Invalid updates!' });
+
+    try {
+      /* eslint-disable no-return-assign */
+      updates.forEach((field) => (req.user[field] = req.body[field]));
+      await req.user.save();
+      res.send(req.user);
+    } catch (error) {
+      res.status(400).send(error);
+    }
   },
 
   async forgotPassword(req, res) {
     const { email } = req.body;
 
-    User.findOne({ email }, (err, user) => {
-      if (err || !user) {
-        return res
-          .status(400)
-          .json({ error: 'User with this email does not exist.' });
-      }
-
-      const resetToken = jwt.sign(
+    try {
+      const user = await User.findOne({ email });
+      const resetLink = jwt.sign(
         { _id: user._id },
         userAuth.secretResetPassword,
         { expiresIn: '60m' },
       );
+      user.resetLink = resetLink;
+      await user.save();
       const data = {
         from: 'minAcademy@minAcademy.com',
         to: email,
-        // template: 'forgotPassword',
         subject: 'Redefinição de Senha',
-        // template: 'forgotPassword'
         html: `
-                    <div >
-                        <div>
-                            <div class="box_text">
-                                <h1>Redefinição de senha</h1>
-                                <p>Você solicitou a redefinição de senha. Click <a href="http://localhost:3000/change/${resetToken}">aqui</a> para redefinir sua senha.</p>
-                            </div>
-                        </div>
-
+            <div >
+                <div>
+                    <div class="box_text">
+                        <h1>Redefinição de senha</h1>
+                        <p>Você solicitou a redefinição de senha. Click <a href="http://localhost:3000/change/${resetLink}">aqui</a> para redefinir sua senha.</p>
                     </div>
-                      `,
+                </div>
+            </div>`,
       };
 
-      return user.updateOne({ resetLink: resetToken }, (error, success) => {
-        if (error) {
-          return res.status(400).json({ error: 'reset password link error' });
-        }
-        transport.sendMail(data, (err, data) => {
-          if (err) {
-            console.log(err);
-            return res.json({ error: 'Could not send Email.' });
-          }
+      await transport.sendMail(data);
+      res.send({ message: 'A e-mail has sent to you, verify it' });
+    } catch (error) {
+      res.status(400).send({ error: error.message });
+    }
 
-          return res
-            .status(200)
-            .json({ message: 'A e-mail has sent to you, verify it' });
-        });
-      });
-    });
+    // User.findOne({ email }, (err, user) => {
+    //   if (err || !user) {
+    //     return res
+    //       .status(400)
+    //       .json({ error: 'User with this email does not exist.' });
+    //   }
+
+    //   const resetToken = jwt.sign(
+    //     { _id: user._id },
+    //     userAuth.secretResetPassword,
+    //     { expiresIn: '60m' },
+    //   );
+    // const data = {
+    //   // from: 'minAcademy@minAcademy.com',
+    //   from: 'lucasmelodos322@gmail.com',
+    //   to: email,
+    //   // template: 'forgotPassword',
+    //   subject: 'Redefinição de Senha',
+    //   // template: 'forgotPassword'
+    //   html: `
+    //               <div >
+    //                   <div>
+    //                       <div class="box_text">
+    //                           <h1>Redefinição de senha</h1>
+    //                           <p>Você solicitou a redefinição de senha. Click <a href="http://localhost:3000/change/${resetToken}">aqui</a> para redefinir sua senha.</p>
+    //                       </div>
+    //                   </div>
+
+    //               </div>
+    //                 `,
+    // };
+
+    //   return user.updateOne({ resetLink: resetToken }, (error, success) => {
+    //     if (error) {
+    //       return res.status(400).json({ error: 'reset password link error' });
+    //     }
+    //     transport.sendMail(data, (err, data) => {
+    //       if (err) {
+    //         console.log(err);
+    //         return res.json({ error: 'Could not send Email.' });
+    //       }
+
+    //       return res
+    //         .status(200)
+    //         .json({ message: 'A e-mail has sent to you, verify it' });
+    //     });
+    //   });
+    // });
   },
 
   async resetPassword(req, res) {
     const { password, resetLink } = req.body;
-    if (resetLink) {
-      jwt.verify(
-        resetLink,
-        userAuth.secretResetPassword,
-        (err, decodedData) => {
-          if (err) {
-            // console.log(err);
-            console.log('resetLink errado');
-            return res.json({ error: 'Incorrect token or it is expired.' });
-          }
-          User.findOne({ resetLink }, (err, user) => {
-            if (err || !user) {
-              console.log(user);
-              return res
-                .status(400)
-                .json({ error: 'User with this token does not exist.' });
-            }
 
-            user.password = password;
-            user.save((err, result) => {
-              if (err) {
-                console.log(err);
-                return res.status(400).json({ error: 'reset password error' });
-              }
-              return res
-                .status(200)
-                .json({ message: 'Your password has been changed' });
-            });
-          });
-        },
-      );
-    } else {
-      console.log('resetLink nao existe');
-      return res.status(401).json({ error: 'Authentication error' });
+    try {
+      const decodedID = jwt.verify(resetLink, userAuth.secretResetPassword);
+      const user = await User.findById(decodedID);
+      if (!user) throw new Error('User does not exist');
+      user.password = password;
+      await user.save();
+      res.send({ message: 'Your password has been changed' });
+    } catch (error) {
+      res.status(400).send({ error: error.message });
     }
   },
 };

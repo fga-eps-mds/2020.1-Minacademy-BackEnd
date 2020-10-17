@@ -35,12 +35,15 @@ const UserSchema = new Schema(
       },
     },
     resetLink: {
-      data: String,
-      default: '',
+      type: String,
     },
     gender: {
       type: String,
       required: true,
+    },
+    about: {
+      type: String,
+      default: '',
     },
     profileImg: {
       type: String,
@@ -62,7 +65,7 @@ const UserSchema = new Schema(
       },
     ],
   },
-  { timestamps: true, discriminatorKey: 'userType' },
+  { timestamps: true, discriminatorKey: 'userType' } // eslint-disable-line comma-dangle
 );
 
 UserSchema.virtual('answers', {
