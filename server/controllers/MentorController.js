@@ -17,7 +17,7 @@ module.exports = {
     user.isAvailable = true;
     try {
       const learner = (
-        await Learner.find({ mentor_request: true }).sort({ createdAt: 'asc' })
+        await Learner.find({ mentor_request: true, mentor: null }).sort({ createdAt: 'asc' })
       )[0];
       if (!learner) throw new Error("There's no available learners");
       learner.mentor = user._id;
@@ -27,6 +27,7 @@ module.exports = {
       await user.save();
       await learner.save();
       await user.execPopulate('learners');
+      /* eslint-disable no-unused-expressions */
       res.send({
         learner: user.learners[user.learners.length - 1],
         isAvailable: user.isAvailable,

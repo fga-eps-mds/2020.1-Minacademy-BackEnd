@@ -115,13 +115,6 @@ describe('Users', () => {
     expect(response.body.user.email).toEqual('teste@gmail.com');
   });
 
-  it('Should be able to send a e-mail', async () => {
-    const response = await request.put('/forgotPassword').send({
-      email: userOne.email,
-    });
-    expect(response.status).toEqual(200);
-  });
-
   it('should be able to get all mentors', async () => {
     const response = await request
       .get('/mentors')

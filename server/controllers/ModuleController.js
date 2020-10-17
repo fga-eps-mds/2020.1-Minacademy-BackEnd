@@ -26,7 +26,7 @@ module.exports = {
           } else {
             obj.completed = false;
           }
-
+          /* eslint-disable no-unused-expressions */
           if (obj.completed) {
             req.user.completedModules.includes(module._id)
               ? (null)

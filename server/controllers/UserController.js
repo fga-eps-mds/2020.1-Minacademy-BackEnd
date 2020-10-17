@@ -81,7 +81,7 @@ module.exports = {
       'name',
       'email',
       'password',
-      'profileImage',
+      'profileImg',
       'about',
     ];
     const isValidOperation = updates.every((item) => allowedUpdates.includes(item));
@@ -128,57 +128,9 @@ module.exports = {
       await transport.sendMail(data);
       res.send({ message: 'A e-mail has sent to you, verify it' });
     } catch (error) {
+      console.log('EMAIL ERROR: ', error); // eslint-disable-line no-console
       res.status(400).send({ error: error.message });
     }
-
-    // User.findOne({ email }, (err, user) => {
-    //   if (err || !user) {
-    //     return res
-    //       .status(400)
-    //       .json({ error: 'User with this email does not exist.' });
-    //   }
-
-    //   const resetToken = jwt.sign(
-    //     { _id: user._id },
-    //     userAuth.secretResetPassword,
-    //     { expiresIn: '60m' },
-    //   );
-    // const data = {
-    //   // from: 'minAcademy@minAcademy.com',
-    //   from: 'lucasmelodos322@gmail.com',
-    //   to: email,
-    //   // template: 'forgotPassword',
-    //   subject: 'Redefinição de Senha',
-    //   // template: 'forgotPassword'
-    //   html: `
-    //               <div >
-    //                   <div>
-    //                       <div class="box_text">
-    //                           <h1>Redefinição de senha</h1>
-    //                           <p>Você solicitou a redefinição de senha. Click <a href="http://localhost:3000/change/${resetToken}">aqui</a> para redefinir sua senha.</p>
-    //                       </div>
-    //                   </div>
-
-    //               </div>
-    //                 `,
-    // };
-
-    //   return user.updateOne({ resetLink: resetToken }, (error, success) => {
-    //     if (error) {
-    //       return res.status(400).json({ error: 'reset password link error' });
-    //     }
-    //     transport.sendMail(data, (err, data) => {
-    //       if (err) {
-    //         console.log(err);
-    //         return res.json({ error: 'Could not send Email.' });
-    //       }
-
-    //       return res
-    //         .status(200)
-    //         .json({ message: 'A e-mail has sent to you, verify it' });
-    //     });
-    //   });
-    // });
   },
 
   async resetPassword(req, res) {
