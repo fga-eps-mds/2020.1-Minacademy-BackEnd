@@ -7,46 +7,34 @@ module.exports = {
   },
 
   async mentorRequest(req, res) {
+    req.user.mentor_request = true;
+
     try {
-      const avaliableMentors = await Mentor.find({ isAvailable: true });
+      if (req.user.mentor !== null) throw new Error('You already have a mentor');
 
-      if (req.user.mentor != null) {
-        throw new Error('You already have a mentor');
-      }
+      let mentor = (await Mentor.aggregate()
+        .match({ isAvailable: true })
+        .group({
+          _id: '$_id',
+          size: { $max: '$learners' },
+          createdAt: { $max: '$createdAt' } // eslint-disable-line comma-dangle
+        })
+        .sort({ size: 1, createdAt: 'asc' }))[0];
 
-      if (avaliableMentors.length === 0) {
-        throw new Error('there are no monitors available at the moment');
-      }
+      mentor = await Mentor.findById(mentor._id);
 
-      function min(arr) {
-        arr[0].execPopulate('learners');
-        let min = arr[0].learners.length;
-        let minObject = arr[0];
+      if (!mentor) throw new Error("There's no mentor available");
 
-        for (let i = 1; i < arr.length; i++) {
-          arr[i].execPopulate('learners');
-          if (arr[i].learners.length < min) {
-            // console.log("entrou no if")
-            min = arr[i].learners.length;
-            minObject = arr[i];
-          }
-        }
-        return minObject;
-      }
+      req.user.mentor = mentor._id;
+      mentor.learners = mentor.learners.concat(req.user._id);
+      mentor.isAvailable = false;
 
-      const chosenMentor = min(avaliableMentors);
-
-      req.user.mentor = chosenMentor._id;
-      req.user.mentor_request = true;
       await req.user.save();
-
-      chosenMentor.learners = [...chosenMentor.learners, req.user._id];
-
-      await chosenMentor.save();
-      const mentor = await Mentor.findById(chosenMentor);
+      await mentor.save();
 
       return res.status(200).send(mentor);
     } catch (err) {
+      console.log(err); // eslint-disable-line no-console
       return res.status(400).send({ error: err.message });
     }
   },
