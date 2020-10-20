@@ -5,9 +5,9 @@ module.exports = {
     try {
       const mentor = await Mentor.findById(req.user.mentor);
       return res.send(mentor);
-    } catch(error) {
-      return res.status(400).send({ error: err.message });
-    };
+    } catch (error) {
+      return res.status(400).send({ error: error.message });
+    }
   },
 
   async mentorRequest(req, res) {
