@@ -20,7 +20,7 @@ module.exports = {
     try {
       if (req.body.gender === 'Male') req.body.userType = 'Mentor';
       const user = await User.create(req.body);
-      const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
+      const accessToken = jwt.sign({ id: user._id }, userAuth.secret);
       user.tokens = user.tokens.concat({ accessToken });
       await user.save();
       res.cookie('auth_token', accessToken);
@@ -42,7 +42,7 @@ module.exports = {
         throw new Error('Invalid Email or Password');
       }
 
-      const accessToken = jwt.sign({ id: user.email }, userAuth.secret);
+      const accessToken = jwt.sign({ id: user._id }, userAuth.secret);
       user.tokens = user.tokens.concat({ accessToken });
       await user.save();
       res.cookie('auth_token', accessToken, { httpOnly: true });

@@ -2,8 +2,12 @@ const Mentor = require('../models/Mentor');
 
 module.exports = {
   async getMentor(req, res) {
-    const mentor = await Mentor.findById(req.user.mentor);
-    return res.json(mentor);
+    try {
+      const mentor = await Mentor.findById(req.user.mentor);
+      return res.send(mentor);
+    } catch(error) {
+      return res.status(400).send({ error: err.message });
+    };
   },
 
   async mentorRequest(req, res) {
