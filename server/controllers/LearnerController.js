@@ -62,6 +62,7 @@ module.exports = {
   async unassignMentor(req, res) {
     const learner = req.user;
     try {
+      if (!learner.mentor) throw new Error('Learner does not have a mentor');
       await Mentor.findByIdAndUpdate(learner.mentor, { $pull: { learners: learner._id } });
       learner.mentor = null;
       await learner.save();
@@ -70,5 +71,5 @@ module.exports = {
       console.log(error); // eslint-disable-line no-console
       res.status(400).send({ error: error.message });
     }
-  }
+  },
 };
