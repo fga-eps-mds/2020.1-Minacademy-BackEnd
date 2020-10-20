@@ -18,9 +18,7 @@ module.exports = {
     try {
       learner.mentor_request = true;
       await learner.save();
-
       if (learner.mentor) throw new Error('Learner already has a mentor');
-
       let mentor = (await Mentor.aggregate()
         .match({ isAvailable: true })
         .group({
@@ -60,4 +58,17 @@ module.exports = {
       res.status(400).send({ error: error.message, mentor_request: user.mentor_request });
     }
   },
+
+  async unassignMentor(req, res) {
+    const learner = req.user;
+    try {
+      await Mentor.findByIdAndUpdate(learner.mentor, { $pull: { learners: learner._id } });
+      learner.mentor = null;
+      await learner.save();
+      res.send({ mentor: learner.mentor });
+    } catch (error) {
+      console.log(error); // eslint-disable-line no-console
+      res.status(400).send({ error: error.message });
+    }
+  }
 };
