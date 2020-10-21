@@ -38,6 +38,16 @@ describe('Learner', () => {
     done();
   });
 
+  it("Should not be able to get learnerOne's mentor", async () => {
+    const response = await request
+      .get('/learners')
+      .send()
+      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
+      .expect(400);
+
+    expect(response.body.error).toEqual('Learner does not have a mentor');
+  });
+
   it('Should be able to atribute one mentor to one learner and more one learner to one mentor', async () => {
     const response = await request
       .patch('/learners')
@@ -47,12 +57,45 @@ describe('Learner', () => {
     expect(response.body).not.toBeNull();
   });
 
+  it('Should not be able to assign a mentor to learnerOne', async () => {
+    const response = await request
+      .patch('/learners')
+      .send()
+      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
+      .expect(400);
+
+    expect(response.body.error).toEqual('Learner already has a mentor');
+  });
+
+  it("Should be able to get learnerOne's mentor", async () => {
+    const response = await request
+      .get('/learners')
+      .send()
+      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
+      .expect(200);
+
+    expect(response.body).not.toBeNull();
+  });
+
   it('Should not be able to atribute one mentor to one learner', async () => {
     await Mentor.updateMany({}, { isAvailable: false });
     const response = await request
       .patch('/learners')
       .send()
-      .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`]);
-    expect(response.status).toEqual(400);
+      .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
+      .expect(400);
+
+    expect(response.body.error).toEqual("There's no mentor available");
   });
+
+  it('A mentor should not be able to request a mentor', async () => {
+    const response = await request
+      .patch('/learners')
+      .send()
+      .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
+      .expect(403);
+
+    expect(response.body.message).toEqual('Forbidden');
+  });
+
 });

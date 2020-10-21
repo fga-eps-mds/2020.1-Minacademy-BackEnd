@@ -17,7 +17,7 @@ const auth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    res.status(401).send({ error: 'Não autorizado' }); // 401: Unauthorized
+    res.status(401).send({ error: 'Unauthorized' }); // 401: Unauthorized
   }
 };
 

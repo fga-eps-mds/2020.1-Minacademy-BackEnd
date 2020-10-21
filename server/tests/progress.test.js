@@ -71,6 +71,6 @@ describe('Questions', () => {
       ])
       .expect(401);
 
-    expect(response.body.error).toEqual('Não autorizado');
+    expect(response.body.error).toEqual('Unauthorized');
   });
 });

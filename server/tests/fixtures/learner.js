@@ -14,7 +14,7 @@ const learnerOne = {
   password: 'Renata2@',
   userType: 'Learner',
   tokens: [{
-    accessToken: jwt.sign({ id: 'renata@gmail.com' }, userAuth.secret),
+    accessToken: jwt.sign({ id: learnerOneId }, userAuth.secret),
   }],
   resetLink: jwt.sign({ id: 'renata@gmail.com' }, userAuth.secretResetPassword),
 };
@@ -31,7 +31,7 @@ const learnerTwo = {
   password: 'Luisa2@',
   userType: 'Learner',
   tokens: [{
-    accessToken: jwt.sign({ id: 'luisa@gmail.com' }, userAuth.secret),
+    accessToken: jwt.sign({ id: learnerTwoId }, userAuth.secret),
   }],
   resetLink: jwt.sign({ id: 'luisa@gmail.com' }, userAuth.secretResetPassword),
 };
@@ -48,7 +48,7 @@ const learnerThree = {
   password: 'Vanessa2@',
   userType: 'Learner',
   tokens: [{
-    accessToken: jwt.sign({ id: 'vanessa@gmail.com' }, userAuth.secret),
+    accessToken: jwt.sign({ id: learnerThreeId }, userAuth.secret),
   }],
   resetLink: jwt.sign({ id: 'vanessa@gmail.com' }, userAuth.secretResetPassword),
 };
@@ -65,7 +65,7 @@ const learnerFour = {
   password: 'Helen2@',
   userType: 'Learner',
   tokens: [{
-    accessToken: jwt.sign({ id: 'helen@gmail.com' }, userAuth.secret),
+    accessToken: jwt.sign({ id: learnerFourId }, userAuth.secret),
   }],
   resetLink: jwt.sign({ id: 'helen@gmail.com' }, userAuth.secretResetPassword),
 };
@@ -82,7 +82,7 @@ const learnerFive = {
   password: 'Camila2@',
   userType: 'Learner',
   tokens: [{
-    accessToken: jwt.sign({ id: 'camila@gmail.com' }, userAuth.secret),
+    accessToken: jwt.sign({ id: learnerFiveId }, userAuth.secret),
   }],
   resetLink: jwt.sign({ id: 'camila@gmail.com' }, userAuth.secretResetPassword),
 };

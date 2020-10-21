@@ -13,7 +13,7 @@ const userOne = {
   userType: 'Learner',
   tokens: [
     {
-      accessToken: jwt.sign({ id: 'maria@gmail.com' }, userAuth.secret),
+      accessToken: jwt.sign({ id: userOneId }, userAuth.secret),
     },
   ],
   resetLink: jwt.sign({ id: 'maria@gmail.com' }, userAuth.secretResetPassword),
@@ -41,7 +41,7 @@ const userTwo = {
   password: 'joao2727',
   tokens: [
     {
-      accessToken: jwt.sign({ id: 'joao@mail.com' }, userAuth.secret),
+      accessToken: jwt.sign({ id: userTwoId }, userAuth.secret),
     },
   ],
   resetLink: jwt.sign({ id: 'joao@mail.com' }, userAuth.secretResetPassword),

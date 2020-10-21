@@ -164,4 +164,14 @@ describe('Users', () => {
 
     expect(response.body).not.toBeNull();
   });
+
+  it('Should not be authorized', async () => {
+    const response = await request
+      .patch('/users')
+      .send()
+      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
+      .expect(401);
+
+      expect(response.body.error).toEqual('Unauthorized');
+  });
 });

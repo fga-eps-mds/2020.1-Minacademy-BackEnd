@@ -17,7 +17,7 @@ const mentorOne = {
   userType: 'Mentor',
   tokens: [
     {
-      accessToken: jwt.sign({ id: 'gustavo@gmail.com' }, userAuth.secret),
+      accessToken: jwt.sign({ id: mentorOneId }, userAuth.secret),
     },
   ],
   resetLink: jwt.sign(
@@ -40,7 +40,7 @@ const mentorTwo = {
   userType: 'Mentor',
   tokens: [
     {
-      accessToken: jwt.sign({ id: 'ana@gmail.com' }, userAuth.secret),
+      accessToken: jwt.sign({ id: mentorTwoId }, userAuth.secret),
     },
   ],
   resetLink: jwt.sign({ id: 'ana@gmail.com' }, userAuth.secretResetPassword),
@@ -60,7 +60,7 @@ const mentorThree = {
   userType: 'Mentor',
   tokens: [
     {
-      accessToken: jwt.sign({ id: 'tiago@gmail.com' }, userAuth.secret),
+      accessToken: jwt.sign({ id: mentorThreeId }, userAuth.secret),
     },
   ],
   resetLink: jwt.sign({ id: 'tiago@gmail.com' }, userAuth.secretResetPassword),
@@ -79,7 +79,7 @@ const mentorFour = {
   userType: 'Mentor',
   tokens: [
     {
-      accessToken: jwt.sign({ id: 'teste@gmail.com' }, userAuth.secret),
+      accessToken: jwt.sign({ id: mentorFourId }, userAuth.secret),
     },
   ],
   resetLink: jwt.sign({ id: 'teste@gmail.com' }, userAuth.secretResetPassword),
