@@ -1,6 +1,7 @@
 version: '3.7'
 
 services:
+
   server:
     build: ./server
     volumes:
@@ -16,9 +17,6 @@ services:
       - mongo
     ports:
       - '9000:9000'
-    networks:
-      - client-server-network
-      - server-network
 
   mongo:
     image: mongo:4.2.9
@@ -32,34 +30,21 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
       MONGO_INITDB_DATABASE: db
-    networks:
-      - server-network
   
   seeder:
     build: ./seeds
     volumes:
         - ./seeds:/seeds
-    networks:
-      - server-network
-  
+
   mailhog:
     image: mailhog/mailhog
     ports: 
       - 1025:1025
       - 8025:8025
-    networks: 
-     - server-network
 
 
 volumes:
   db:
   dump:
-
-networks:
-  client-server-network:
-    name: client-server-network
-  server-network:
-    name: server-network
-
 
 
