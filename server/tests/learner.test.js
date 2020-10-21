@@ -83,9 +83,9 @@ describe('Learner', () => {
       .patch('/learners')
       .send()
       .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
-      .expect(201);
+      .expect(400);
 
-    expect(response.body.mentorRequest).toEqual(true);
+    expect(response.body.mentor_request).toEqual(true);
   });
 
   it('A mentor should not be able to request a mentor', async () => {
@@ -107,5 +107,4 @@ describe('Learner', () => {
     expect(response.status).toEqual(200);
     expect(response.body).toEqual(false);
   });
-
 });

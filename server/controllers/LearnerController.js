@@ -8,7 +8,7 @@ module.exports = {
       if (!mentor) throw new Error('Learner does not have a mentor');
       return res.send(mentor);
     } catch (error) {
-      return res.status(400).send({ error: error.message });
+      return res.status(400).send({ error: error.message, mentor: learner.mentor });
     }
   },
 
@@ -31,7 +31,7 @@ module.exports = {
         .sort({ createdAt: 'asc', size: 1 }))[0];
       /* eslint-disable quotes */
       /* eslint-disable quote-props */
-      if (!mentor) return res.status(201).send({ "mentorRequest": learner.mentor_request });
+      if (!mentor) throw new Error('There are no available mentors');
 
       mentor = await Mentor.findById(mentor._id);
 
@@ -45,7 +45,7 @@ module.exports = {
       return res.status(200).send(mentor);
     } catch (err) {
       console.log(err); // eslint-disable-line no-console
-      return res.status(400).send({ error: err.message });
+      return res.status(400).send({ error: err.message, mentor_request: learner.mentor_request });
     }
   },
 
@@ -57,7 +57,7 @@ module.exports = {
       res.status(200).send(user.mentor_request);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
-      res.status(400).send({ error: error.message });
+      res.status(400).send({ error: error.message, mentor_request: user.mentor_request });
     }
   },
 };
