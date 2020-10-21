@@ -14,9 +14,11 @@ module.exports = {
 
   async assignMentor(req, res) {
     const learner = req.user;
-    learner.mentor_request = true;
 
     try {
+      learner.mentor_request = true;
+      await learner.save();
+
       if (learner.mentor) throw new Error('Learner already has a mentor');
 
       let mentor = (await Mentor.aggregate()
@@ -27,8 +29,9 @@ module.exports = {
           createdAt: { $min: '$createdAt' } // eslint-disable-line comma-dangle
         })
         .sort({ createdAt: 'asc', size: 1 }))[0];
-
-      if (!mentor) throw new Error("There's no mentor available");
+      /* eslint-disable quotes */
+      /* eslint-disable quote-props */
+      if (!mentor) return res.status(201).send({ "mentorRequest": learner.mentor_request });
 
       mentor = await Mentor.findById(mentor._id);
 
@@ -54,6 +57,18 @@ module.exports = {
       learner.mentor = null;
       await learner.save();
       res.send({ mentor: learner.mentor });
+    } catch (error) {
+      console.log(error); // eslint-disable-line no-console
+      res.status(400).send({ error: error.message });
+    }
+  },
+
+  async cancelMentorRequest(req, res) {
+    const { user } = req;
+    try {
+      user.mentor_request = false;
+      await user.save();
+      res.status(200).send(user.mentor_request);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
       res.status(400).send({ error: error.message });

@@ -83,9 +83,9 @@ describe('Learner', () => {
       .patch('/learners')
       .send()
       .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
-      .expect(400);
+      .expect(201);
 
-    expect(response.body.error).toEqual("There's no mentor available");
+    expect(response.body.mentorRequest).toEqual(true);
   });
 
   it('A mentor should not be able to request a mentor', async () => {
@@ -96,6 +96,16 @@ describe('Learner', () => {
       .expect(403);
 
     expect(response.body.message).toEqual('Forbidden');
+  });
+
+  it('Should be able to cancel a mentor request', async () => {
+    //await Mentor.updateMany({}, { isAvailable: false });
+    const response = await request
+      .patch('/learners/request')
+      .send()
+      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`]);
+    expect(response.status).toEqual(200);
+    expect(response.body).toEqual(false);
   });
 
 });
