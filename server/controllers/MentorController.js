@@ -16,6 +16,7 @@ module.exports = {
     const { user } = req;
     user.isAvailable = true;
     try {
+      await user.save();
       const learner = (
         await Learner.find({ mentor_request: true, mentor: null }).sort({ createdAt: 'asc' })
       )[0];
@@ -34,7 +35,7 @@ module.exports = {
       });
     } catch (error) {
       console.log(error.message); // eslint-disable-line no-console
-      res.status(400).send({ error: error.message });
+      res.status(400).send({ isAvailable: user.isAvailable, error: error.message });
     }
   },
 
@@ -52,7 +53,7 @@ module.exports = {
       res.send(user.learners);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
-      res.status(400).send({ error: error.message });
+      res.status(400).send({ learners: user.learners, error: error.message });
     }
   },
 

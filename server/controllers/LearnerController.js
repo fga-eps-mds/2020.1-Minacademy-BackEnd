@@ -34,14 +34,14 @@ module.exports = {
       mentor = await Mentor.findById(mentor._id);
 
       learner.mentor = mentor._id;
-      learner.mentor_request = false
+      learner.mentor_request = false;
       mentor.learners = mentor.learners.concat(learner._id);
       mentor.isAvailable = false;
 
       await learner.save();
       await mentor.save();
 
-      return res.status(200).send({ mentorRequest: learner.mentor_request, mentor});
+      return res.status(200).send({ mentorRequest: learner.mentor_request, mentor });
     } catch (err) {
       console.log(err); // eslint-disable-line no-console
       return res.status(400).send({ error: err.message, mentor_request: learner.mentor_request });
