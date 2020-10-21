@@ -19,11 +19,10 @@ Repositório do BackEnd do projeto [Minacademy](https://github.com/fga-eps-mds/2
 
 ## Instalação de Pacotes
 
-Se você deseja instalar um pacote utilizando npm ou yarn leia as instruções a seguir:
+Se você deseja instalar um pacote utilizando npm, leia as instruções a seguir:
 
 - Execute o comando `make npm pacote=<nome-do-pacote>`
 - Se for uma dependência apenas para desenvolvimento execute `make npm-dev pacote=<nome-do-pacote>`
-- Caso deseje utilizar o yarn, basta substituir 'npm' por 'yarn'
 
 ## Comandos Úteis
 

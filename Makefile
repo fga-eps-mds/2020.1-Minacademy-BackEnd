@@ -18,9 +18,3 @@ npm:
 
 npm-dev:
 	docker-compose exec server npm install -D $(pacote)
-
-yarn:
-	docker-compose exec server yarn add $(pacote)
-
-yarn-dev:
-	docker-compose exec server yarn add --dev $(pacote)
