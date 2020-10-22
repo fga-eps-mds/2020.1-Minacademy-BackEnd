@@ -110,7 +110,7 @@ describe('Learner', () => {
 
   it("Should be able to unassign learnerOne's mentor", async () => {
     const response = await request
-      .delete('/learners')
+      .delete('/api/learners')
       .send()
       .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
       .expect(200);
@@ -120,7 +120,7 @@ describe('Learner', () => {
 
   it("Should not be able to unassign learnerTwo's mentor", async () => {
     const response = await request
-      .delete('/learners')
+      .delete('/api/learners')
       .send()
       .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
       .expect(400);
@@ -130,7 +130,7 @@ describe('Learner', () => {
 
   it('A mentor should not be able to request a mentor', async () => {
     const response = await request
-      .patch('/learners')
+      .patch('/api/learners')
       .send()
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(403);
