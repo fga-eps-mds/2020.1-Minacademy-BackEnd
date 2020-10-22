@@ -1,7 +1,5 @@
-const mongoose = require('mongoose');
 const Module = require('../models/Module');
 const Question = require('../models/Question');
-const User = require('../models/User');
 
 module.exports = {
   async getQuestions(req, res) {
@@ -17,7 +15,7 @@ module.exports = {
         res.send(module.questions);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error); // eslint-disable-line no-console
       res.status(400).send({ error: error.message });
     }
   },

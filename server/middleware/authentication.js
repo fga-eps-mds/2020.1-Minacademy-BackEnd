@@ -6,7 +6,10 @@ const auth = async (req, res, next) => {
   try {
     const token = req.cookies.auth_token;
     const decodedToken = jwt.verify(token, userAuth.secret);
-    const user = await User.findOne({ email: decodedToken.id, 'tokens.accessToken': token });
+    const user = await User.findOne({
+      _id: decodedToken.id,
+      'tokens.accessToken': token,
+    });
 
     if (!user) throw new Error();
 
@@ -14,7 +17,7 @@ const auth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    res.status(401).send({ error: 'Não autorizado' }); // 401: Unauthorized
+    res.status(401).send({ error: 'Unauthorized' }); // 401: Unauthorized
   }
 };
 

@@ -1,15 +1,13 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
-
 const app = require('../app');
-
-const request = supertest(app);
-
 const Module = require('../models/Module');
 const Question = require('../models/Question');
 const User = require('../models/User');
 const { questions, modules } = require('./fixtures/tutorial');
 const { userOne } = require('./fixtures/db');
+
+const request = supertest(app);
 
 describe('Questions', () => {
   beforeAll(async () => {
@@ -31,15 +29,14 @@ describe('Questions', () => {
   });
 
   it('Should get all questions', async () => {
-    const response = await request.get('/questions')
-      .send()
-      .expect(200);
+    const response = await request.get('/questions').send().expect(200);
 
     expect(response.body.length).not.toBeNull();
   });
 
   it('Should get all questions for module 1', async () => {
-    const response = await request.get('/questions?moduleNumber=1')
+    const response = await request
+      .get('/questions?moduleNumber=1')
       .send()
       .expect(200);
 
@@ -51,7 +48,8 @@ describe('Questions', () => {
   });
 
   it('Should not get questions', async () => {
-    const response = await request.get('/questions?moduleNumber=0')
+    const response = await request
+      .get('/questions?moduleNumber=0')
       .send()
       .expect(400);
 

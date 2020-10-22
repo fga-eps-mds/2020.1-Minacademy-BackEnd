@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../app');
-
 const Module = require('../models/Module');
 const User = require('../models/User');
 const { modules } = require('./fixtures/tutorial');
@@ -26,7 +25,8 @@ describe('Modules', () => {
   });
 
   it('Should return modules list', async () => {
-    const response = await request(app).get('/modules')
+    const response = await request(app)
+      .get('/modules')
       .send()
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
       .expect(200);
