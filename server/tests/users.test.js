@@ -27,7 +27,7 @@ describe('Users', () => {
   });
 
   it('should be able to create user', async () => {
-    const response = await request.post('/users').send({
+    const response = await request.post('/api/users').send({
       name: 'Teste',
       lastname: 'Aprendiz',
       gender: 'Female',
@@ -39,7 +39,7 @@ describe('Users', () => {
   });
 
   it('Should not be able to create user', async () => {
-    const response = await request.post('/users').send({
+    const response = await request.post('/api/users').send({
       name: 'Teste',
       email: 'invalid_email',
       password: '44444dsasa',
@@ -49,12 +49,12 @@ describe('Users', () => {
   });
 
   it('should be able to get all users', async () => {
-    const response = await request.get('/users');
+    const response = await request.get('/api/users');
     expect(response.status).toEqual(200);
   });
 
   it('should be able to login', async () => {
-    const response = await request.post('/users/login').send({
+    const response = await request.post('/api/users/login').send({
       email: userOne.email,
       password: userOne.password,
     });
@@ -63,7 +63,7 @@ describe('Users', () => {
 
   it('Should be able to edit User', async () => {
     const response = await request
-      .post('/editUser')
+      .post('/api/editUser')
       .send({
         name: 'Cleiton',
         email: userOne.email,
@@ -77,7 +77,7 @@ describe('Users', () => {
   });
 
   it('Should not be able to login unregisterd user', async () => {
-    const response = await request.post('/users/login').send({
+    const response = await request.post('/api/users/login').send({
       email: 'invallid_email',
       password: userOne.password,
     });
@@ -85,7 +85,7 @@ describe('Users', () => {
   });
 
   it('Should not be able to login with wrong password', async () => {
-    const response = await request.post('/users/login').send({
+    const response = await request.post('/api/users/login').send({
       email: userOne.email,
       password: 'invalid_password',
     });
@@ -94,7 +94,7 @@ describe('Users', () => {
 
   it('Should not be able to edit User', async () => {
     const response = await request
-      .post('/editUser')
+      .post('/api/editUser')
       .send({
         name: userOne.name,
         email: 'invalid_email',
@@ -108,7 +108,7 @@ describe('Users', () => {
   });
 
   it('Should be able to check if email is used', async () => {
-    const response = await request.get('/users?email=teste@gmail.com')
+    const response = await request.get('/api/users?email=teste@gmail.com')
       .send()
       .expect(200)
 
@@ -117,14 +117,14 @@ describe('Users', () => {
 
   it('should be able to get all mentors', async () => {
     const response = await request
-      .get('/mentors')
+      .get('/api/mentors')
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
     expect(response.status).toEqual(200);
   });
 
   it('Should be able to logout', async () => {
     const response = await request
-      .post('/users/logout')
+      .post('/api/users/logout')
       .send()
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
     expect(response.status).toEqual(200);
@@ -132,7 +132,7 @@ describe('Users', () => {
 
   it('Should not be able to logout', async () => {
     const response = await request
-      .post('/users/logout')
+      .post('/api/users/logout')
       .send()
       .set('Cookie', [
         `auth_token=${jwt.sign(
@@ -145,7 +145,7 @@ describe('Users', () => {
 
   it('Should not delete user', async () => {
     const response = await request
-      .delete('/users')
+      .delete('/api/users')
       .send({
         _id: '5f6cfbb6fc13ae3bc6000067',
       })
@@ -156,7 +156,7 @@ describe('Users', () => {
 
   it('Should delete user', async () => {
     const response = await request
-      .delete('/users')
+      .delete('/api/users')
       .send({
         _id: userOne._id,
       })
@@ -167,7 +167,7 @@ describe('Users', () => {
 
   it('Should not be authorized', async () => {
     const response = await request
-      .patch('/users')
+      .patch('/api/users')
       .send()
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
       .expect(401);

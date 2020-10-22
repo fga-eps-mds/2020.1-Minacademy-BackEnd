@@ -30,7 +30,7 @@ describe('Questions', () => {
 
   it('Should answer question 1 incorrectly', async () => {
     const response = await request
-      .post('/answer')
+      .post('/api/answer')
       .send({
         question: questions[0]._id,
         alternative: 'a',
@@ -44,7 +44,7 @@ describe('Questions', () => {
 
   it('Should answer question 1 correctly', async () => {
     const response = await request
-      .post('/answer')
+      .post('/api/answer')
       .send({
         question: questions[0]._id,
         alternative: 'b',
@@ -59,7 +59,7 @@ describe('Questions', () => {
 
   it('Should not answer question', async () => {
     const response = await request
-      .post('/answer')
+      .post('/api/answer')
       .send({
         question: '5f652249fc13ae49f0000000',
         alternative: 'a',

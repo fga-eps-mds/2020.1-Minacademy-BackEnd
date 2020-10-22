@@ -46,7 +46,7 @@ describe('Learner', () => {
 
   it('Should get all learners for mentor one', async () => {
     const response = await request
-      .get('/mentors')
+      .get('/api/mentors')
       .send()
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(200);
@@ -56,7 +56,7 @@ describe('Learner', () => {
 
   it('Should assign a learner to mentor one', async () => {
     const response = await request
-      .patch('/mentors')
+      .patch('/api/mentors')
       .send()
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(200);
@@ -66,7 +66,7 @@ describe('Learner', () => {
 
   it('Should not assign a learner to mentor one', async () => {
     const response = await request
-      .patch('/mentors')
+      .patch('/api/mentors')
       .send()
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(400);
@@ -76,7 +76,7 @@ describe('Learner', () => {
 
   it('Should unassign a learner to mentor one', async () => {
     const response = await request
-      .delete(`/mentors?learnerID=${learnerOne._id}`)
+      .delete(`/api/mentors?learnerID=${learnerOne._id}`)
       .send()
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(200);
@@ -87,7 +87,7 @@ describe('Learner', () => {
 
   it('Should not unassign a learner to mentor one', async () => {
     const response = await request
-      .delete('/mentors?')
+      .delete('/api/mentors?')
       .send()
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(400);
@@ -97,7 +97,7 @@ describe('Learner', () => {
 
   it('Should change availability of mentor one', async () => {
     const response = await request
-      .patch('/mentors/availability')
+      .patch('/api/mentors/availability')
       .send()
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(200);

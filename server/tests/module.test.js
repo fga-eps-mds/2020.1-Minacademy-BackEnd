@@ -26,7 +26,7 @@ describe('Modules', () => {
 
   it('Should return modules list', async () => {
     const response = await request(app)
-      .get('/modules')
+      .get('/api/modules')
       .send()
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
       .expect(200);
