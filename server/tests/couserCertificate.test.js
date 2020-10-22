@@ -33,33 +33,12 @@ describe('CurserCertificate', ()=>{
       .patch('/certificates')
       .send()
       .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
+    /* console.log("DAAAAAAAADDDDOOOOOOOSSSS DO TEEEEESSSSTTEEE");
+    console.log(response.body.certificate.user);
+    console.log(response.status);
+    console.log(learnerTwo._id); */
     expect(response.status).toEqual(200);
     expect(response.body.certificate.user).toEqual(String(learnerTwo._id));
     }
   );
-
-  it('Should not generate a new certificate to a learner', async () =>{
-    const response  = await request
-      .patch('/certificates')
-      .send()
-      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
-    expect(response.status).toEqual(400);
-    expect(response.body.error).toEqual('you already have a learner certificate');
-  });
-
-  it('Should get a certificate', async () =>{
-    const response  = await request
-      .post('/certificates')
-      .send({_id: certificateLearnerOne._id})
-    expect(response.status).toEqual(200);
-   //expect(response.body).toEqual(certificateLearnerOne);
-  });
-
-  it('Should not get a certificate', async () =>{
-    const response  = await request
-      .post('/certificates')
-      .send({_id: "idInexistente"})
-    expect(response.status).toEqual(400);
-  });
-
 });
