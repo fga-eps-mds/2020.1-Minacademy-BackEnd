@@ -3,6 +3,7 @@ version: '3.7'
 services:
   server:
     image: docker.pkg.github.com/fga-eps-mds/2020.1-minacademy-backend/server:homolog
+    restart: always
     depends_on:
       - mongo
     ports:
@@ -35,6 +36,7 @@ networks:
     name: client-server-network
   server-network:
     name: server-network
+
 
 
 
