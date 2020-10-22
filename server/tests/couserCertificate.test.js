@@ -41,4 +41,14 @@ describe('CurserCertificate', ()=>{
     expect(response.body.certificate.user).toEqual(String(learnerTwo._id));
     }
   );
+  
+  it('Should not generate a new certificate to a learner', async () =>{
+    const response  = await request
+      .patch('/certificates')
+      .send()
+      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
+    expect(response.status).toEqual(400);
+    expect(response.body.error).toEqual('you already have a learner certificate');
+  });
+
 });
