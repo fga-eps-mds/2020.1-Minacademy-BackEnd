@@ -34,7 +34,7 @@ describe('Questions', () => {
 
   it('Should get question result for userOne', async () => {
     const response = await request
-      .get('/progress')
+      .get('/api/progress')
       .send()
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
       .expect(200);
@@ -44,7 +44,7 @@ describe('Questions', () => {
 
   it('Should not get question result for useTwo', async () => {
     const response = await request
-      .get('/progress')
+      .get('/api/progress')
       .send()
       .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`])
       .expect(400);
@@ -54,7 +54,7 @@ describe('Questions', () => {
 
   it('Should get question result for question 4', async () => {
     const response = await request
-      .get('/progress?moduleNumber=2')
+      .get('/api/progress?moduleNumber=2')
       .send()
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
       .expect(200);
@@ -64,7 +64,7 @@ describe('Questions', () => {
 
   it('Should not get question result', async () => {
     const response = await request
-      .get('/progress?moduleNumber=1')
+      .get('/api/progress?moduleNumber=1')
       .send()
       .set('Cookie', [
         `auth_token=$${jwt.sign({ id: 'maria@gmail.com' }, userAuth.secret)}`,

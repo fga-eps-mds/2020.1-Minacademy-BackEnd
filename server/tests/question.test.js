@@ -29,14 +29,14 @@ describe('Questions', () => {
   });
 
   it('Should get all questions', async () => {
-    const response = await request.get('/questions').send().expect(200);
+    const response = await request.get('/api/questions').send().expect(200);
 
     expect(response.body.length).not.toBeNull();
   });
 
   it('Should get all questions for module 1', async () => {
     const response = await request
-      .get('/questions?moduleNumber=1')
+      .get('/api/questions?moduleNumber=1')
       .send()
       .expect(200);
 
@@ -49,7 +49,7 @@ describe('Questions', () => {
 
   it('Should not get questions', async () => {
     const response = await request
-      .get('/questions?moduleNumber=0')
+      .get('/api/questions?moduleNumber=0')
       .send()
       .expect(400);
 

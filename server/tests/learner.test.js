@@ -40,7 +40,7 @@ describe('Learner', () => {
 
   it("Should not be able to get learnerOne's mentor", async () => {
     const response = await request
-      .get('/learners')
+      .get('/api/learners')
       .send()
       .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
       .expect(400);
@@ -50,7 +50,7 @@ describe('Learner', () => {
 
   it('Should be able to atribute one mentor to one learner and more one learner to one mentor', async () => {
     const response = await request
-      .patch('/learners')
+      .patch('/api/learners')
       .send()
       .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`]);
     expect(response.status).toEqual(200);
@@ -59,7 +59,7 @@ describe('Learner', () => {
 
   it('Should not be able to assign a mentor to learnerOne', async () => {
     const response = await request
-      .patch('/learners')
+      .patch('/api/learners')
       .send()
       .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
       .expect(400);
@@ -69,7 +69,7 @@ describe('Learner', () => {
 
   it("Should be able to get learnerOne's mentor", async () => {
     const response = await request
-      .get('/learners')
+      .get('/api/learners')
       .send()
       .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
       .expect(200);
@@ -80,7 +80,7 @@ describe('Learner', () => {
   it('Should not be able to atribute one mentor to one learner', async () => {
     await Mentor.updateMany({}, { isAvailable: false });
     const response = await request
-      .patch('/learners')
+      .patch('/api/learners')
       .send()
       .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
       .expect(400);
@@ -90,7 +90,7 @@ describe('Learner', () => {
 
   it('A mentor should not be able to request a mentor', async () => {
     const response = await request
-      .patch('/learners')
+      .patch('/api/learners')
       .send()
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(403);
@@ -101,7 +101,7 @@ describe('Learner', () => {
   it('Should be able to cancel a mentor request', async () => {
     //await Mentor.updateMany({}, { isAvailable: false });
     const response = await request
-      .patch('/learners/request')
+      .patch('/api/learners/request')
       .send()
       .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`]);
     expect(response.status).toEqual(200);

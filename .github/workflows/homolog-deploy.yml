@@ -4,6 +4,7 @@ on:
   push:
     branches: 
       - develop
+      - 79-nginx
 
 jobs:
   test:
@@ -25,7 +26,7 @@ jobs:
 
   build:
     name: Push Docker image to GitHub Packages
-    needs: test
+    #needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -40,7 +41,7 @@ jobs:
           tags: homolog
           workdir: server
           default_branch: develop
-          dockerfile: prod.Dockerfile
+          dockerfile: hom.Dockerfile
 
   deploy:
     name: Deploy package to DigitalOcean 
