@@ -17,7 +17,6 @@ module.exports = {
         courseType: user.userType,
         key: jwt.sign({ _id: user._id }, userAuth.secret),
       };
-     
       // console.log(hasLearnerCertificate);
       if (hasLearnerCertificate.length === 0) {
         const certificate = await CourseCertificate.create(certificateData);
@@ -27,7 +26,7 @@ module.exports = {
         await certificate.save();
         await user.save();
 
-        res.status(200).send( certificate );
+        res.status(200).send(certificate);
       } else {
         throw new Error('you already have a learner certificate');
       }
@@ -36,7 +35,7 @@ module.exports = {
         .status(400)
         .send({
           error: error.message,
-          learnerCertificate: hasLearnerCertificate[0]
+          learnerCertificate: hasLearnerCertificate[0],
         });
     }
   },
