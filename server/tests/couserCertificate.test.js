@@ -33,10 +33,6 @@ describe('CurserCertificate', ()=>{
       .patch('/api/certificates')
       .send()
       .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
-    /* console.log("DAAAAAAAADDDDOOOOOOOSSSS DO TEEEEESSSSTTEEE");
-    console.log(response.body.certificate.user);
-    console.log(response.status);
-    console.log(learnerTwo._id); */
     expect(response.status).toEqual(200);
     expect(response.body.user).toEqual(String(learnerTwo._id));
     }
