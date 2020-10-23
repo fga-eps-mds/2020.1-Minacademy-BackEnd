@@ -102,6 +102,6 @@ describe('Learner', () => {
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(200);
 
-    expect(response.body).toBeTruthy();
+    expect(response.body === true || response.body === false).toBeTruthy();
   });
 });

@@ -107,4 +107,35 @@ describe('Learner', () => {
     expect(response.status).toEqual(200);
     expect(response.body).toEqual(false);
   });
+
+  it("Should be able to unassign learnerOne's mentor", async () => {
+    const response = await request
+      .delete('/api/learners')
+      .send()
+      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
+      .expect(200);
+
+    expect(response.body.mentor).toBeNull();
+  });
+
+  it("Should not be able to unassign learnerTwo's mentor", async () => {
+    const response = await request
+      .delete('/api/learners')
+      .send()
+      .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
+      .expect(400);
+
+    expect(response.body.error).toEqual('Learner does not have a mentor');
+  });
+
+  it('A mentor should not be able to request a mentor', async () => {
+    const response = await request
+      .patch('/api/learners')
+      .send()
+      .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
+      .expect(403);
+
+    expect(response.body.message).toEqual('Forbidden');
+  });
+
 });
