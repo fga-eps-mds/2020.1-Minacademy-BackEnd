@@ -47,7 +47,7 @@ module.exports = {
       user.learners = user.learners.filter(
         (learner) => learner.toString() !== learnerID,
       );
-      await Learner.findByIdAndUpdate(learnerID, { mentor: null, mentor_request: true });
+      await Learner.findByIdAndUpdate(learnerID, { mentor: null, mentor_request: false });
       await user.save();
       await user.execPopulate('learners');
       res.send(user.learners);

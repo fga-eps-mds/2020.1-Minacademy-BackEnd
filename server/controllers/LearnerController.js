@@ -64,7 +64,10 @@ module.exports = {
     const learner = req.user;
     try {
       if (!learner.mentor) throw new Error('Learner does not have a mentor');
-      await Mentor.findByIdAndUpdate(learner.mentor, { $pull: { learners: learner._id } });
+      await Mentor.findByIdAndUpdate(learner.mentor, {
+        $pull: { learners: learner._id },
+        isAvailable: false,
+      });
       learner.mentor = null;
       await learner.save();
       res.send({ mentorRequest: learner.mentor_request, mentor: learner.mentor });
