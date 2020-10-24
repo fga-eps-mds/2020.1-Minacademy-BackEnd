@@ -57,6 +57,10 @@ const UserSchema = new Schema(
       type: [String],
       select: false,
     },
+    courseCertificates: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'courseCertificate',
+    }],
     tokens: [
       {
         accessToken: {

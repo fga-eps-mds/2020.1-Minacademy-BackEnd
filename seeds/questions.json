@@ -347,14 +347,14 @@
         "module": {
             "$oid":"5f652249fc13ae49f000000c"
         },
-        "description": "Julgue os itens abaixo\n    I. Superuser é o/a adminstrador(a) do site.\n    II. É possível ver a senha ao criar superuser.\n    III. O painel de controle de administração mostra todas as models criadas da sua aplicação Django",
+        "description": "Julgue os itens abaixo\n    I. Superuser é o(a) administrador(a) do site.\n    II. É possível ver a senha ao criar superuser.\n    III. O painel de controle de administração mostra todas as models criadas da sua aplicação Django",
         "alternatives": {
             "a": "Somente I é verdadeira",
             "b": "Somente II é verdadeira",
             "c": "Somente II é falsa",
             "d": "II e III são verdadeiras"
         },
-        "answer": ""
+        "answer": "c"
     },
     {
         "_id": {
