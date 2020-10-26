@@ -104,4 +104,14 @@ describe('Learner', () => {
 
     expect(response.body === true || response.body === false).toBeTruthy();
   });
+
+  it('Should validate mentor one', async () => {
+    const response = await request
+      .patch('/api/mentors/validation')
+      .send()
+      .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
+      .expect(200);
+
+    expect(response.body === true || response.body === false).toBeTruthy();
+  });
 });

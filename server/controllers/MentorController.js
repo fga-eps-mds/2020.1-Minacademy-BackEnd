@@ -68,4 +68,16 @@ module.exports = {
       res.status(400).send({ error: error.message });
     }
   },
+
+  async validateMentor(req, res) {
+    const { user } = req;
+    try {
+      user.isValidated = !user.isValidated;
+      await user.save();
+      res.status(200).send(user.isValidated);
+    } catch (error) {
+      console.log(error); // eslint-disable-line no-console
+      res.status(400).send({ error: error.message, isValidated: user.isValidated });
+    }
+  },
 };
