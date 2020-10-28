@@ -20,7 +20,7 @@ const questionSchema = new mongoose.Schema({
   },
   module: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
+    // required: true,
     ref: 'Module',
   },
 });
