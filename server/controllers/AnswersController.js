@@ -26,6 +26,8 @@ module.exports = {
       }
 
       await answerKeys.save();
+      // questão de prova, não mostra o resultado ao responder
+      if (question.module === undefined) newAnswer.isCorrect = 'hidden';
       res.send(newAnswer);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
