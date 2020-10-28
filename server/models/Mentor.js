@@ -19,6 +19,10 @@ const MentorSchema = new Schema({
       ref: 'Learner',
     },
   ],
+  attempts: {
+    type: Number,
+    default: 3,
+  },
 });
 
 MentorSchema.path('learners').validate(async function (value) {
