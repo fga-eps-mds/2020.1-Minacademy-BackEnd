@@ -3,8 +3,6 @@ const Module = require('../models/Module');
 
 module.exports = {
   async getProgress(req, res) {
-    let queryAnswers = [];
-
     try {
       const answerKeys = await req.user
         .execPopulate('answers')
@@ -21,26 +19,24 @@ module.exports = {
         .filter((answer) => answer.isCorrect);
 
       if (req.query.moduleNumber) {
-        const module = await Module.findOne({
+        const questions = await Module.findOne({
           moduleNumber: req.query.moduleNumber,
-        });
-        let questions = await module
-          .execPopulate('questions')
-          .then((doc) => doc.questions);
-        questions = questions.map((question) => question._id.toString());
-        queryAnswers = answerKeys.answers
+        }).populate('questions')
+          .then((doc) => doc.questions.map((question) => question._id.toString()));
+        answerKeys.answers = answerKeys.answers
           .filter((answer) => questions.includes(answer.question.toString()));
       }
 
-      const totalQuestions = await Question.find({});
-      const totalProgress = Math.floor((correctAnswers.length / totalQuestions.length) * 100);
+      const totalQuestions = await Question.countDocuments({ module: { $ne: undefined } });
+      const totalProgress = Math.floor((correctAnswers.length / totalQuestions) * 100);
 
-      const payload = req.query.moduleNumber
-        ? { correctAnswers: correctAnswers.length, totalProgress, queryAnswers }
-        : { totalProgress, correctAnswers: correctAnswers.length };
+      const payload = {
+        questionsResults: answerKeys.answers,
+        totalProgress,
+      };
       res.send(payload);
     } catch (error) {
-      res.status(400).send({ error: error.message });
+      res.status(400).send({ error: error.message, questionsResults: [], totalProgress: 0 });
     }
   },
 };
