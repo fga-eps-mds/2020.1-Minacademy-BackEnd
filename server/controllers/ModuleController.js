@@ -1,15 +1,8 @@
 const Module = require('../models/Module');
 
-const checkModuleCompletion = async (module, user) => {
+const checkModuleCompletion = async (module, user, answerKeys) => {
   const questions = await module.execPopulate('questions')
     .then((doc) => doc.questions.map((question) => question._id.toString()));
-
-  const match = {};
-  match.question = { $in: module.questions };
-
-  const answerKeys = await user
-    .execPopulate('answers')
-    .then((doc) => doc.answers);
 
   const obj = module.toObject();
 
@@ -42,7 +35,7 @@ module.exports = {
       if (answerKeys) {
         parsedModules = await Promise.all(
           modules.map(async (module) => {
-            const obj = await checkModuleCompletion(module, user);
+            const obj = await checkModuleCompletion(module, user, answerKeys);
             return obj;
           }),
         );
