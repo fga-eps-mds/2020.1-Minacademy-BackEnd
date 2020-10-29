@@ -6,8 +6,9 @@ module.exports = {
   },
 
   async populateAnswerKeys(user) {
-    const answerKeys = await user.execPopulate('answers').then((user) =>
-      user.answers.populate({
+    const answerKeys = await user.execPopulate('answers').then((user) => {
+      if (!user.answers) throw new Error('User does not have any answered question')
+      return user.answers.populate({
           path: 'answers',
           populate: {
             path: 'question',
@@ -18,6 +19,7 @@ module.exports = {
             },
           },
         }).execPopulate()
+      }
     );
 
     return answerKeys;

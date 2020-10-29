@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../app');
 const Module = require('../models/Module');
+const Question = require('../models/Question');
 const User = require('../models/User');
 const AnswerKey = require('../models/AnswerKey');
-const { modules } = require('./fixtures/tutorial');
+const { modules, questions } = require('./fixtures/tutorial');
 const { userOne, userTwo } = require('./fixtures/db');
-const {answerKeyOne, answerKeyOneId} = require('./fixtures/answerKey');
-const {module2} = require('./fixtures/module');
+const { learnerOne } = require('./fixtures/learner')
+const {answerKeyOne, answerKeyTwo} = require('./fixtures/answerKey');
 
 describe('Modules', () => {
   beforeAll(async () => {
@@ -17,12 +18,13 @@ describe('Modules', () => {
       useCreateIndex: true,
       useFindAndModify: false,
     });
-   // await Module.insertMany(modules);
+    await Module.insertMany(modules);
+    await Question.insertMany(questions);
     await new User(userOne).save();
     await new User(userTwo).save();
+    await new User(learnerOne).save();
     await new AnswerKey(answerKeyOne).save();
-    await new Module(module2).save();
-
+    await new AnswerKey(answerKeyTwo).save();
   });
 
   afterAll(async (done) => {
@@ -35,21 +37,27 @@ describe('Modules', () => {
     const response = await request(app)
       .get('/api/modules')
       .send()
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
+      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
       .expect(200);
 
     expect(response.body.length).not.toBeNull();
   });
 
-  it('Should return SOME THING THAT I DONT KNOW', async () => {
-    console.log("SEGUNDO TESTEEEEE");
-    await User.updateOne({_id: userTwo._id}, { $set: {answers: answerKeyOneId}});
+  it('Should return modules list with completed module', async () => {
+    const response = await request(app)
+      .get('/api/modules')
+      .send()
+      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
+      .expect(200);
+      console.log(response.body);
+    expect(response.body[0].completed).toBe(true);
+  });
+
+  it('Should get Error 400 by to be a mentor', async () => {
     const response = await request(app)
       .get('/api/modules')
       .send()
       .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`])
-      .expect(200);
-      console.log(response.body);
-    expect(response.body.length).not.toBeNull();
+      .expect(400);
   });
 });
