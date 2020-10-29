@@ -5,7 +5,6 @@ const { TUTORIAL, EXAM } = require('../utils/questionTypes')
 module.exports = {
   async getProgress(req, res) {
     let questionsResults = []
-
     try {
       const answerKeys = await populateAnswerKeys(req.user);
       if (!answerKeys) throw new Error('User does not have any answered question');
@@ -25,7 +24,7 @@ module.exports = {
           answer.question.module.moduleNumber.toString() === req.query.moduleNumber
         );
       } else if (req.query.exam) {
-        questionsResults = answerKeys.answers.filter((answer) =>answer.question.type === EXAM);
+        questionsResults = answerKeys.answers.filter((answer) => answer.question.type === EXAM);
       }
 
       const totalQuestions = await Question.countDocuments({ type: TUTORIAL });

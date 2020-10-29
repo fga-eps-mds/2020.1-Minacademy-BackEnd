@@ -1,4 +1,5 @@
 const Learner = require('../models/Learner');
+const Question = require('../models/Question')
 const { populateAnswerKeys } = require('../utils/answerKeysUtils');
 const { EXAM } = require('../utils/questionTypes');
 
@@ -82,13 +83,18 @@ module.exports = {
           return (answer.question.type === EXAM && isCorrect);
         })
 
-      // if (examResult.length)
-      // user.isValidated = !user.isValidated;
-      // await user.save();
-      res.status(200).send({ result: examResult.length, validated: user.isValidated });
+      const totalExamQuestions = await Question.countDocuments({ type: EXAM });
+      if (examResult.length >= totalExamQuestions*0.7) {
+        user.isValidated = true;
+      } else {
+        user.isValidated = false;
+        user.attempts = user.attempts - 1
+      }
+      await user.save();
+      res.status(200).send({ user, result: examResult.length, attempts: user.attempts });
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
-      res.status(400).send({ error: error.message, isValidated: user.isValidated });
+      res.status(400).send({ error: error.message, isValidated: user.isValidated, attempts: user.attempts });
     }
   },
 };
