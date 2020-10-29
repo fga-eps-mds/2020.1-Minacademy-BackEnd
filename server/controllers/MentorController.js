@@ -79,6 +79,7 @@ module.exports = {
 
       const examResult = answerKeys.answers
         .filter((answer) => {
+          console.log("QUESTAO: ", answer)
           const isCorrect = answer.alternative === answer.question.answer;
           return (answer.question.type === EXAM && isCorrect);
         })

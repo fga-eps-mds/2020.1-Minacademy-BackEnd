@@ -3,6 +3,8 @@ const supertest = require('supertest');
 const app = require('../app');
 const Learner = require('../models/Learner');
 const Mentor = require('../models/Mentor');
+const AnswerKey = require('../models/AnswerKey');
+const Question = require('../models/Question');
 const {
   learnerOne,
   learnerTwo,
@@ -16,10 +18,12 @@ const {
   mentorThree,
   mentorFour,
 } = require('./fixtures/mentor');
+const { answerKeyThree } = require('./fixtures/answerKey')
+const { questions } = require('./fixtures/examQuestions')
 
 const request = supertest(app);
 
-describe('Learner', () => {
+describe('Mentor', () => {
   beforeAll(async () => {
     mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
@@ -36,6 +40,8 @@ describe('Learner', () => {
     await new Mentor(mentorTwo).save();
     await new Mentor(mentorThree).save();
     await new Mentor(mentorFour).save();
+    await new AnswerKey(answerKeyThree).save();
+    await Question.insertMany(questions);
   });
 
   afterAll(async (done) => {
@@ -112,6 +118,7 @@ describe('Learner', () => {
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       .expect(200);
 
-    expect(response.body === true || response.body === false).toBeTruthy();
+    expect(response.body.user.isValidated).toBe(true);
+    expect(response.body.result).toBe(10)
   });
 });

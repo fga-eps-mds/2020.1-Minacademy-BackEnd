@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {userOne, userTwo} = require('./db');
+const {mentorOne} = require ('./mentor');
 
 const answerKeyOneId = new mongoose.Types.ObjectId();
 
@@ -49,9 +50,67 @@ const answerKeyTwo={
   ],
 }
 
+const answerKeyThreeId = new mongoose.Types.ObjectId();
+const answerKeyThree={
+  _id: answerKeyThreeId,
+  user: mentorOne._id,
+  answers: [
+    { // 01
+      question: mongoose.Types.ObjectId('5f961e56fc13ae454d000014'),
+      alternative: 'a',
+      isCorrect: true,
+    },
+    { // 02
+      question: mongoose.Types.ObjectId('5f961e56fc13ae454d000015'),
+      alternative: 'c',
+      isCorrect: true,
+    },
+    { // 03
+      question: mongoose.Types.ObjectId('5f961e56fc13ae454d000016'),
+      alternative: 'a',
+      isCorrect: true,
+    },
+    { // 04
+      question: mongoose.Types.ObjectId('5f961e56fc13ae454d000017'),
+      alternative: 'd',
+      isCorrect: true,
+    },
+    { // 05
+      question: mongoose.Types.ObjectId('5f961e56fc13ae454d000018'),
+      alternative: 'b',
+      isCorrect: true,
+    },
+    { // 06
+      question: mongoose.Types.ObjectId('5f961e56fc13ae454d000019'),
+      alternative: 'e',
+      isCorrect: true,
+    },
+    { // 07
+      question: mongoose.Types.ObjectId('5f961e56fc13ae454d00001a'),
+      alternative: 'd',
+      isCorrect: true,
+    },
+    { // 08
+      question: mongoose.Types.ObjectId('5f961e56fc13ae454d00001b'),
+      alternative: 'b',
+      isCorrect: true,
+    },
+    { //09
+      question: mongoose.Types.ObjectId('5f961e56fc13ae454d00001c'),
+      alternative: 'e',
+      isCorrect: true,
+    },
+    { //10
+      question: mongoose.Types.ObjectId('5f961e56fc13ae454d00001d'),
+      alternative: 'd',
+      isCorrect: true,
+    },
+  ]
+};
+
 module.exports = {
   answerKeyOne,
   answerKeyOneId,
   answerKeyTwo,
-
+  answerKeyThree,
 };
