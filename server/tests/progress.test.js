@@ -58,8 +58,8 @@ describe('Questions', () => {
       .send()
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
       .expect(200);
-
-    expect(response.body.queryAnswers.length).toBe(1);
+      
+    expect(response.body.questionsResults[0].isCorrect).toEqual(false);
   });
 
   it('Should not get question result', async () => {

@@ -3,6 +3,7 @@ const Module = require('../models/Module');
 const checkModuleCompletion = async (module, user, answerKeys) => {
   const questions = await module.execPopulate('questions')
     .then((doc) => doc.questions.map((question) => question._id.toString()));
+  console.log(questions[0]);
 
   const obj = module.toObject();
 
