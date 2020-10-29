@@ -1,5 +1,6 @@
 const Module = require('../models/Module');
 const Question = require('../models/Question');
+const { EXAM } = require('../utils/questionTypes');
 
 module.exports = {
   async getQuestions(req, res) {
@@ -13,7 +14,7 @@ module.exports = {
         await module.populate('questions').execPopulate();
         questions = module.questions;
       } else if (query.exam) {
-        questions = await Question.find({ module: undefined });
+        questions = await Question.find({ type: EXAM });
       }
 
       res.send(questions);

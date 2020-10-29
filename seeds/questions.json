@@ -14,7 +14,8 @@
             "c": "Ambas as alternativas;",
             "d": "Nenhuma das alternativas."
         },
-        "answer": "b"
+        "answer": "b",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -31,7 +32,8 @@
             "c": "Te mostrar que programação e a criação de websites não são tão complicados quanto parecem;",
             "d": "Capacitar e ajudar mulheres a serem programadoras;"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -48,7 +50,8 @@
             "c": "IBM;",
             "d": "Mac OS X."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -65,7 +68,8 @@
             "c": "Pois é um editor de texto rico;",
             "d": "Pois é da Microsoft."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -82,7 +86,8 @@
             "c": "Ambas as alternativas;",
             "d": "Nenhuma das alternativas."
         },
-        "answer": "a"
+        "answer": "a",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -99,7 +104,8 @@
             "c": "Endereços de IP, DNS, HTTP e hCG são palavras chaves quando se trata de endereço host;",
             "d": "Nenhuma das alternativas anteriores."
         },
-        "answer": "a"
+        "answer": "a",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -116,7 +122,8 @@
             "c": "Tradutor do nome de domínio para o endereço IP;",
             "d": "O endereço do seu computador."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -133,7 +140,8 @@
             "c": "Para visualizar, manipular e manusear arquivos;",
             "d": "Para exportar arquivos com uma interface gráfica mais prática."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -150,7 +158,8 @@
             "c": "Python;",
             "d": "Java."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -167,7 +176,8 @@
             "c": "do grupo humorístico britânico Monty Python;",
             "d": "da versatilidade da linguagem de programação."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -184,7 +194,8 @@
             "c": "Editores de códigos nativos, embora mais simples, porém menos rápido, não são recomendáveis para desenvolver programas mesmo possuindo funcionalidades úteis;",
             "d": "Nenhuma das alternativas anteriores."
         },
-        "answer": "a"
+        "answer": "a",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -201,7 +212,8 @@
             "c": "Material textual sem muito processamento;",
             "d": "Texto sem estar criptografado."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -218,7 +230,8 @@
             "c": "Ambas as alternativas, sendo II um complemento de I;",
             "d": "Ambas as alternativas, porém II não complementa I."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -235,7 +248,8 @@
             "c": "8;",
             "d": "9."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -252,7 +266,8 @@
             "c": "Uma abstração que une códigos comuns entre vários projetos de software provendo uma funcionalidade genérica;",
             "d": "O que faz o FPS ficar alto."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -269,7 +284,8 @@
             "c": "Isolar seu código python em um ambiente organizado de projetos;",
             "d": "Deixar o programa mais seguro, à prova de crackers."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -286,7 +302,8 @@
             "c": "SQLite3;",
             "d": "Banco de Dados Oracle."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -303,7 +320,8 @@
             "c": "Significa rodar o projeto localmente, mas sem nenhuma porta especificada;",
             "d": "Não tem nenhum significado importante."
         },
-        "answer": "a"
+        "answer": "a",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -320,7 +338,8 @@
             "c": "Atributo;",
             "d": "Post."
         },
-        "answer": "d"
+        "answer": "d",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -337,7 +356,8 @@
             "c": "Nome: Caneta; Atributos: marca, cor, porcetagem_de_tinta e esta_tampada; Métodos: tampar, destampar e rabiscar;",
             "d": "Nome: Caneta; Atributos: tampar, destampar e rabiscar; Métodos: marca, cor, porcetagem_de_tinta e esta_tampada."
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -354,7 +374,8 @@
             "c": "Somente II é falsa",
             "d": "II e III são verdadeiras"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -371,7 +392,8 @@
             "c": "É um sistema de controle de versão, muito utilizado entre os desenvolvdores",
             "d": "É um sistema capaz de gerar um executável para o programa"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -388,7 +410,8 @@
             "c": "Ter o pip install em uma versão antiga",
             "d": "Não adicionar todos os seus arquivos ao Git e/ou você não fez o push deles para o GitHub"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -405,7 +428,8 @@
             "c": "Universal Resistivity Local",
             "d": "Universal Restructure Locator"
         },
-        "answer": "a"
+        "answer": "a",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -422,7 +446,8 @@
             "c": "Não existe nenhum atributo `post_list` no módulo views",
             "d": "Que você não sabe programar"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -439,7 +464,8 @@
             "c": "Ainda não existe o Template",
             "d": "Que você não sabe programar"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -456,7 +482,8 @@
             "c": "I e II são verdadeiras",
             "d": "I e II são falsas"
         },
-        "answer": "b"
+        "answer": "b",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -473,7 +500,8 @@
             "c": "HTML não está sendo fechado",
             "d": "Não possui </br>"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -490,7 +518,8 @@
             "c": "<Model>.objects.order_by(‘atributo’)",
             "d": "<Model>.objects.order(‘atributo’)"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -507,7 +536,8 @@
             "c": "Conectar modelos e templates",
             "d": "Somente renderizar a interface de usuário"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -524,7 +554,8 @@
             "c": "render(request, ‘local_do_.html’, {‘parametro’ : parametro})",
             "d": "render(request, ‘local_do_.html’, {parametro : 'parametro'})"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -541,7 +572,8 @@
             "c": "São tags usadas para exibir informações dinamicamente no HTML, utilizando Python",
             "d": "São tags para deixar usar HTML5, em vez de HTML"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -558,7 +590,8 @@
             "c": "I e II estão corretas",
             "d": "I e II estão erradas"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -575,7 +608,8 @@
             "c": "Uma parte do código, que pode ser reaproveitada, sem a necessidade de repetir o código",
             "d": "Uma parte do código que pode ser descartada, sem causar impactos no site"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -592,7 +626,8 @@
             "c": "Primary Key, um identificador único de cada entrada do Banco de Dados",
             "d": "Perma Key, um identificador imútavel do Django"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -609,7 +644,8 @@
             "c": "Adicionar ou editar uma Model, de acordo com os inputs do usuário",
             "d": "Adicionar ou editar um Post, de acordo com os inputs do usuário"
         },
-        "answer": "c"
+        "answer": "c",
+        "type": "Tutorial"
     },
     {
         "_id": {
@@ -626,7 +662,8 @@
             "c": "Uma introdução ao Django",
             "d": "Criar um site e hospedar na nuvem"
         },
-        "answer": "b"
+        "answer": "b",
+        "type": "Tutorial"
     },
 
     {
@@ -641,7 +678,8 @@
             "d": "Para sincronizar o Schema do Banco de Dados"
         },
         "number": 1,
-        "answer": "a"
+        "answer": "a",
+        "type": "Exam"
     },
     {
         "_id": {
@@ -655,7 +693,8 @@
             "d": "model = CharField(max_length=255)"
         },
         "number": 2,
-        "answer": "c"
+        "answer": "c",
+        "type": "Exam"
     },
     {
         "_id": {
@@ -668,7 +707,8 @@
             "c": "Uma boa aplicação Django é altamente customizada e não pode ser usada em outros projetos"
         },
         "number": 3,
-        "answer": "a"
+        "answer": "a",
+        "type": "Exam"
     },
     {
         "_id": {
@@ -682,7 +722,8 @@
             "d": "No arquivo settings.py: USE_TZ=True"
         },
         "number": 4,
-        "answer": "d"
+        "answer": "d",
+        "type": "Exam"
     },
     {
         "_id": {
@@ -696,7 +737,8 @@
             "d": "User.object.all()"
         },
         "number": 5,
-        "answer": "b"
+        "answer": "b",
+        "type": "Exam"
     },
     {
         "_id": {
@@ -711,7 +753,8 @@
             "e": "admin.site.register(User)"
         },
         "number": 6,
-        "answer": "e"
+        "answer": "e",
+        "type": "Exam"
     },
     {
         "_id": {
@@ -726,7 +769,8 @@
             "e": "manage.py start usuarios"
         },
         "number": 7,
-        "answer": "d"
+        "answer": "d",
+        "type": "Exam"
     },
     {
         "_id": {
@@ -741,7 +785,8 @@
             "e": "PHP"
         },
         "number": 8,
-        "answer": "b"
+        "answer": "b",
+        "type": "Exam"
     },
     {
         "_id": {
@@ -756,7 +801,8 @@
             "e": "django.contrib"
         },
         "number": 9,
-        "answer": "e"
+        "answer": "e",
+        "type": "Exam"
     },
     {
         "_id": {
@@ -771,6 +817,7 @@
             "e": "Checks for errors in your settings.py file"
         },
         "number": 10,
-        "answer": "d"
+        "answer": "d",
+        "type": "Exam"
     }
 ]
