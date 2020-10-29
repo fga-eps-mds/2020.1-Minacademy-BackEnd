@@ -1,6 +1,6 @@
 const Question = require('../models/Question');
 const AnswerKeys = require('../models/AnswerKey');
-const { isCorrect } = require('../utils/answerKeysUtils')
+const { isCorrect } = require('../utils/answerKeysUtils');
 
 module.exports = {
   async answerQuestion(req, res) {

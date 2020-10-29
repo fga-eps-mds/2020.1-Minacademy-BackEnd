@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { TUTORIAL } = require('../utils/questionTypes')
+const { TUTORIAL } = require('../utils/questionTypes');
 
 const questionSchema = new mongoose.Schema({
   number: {
@@ -27,7 +27,7 @@ const questionSchema = new mongoose.Schema({
     type: String,
     required: true,
     default: TUTORIAL,
-  }
+  },
 });
 
 questionSchema.methods.toJSON = function () {

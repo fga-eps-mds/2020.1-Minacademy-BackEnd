@@ -1,26 +1,26 @@
-const { EXAM } = require('./questionTypes')
+const { EXAM } = require('./questionTypes');
 
 module.exports = {
   isCorrect(question, alternative) {
-    return question.type === EXAM ? 'hidden' : question.answer === alternative
+    return question.type === EXAM ? 'hidden' : question.answer === alternative;
   },
-
+  /* eslint no-shadow: ["error", { "allow": ["user"] }] */
+  /* eslint-env es6 */
   async populateAnswerKeys(user) {
     const answerKeys = await user.execPopulate('answers').then((user) => {
-      if (!user.answers) throw new Error('User does not have any answered question')
+      if (!user.answers) throw new Error('User does not have any answered question');
       return user.answers.populate({
-          path: 'answers',
+        path: 'answers',
+        populate: {
+          path: 'question',
+          model: 'Question',
           populate: {
-            path: 'question',
-            model: 'Question',
-            populate: {
-              path: 'module',
-              model: 'Module',
-            },
+            path: 'module',
+            model: 'Module',
           },
-        }).execPopulate()
-      }
-    );
+        },
+      }).execPopulate();
+    });
 
     return answerKeys;
   },
