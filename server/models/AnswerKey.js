@@ -18,7 +18,7 @@ const AnswerKeysSchema = new mongoose.Schema({
         required: true,
       },
       isCorrect: {
-        type: Boolean,
+        type: mongoose.Schema.Types.Mixed,
         required: true,
       },
     },
