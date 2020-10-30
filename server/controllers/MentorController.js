@@ -87,9 +87,11 @@ module.exports = {
       if (examResult.length >= totalExamQuestions * 0.7) {
         user.isValidated = true;
       } else {
+        user.answers.answers = user.answers.answers.filter((key) => key.question.type !== EXAM);
         user.isValidated = false;
         user.attempts -= 1;
       }
+      await user.answers.save()
       await user.save();
       res.status(200).send({ user, result: examResult.length, attempts: user.attempts });
     } catch (error) {

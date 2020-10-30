@@ -20,7 +20,7 @@ module.exports = {
       await learner.save();
       if (learner.mentor) throw new Error('Learner already has a mentor');
       let mentor = (await Mentor.aggregate()
-        .match({ isAvailable: true })
+        .match({ isAvailable: true, isValidated: true })
         .group({
           _id: '$_id',
           size: { $max: '$learners' },
