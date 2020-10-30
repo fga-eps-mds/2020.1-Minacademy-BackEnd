@@ -6,5 +6,6 @@ const router = new Router();
 
 router.patch('/certificates', auth, courseCertificateController.generateCertificate);
 router.post('/certificates', courseCertificateController.getLearnerCertificate);
+router.get('/certificates', auth, courseCertificateController.getAllCertificates);
 
 module.exports = router;
