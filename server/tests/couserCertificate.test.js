@@ -4,7 +4,8 @@ const app = require('../app');
 const Learner = require('../models/Learner');
 const Mentor = require('../models/Mentor');
 const CouserCertificate = require('../models/CourseCertificate');
-const { learnerOne, learnerTwo } = require('./fixtures/learner');
+const { learnerOne, learnerTwo, learnerThree, learnerFour, learnerSix } = require('./fixtures/learner');
+const { mentorOne } = require('./fixtures/mentor');
 const {certificateLearnerOne} = require('./fixtures/couserCertificate')
 
 const request = supertest(app);
@@ -19,6 +20,9 @@ describe('CurserCertificate', ()=>{
     });
     await new Learner(learnerOne).save();
     await new Learner(learnerTwo).save();
+    await new Learner(learnerThree).save();
+    await new Learner(learnerFour).save();
+    await new Mentor(mentorOne).save();
     await new CouserCertificate(certificateLearnerOne).save();
   });
 
@@ -37,6 +41,19 @@ describe('CurserCertificate', ()=>{
     expect(response.body.user).toEqual(String(learnerTwo._id));
     }
   );
+
+  it('Should generate a new certificate to a learner and mentor', async () =>{
+    await request
+      .patch('/api/learners')
+      .send()
+      .set('Cookie', [`auth_token=${learnerFour.tokens[0].accessToken}`]);
+    const response = await request
+      .patch('/api/certificates')
+      .send()
+      .set('Cookie', [`auth_token=${learnerFour.tokens[0].accessToken}`])
+    expect(response.status).toEqual(200);
+    expect(response.body.user).toEqual(String(learnerFour._id));
+  })
 
   it('Should not generate a new certificate to a learner', async () =>{
     const response  = await request
@@ -62,4 +79,17 @@ describe('CurserCertificate', ()=>{
     expect(response.status).toEqual(400);
   });
 
+  it('Should get all certificates', async() =>{
+    const response = await request
+      .get('/api/certificates')
+      .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
+    expect(response.status).toEqual(200);
+  })
+
+  it('Should not get all certificates', async() => {
+    const response = await request
+      .get('/api/certificates')
+      .set('Cookie', [`auth_token=${learnerThree.tokens[0].accessToken}`]);
+    expect(response.status).toEqual(400);
+  });
 });
