@@ -91,7 +91,7 @@ module.exports = {
         user.isValidated = false;
         user.attempts -= 1;
       }
-      await user.answers.save()
+      await user.answers.save();
       await user.save();
       res.status(200).send({ user, result: examResult.length, attempts: user.attempts });
     } catch (error) {
