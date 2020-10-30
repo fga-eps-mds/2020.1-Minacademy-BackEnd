@@ -810,11 +810,11 @@
         },
         "description": "Qual a função do comando “manage.py validate”?",
         "alternatives": {
-            "a": "Checks for errors in your views",
-            "b": "Checks for errors in your templates",
-            "c": "Checks for errors in your controllers",
-            "d": "Checks for errors in your models",
-            "e": "Checks for errors in your settings.py file"
+            "a": "Verificar erros em suas views",
+            "b": "Verificar erros em seus templates",
+            "c": "Verificar erros em seus controllers",
+            "d": "Verificar erros em suas models",
+            "e": "Verificar erros no arquivo settings.py"
         },
         "number": 10,
         "answer": "d",
