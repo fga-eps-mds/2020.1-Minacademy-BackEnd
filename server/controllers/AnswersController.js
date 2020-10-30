@@ -1,5 +1,6 @@
 const Question = require('../models/Question');
 const AnswerKeys = require('../models/AnswerKey');
+const { isCorrect } = require('../utils/answerKeysUtils');
 
 module.exports = {
   async answerQuestion(req, res) {
@@ -9,7 +10,7 @@ module.exports = {
       const newAnswer = {
         question: req.body.question,
         alternative: req.body.alternative,
-        isCorrect: question.answer === req.body.alternative,
+        isCorrect: isCorrect(question, req.body.alternative),
       };
       let answerKeys = await req.user
         .execPopulate('answers')

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { TUTORIAL } = require('../utils/questionTypes');
 
 const questionSchema = new mongoose.Schema({
   number: {
@@ -20,8 +21,12 @@ const questionSchema = new mongoose.Schema({
   },
   module: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
     ref: 'Module',
+  },
+  type: {
+    type: String,
+    required: true,
+    default: TUTORIAL,
   },
 });
 

@@ -1,46 +1,47 @@
 const Question = require('../models/Question');
-const Module = require('../models/Module');
+const { isCorrect, populateAnswerKeys } = require('../utils/answerKeysUtils');
+const { TUTORIAL, EXAM } = require('../utils/questionTypes');
 
 module.exports = {
   async getProgress(req, res) {
-    let queryAnswers = [];
-
+    let questionsResults = [];
     try {
-      const answerKeys = await req.user
-        .execPopulate('answers')
-        .then((user) => user.answers);
+      const answerKeys = await populateAnswerKeys(req.user);
       if (!answerKeys) throw new Error('User does not have any answered question');
+
       /* eslint-disable no-param-reassign */
-      answerKeys.answers.forEach(async (answer) => {
-        const question = await Question.findById(answer.question);
-        answer.isCorrect = question.answer.toString() === answer.alternative.toString();
+      questionsResults = answerKeys.answers.map((answer) => {
+        answer.isCorrect = isCorrect(answer.question, answer.alternative);
+        return answer;
       });
       await answerKeys.save();
 
-      const correctAnswers = answerKeys.answers
-        .filter((answer) => answer.isCorrect);
+      const correctAnswers = questionsResults.filter((answer) => answer.isCorrect);
 
       if (req.query.moduleNumber) {
-        const module = await Module.findOne({
-          moduleNumber: req.query.moduleNumber,
-        });
-        let questions = await module
-          .execPopulate('questions')
-          .then((doc) => doc.questions);
-        questions = questions.map((question) => question._id.toString());
-        queryAnswers = answerKeys.answers
-          .filter((answer) => questions.includes(answer.question.toString()));
+        questionsResults = answerKeys.answers.filter((answer) => answer.question.type
+        === TUTORIAL && answer.question.module.moduleNumber.toString() === req.query.moduleNumber);
+      } else if (req.query.exam) {
+        questionsResults = answerKeys.answers.filter((answer) => answer.question.type === EXAM);
       }
 
-      const totalQuestions = await Question.find({});
-      const totalProgress = Math.floor((correctAnswers.length / totalQuestions.length) * 100);
+      const totalQuestions = await Question.countDocuments({ type: TUTORIAL });
+      const totalProgress = Math.floor((correctAnswers.length / totalQuestions) * 100);
 
-      const payload = req.query.moduleNumber
-        ? { correctAnswers: correctAnswers.length, totalProgress, queryAnswers }
-        : { totalProgress, correctAnswers: correctAnswers.length };
+      questionsResults = questionsResults.map((answer) => ({
+        question: answer.question._id,
+        alternative: answer.alternative,
+        isCorrect: answer.isCorrect,
+      }));
+
+      const payload = {
+        questionsResults,
+        totalProgress,
+      };
       res.send(payload);
     } catch (error) {
-      res.status(400).send({ error: error.message });
+      console.log(error); // eslint-disable-line no-console
+      res.status(400).send({ error: error.message, questionsResults: [], totalProgress: 0 });
     }
   },
 };

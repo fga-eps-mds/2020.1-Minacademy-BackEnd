@@ -1,4 +1,4 @@
 server/node_modules/
 .env-prod
 server/coverage/
-server/globalConfig.json
+/server/globalConfig.json

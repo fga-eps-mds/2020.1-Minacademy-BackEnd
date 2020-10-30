@@ -1,4 +1,7 @@
 const Learner = require('../models/Learner');
+const Question = require('../models/Question');
+const { populateAnswerKeys } = require('../utils/answerKeysUtils');
+const { EXAM } = require('../utils/questionTypes');
 
 module.exports = {
   async getLearners(req, res) {
@@ -66,6 +69,38 @@ module.exports = {
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
       res.status(400).send({ error: error.message });
+    }
+  },
+
+  async validateMentor(req, res) {
+    const { user } = req;
+    try {
+      const answerKeys = await populateAnswerKeys(user);
+
+      const examResult = answerKeys.answers
+        .filter((answer) => {
+          const isCorrect = answer.alternative === answer.question.answer;
+          return (answer.question.type === EXAM && isCorrect);
+        });
+
+      const totalExamQuestions = await Question.countDocuments({ type: EXAM });
+      if (examResult.length >= totalExamQuestions * 0.7) {
+        user.isValidated = true;
+      } else {
+        user.answers.answers = user.answers.answers.filter((key) => key.question.type !== EXAM);
+        user.isValidated = false;
+        user.attempts -= 1;
+      }
+      await user.answers.save();
+      await user.save();
+      res.status(200).send({ user, result: examResult.length, attempts: user.attempts });
+    } catch (error) {
+      console.log(error); // eslint-disable-line no-console
+      res.status(400).send({
+        error: error.message,
+        isValidated: user.isValidated,
+        attempts: user.attempts,
+      });
     }
   },
 };

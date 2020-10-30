@@ -7,11 +7,11 @@ const { Schema } = mongoose;
 const MentorSchema = new Schema({
   isValidated: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   isAvailable: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   learners: [
     {
@@ -19,6 +19,10 @@ const MentorSchema = new Schema({
       ref: 'Learner',
     },
   ],
+  attempts: {
+    type: Number,
+    default: 3,
+  },
 });
 
 MentorSchema.path('learners').validate(async function (value) {

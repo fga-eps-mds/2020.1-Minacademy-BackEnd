@@ -11,6 +11,7 @@ const userOne = {
   email: 'maria@gmail.com',
   password: '44444dsasa',
   userType: 'Learner',
+  completedModules: [],
   tokens: [
     {
       accessToken: jwt.sign({ id: userOneId }, userAuth.secret),

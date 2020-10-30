@@ -1,42 +1,49 @@
 const Module = require('../models/Module');
 
+const checkModuleCompletion = async (module, user, answerKeys) => {
+  const questions = await module.execPopulate('questions')
+    .then((doc) => doc.questions.map((question) => question._id.toString()));
+
+  const obj = module.toObject();
+
+  const filteredAnswers = answerKeys.answers
+    .filter((answer) => questions.includes(answer.question.toString()));
+
+  obj.completed = (filteredAnswers.length === questions.length)
+    ? (filteredAnswers.every((result) => result.isCorrect === true))
+    : (false);
+
+  /* eslint-disable no-unused-expressions */
+  /* eslint-disable no-param-reassign */
+  if (obj.completed) {
+    user.completedModules.includes(module._id)
+      ? (null)
+      : (user.completedModules = user.completedModules.concat(module._id));
+  }
+  return obj;
+};
+
 module.exports = {
   async getModules(req, res) {
+    const { user } = req;
+    let parsedModules = [];
+
     try {
       const modules = await Module.find({});
 
-      const parsedModules = await Promise.all(
-        modules.map(async (module) => {
-          await module.populate('questions').execPopulate();
-          const match = {};
-          match.question = { $in: module.questions };
+      const answerKeys = await user.execPopulate('answers').then((doc) => doc.answers);
+      if (answerKeys) {
+        parsedModules = await Promise.all(
+          modules.map(async (module) => {
+            const obj = await checkModuleCompletion(module, user, answerKeys);
+            return obj;
+          }),
+        );
+      } else {
+        parsedModules = modules;
+      }
 
-          const answerKeys = await req.user
-            .execPopulate('answers')
-            .then((user) => user.answers);
-          const obj = module.toObject();
-          const questions = module.questions
-            .map((question) => question._id.toString());
-          if (answerKeys) {
-            const filteredAnswers = answerKeys.answers
-              .filter((answer) => questions.includes(answer.question.toString()));
-            obj.completed = (filteredAnswers.length === module.questions.length)
-              ? (filteredAnswers.every((result) => result.isCorrect === true))
-              : (false);
-          } else {
-            obj.completed = false;
-          }
-          /* eslint-disable no-unused-expressions */
-          if (obj.completed) {
-            req.user.completedModules.includes(module._id)
-              ? (null)
-              : (req.user.completedModules = req.user.completedModules.concat(module._id));
-          }
-          return obj;
-        }),
-      );
-
-      await req.user.save();
+      await user.save();
       res.send(parsedModules);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
