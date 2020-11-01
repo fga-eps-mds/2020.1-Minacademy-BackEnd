@@ -103,7 +103,7 @@ module.exports = {
 
     try {
       const user = await User.findOne({ email });
-      if (!user) throw new Error('There is no such email in our platform')
+      if (!user) throw new Error('There is no such email in our platform');
       const resetLink = jwt.sign(
         { _id: user._id },
         userAuth.secretResetPassword,
@@ -174,7 +174,7 @@ module.exports = {
       res.send({ message: 'A e-mail has sent to you, verify it' });
     } catch (error) {
       console.log('EMAIL ERROR: ', error.message); // eslint-disable-line no-console
-      res.status(400).send({ error: error, message: error.message });
+      res.status(400).send({ error, message: error.message });
     }
   },
 
