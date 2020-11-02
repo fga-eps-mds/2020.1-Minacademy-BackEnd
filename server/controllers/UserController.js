@@ -80,9 +80,7 @@ module.exports = {
     const allowedUpdates = [
       'name',
       'email',
-      'password',
-      'profileImg',
-      'about',
+      'lastname',
     ];
     const isValidOperation = updates.every((item) => allowedUpdates.includes(item));
 
