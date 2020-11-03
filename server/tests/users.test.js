@@ -67,9 +67,7 @@ describe('Users', () => {
       .send({
         name: 'Cleiton',
         email: userOne.email,
-        password: 'novasenha',
-        profileImg: '',
-        about: '',
+        lastname: 'Nobrega',
       })
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
     expect(response.status).toEqual(200);
@@ -99,8 +97,6 @@ describe('Users', () => {
         name: userOne.name,
         email: 'invalid_email',
         password: 'novasenha',
-        profileImg: '',
-        about: '',
       })
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
 
