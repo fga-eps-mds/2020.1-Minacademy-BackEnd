@@ -103,6 +103,7 @@ module.exports = {
 
     try {
       const user = await User.findOne({ email });
+      if (!user) throw new Error('There is no such email in our platform');
       const resetLink = jwt.sign(
         { _id: user._id },
         userAuth.secretResetPassword,
@@ -115,32 +116,78 @@ module.exports = {
         to: email,
         subject: 'Redefinição de Senha',
         html: `
-            <div >
-                <div>
-                    <div class="box_text">
-                        <h1>Redefinição de senha</h1>
-                        <p>Você solicitou a redefinição de senha. Click <a href="http://localhost:3000/change/${resetLink}">aqui</a> para redefinir sua senha.</p>
-                    </div>
-                </div>
-            </div>`,
+        <html>
+  <body>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
+      
+      body {
+        background-color: #F5F5F5;
+      }
+
+      .box_text {
+        min-height: 50vh;
+        padding: 3em;
+        background: #FFFFFF;
+        box-shadow: 0px 5px 10px rgba(43, 43, 43, 0.05), 0px 15px 40px rgba(0, 0, 0, 0.02);
+        border-radius: 10px;
+        margin-bottom: 3rem;
+      }
+
+      hr {
+        border: 1px solid #9241C0;
+      }
+
+      h1 {
+        color: #9241C0;
+        box-sizing: border-box;
+        font-family: Overpass;
+      }
+
+      p {
+        color: #675775;
+        font-weight: 300;
+        font-family: Overpass;
+        text-align: left;
+        font-size: 1.5vw;
+      }
+
+      img {
+        position: absolute;
+        right: 50px;
+      }
+    </style>
+    <div class="box_text">
+      <div class="email-header">
+        <img src='https://raw.githubusercontent.com/fga-eps-mds/2020.1-Minacademy-FrontEnd/0395eb8b413765722f8b9c766020562608276217/src/assets/images/minacademyLogo.svg'>
+        <h1>Redefinição de senha</h1>
+      </div>
+      <hr>
+      <p>Olá, ficamos sabendo que você esqueceu a sua senha, mas não se preocupe, estamos aqui para ajudar.</p>
+      <p>Para ser redirecionado(a) para a página de redefinição de senha clique <a href="http://localhost:3000/change/${resetLink}">aqui</a>.</p>
+    </div>
+  </body>
+</html>`,
       };
 
       await transport.sendMail(data);
       res.send({ message: 'A e-mail has sent to you, verify it' });
     } catch (error) {
-      console.log('EMAIL ERROR: ', error); // eslint-disable-line no-console
-      res.status(400).send({ error: error.message });
+      console.log('EMAIL ERROR: ', error.message); // eslint-disable-line no-console
+      res.status(400).send({ error, message: error.message });
     }
   },
 
   async resetPassword(req, res) {
-    const { password, resetLink } = req.body;
-
+    const { password, resetLink, confirmPassword } = req.body;
     try {
       const decodedID = jwt.verify(resetLink, userAuth.secretResetPassword);
       const user = await User.findById(decodedID);
       if (!user) throw new Error('User does not exist');
+      if (password !== confirmPassword) throw new Error('Passwords do not coincide');
+      if (!user.resetLink) throw new Error('You already changed your password');
       user.password = password;
+      user.resetLink = null;
       await user.save();
       res.send({ message: 'Your password has been changed' });
     } catch (error) {
