@@ -180,13 +180,15 @@ module.exports = {
 
   async resetPassword(req, res) {
     const { password, resetLink, confirmPassword } = req.body;
-
     try {
       const decodedID = jwt.verify(resetLink, userAuth.secretResetPassword);
       const user = await User.findById(decodedID);
+      console.log(user)
       if (!user) throw new Error('User does not exist');
       if (password != confirmPassword) throw new Error('Passwords do not coincide')
+      if(!user.resetLink) throw new Error('You already changed your password')
       user.password = password;
+      user.resetLink=null;
       await user.save();
       res.send({ message: 'Your password has been changed' });
     } catch (error) {
