@@ -1,8 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const http = require('http');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const router = require('./routers/index');
+const { io } = require('./websocket');
+require('./db/mongoose');
 require('dotenv').config();
 
 const app = express();
@@ -13,23 +15,16 @@ app.use(cors({
   exposedHeaders: ['set-cookie'],
 }));
 
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
-
-// eslint-disable no-console
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'DB connection error:')); // eslint-disable-line no-console
-db.once('open', () => {
-  console.log('DB connected'); // eslint-disable-line no-console
-});
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(function (req, res, next) {
+  req.io = io.of('/api');
+  next();
+});
 app.use('/api', router);
 
-module.exports = app;
+const server = http.createServer(app);
+io.listen(server);
+
+module.exports = server;
