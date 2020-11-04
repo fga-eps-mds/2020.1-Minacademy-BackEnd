@@ -1,5 +1,6 @@
 const socketio = require('socket.io')();
 const socketioJwt = require('socketio-jwt');
+const User = require('./models/User');
 
 const connections = {};
 
@@ -8,7 +9,7 @@ socketio.of('/api').use(socketioJwt.authorize({
   handshake: true
 }));
 
-socketio.of('/api').on('connection', (socket) => {
+socketio.of('/api').on('connection', async (socket) => {
   console.log('New WebSocket connection!  New WebSocket connection!');
   console.log("socket: ", socket.id);
   console.log("user ID: ", socket.decoded_token.id);
@@ -21,9 +22,16 @@ socketio.of('/api').on('connection', (socket) => {
     connections[socket.decoded_token.id] = [socket];
   }
 
+  const user = await User.findById(socket.decoded_token.id)
+  const chats = await user.execPopulate('chat').then(doc => doc.chat)
+  console.log('CHATS: ', chats)
+  chats.forEach((chat) => socket.join(chat._id))
+
   socket.on('disconnect', (reason) => {
     console.log('disconnect', reason);
-    delete connections[socket.decoded_token.id]
+    // delete connections[socket.decoded_token.id]
+    connections[socket.decoded_token.id] = connections[socket.decoded_token.id]
+      .filter((connection) => connection.id !== socket.id)
   });
 });
 
