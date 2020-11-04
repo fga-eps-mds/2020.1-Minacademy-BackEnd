@@ -79,6 +79,12 @@ UserSchema.virtual('answers', {
   justOne: true,
 });
 
+UserSchema.virtual('chat', {
+  ref: 'Chat',
+  localField: '_id',
+  foreignField: 'users',
+});
+
 UserSchema.methods.toJSON = function () {
   const user = this;
   const userObject = user.toObject();
