@@ -9,5 +9,6 @@ router.patch('/learners', auth, permit('Learner'), LearnerController.assignMento
 router.patch('/learners/request', auth, permit('Learner'), LearnerController.cancelMentorRequest);
 router.get('/learners', auth, permit('Learner'), LearnerController.getMentor);
 router.delete('/learners', auth, permit('Learner'), LearnerController.unassignMentor);
+router.patch('/learners/promote', auth, permit('Learner'), LearnerController.promoteToMentor);
 
 module.exports = router;

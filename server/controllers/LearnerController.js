@@ -1,4 +1,6 @@
+const CourseCertificate = require('../models/CourseCertificate');
 const Mentor = require('../models/Mentor');
+const User = require('../models/User');
 
 module.exports = {
   async getMentor(req, res) {
@@ -76,4 +78,29 @@ module.exports = {
       res.status(400).send({ mentor: learner.mentor, error: error.message });
     }
   },
+
+  async promoteToMentor(req, res) {
+    const { _id } = req.user;
+    try {
+      const hasLearnerCertificate = await CourseCertificate.findOne({
+        user: _id,
+        courseType: 'Learner'
+      });
+
+      if (!hasLearnerCertificate)
+        throw new Error ('User did not conclude Tutorial');
+      
+      const user = await User.findOneAndUpdate(
+        { _id }, 
+        {$set: {userType: 'Mentor'}}, {new: true}
+      );
+      user.isValidated = true;
+      user.mentor_request = false;
+      user.save();
+      
+      res.status(200).send({ user });
+    } catch (error) {
+      res.status(400).send({ error: error.message });
+    }
+  }
 };
