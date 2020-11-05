@@ -15,6 +15,7 @@ const checkModuleCompletion = async (module, user, answerKeys) => {
 
   /* eslint-disable no-unused-expressions */
   /* eslint-disable no-param-reassign */
+  if (!user.completedModules) user.completedModules = [];
   if (obj.completed) {
     user.completedModules.includes(module._id)
       ? (null)
