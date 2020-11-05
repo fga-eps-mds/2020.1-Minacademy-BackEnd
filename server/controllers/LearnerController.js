@@ -1,4 +1,3 @@
-const CourseCertificate = require('../models/CourseCertificate');
 const Mentor = require('../models/Mentor');
 const User = require('../models/User');
 
