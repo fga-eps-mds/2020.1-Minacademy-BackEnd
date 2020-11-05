@@ -53,11 +53,11 @@ describe('Modules', () => {
     expect(response.body[0].completed).toBe(true);
   });
 
-  it('Should get Error 400 by to be a mentor', async () => {
+  it('Should get status 200 by to be a mentor', async () => {
     const response = await request(app)
       .get('/api/modules')
       .send()
       .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`])
-      .expect(400);
+      .expect(200);
   });
 });
