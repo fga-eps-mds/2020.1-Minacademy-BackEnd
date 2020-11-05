@@ -88,6 +88,18 @@ module.exports = {
 
     try {
       /* eslint-disable no-return-assign */
+      if(req.body['email']){
+        console.log(req.body['email']);
+        //console.log("TEM EMAIL");
+        const index = updates.indexOf('email');
+        //console.log("Valor do index do email:", index);
+        if (index > -1) updates.splice(index, 1);
+        const newEmail = req.body['email'];
+        console.log("Novo email", newEmail);
+        req.user['changeEmail'] = newEmail;
+        //console.log("ARREY updates sem o email", updates);
+      }
+
       updates.forEach((field) => (req.user[field] = req.body[field]));
       await req.user.save();
       res.send(req.user);
