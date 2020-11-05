@@ -52,8 +52,7 @@ module.exports = {
   async cancelMentorRequest(req, res) {
     const { user } = req;
     try {
-      if (!user.mentor_request)
-        throw new Error('Learner already canceled mentor request');
+      if (!user.mentor_request) throw new Error('Learner already canceled mentor request');
       user.mentor_request = false;
       await user.save();
       res.status(200).send(user.mentor_request);
