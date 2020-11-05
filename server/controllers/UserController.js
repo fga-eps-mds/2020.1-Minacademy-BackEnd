@@ -89,17 +89,81 @@ module.exports = {
     try {
       /* eslint-disable no-return-assign */
       if(req.body['email']){
-        console.log(req.body['email']);
-        //console.log("TEM EMAIL");
         const index = updates.indexOf('email');
-        //console.log("Valor do index do email:", index);
         if (index > -1) updates.splice(index, 1);
+        const email = req.user.email;
         const newEmail = req.body['email'];
         console.log("Novo email", newEmail);
         req.user['changeEmail'] = newEmail;
-        //console.log("ARREY updates sem o email", updates);
-      }
 
+        const changeEmailLink = jwt.sign(
+          { _id: req.user._id },
+          userAuth.secretChangeEmail,
+          { expiresIn: '60m' },
+        );
+        req.user.changeEmailLink = changeEmailLink;
+        const data = {
+          from: 'minAcademy@minAcademy.com',
+          to: email,
+          subject: 'Redefinição de Email',
+          html: `
+          <html>
+    <body>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
+        
+        body {
+          background-color: #F5F5F5;
+        }
+  
+        .box_text {
+          min-height: 50vh;
+          padding: 3em;
+          background: #FFFFFF;
+          box-shadow: 0px 5px 10px rgba(43, 43, 43, 0.05), 0px 15px 40px rgba(0, 0, 0, 0.02);
+          border-radius: 10px;
+          margin-bottom: 3rem;
+        }
+  
+        hr {
+          border: 1px solid #9241C0;
+        }
+  
+        h1 {
+          color: #9241C0;
+          box-sizing: border-box;
+          font-family: Overpass;
+        }
+  
+        p {
+          color: #675775;
+          font-weight: 300;
+          font-family: Overpass;
+          text-align: left;
+          font-size: 1.5vw;
+        }
+  
+        img {
+          position: absolute;
+          right: 50px;
+        }
+      </style>
+      <div class="box_text">
+        <div class="email-header">
+          <img src='https://raw.githubusercontent.com/fga-eps-mds/2020.1-Minacademy-FrontEnd/0395eb8b413765722f8b9c766020562608276217/src/assets/images/minacademyLogo.svg'>
+          <h1>Redefinição de Email</h1>
+        </div>
+        <hr>
+        <p>Olá, foi voce quem pediu pra mudar seu endereço de email? Isso é facil pra gente!.</p>
+        <p>Clique <a href="http://localhost:3000/confirma-mudanca-email/${changeEmailLink}">aqui</a> para confirmar a mudança.</p>
+      </div>
+    </body>
+  </html>`,
+        };
+        
+        await transport.sendMail(data);
+      }
+      
       updates.forEach((field) => (req.user[field] = req.body[field]));
       await req.user.save();
       res.send(req.user);
