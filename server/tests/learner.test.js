@@ -109,6 +109,15 @@ describe('Learner', () => {
     expect(response.status).toEqual(200);
     expect(response.body).toEqual(false);
   });
+  
+  it('Should not be able to cancel a mentor request', async () => {
+    const response = await request
+      .patch('/api/learners/request')
+      .send()
+      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`]);
+    expect(response.status).toEqual(400);
+    expect(response.body.mentor_request).toEqual(false);
+  });
 
   it("Should be able to unassign learnerOne's mentor", async () => {
     const response = await request
