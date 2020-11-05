@@ -160,24 +160,13 @@ module.exports = {
     </body>
   </html>`,
         };
-        req.user.showMessageConfirm = true;
+        
         await transport.sendMail(data);
       }
       
-        console.log(req.body['email']);
-        //console.log("TEM EMAIL");
-        const index = updates.indexOf('email');
-        //console.log("Valor do index do email:", index);
-        if (index > -1) updates.splice(index, 1);
-        const newEmail = req.body['email'];
-        console.log("Novo email", newEmail);
-        req.user['changeEmail'] = newEmail;
-        //console.log("ARREY updates sem o email", updates);
-        
-        updates.forEach((field) => (req.user[field] = req.body[field]));
-        await req.user.save();
-        res.send(req.user);
-      
+      updates.forEach((field) => (req.user[field] = req.body[field]));
+      await req.user.save();
+      res.send(req.user);
     } catch (error) {
       res.status(400).send(error);
     }
