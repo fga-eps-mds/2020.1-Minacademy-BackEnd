@@ -87,6 +87,25 @@ const learnerFive = {
   resetLink: jwt.sign({ id: 'camila@gmail.com' }, userAuth.secretResetPassword),
 };
 
+const learnerSixId = new mongoose.Types.ObjectId();
+const learnerSixCertificateId = new mongoose.Types.ObjectId();
+const learnerSix = {
+  mentor: null,
+  mentor_request: false,
+  _id: learnerSixId,
+  name: 'Maria',
+  lastname: 'Silva',
+  gender: 'Female',
+  email: 'maria@gmail.com',
+  password: 'Maria2@',
+  userType: 'Learner',
+  tokens: [{
+    accessToken: jwt.sign({ id: learnerSixId }, userAuth.secret),
+  }],
+  resetLink: jwt.sign({ id: 'maria@gmail.com' }, userAuth.secretResetPassword),
+  courseCertificates: [learnerSixCertificateId],
+};
+
 module.exports = {
   learnerOne,
   learnerTwo,
@@ -96,4 +115,6 @@ module.exports = {
   learnerThreeId,
   learnerFourId,
   learnerFiveId,
+  learnerSix,
+  learnerSixId,
 };

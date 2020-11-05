@@ -148,12 +148,12 @@ describe('Learner', () => {
     expect(response.body.error).toEqual("User did not conclude Tutorial");
   });
 
-  // it('Should be able to become a mentor', async () => {
-  //   const response = await request
-  //     .patch('/api/learners/promote')
-  //     .send()
-  //     .set('Cookie', [`auth_token=${learnerSix.tokens[0].accessToken}`]);
-  //   expect(response.status).toEqual(200);
-  // });
+  it('Should be able to become a mentor', async () => {
+    const response = await request
+      .patch('/api/learners/promote')
+      .send()
+      .set('Cookie', [`auth_token=${learnerSix.tokens[0].accessToken}`]);
+    expect(response.status).toEqual(200);
+  });
 
 });

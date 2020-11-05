@@ -81,11 +81,9 @@ module.exports = {
 
   async promoteToMentor(req, res) {
     const { _id } = req.user;
+    const reqUser = req.user;
     try {
-      const hasLearnerCertificate = await CourseCertificate.findOne({
-        user: _id,
-        courseType: 'Learner',
-      });
+      const hasLearnerCertificate = reqUser.courseCertificates.length > 0;
 
       if (!hasLearnerCertificate) throw new Error('User did not conclude Tutorial');
 
