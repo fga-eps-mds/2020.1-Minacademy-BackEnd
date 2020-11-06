@@ -1,5 +1,6 @@
 const socketio = require('socket.io')();
 const socketioJwt = require('socketio-jwt');
+const Chat = require('./models/Chat');
 const User = require('./models/User');
 
 const connections = {};
@@ -25,7 +26,7 @@ socketio.of('/api').on('connection', async (socket) => {
     }
 
     const user = await User.findById(socket.decoded_token.id)
-    const chats = await user.execPopulate('chat').then(doc => doc.chat)
+    const chats = await Chat.find({ users: user._id})
     console.log('CHATS: ', chats)
     chats.forEach((chat) => socket.join(chat._id))
   } catch (error) {
