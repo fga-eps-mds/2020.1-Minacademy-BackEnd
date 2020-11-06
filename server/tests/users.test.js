@@ -69,7 +69,6 @@ describe('Users', () => {
         lastname: 'Nobrega',
       })
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
-    console.log(response.body);
     expect(response.status).toEqual(200);
     expect(response.body.name).toEqual('Cleiton');
   });
@@ -81,8 +80,6 @@ describe('Users', () => {
         email: 'new@email.com',
       })
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
-      console.log(response.body);
-    expect(response.status).toEqual(200);
     expect(response.body.changeEmail).toEqual('new@email.com');
   });
 
