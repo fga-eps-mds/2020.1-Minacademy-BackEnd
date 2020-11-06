@@ -160,7 +160,7 @@ module.exports = {
     </body>
   </html>`,
         };
-        
+        req.user.showMessageConfirm = true;
         await transport.sendMail(data);
       }
       
@@ -279,7 +279,6 @@ module.exports = {
       const newEmail = user.changeEmail;
       user.changeEmail = '';
       await user.save();
-      console.log("");
       
       user.email = newEmail;
       user.changeEmailLink = '';
