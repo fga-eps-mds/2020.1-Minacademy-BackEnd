@@ -279,6 +279,7 @@ module.exports = {
       const newEmail = user.changeEmail;
       user.changeEmail = '';
       await user.save();
+      console.log("");
       
       user.email = newEmail;
       user.changeEmailLink = '';
