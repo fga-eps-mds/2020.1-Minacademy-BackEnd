@@ -268,4 +268,26 @@ module.exports = {
       res.status(400).send({ error: error.message });
     }
   },
+
+  async changeEmail(req, res){
+    try{
+      const {changeEmailLink} = req.body;
+      const decodedID = jwt.verify(changeEmailLink, userAuth.secretChangeEmail);
+      const user = await User.findById(decodedID);
+      if (!user) throw new Error('User does not exist');
+      if (!user.changeEmailLink) throw new Error('You already changed your email');
+      const newEmail = user.changeEmail;
+      user.changeEmail = '';
+      await user.save();
+      user.email = newEmail;
+      
+      user.changeEmailLink = '';
+      await user.save();
+      res.send(user);
+
+    } catch(error){
+      console.log(error.message);
+      res.status(400).send({ error: error.message });
+    }
+  },
 };
