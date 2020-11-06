@@ -3,8 +3,9 @@ const supertest = require('supertest');
 const app = require('../app');
 const User = require('../models/User');
 const Chat = require('../models/Chat');
-const { learnerOne } = require('./fixtures/learner');
-const { chatOne } = require('./fixtures/chat');
+const { learnerOne, learnerThree, learnerFour } = require('./fixtures/learner');
+const { mentorOne } = require('./fixtures/mentor');
+const { chatOne, chatTwo } = require('./fixtures/chat');
 
 const request = supertest(app);
 
@@ -17,7 +18,11 @@ describe('Chats', () => {
       useFindAndModify: false,
     });
     await new User(learnerOne).save();
+    await new User(learnerThree).save();
+    await new User(learnerFour).save();
+    await new User(mentorOne).save();
     await new Chat(chatOne).save();
+    await new Chat(chatTwo).save();
   });
 
   afterAll(async (done) => {
@@ -27,6 +32,10 @@ describe('Chats', () => {
   });
 
   it('Should get chat for learnerOne', async () => {
+    // await User.updateOne({_id: learnerOne._id}, {mentor: mentorOne._id })
+    const user = await User.findById(learnerOne._id)
+    user.mentor = mentorOne._id
+    await user.save()
     const response = await request.get('/api/chat')
     .send()
     .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
@@ -34,6 +43,17 @@ describe('Chats', () => {
 
     expect(response.body.length).not.toBeNull();
     expect(response.body[0].users).toContain(learnerOne._id.toString());
+  });
+
+  it('Should get chat for mentorOne', async () => {
+    // await User.updateOne({_id: learnerOne._id}, {mentor: mentorOne._id })
+    const response = await request.get('/api/chat')
+    .send()
+    .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
+    .expect(200);
+
+    expect(response.body.length).not.toBeNull();
+    expect(response.body[0].users).toContain(learnerThree._id.toString());
   });
 
   it('Should send message to chatOne', async () => {

@@ -13,7 +13,7 @@ module.exports = {
       if (user.learners.length < 1) throw new Error('Mentor does not have learners');
       res.send(user.learners);
     } catch (error) {
-      res.status(400).send({ error: error.message });
+      res.status(400).send({ error: error.message, learners: user.learners });
     }
   },
 
@@ -35,7 +35,7 @@ module.exports = {
       await user.save();
       await learner.save();
       await user.execPopulate('learners');
-      await createChat([user._id, learner._id]);
+      await createChat([learner._id, user._id]);
       /* eslint-disable no-unused-expressions */
       res.send({
         learner: user.learners[user.learners.length - 1],

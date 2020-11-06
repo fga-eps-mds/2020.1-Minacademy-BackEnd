@@ -5,9 +5,14 @@ const { findSockets } = require('../utils/findSocket');
 module.exports = {
   async getChat(req, res) {
     const { user } = req;
+    let chats = [];
 
     try {
-      const chats = await user.execPopulate('chat').then((doc) => doc.chat);
+      if (user.userType === 'Mentor') {
+        chats = await Chat.find({ users: { $in: [...user.learners] } });
+      } else {
+        chats = await Chat.find({ users: { $all: [user._id, user.mentor] } });
+      }
       res.send(chats);
     } catch (error) {
       console.error(error); // eslint-disable-line no-console
@@ -17,7 +22,7 @@ module.exports = {
 
   async createChat(ids) {
     try {
-      let chat = await Chat.findOne({ users: ids });
+      let chat = await Chat.findOne({ users: { $all: [...ids] } });
       if (chat) return;
       chat = new Chat({ users: ids });
       await chat.save();

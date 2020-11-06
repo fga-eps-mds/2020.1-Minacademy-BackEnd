@@ -72,9 +72,10 @@ module.exports = {
         $pull: { learners: learner._id },
         isAvailable: false,
       });
+      const oldMentor = learner.mentor;
       learner.mentor = null;
       await learner.save();
-      res.send({ mentorRequest: learner.mentor_request, mentor: learner.mentor });
+      res.send({ mentorRequest: learner.mentor_request, mentor: learner.mentor, oldMentor });
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
       res.status(400).send({ mentor: learner.mentor, error: error.message });
