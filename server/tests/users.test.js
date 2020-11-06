@@ -115,13 +115,6 @@ describe('Users', () => {
     expect(response.body.user.email).toEqual('teste@gmail.com');
   });
 
-  it('should be able to get all mentors', async () => {
-    const response = await request
-      .get('/api/mentors')
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
-    expect(response.status).toEqual(200);
-  });
-
   it('Should be able to logout', async () => {
     const response = await request
       .post('/api/users/logout')

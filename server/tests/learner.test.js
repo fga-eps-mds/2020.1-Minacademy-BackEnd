@@ -9,6 +9,7 @@ const {
   learnerThree,
   learnerFour,
   learnerFive,
+  learnerSix,
 } = require('./fixtures/learner');
 const { mentorOne, mentorTwo, mentorThree } = require('./fixtures/mentor');
 
@@ -27,6 +28,7 @@ describe('Learner', () => {
     await new Learner(learnerThree).save();
     await new Learner(learnerFour).save();
     await new Learner(learnerFive).save();
+    await new Learner(learnerSix).save();
     await new Mentor(mentorOne).save();
     await new Mentor(mentorTwo).save();
     await new Mentor(mentorThree).save();
@@ -107,6 +109,15 @@ describe('Learner', () => {
     expect(response.status).toEqual(200);
     expect(response.body).toEqual(false);
   });
+  
+  it('Should not be able to cancel a mentor request', async () => {
+    const response = await request
+      .patch('/api/learners/request')
+      .send()
+      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`]);
+    expect(response.status).toEqual(400);
+    expect(response.body.mentor_request).toEqual(false);
+  });
 
   it("Should be able to unassign learnerOne's mentor", async () => {
     const response = await request
@@ -136,6 +147,22 @@ describe('Learner', () => {
       .expect(403);
 
     expect(response.body.message).toEqual('Forbidden');
+  });
+
+  it('Should not be able to become a mentor', async () => {
+    const response = await request
+      .patch('/api/learners/promote')
+      .send()
+      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`]);
+    expect(response.body.error).toEqual("User did not conclude Tutorial");
+  });
+
+  it('Should be able to become a mentor', async () => {
+    const response = await request
+      .patch('/api/learners/promote')
+      .send()
+      .set('Cookie', [`auth_token=${learnerSix.tokens[0].accessToken}`]);
+    expect(response.status).toEqual(200);
   });
 
 });

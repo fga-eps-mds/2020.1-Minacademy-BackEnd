@@ -1,4 +1,5 @@
 const Mentor = require('../models/Mentor');
+const User = require('../models/User');
 
 module.exports = {
   async getMentor(req, res) {
@@ -51,6 +52,7 @@ module.exports = {
   async cancelMentorRequest(req, res) {
     const { user } = req;
     try {
+      if (!user.mentor_request) throw new Error('Learner already canceled mentor request');
       user.mentor_request = false;
       await user.save();
       res.status(200).send(user.mentor_request);
@@ -74,6 +76,28 @@ module.exports = {
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
       res.status(400).send({ mentor: learner.mentor, error: error.message });
+    }
+  },
+
+  async promoteToMentor(req, res) {
+    const { _id } = req.user;
+    const reqUser = req.user;
+    try {
+      const hasLearnerCertificate = reqUser.courseCertificates.length > 0;
+
+      if (!hasLearnerCertificate) throw new Error('User did not conclude Tutorial');
+
+      const user = await User.findOneAndUpdate(
+        { _id },
+        { $set: { userType: 'Mentor' } }, { new: true },
+      );
+      user.isValidated = true;
+      user.mentor_request = false;
+      user.save();
+
+      res.status(200).send({ user });
+    } catch (error) {
+      res.status(400).send({ error: error.message });
     }
   },
 };

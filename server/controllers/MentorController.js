@@ -9,6 +9,7 @@ module.exports = {
 
     try {
       await user.execPopulate('learners');
+      if (user.learners.length < 1) throw new Error('Mentor does not have learners');
       res.send(user.learners);
     } catch (error) {
       res.status(400).send({ error: error.message });
@@ -93,13 +94,13 @@ module.exports = {
       }
       await user.answers.save();
       await user.save();
+      if (!user.isValidated) throw new Error('Mentor does not have score to validate');
       res.status(200).send({ user, result: examResult.length, attempts: user.attempts });
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
       res.status(400).send({
         error: error.message,
-        isValidated: user.isValidated,
-        attempts: user.attempts,
+        user,
       });
     }
   },

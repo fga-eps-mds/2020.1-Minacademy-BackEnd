@@ -18,7 +18,7 @@ const {
   mentorThree,
   mentorFour,
 } = require('./fixtures/mentor');
-const { answerKeyThree } = require('./fixtures/answerKey')
+const { answerKeyThree, answerKeyFour } = require('./fixtures/answerKey')
 const { questions } = require('./fixtures/examQuestions')
 
 const request = supertest(app);
@@ -41,6 +41,7 @@ describe('Mentor', () => {
     await new Mentor(mentorThree).save();
     await new Mentor(mentorFour).save();
     await new AnswerKey(answerKeyThree).save();
+    await new AnswerKey(answerKeyFour).save();
     await Question.insertMany(questions);
   });
 
@@ -58,6 +59,15 @@ describe('Mentor', () => {
       .expect(200);
 
     expect(response.body.length).toBe(2);
+  });
+
+  it('Should not get learners for mentor three', async () => {
+    const response = await request
+      .get('/api/mentors')
+      .send()
+      .set('Cookie', [`auth_token=${mentorThree.tokens[0].accessToken}`])
+      .expect(400);
+    expect(response.body.error).toBe('Mentor does not have learners');
   });
 
   it('Should assign a learner to mentor one', async () => {
@@ -120,5 +130,16 @@ describe('Mentor', () => {
 
     expect(response.body.user.isValidated).toBe(true);
     expect(response.body.result).toBe(10)
+  });
+
+  it('Should not validate mentor two', async () => {
+    const response = await request
+      .patch('/api/mentors/validation')
+      .send()
+      .set('Cookie', [`auth_token=${mentorTwo.tokens[0].accessToken}`])
+      .expect(400);
+
+    expect(response.body.user.isValidated).toBe(false);
+    expect(response.body.user.attempts).toBe(2);
   });
 });
