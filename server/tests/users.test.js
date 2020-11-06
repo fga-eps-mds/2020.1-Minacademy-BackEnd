@@ -80,6 +80,7 @@ describe('Users', () => {
         email: 'new@email.com',
       })
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
+      console.log(response.body);
     expect(response.body.changeEmail).toEqual('new@email.com');
   });
 
