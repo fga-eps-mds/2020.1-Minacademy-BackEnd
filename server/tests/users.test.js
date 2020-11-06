@@ -61,7 +61,7 @@ describe('Users', () => {
     expect(response.status).toEqual(200);
   });
 
-  it('Should be able to edit User', async () => {
+  it('Should be able to edit name and lastname user of User', async () => {
     const response = await request
       .post('/api/editUser')
       .send({
@@ -72,6 +72,28 @@ describe('Users', () => {
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
     expect(response.status).toEqual(200);
     expect(response.body.name).toEqual('Cleiton');
+  });
+
+  it('Should be able to send a email to confirm the newEmail', async () => {
+    const response = await request
+      .post('/api/editUser')
+      .send({
+        email: 'new@email.com',
+      })
+      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
+    expect(response.status).toEqual(200);
+    expect(response.body.changeEmail).toEqual('new@email.com');
+  });
+
+  it('Should be able to change email', async () => {
+    const response = await request
+      .put('/api/changeEmail')
+      .send({
+        changeEmailLink : userOne.changeEmailLink,
+      })
+      console.log("RESPOSTAAAAA: ", response.body);
+    expect(response.status).toEqual(200);
+    expect(response.body.email).toEqual('new@email.com');
   });
 
   it('Should not be able to login unregisterd user', async () => {

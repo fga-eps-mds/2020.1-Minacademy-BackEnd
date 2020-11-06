@@ -18,6 +18,8 @@ const userOne = {
     },
   ],
   resetLink: jwt.sign({ id: 'maria@gmail.com' }, userAuth.secretResetPassword),
+  changeEmailLink : jwt.sign({ _id: userOneId},userAuth.secretChangeEmail),
+  changeEmail: 'new@email.com',
 };
 
 const answerKey = {
