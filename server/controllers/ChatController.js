@@ -19,11 +19,15 @@ module.exports = {
   async createChat(ids) {
     try {
       let chat = await Chat.findOne({ users: ids })
+      console.log(chat)
       if (chat) return
       chat = new Chat({ users: ids })
       await chat.save()
       const targets = findSockets(ids)
-      targets.forEach((target) => target.emit('assigned', chat))
+      targets.forEach((target) => {
+        target.join(chat._id)
+        target.emit('NEW_CHAT_EVENT', chat)
+      })
     } catch (error) {
       console.error(error)
     }
@@ -33,18 +37,15 @@ module.exports = {
     const { toChat, content } = req.body
     try {
       const chat = await Chat.findById(toChat)
-      const newMessage = await new Message({ sender: req.user._id, content });
+      const newMessage = await new Message({ sender: req.user._id, content, chat: chat._id });
 
       chat.messages = chat.messages.concat(newMessage)
 
       await newMessage.save();
       await chat.save();
 
-      // const targets = findSockets([...chat.users])
-      // targets.forEach((target) => target.emit('assigned', newMessage))
       const socket = findSockets([req.user._id])
       socket[0].to(chat._id).emit('NEW_MESSAGE_EVENT', { newMessage, from: req.user.name })
-      // req.io.to(chat._id).broadcast("assigned", newMessage)
 
       res.send(newMessage)
     } catch (error) {
@@ -53,7 +54,7 @@ module.exports = {
     }
   },
   async teste(req, res) {
-    // console.log(connections[req.user._id][0].adapter.rooms)
+    console.log(req.io.adapter.rooms)
     Object.keys(connections).forEach((item) => {
       connections[item].forEach((x) => x.emit('assigned', 'teste'))
     })
