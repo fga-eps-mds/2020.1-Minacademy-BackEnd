@@ -68,7 +68,7 @@ const UserSchema = new Schema(
     changeEmailLink: {
       type: String,
     },
-    showPopup: {
+    showMessageConfirm: {
       type: Boolean,
       default:false,
     }
