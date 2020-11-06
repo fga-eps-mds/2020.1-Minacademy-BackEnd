@@ -88,14 +88,12 @@ module.exports = {
 
     try {
       /* eslint-disable no-return-assign */
-      if(req.body['email']){
+      if (req.body.email) {
         const index = updates.indexOf('email');
         if (index > -1) updates.splice(index, 1);
-        const email = req.user.email;
-        const newEmail = req.body['email'];
-        console.log("Novo email", newEmail);
-        req.user['changeEmail'] = newEmail;
-
+        const { email } = req.user;
+        const newEmail = req.body.email;
+        req.user.changeEmail = newEmail;
         const changeEmailLink = jwt.sign(
           { _id: req.user._id },
           userAuth.secretChangeEmail,
@@ -163,7 +161,6 @@ module.exports = {
         req.user.showMessageConfirm = true;
         await transport.sendMail(data);
       }
-      
       updates.forEach((field) => (req.user[field] = req.body[field]));
       await req.user.save();
       res.send(req.user);
@@ -269,9 +266,9 @@ module.exports = {
     }
   },
 
-  async changeEmail(req, res){
-    try{
-      const {changeEmailLink} = req.body;
+  async changeEmail(req, res) {
+    try {
+      const { changeEmailLink } = req.body;
       const decodedID = jwt.verify(changeEmailLink, userAuth.secretChangeEmail);
       const user = await User.findById(decodedID);
       if (!user) throw new Error('User does not exist');
@@ -279,15 +276,12 @@ module.exports = {
       const newEmail = user.changeEmail;
       user.changeEmail = '';
       await user.save();
-      
       user.email = newEmail;
       user.changeEmailLink = '';
       user.showMessageConfirm = false;
       await user.save();
       res.send(user);
-
-    } catch(error){
-      console.log(error.message);
+    } catch (error) {
       res.status(400).send({ error: error.message });
     }
   },

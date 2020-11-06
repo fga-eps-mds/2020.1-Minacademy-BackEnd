@@ -70,8 +70,8 @@ const UserSchema = new Schema(
     },
     showMessageConfirm: {
       type: Boolean,
-      default:false,
-    }
+      default: false,
+    },
   },
   { timestamps: true, discriminatorKey: 'userType' } // eslint-disable-line comma-dangle
 );
