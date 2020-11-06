@@ -42,7 +42,7 @@ module.exports = {
 
       await learner.save();
       await mentor.save();
-      await createChat([learner._id, mentor._id])
+      await createChat([learner._id, mentor._id]);
 
       return res.status(200).send({ mentorRequest: learner.mentor_request, mentor });
     } catch (err) {

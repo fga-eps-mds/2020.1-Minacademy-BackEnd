@@ -55,7 +55,7 @@ module.exports = {
     try {
       if (!learnerID) throw new Error('Invalid learner ID');
       user.learners = user.learners.filter(
-        (learner) => learner.toString() !== learnerID
+        (learner) => learner.toString() !== learnerID,
       );
       await Learner.findByIdAndUpdate(learnerID, {
         mentor: null,
@@ -97,7 +97,7 @@ module.exports = {
         user.isValidated = true;
       } else {
         user.answers.answers = user.answers.answers.filter(
-          (key) => key.question.type !== EXAM
+          (key) => key.question.type !== EXAM,
         );
         user.isValidated = false;
         user.attempts -= 1;
