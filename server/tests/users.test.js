@@ -66,10 +66,10 @@ describe('Users', () => {
       .post('/api/editUser')
       .send({
         name: 'Cleiton',
-        email: userOne.email,
         lastname: 'Nobrega',
       })
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
+    console.log(response.body);
     expect(response.status).toEqual(200);
     expect(response.body.name).toEqual('Cleiton');
   });
@@ -81,6 +81,7 @@ describe('Users', () => {
         email: 'new@email.com',
       })
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
+      console.log(response.body);
     expect(response.status).toEqual(200);
     expect(response.body.changeEmail).toEqual('new@email.com');
   });
@@ -91,7 +92,6 @@ describe('Users', () => {
       .send({
         changeEmailLink : userOne.changeEmailLink,
       })
-      console.log("RESPOSTAAAAA: ", response.body);
     expect(response.status).toEqual(200);
     expect(response.body.email).toEqual('new@email.com');
   });
