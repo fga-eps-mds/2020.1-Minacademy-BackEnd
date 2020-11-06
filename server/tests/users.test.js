@@ -73,17 +73,6 @@ describe('Users', () => {
     expect(response.body.name).toEqual('Cleiton');
   });
 
-  it('Should be able to send a email to confirm the newEmail', async () => {
-    const response = await request
-      .post('/api/editUser')
-      .send({
-        email: 'new@email.com',
-      })
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
-      console.log(response.body);
-    expect(response.body.changeEmail).toEqual('new@email.com');
-  });
-
   it('Should be able to change email', async () => {
     const response = await request
       .put('/api/changeEmail')
