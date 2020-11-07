@@ -1,4 +1,4 @@
-const socketio = require('socket.io')();
+const socketio = require('socket.io')({ path: '/api/socket.io' });
 const socketioJwt = require('socketio-jwt');
 const Chat = require('./models/Chat');
 const User = require('./models/User');

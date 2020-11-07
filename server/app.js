@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const router = require('./routers/index');
 const { io } = require('./websocket');
@@ -15,6 +16,7 @@ app.use(cors({
   exposedHeaders: ['set-cookie'],
 }));
 
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
