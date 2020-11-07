@@ -88,7 +88,7 @@ module.exports = {
 
     try {
       /* eslint-disable no-return-assign */
-      if (req.body.email) {
+      if (req.body.email !== req.user.email) {
         const index = updates.indexOf('email');
         if (index > -1) updates.splice(index, 1);
         const { email } = req.user;
@@ -152,8 +152,9 @@ module.exports = {
           <h1>Redefinição de Email</h1>
         </div>
         <hr>
-        <p>Olá, foi voce quem pediu pra mudar seu endereço de email? Isso é facil pra gente!.</p>
-        <p>Clique <a href="http://localhost:3000/confirma-mudanca-email/${changeEmailLink}">aqui</a> para confirmar a mudança.</p>
+        <p>Olá, recebemos a sua solicitação de troca do endereço de e-mail. Estamos aqui para ajudar!</p>
+        <p>Para efetivar a mudança, clique <a href="http://localhost:3000/confirma-mudanca-email/${changeEmailLink}">aqui</a>.</p>
+        <p>Caso você não tenha requisitado essa alteração, ignore essa mensagem.</p>
       </div>
     </body>
   </html>`,
@@ -163,7 +164,9 @@ module.exports = {
       }
       updates.forEach((field) => (req.user[field] = req.body[field]));
       await req.user.save();
-      res.send(req.user);
+      let emailChange = false;
+      if (req.body.email !== req.user.email) emailChange = true;
+      res.send({ user: req.user, emailChange });
     } catch (error) {
       res.status(400).send(error);
     }
