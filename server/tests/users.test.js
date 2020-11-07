@@ -68,7 +68,7 @@ describe('Users', () => {
         name: 'Cleiton',
         lastname: 'Nobrega',
       })
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
+      .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`]);
     expect(response.status).toEqual(200)
     expect(response.body.user.name).toEqual('Cleiton');
   });
@@ -180,5 +180,13 @@ describe('Users', () => {
       .expect(401);
 
       expect(response.body.error).toEqual('Unauthorized');
+  });
+
+  it('Should not be able to request a password change', async () => {
+    const response = await request.put('/api/forgotPassword')
+    .send({
+      email: 'invalid',
+    });
+    expect(response.status).toEqual(400);
   });
 });

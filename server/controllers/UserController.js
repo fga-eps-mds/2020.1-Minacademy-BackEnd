@@ -245,7 +245,7 @@ module.exports = {
       };
 
       await transport.sendMail(data);
-      res.send({ message: 'A e-mail has sent to you, verify it' });
+      res.status(200).send({ message: 'A e-mail has sent to you, verify it' });
     } catch (error) {
       console.log('EMAIL ERROR: ', error.message); // eslint-disable-line no-console
       res.status(400).send({ error, message: error.message });
