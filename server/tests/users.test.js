@@ -69,7 +69,6 @@ describe('Users', () => {
         lastname: 'Nobrega',
       })
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
-    expect(response.status).toEqual(200);
     expect(response.body.user.name).toEqual('Cleiton');
   });
 
