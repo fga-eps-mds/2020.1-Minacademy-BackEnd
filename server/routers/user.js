@@ -13,5 +13,6 @@ router.post('/editUser', auth, UserController.editUser);
 router.put('/forgotPassword', UserController.forgotPassword);
 router.put('/resetPassword', UserController.resetPassword);
 router.patch('/users', auth, UserController.editUser);
+router.put('/changeEmail', UserController.changeEmail);
 
 module.exports = router;

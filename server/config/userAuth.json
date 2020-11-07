@@ -1,4 +1,5 @@
 {
     "secret": "efb7e5eddfdd6ac729b741a2946a89a58dee7569bd4962d4bc",
-    "secretResetPassword": "efb7e5eddfdd6ac729b741a2946a89a58dee7569bd4962d4bc1a2b3c4d"
+    "secretResetPassword": "efb7e5eddfdd6ac729b741a2946a89a58dee7569bd4962d4bc1a2b3c4d",
+    "secretChangeEmail": "efb7e5eddfdd6ac729b741a29"
 }

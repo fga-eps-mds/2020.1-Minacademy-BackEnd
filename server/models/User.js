@@ -41,14 +41,6 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    about: {
-      type: String,
-      default: '',
-    },
-    profileImg: {
-      type: String,
-      required: false,
-    },
     isAdmin: {
       type: Boolean,
       select: false,
@@ -68,6 +60,18 @@ const UserSchema = new Schema(
         },
       },
     ],
+    changeEmail: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+    changeEmailLink: {
+      type: String,
+    },
+    showMessageConfirm: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true, discriminatorKey: 'userType' } // eslint-disable-line comma-dangle
 );

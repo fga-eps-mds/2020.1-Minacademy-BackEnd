@@ -61,19 +61,35 @@ describe('Users', () => {
     expect(response.status).toEqual(200);
   });
 
-  it('Should be able to edit User', async () => {
+  it('Should be able to edit name and lastname user of User', async () => {
     const response = await request
       .post('/api/editUser')
       .send({
         name: 'Cleiton',
-        email: userOne.email,
-        password: 'novasenha',
-        profileImg: '',
-        about: '',
+        lastname: 'Nobrega',
+        email: 'change@email.com',
       })
-      .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
+      .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`]);
+    expect(response.status).toEqual(400)
+  });
+
+  it('Should be able to change email', async () => {
+    const response = await request
+      .put('/api/changeEmail')
+      .send({
+        changeEmailLink : userOne.changeEmailLink,
+      })
     expect(response.status).toEqual(200);
-    expect(response.body.name).toEqual('Cleiton');
+    expect(response.body.email).toEqual('new@email.com');
+  });
+
+  it('Should not be able to change email', async () => {
+    const response = await request
+      .put('/api/changeEmail')
+      .send({
+        changeEmailLink : userTwo.changeEmailLink,
+      })
+    expect(response.status).toEqual(400);
   });
 
   it('Should not be able to login unregisterd user', async () => {
@@ -99,8 +115,6 @@ describe('Users', () => {
         name: userOne.name,
         email: 'invalid_email',
         password: 'novasenha',
-        profileImg: '',
-        about: '',
       })
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
 
@@ -166,5 +180,13 @@ describe('Users', () => {
       .expect(401);
 
       expect(response.body.error).toEqual('Unauthorized');
+  });
+
+  it('Should not be able to request a password change', async () => {
+    const response = await request.put('/api/forgotPassword')
+    .send({
+      email: 'invalid',
+    });
+    expect(response.status).toEqual(400);
   });
 });
