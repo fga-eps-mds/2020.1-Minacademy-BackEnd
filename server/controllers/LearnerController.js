@@ -1,5 +1,6 @@
 const Mentor = require('../models/Mentor');
 const User = require('../models/User');
+const { createChat } = require('./ChatController');
 
 module.exports = {
   async getMentor(req, res) {
@@ -41,6 +42,7 @@ module.exports = {
 
       await learner.save();
       await mentor.save();
+      await createChat([learner._id, mentor._id]);
 
       return res.status(200).send({ mentorRequest: learner.mentor_request, mentor });
     } catch (err) {
@@ -70,9 +72,10 @@ module.exports = {
         $pull: { learners: learner._id },
         isAvailable: false,
       });
+      const oldMentor = learner.mentor;
       learner.mentor = null;
       await learner.save();
-      res.send({ mentorRequest: learner.mentor_request, mentor: learner.mentor });
+      res.send({ mentorRequest: learner.mentor_request, mentor: learner.mentor, oldMentor });
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
       res.status(400).send({ mentor: learner.mentor, error: error.message });

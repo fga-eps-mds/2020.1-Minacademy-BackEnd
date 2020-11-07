@@ -6,6 +6,7 @@ const progressRouter = require('./progress');
 const learnerRouter = require('./learner');
 const mentorRouter = require('./mentor');
 const certificateRouter = require('./courseCertificate');
+const chatRouter = require('./chat');
 
 module.exports = [
   userRouter,
@@ -16,4 +17,5 @@ module.exports = [
   learnerRouter,
   mentorRouter,
   certificateRouter,
+  chatRouter,
 ];
