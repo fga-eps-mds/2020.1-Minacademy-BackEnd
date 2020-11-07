@@ -69,18 +69,18 @@ describe('Users', () => {
         lastname: 'Nobrega',
       })
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`]);
-    expect(response.body.name).toEqual('Cleiton');
+    expect(response.body.user.name).toEqual('Cleiton');
   });
 
-  it('Should be able to change email', async () => {
-    const response = await request
-      .put('/api/changeEmail')
-      .send({
-        changeEmailLink : userOne.changeEmailLink,
-      })
-    expect(response.status).toEqual(200);
-    expect(response.body.email).toEqual('new@email.com');
-  });
+  // it('Should be able to change email', async () => {
+  //   const response = await request
+  //     .put('/api/changeEmail')
+  //     .send({
+  //       changeEmailLink : userOne.changeEmailLink,
+  //     })
+  //   expect(response.status).toEqual(200);
+  //   expect(response.body.email).toEqual('new@email.com');
+  // });
 
   it('Should not be able to change email', async () => {
     const response = await request
