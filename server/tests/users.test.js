@@ -83,6 +83,15 @@ describe('Users', () => {
     expect(response.body.email).toEqual('new@email.com');
   });
 
+  it('Should not be able to change email', async () => {
+    const response = await request
+      .put('/api/changeEmail')
+      .send({
+        changeEmailLink : userTwo.changeEmailLink,
+      })
+    expect(response.status).toEqual(400);
+  });
+
   it('Should not be able to login unregisterd user', async () => {
     const response = await request.post('/api/users/login').send({
       email: 'invallid_email',
