@@ -9,6 +9,11 @@ const courseCertificateSchema = new Schema(
       required: true,
       ref: 'User',
     },
+    assignedPartner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      default: null,
+    },
     courseType: {
       type: String,
       required: true,
