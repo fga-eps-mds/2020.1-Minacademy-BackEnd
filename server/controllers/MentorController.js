@@ -38,6 +38,10 @@ module.exports = {
       await learner.save();
       await user.execPopulate('learners');
       await createChat([learner._id, user._id]);
+      const data = mail.assignMentor(learner.email, user.name);
+      const data2 = mail.assignLearner(user.email, learner.name);
+      await transport.sendMail(data);
+      await transport.sendMail(data2);
       /* eslint-disable no-unused-expressions */
       res.send({
         learner: user.learners[user.learners.length - 1],
