@@ -75,8 +75,11 @@ module.exports = {
         isAvailable: false,
       });
       const oldMentor = learner.mentor;
+      const mentorMail = await Mentor.findById(learner.mentor);
       learner.mentor = null;
       await learner.save();
+      const data = mail.unassignMentor(req.user.email, mentorMail.name);
+      await transport.sendMail(data);
       res.send({ mentorRequest: learner.mentor_request, mentor: learner.mentor, oldMentor });
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
