@@ -66,7 +66,6 @@ module.exports = {
   resetLink(email, resetLink) {
     const message = `<p>Olá, ficamos sabendo que você esqueceu a sua senha, mas não se preocupe, estamos aqui para ajudar.</p>
       <p>Para ser redirecionado(a) para a página de redefinição de senha clique <a href="${link}/change/${resetLink}">aqui</a>.</p>`;
-
     return {
       from,
       to: email,
@@ -75,12 +74,12 @@ module.exports = {
     };
   },
 
-  costum(email, subject, message) {
-    return {
-      from,
-      to: email,
-      subject,
-      html: html(subject, message),
-    };
-  },
+  // costum(email, subject, message) {
+  //   return {
+  //     from,
+  //     to: email,
+  //     subject,
+  //     html: html(subject, message),
+  //   };
+  // },
 };

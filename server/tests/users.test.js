@@ -189,4 +189,32 @@ describe('Users', () => {
     });
     expect(response.status).toEqual(400);
   });
+
+  it('Should be able to request password change', async () => {
+    const response = await request.put('/api/forgotPassword')
+    .send({
+      email: userTwo.email,
+    });
+    expect(response.status).toEqual(200);
+  });
+
+  it('Should not be able to change password', async () => {
+    const response = await request.put('/api/resetPassword')
+    .send({
+      resetLink: userTwo.resetLink,
+      password: 'NewPassword123',
+      confirmPassword: 'NewPassword321',
+    });
+    expect(response.status).toEqual(400);
+  });
+
+  // it('Should be able to change password', async () => {
+  //   const response = await request.put('/api/resetPassword')
+  //   .send({
+  //     resetLink: userOne.resetLink,
+  //     password: 'NewPassword123',
+  //     confirmPassword: 'NewPassword123',
+  //   });
+  //   expect(response.body.error).toEqual('a');
+  // });
 });
