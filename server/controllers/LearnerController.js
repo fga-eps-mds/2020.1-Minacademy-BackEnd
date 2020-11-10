@@ -1,6 +1,8 @@
 const Mentor = require('../models/Mentor');
 const User = require('../models/User');
 const { createChat } = require('./ChatController');
+const transport = require('../mail/index');
+const mail = require('../mail/data');
 
 module.exports = {
   async getMentor(req, res) {
@@ -97,6 +99,8 @@ module.exports = {
       user.isValidated = true;
       user.mentor_request = false;
       user.save();
+      const data = mail.learnerPromotion(user.email);
+      await transport.sendMail(data);
 
       res.status(200).send({ user });
     } catch (error) {

@@ -52,7 +52,8 @@ function html(subject, message) {
 
 module.exports = {
   changeEmailLink(email, changeEmailLink) {
-    const message = `<p>Olá, recebemos a sua solicitação de troca do endereço de e-mail. Estamos aqui para ajudar!</p>
+    const message = `
+      <p>Olá, recebemos a sua solicitação de troca do endereço de e-mail. Estamos aqui para ajudar!</p>
       <p>Para efetivar a mudança, clique <a href="${link}/confirma-mudanca-email/${changeEmailLink}">aqui</a>.</p>
       <p>Caso você não tenha requisitado essa alteração, ignore essa mensagem.</p>`;
     return {
@@ -64,7 +65,8 @@ module.exports = {
   },
 
   resetLink(email, resetLink) {
-    const message = `<p>Olá, ficamos sabendo que você esqueceu a sua senha, mas não se preocupe, estamos aqui para ajudar.</p>
+    const message = `
+      <p>Olá, ficamos sabendo que você esqueceu a sua senha, mas não se preocupe, estamos aqui para ajudar.</p>
       <p>Para ser redirecionado(a) para a página de redefinição de senha clique <a href="${link}/change/${resetLink}">aqui</a>.</p>`;
     return {
       from,
@@ -74,6 +76,7 @@ module.exports = {
     };
   },
 
+<<<<<<< HEAD
   // costum(email, subject, message) {
   //   return {
   //     from,
@@ -82,4 +85,16 @@ module.exports = {
   //     html: html(subject, message),
   //   };
   // },
+=======
+  learnerPromotion(email) {
+    const message = `
+      <p>Parabéns! Você foi promovida para Mentora na plataforma Minacademy, e o que muda agora?</p>
+      <p>A mentoria é um serviço voluntário, onde aqueles que já tem conhecimento em Django, ajudam quem está fazendo o tutorial ainda, 
+      caso queira ter aprendizes, você poderá ajuda-los por meio do chat na pŕopria plataforma.</p>
+      <p>Caso queira procurar por aprendizes, basta ir em <a href="${link}/mentoria">Mentoria</a> e clicar em solicitar aprendizes</p>
+      <p>E quando seus aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consulta-lo em <a href="${link}/certificados">Certificados</a></p>
+      <p>Não se preocupe todo o seu histórico como Aprendiz ainda poderá ser consultado, assim como seu certificado mas agora você pode ajudar outras aprendizes sendo mentora delas.</p>`;
+      return mailBuilder(email, 'Você foi promovida para Mentora', message);
+  },
+>>>>>>> [91](https://github.com/fga-eps-mds/2020.1-Minacademy-Wiki/issues/91) Envio de Email quando Aprendiz é promovida a Mentora
 };
