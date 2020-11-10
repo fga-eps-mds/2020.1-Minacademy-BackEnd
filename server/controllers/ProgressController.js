@@ -16,7 +16,7 @@ module.exports = {
       });
       await answerKeys.save();
 
-      const correctAnswers = questionsResults.filter((answer) => answer.isCorrect);
+      const correctAnswers = questionsResults.filter((answer) => answer.isCorrect === true);
 
       if (req.query.moduleNumber) {
         questionsResults = answerKeys.answers.filter((answer) => answer.question.type
