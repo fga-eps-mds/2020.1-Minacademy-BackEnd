@@ -47,7 +47,9 @@ module.exports = {
       await createChat([learner._id, mentor._id]);
 
       const data = mail.assignMentor(req.user.email, mentor.name);
+      const data2 = mail.assignLearner(mentor.email, req.user.name);
       await transport.sendMail(data);
+      await transport.sendMail(data2);
 
       return res.status(200).send({ mentorRequest: learner.mentor_request, mentor });
     } catch (err) {
