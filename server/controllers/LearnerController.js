@@ -46,6 +46,9 @@ module.exports = {
       await mentor.save();
       await createChat([learner._id, mentor._id]);
 
+      const data = mail.assignMentor(req.user.email, mentor.name);
+      await transport.sendMail(data);
+
       return res.status(200).send({ mentorRequest: learner.mentor_request, mentor });
     } catch (err) {
       console.log(err); // eslint-disable-line no-console

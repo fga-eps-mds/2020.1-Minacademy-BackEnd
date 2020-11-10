@@ -3,6 +3,8 @@ const Question = require('../models/Question');
 const { populateAnswerKeys } = require('../utils/answerKeysUtils');
 const { EXAM } = require('../utils/questionTypes');
 const { createChat } = require('./ChatController');
+const transport = require('../mail/index');
+const mail = require('../mail/data');
 
 module.exports = {
   async getLearners(req, res) {

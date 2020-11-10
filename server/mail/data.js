@@ -108,7 +108,7 @@ module.exports = {
       <li>Dentro da página de "Mentoria", clique no botão "Solicitar Mentor"</li>
       </ul>
       <p>Assim que possível você receberá um novo monitor para te ajudar no que precisar para concluir o tutorial e adquirir seu certificado.</p>`;
-    return mailBuilder(email, 'Desvinculação de Monitor', message);
+    return mailBuilder(email, 'Cancelamento de Mentoria', message);
   },
   unassignLearner(email, learner){
     const message = `<p>A aprendiz ${learner} se desvinculou da sua mentoria. Portanto não há mais a necessidade de monitorá-la.</p>
@@ -121,7 +121,18 @@ module.exports = {
       <p>Caso alguma aprendiz tenha solicitado um mentor, ela poderá ser atribuída a você</p>
       <p>Caso não deseje ser vinculada(o) à outra aprendiz, clique no botão "Ficar indisponível".
         Dessa forma não serão atribuídas outras aprendizes à sua monitoria.</p>`;
-    return mailBuilder(email, 'Desvinculação de Aprediz', message);
+    return mailBuilder(email, 'Cancelamento de Mentoria', message);
   },
-
+  
+  assignMentor(email, mentor){
+    const message = `<p>Agora você possui um(a) mentor(a) chamado(a) ${mentor}.</p>
+    <p>Caso caso tenha dificuldades para continuar o tutorial, ou alguma dúvida, ou qualquer outra coisa que ache necessário o auxílio de um mentor(a)
+    você pode entrar em contato com seu mentor(a) a qualquer momento pelo ícone de chat que estará visível no canto inferior direito em toda a plataforma, desde que esteja vinculada a um mentor</p>
+    <p>Caso deseje saber mais informações sobre seu(a) mentor(a) você pode clicar na guia "Mentoria" ou ainda 
+    clicando na guia "Dashboard" e acesse o link "monitoria" na área de mentoria.
+    <p>Dentro da página de "Mentoria" você tem acesso as informações do nome e email do seu mentor</p>
+    <p>Caso deseje cancelar a mentoria, você pode, dentro da página de mentoria clicar no botão "Desvincular" para se desvincular do seu monitor atual.</p>
+    `;
+  return mailBuilder(email, 'Vinculação de Mentor', message);
+  },
 };
