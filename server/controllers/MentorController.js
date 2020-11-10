@@ -67,8 +67,13 @@ module.exports = {
         mentor: null,
         mentor_request: false,
       });
+      const learner = await Learner.findById(learnerID);
       await user.save();
       await user.execPopulate('learners');
+      const data = mail.unassignMentor(learner.email, user.name);
+      const data2 = mail.unassignLearner(user.email, learner.name);
+      await transport.sendMail(data);
+      await transport.sendMail(data2);
       res.send(user.learners);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
