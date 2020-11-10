@@ -147,4 +147,22 @@ module.exports = {
     `;
   return mailBuilder(email, 'Vinculação de Aprendiz', message);
   },
+  
+  courseConcluded(email, certificate, name) {
+    const message = `
+      <p>Parabéns ${name}! Você conseguiu concluir o tutorial da plataforma Minacademy</p>
+      <p>Você recebeu um certificado de Conclusão de Tutorial, e pode ser consultado <a href="${link}/certificado/${certificate}">aqui</a></p>
+      <p>A próxima vez que você entrar na nossa dashboard, você já será promovida automaticamente para uma Mentora validada, 
+      e receberá um email com tudo que precisa saber sobre Mentoria.</p>
+      <p>Caso queira, você também pode navegar pela plataforma, e procurar pelo seu certificado em <a href="${link}/certificados">Certificados</a></p>`;
+    return mailBuilder(email, 'Conclusão do tutorial', message);
+  },
+
+  courseConcludedForMentor(email, certificate, mentorName, learnerName) {
+    const message = `
+      <p>Parabéns ${mentorName}! Sua aprendiz ${learnerName} concluiu o tutorial na plataforma Minacademy</p>
+      <p>Você recebeu um certificado de mentoria, e pode ser consultado <a href="${link}/certificado/${certificate}">aqui</a></p>
+      <p>Caso queira, você também pode navegar pela plataforma, e procurar pelo(s) seu(s) certificado(s) em <a href="${link}/certificados">Certificados</a></p>`
+    return mailBuilder(email, 'Aprendiz Concluiu o Tutorial', message);
+  },
 };
