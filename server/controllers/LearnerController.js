@@ -79,7 +79,9 @@ module.exports = {
       learner.mentor = null;
       await learner.save();
       const data = mail.unassignMentor(req.user.email, mentorMail.name);
+      const data2 = mail.unassignLearner(mentorMail.email, req.user.name);
       await transport.sendMail(data);
+      await transport.sendMail(data2);
       res.send({ mentorRequest: learner.mentor_request, mentor: learner.mentor, oldMentor });
     } catch (error) {
       console.log(error); // eslint-disable-line no-console

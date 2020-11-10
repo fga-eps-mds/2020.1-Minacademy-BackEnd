@@ -105,9 +105,23 @@ module.exports = {
       <ul>
       <li>Acesse sua conta de usuário</li>
       <li>Na guia "Dashboard" acesse o link "solicitar mentor" no área de mentoria</li>
-      <li>Dentro da página de mentoria, clique no botão "Solicitar Mentor"</li>
+      <li>Dentro da página de "Mentoria", clique no botão "Solicitar Mentor"</li>
       </ul>
-      <p>Assim que possível voce receberá um novo monitor para te ajudar no que precisar para concluir o tutorial</p>`;
+      <p>Assim que possível você receberá um novo monitor para te ajudar no que precisar para concluir o tutorial e adquirir seu certificado.</p>`;
     return mailBuilder(email, 'Desvinculação de Monitor', message);
   },
+  unassignLearner(email, learner){
+    const message = `<p>A aprendiz ${learner} se desvinculou da sua mentoria. Portanto não há mais a necessidade de monitorá-la.</p>
+      <p>Caso deseje receber mais aprendizes, você pode solicitar uma nova aprendiz com os seguintes passos:</p>
+      <ul>
+      <li>Acesse sua conta de usuário</li>
+      <li>Na guia "Dashboard" acesse o link "solicitar mentoria" na área de mentoria</li>
+      <li>Dentro da página de "Mentoria", clique no botão "Solicitar Aprendiz"</li>
+      </ul>
+      <p>Caso alguma aprendiz tenha solicitado um mentor, ela poderá ser atribuída a você</p>
+      <p>Caso não deseje ser vinculada(o) à outra aprendiz, clique no botão "Ficar indisponível".
+        Dessa forma não serão atribuídas outras aprendizes à sua monitoria.</p>`;
+    return mailBuilder(email, 'Desvinculação de Aprediz', message);
+  },
+
 };
