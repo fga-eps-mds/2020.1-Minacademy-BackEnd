@@ -34,7 +34,7 @@ describe('CurserCertificate', ()=>{
 
   it('Should generate a new certificate to a learner', async () =>{
     const response  = await request
-      .patch('/api/certificates')
+      .post('/api/certificates')
       .send()
       .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
     expect(response.status).toEqual(200);
@@ -48,7 +48,7 @@ describe('CurserCertificate', ()=>{
       .send()
       .set('Cookie', [`auth_token=${learnerFour.tokens[0].accessToken}`]);
     const response = await request
-      .patch('/api/certificates')
+      .post('/api/certificates')
       .send()
       .set('Cookie', [`auth_token=${learnerFour.tokens[0].accessToken}`])
     expect(response.status).toEqual(200);
@@ -57,25 +57,25 @@ describe('CurserCertificate', ()=>{
 
   it('Should not generate a new certificate to a learner', async () =>{
     const response  = await request
-      .patch('/api/certificates')
+      .post('/api/certificates')
       .send()
-      .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`])
+      .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
     expect(response.status).toEqual(400);
     expect(response.body.error).toEqual('you already have a learner certificate');
   });
 
   it('Should get a certificate', async () =>{
     const response  = await request
-      .post('/api/certificates')
-      .send({_id: certificateLearnerOne._id})
+      .get(`/api/certificates/${certificateLearnerOne._id}`)
+      .send()
     expect(response.status).toEqual(200);
    //expect(response.body).toEqual(certificateLearnerOne);
   });
 
   it('Should not get a certificate', async () =>{
     const response  = await request
-      .post('/api/certificates')
-      .send({_id: "idInexistente"})
+      .get(`/api/certificates/InvalidID`)
+      .send()
     expect(response.status).toEqual(400);
   });
 
