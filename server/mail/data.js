@@ -91,10 +91,10 @@ module.exports = {
   learnerPromotion(email) {
     const message = `
       <p>Parabéns! Você foi promovida para Mentora na plataforma Minacademy, e o que muda agora?</p>
-      <p>A mentoria é um serviço voluntário, onde aqueles que já tem conhecimento em Django, ajudam quem está fazendo o tutorial ainda, 
-      caso queira ter aprendizes, você poderá ajuda-los por meio do chat na pŕopria plataforma.</p>
-      <p>Caso queira procurar por aprendizes, basta ir em <a href="${link}/mentoria">Mentoria</a> e clicar em solicitar aprendizes</p>
-      <p>E quando seus aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consulta-lo em <a href="${link}/certificados">Certificados</a></p>
+      <p>A mentoria é um serviço voluntário, no qual aqueles que já tem conhecimento em Django se dispõem a ajudar quem está fazendo o tutorial. 
+      O contato é feito a partir de um chat na própria plataforma.</p>
+      <p>Caso queira procurar por aprendizes, basta ir à página de <a href="${link}/mentoria">Mentoria</a> e clicar em solicitar aprendizes.</p>
+      <p>Quando suas aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consultá-lo na página de <a href="${link}/certificados">Certificados</a>.</p>
       <p>Não se preocupe todo o seu histórico como Aprendiz ainda poderá ser consultado, assim como seu certificado mas agora você pode ajudar outras aprendizes sendo mentora delas.</p>`;
       return mailBuilder(email, 'Você foi promovida para Mentora', message);
   },
@@ -140,7 +140,7 @@ module.exports = {
     const message = `<p>Agora você possui uma aprendiz chamada ${learner}.</p>
     <p>Caso seja solicitado(a) você pode ajudá-la no que for preciso para que ela consiga concluir o tutorial.</p>
     <p>Quando ela terminar todo o tutorial e fizer todas as atividades, você receberá um certificado de 
-      mentoria, comprovando que você á auxiliou na conclusão do tutorial.</p>
+      mentoria, comprovando que você a auxiliou na conclusão do tutorial.</p>
     <p>Caso deseje saber mais informações sobre suas aprendizes você pode clicar na guia "Mentoria" ou ainda 
       clicando na guia "Dashboard" e acesse o link "acessar mentoria" na área de mentoria. Lá você terá acesso ao nome, email e progresso de cada aprendiz que está vinculado(a).</p>
     <p>Dentro da página de Mentoria ainda é possível se desvincular de qualquer aprendiz, clicando no botão "Desvincular" associado à cada aprendiz.</p>
@@ -164,5 +164,32 @@ module.exports = {
       <p>Você recebeu um certificado de mentoria, e pode ser consultado <a href="${link}/certificado/${certificate}">aqui</a></p>
       <p>Caso queira, você também pode navegar pela plataforma, e procurar pelo(s) seu(s) certificado(s) em <a href="${link}/certificados">Certificados</a></p>`
     return mailBuilder(email, 'Aprendiz Concluiu o Tutorial', message);
+  },
+  
+  validateMentor(user) {
+    let message;
+    if (user.isValidated) {
+      message = `
+      <p>Parabéns, você foi aprovado(a) como mentor(a) em nossa plataforma.</p>
+      <p>A mentoria é um serviço voluntário, no qual aqueles que já tem conhecimento em Django se dispõem a ajudar quem está fazendo o tutorial. 
+      O contato é feito a partir de um chat na própria plataforma.</p>
+      <p>Caso queira procurar por aprendizes, basta ir à página de <a href="${link}/mentoria">Mentoria</a> e clicar em solicitar aprendizes.</p>
+      <p>Quando suas aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consultá-lo na página de <a href="${link}/certificados">Certificados</a>.</p>
+      `;
+    } else {
+      if (user.attempts > 0) {
+        message = `
+        <p>Infelizmente, você não foi aprovado(a) como mentor(a) em nossa plataforma.</p>
+        <p>Mas não se preocupe, você ainda possui ${user.attempts} tentativa(s) para fazer a prova.</p>
+        <p>Estamos torcendo por você!</p>
+        `;
+      } else {
+        message = `
+        <p>Infelizmente, você não foi aprovado(a) como mentor(a) em nossa plataforma.</p>
+        <p>Não te restam mais tentativas, logo não será possível que você se torne mentor(a). =(</p>
+        `;
+      }
+    }
+  return mailBuilder(user.email, 'Validação de Mentor', message);
   },
 };

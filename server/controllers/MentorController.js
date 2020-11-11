@@ -115,6 +115,8 @@ module.exports = {
       }
       await user.answers.save();
       await user.save();
+      const data = mail.validateMentor(user);
+      await transport.sendMail(data);
       if (!user.isValidated) throw new Error('Mentor does not have score to validate');
       res.status(200).send({ user, result: examResult.length, attempts: user.attempts });
     } catch (error) {
