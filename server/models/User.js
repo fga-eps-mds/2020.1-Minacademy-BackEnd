@@ -72,6 +72,9 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    registerLink: {
+      type: String,
+    },
   },
   { timestamps: true, discriminatorKey: 'userType' } // eslint-disable-line comma-dangle
 );

@@ -190,9 +190,9 @@ module.exports = {
     return mailBuilder(user.email, 'Validação de Mentor', message);
   },
 
-  registerConfirm(email, name, link) {
+  registerConfirm(email, name, registerLink) {
     const message = `<p>Oi, ${name}!</p>
-    <p> Sua conta está quase pronta. Para ativá-la, por favor confirme o seu endereço de email clicando <a href="${link}/mentoria">aqui</a>.</p>
+    <p> Sua conta está quase pronta. Para ativá-la, por favor confirme o seu endereço de email clicando <a href="${link}/${registerLink}">aqui</a>.</p>
     <p> Sua conta não será ativada até que seu email seja confirmado.</p>
     <p>Se você não se cadastrou na plataforma Minacademy recentemente, por favor ignore este email.</p>
     <p>Se foi você, desde já agradecemos pela decisão de ingressar nessa maravilhosa plataforma de estudos que têm incentivado diversas mulheres a adentrar no mundo maravilhoso da programação!</p>

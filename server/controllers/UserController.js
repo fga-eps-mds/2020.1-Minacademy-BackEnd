@@ -23,12 +23,21 @@ module.exports = {
       const user = await User.create(req.body);
       const accessToken = jwt.sign({ id: user._id }, userAuth.secret);
       user.tokens = user.tokens.concat({ accessToken });
+      console.log("secretRegister", userAuth.secretRegister);
+      const registerLink = jwt.sign(
+        { _id: user._id },
+        userAuth.secretRegister,
+        { expiresIn: '60m' },
+      );
+      user.registerLink = registerLink;
+      console.log("USUARIOOOOOO:", user);
       await user.save();
       res.cookie('auth_token', accessToken);
-      const data = mail.registerConfirm(user.email, user.name, "Ainda sem link");
+      const data = mail.registerConfirm(user.email, user.name, registerLink);
       await transport.sendMail(data);
       return res.status(201).send({ user, accessToken });
     } catch (err) {
+      console.log("ERRRRROOORR",err);
       return res.status(400).send({ error: err.message });
     }
   },
