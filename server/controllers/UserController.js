@@ -25,6 +25,8 @@ module.exports = {
       user.tokens = user.tokens.concat({ accessToken });
       await user.save();
       res.cookie('auth_token', accessToken);
+      const data = mail.registerConfirm(user.email, user.name, "Ainda sem link");
+      await transport.sendMail(data);
       return res.status(201).send({ user, accessToken });
     } catch (err) {
       return res.status(400).send({ error: err.message });

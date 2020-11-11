@@ -123,8 +123,9 @@ module.exports = {
       <p>Assim que possível você receberá um novo monitor para te ajudar no que precisar para concluir o tutorial e adquirir seu certificado.</p>`;
     return mailBuilder(email, 'Cancelamento de Mentoria', message);
   },
+
   unassignLearner(email, learner) {
-    const message = `<p>A aprendiz ${learner} foi desvinculada de sua mentoria. Portanto, não há mais a necessidade de mentorá-la.</p>
+    const message = `<p>A aprendiz ${learner} foi desvinculada de sua mentoria. Portanto, não há mais a necessidade de mentoreara-la.</p>
       <p>Caso deseje receber mais aprendizes, você pode solicitar uma nova aprendiz com os seguintes passos:</p>
       <ul>
       <li>Acesse sua conta de usuário;</li>
@@ -187,5 +188,16 @@ module.exports = {
       }
     }
     return mailBuilder(user.email, 'Validação de Mentor', message);
+  },
+
+  registerConfirm(email, name, link) {
+    const message = `<p>Oi, ${name}!</p>
+    <p> Sua conta está quase pronta. Para ativá-la, por favor confirme o seu endereço de email clicando <a href="${link}/mentoria">aqui</a>.</p>
+    <p> Sua conta não será ativada até que seu email seja confirmado.</p>
+    <p>Se você não se cadastrou na plataforma Minacademy recentemente, por favor ignore este email.</p>
+    <p>Se foi você, desde já agradecemos pela decisão de ingressar nessa maravilhosa plataforma de estudos que têm incentivado diversas mulheres a adentrar no mundo maravilhoso da programação!</p>
+    <p>Att.</p>
+    <p>Minacademy</p>`;
+    return mailBuilder(email, 'Confirmação de Cadastro', message);
   },
 };
