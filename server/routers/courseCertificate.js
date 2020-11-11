@@ -4,8 +4,8 @@ const auth = require('../middleware/authentication');
 
 const router = new Router();
 
-router.patch('/certificates', auth, courseCertificateController.generateCertificate);
-router.post('/certificates', courseCertificateController.getLearnerCertificate);
+router.post('/certificates', auth, courseCertificateController.generateCertificate);
+router.get('/certificates/:_id', courseCertificateController.getCertificateById);
 router.get('/certificates', auth, courseCertificateController.getAllCertificates);
 
 module.exports = router;

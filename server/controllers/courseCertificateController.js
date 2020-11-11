@@ -1,64 +1,82 @@
 const jwt = require('jsonwebtoken');
 const CourseCertificate = require('../models/CourseCertificate');
 const userAuth = require('../config/userAuth');
-const User = require('../models/User');
 
 module.exports = {
   async generateCertificate(req, res) {
     const { user } = req;
-    const hasLearnerCertificate = await CourseCertificate.find({
-      user: user._id,
-      courseType: 'Learner',
-    });
 
     try {
-      if (hasLearnerCertificate.length === 0 && user.userType === 'Learner') {
-        const certificateData = {
-          user: user._id,
-          courseType: user.userType,
-          key: jwt.sign({ _id: user._id }, userAuth.secret),
-        };
+      const { hasLearnerCertificate, mentor } = await user
+        .populate([
+          {
+            path: 'courseCertificate',
+            match: {
+              courseType: 'Learner',
+            },
+          },
+          {
+            path: 'mentor',
+          },
+        ])
+        .execPopulate()
+        .then((doc) => ({
+          hasLearnerCertificate: doc.courseCertificates,
+          mentor: doc.mentor,
+        }));
 
-        const certificate = await CourseCertificate.create(certificateData);
-        user.courseCertificates.push(certificate._id);
-        await certificate.save();
-        await user.save();
-
-        const mentor = await user
-          .populate('mentor')
-          .execPopulate()
-          .then((userData) => userData.mentor);
-        if (mentor) {
-          const mentorCertificateData = {
-            user: mentor._id,
-            courseType: `Mentor ${user._id}`,
-            key: jwt.sign({ _id: `${mentor._id} ${user._id}` }, userAuth.secret),
-          };
-          const mentorCertificate = await CourseCertificate.create(mentorCertificateData);
-          mentor.courseCertificates.push(mentorCertificate._id);
-          await mentorCertificate.save();
-          await mentor.save();
-        }
-
-        res.status(200).send(certificate);
-      } else {
+      if (hasLearnerCertificate.length > 0) {
         throw new Error('you already have a learner certificate');
       }
+
+      const certificateData = {
+        user: user._id,
+        courseType: user.userType,
+        key: jwt.sign({ _id: user._id }, userAuth.secret),
+      };
+
+      if (mentor) {
+        certificateData.assignedPartner = mentor._id;
+        const mentorCertificateData = {
+          user: mentor._id,
+          assignedPartner: user._id,
+          courseType: 'Mentor',
+          key: jwt.sign(
+            { _id: { mentor: mentor._id, learner: user._id } },
+            userAuth.secret,
+          ),
+        };
+        const mentorCertificate = await new CourseCertificate(
+          mentorCertificateData,
+        );
+        mentor.courseCertificates.push(mentorCertificate._id);
+        await mentorCertificate.save();
+        await mentor.save();
+      }
+
+      const certificate = await new CourseCertificate(certificateData);
+      user.courseCertificates.push(certificate._id);
+      await certificate.save();
+      await user.save();
+
+      res.send(certificate);
     } catch (error) {
+      console.error(error); // eslint-disable-line no-console
       return res.status(400).send({
         error: error.message,
-        learnerCertificate: hasLearnerCertificate[0],
+        certificate: user.courseCertificates[0],
       });
     }
   },
 
-  async getLearnerCertificate(req, res) {
-    const { _id } = req.body;
+  async getCertificateById(req, res) {
+    const { _id } = req.params;
+
     try {
       const certificate = await CourseCertificate.findById(_id);
-      const user = await User.findById(certificate.user);
-      certificate.user = user;
-      return res.status(200).send({ certificate });
+      if (!certificate) throw new Error('Certificate does not exists');
+      await certificate.execPopulate(['user', 'assignedPartner']);
+      return res.send(certificate);
     } catch (error) {
       return res.status(400).send({ error: error.message });
     }
@@ -71,8 +89,13 @@ module.exports = {
       if (!certificates.length) {
         throw new Error('This user does not have certificates');
       }
-      return res.status(200).send(certificates);
+      await CourseCertificate.populate(certificates, [
+        'user',
+        'assignedPartner',
+      ]);
+      return res.send(certificates);
     } catch (error) {
+      console.error(error); // eslint-disable-line no-console
       return res.status(400).send({ error: error.message });
     }
   },
