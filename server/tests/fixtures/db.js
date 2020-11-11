@@ -47,7 +47,7 @@ const userTwo = {
       accessToken: jwt.sign({ id: userTwoId }, userAuth.secret),
     },
   ],
-  resetLink: jwt.sign({ id: 'joao@mail.com' }, userAuth.secretResetPassword),
+  resetLink: jwt.sign({ _id: userTwoId }, userAuth.secretResetPassword),
 };
 
 module.exports = {
