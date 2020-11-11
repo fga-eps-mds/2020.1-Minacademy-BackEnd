@@ -79,46 +79,41 @@ module.exports = {
   resetLink(email, resetLink) {
     const message = `
       <p>Olá, ficamos sabendo que você esqueceu a sua senha, mas não se preocupe, estamos aqui para ajudar.</p>
-      <p>Para ser redirecionado(a) para a página de redefinição de senha clique <a href="${link}/change/${resetLink}">aqui</a>.</p>`;
-    return {
-      from,
-      to: email,
-      subject: 'Redefinição de Senha',
-      html: html('Redefinição de Senha', message),
-    };
+      <p>Para ser redirecionado(a) à página de redefinição de senha clique <a href="${link}/change/${resetLink}">aqui</a>.</p>`;
+    return mailBuilder(email, 'Redefinição de Senha', message);
   },
 
   learnerPromotion(email) {
     const message = `
-      <p>Parabéns! Você foi promovida para Mentora na plataforma Minacademy, e o que muda agora?</p>
+      <p>Parabéns! Você foi promovida a Mentora na plataforma Minacademy. O que muda agora?</p>
       <p>A mentoria é um serviço voluntário, no qual aqueles que já tem conhecimento em Django se dispõem a ajudar quem está fazendo o tutorial. 
       O contato é feito a partir de um chat na própria plataforma.</p>
       <p>Caso queira procurar por aprendizes, basta ir à página de <a href="${link}/mentoria">Mentoria</a> e clicar em solicitar aprendizes.</p>
       <p>Quando suas aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consultá-lo na página de <a href="${link}/certificados">Certificados</a>.</p>
-      <p>Não se preocupe todo o seu histórico como Aprendiz ainda poderá ser consultado, assim como seu certificado mas agora você pode ajudar outras aprendizes sendo mentora delas.</p>`;
+      <p>O seu histórico como Aprendiz ainda poderá ser consultado, assim como seu certificado. Porém, agora você pode ajudar outras aprendizes sendo mentora delas.</p>`;
     return mailBuilder(email, 'Você foi promovida para Mentora', message);
   },
 
   courseConcluded(email, certificate, name) {
     const message = `
       <p>Parabéns ${name}! Você conseguiu concluir o tutorial da plataforma Minacademy</p>
-      <p>Você recebeu um certificado de Conclusão de Tutorial, e pode ser consultado <a href="${link}/certificado/${certificate}">aqui</a></p>
-      <p>A próxima vez que você entrar na nossa dashboard, você já será promovida automaticamente para uma Mentora validada, 
+      <p>Você recebeu um certificado de Conclusão de Tutorial, que pode ser consultado <a href="${link}/certificado/${certificate}">aqui</a>.</p>
+      <p>Na próxima vez que você entrar na nossa dashboard, você já será promovida automaticamente a uma Mentora validada, 
       e receberá um email com tudo que precisa saber sobre Mentoria.</p>
-      <p>Caso queira, você também pode navegar pela plataforma, e procurar pelo seu certificado em <a href="${link}/certificados">Certificados</a></p>`;
+      <p>Caso queira, você também pode navegar pela plataforma, e procurar pelo seu certificado em <a href="${link}/certificados">Certificados</a>.</p>`;
     return mailBuilder(email, 'Conclusão do tutorial', message);
   },
 
   courseConcludedForMentor(email, certificate, mentorName, learnerName) {
     const message = `
-      <p>Parabéns ${mentorName}! Sua aprendiz ${learnerName} concluiu o tutorial na plataforma Minacademy</p>
-      <p>Você recebeu um certificado de mentoria, e pode ser consultado <a href="${link}/certificado/${certificate}">aqui</a></p>
-      <p>Caso queira, você também pode navegar pela plataforma, e procurar pelo(s) seu(s) certificado(s) em <a href="${link}/certificados">Certificados</a></p>`;
+      <p>Parabéns ${mentorName}! Sua aprendiz ${learnerName} concluiu o tutorial na plataforma Minacademy!</p>
+      <p>Você recebeu um certificado de mentoria, que pode ser consultado <a href="${link}/certificado/${certificate}">aqui</a>.</p>
+      <p>Caso queira, você também pode navegar pela plataforma, e procurar pelo(s) seu(s) certificado(s) em <a href="${link}/certificados">Certificados</a>.</p>`;
     return mailBuilder(email, 'Aprendiz Concluiu o Tutorial', message);
   },
 
   unassignMentor(email, mentor) {
-    const message = `<p>Você se desvinculou do mentor ${mentor}. Com isso não será mais possível tirar dúvidas ou receber monitoria caso precise.</p>
+    const message = `<p>Você se desvinculou do mentor ${mentor}. Com isso, não será mais possível tirar dúvidas ou receber mentoria caso precise.</p>
       <p>Caso mude de idéia, você pode solicitar novamente um novo mentor com os seguintes passos:</p>
       <ul>
       <li>Acesse sua conta de usuário</li>
@@ -129,27 +124,27 @@ module.exports = {
     return mailBuilder(email, 'Cancelamento de Mentoria', message);
   },
   unassignLearner(email, learner) {
-    const message = `<p>A aprendiz ${learner} se desvinculou da sua mentoria. Portanto não há mais a necessidade de monitorá-la.</p>
+    const message = `<p>A aprendiz ${learner} foi desvinculada de sua mentoria. Portanto, não há mais a necessidade de mentorá-la.</p>
       <p>Caso deseje receber mais aprendizes, você pode solicitar uma nova aprendiz com os seguintes passos:</p>
       <ul>
-      <li>Acesse sua conta de usuário</li>
-      <li>Na guia "Dashboard" acesse o link "solicitar mentoria" na área de mentoria</li>
-      <li>Dentro da página de "Mentoria", clique no botão "Solicitar Aprendiz"</li>
+      <li>Acesse sua conta de usuário;</li>
+      <li>Na guia "Dashboard" acesse o link "solicitar mentoria" na área de mentoria;</li>
+      <li>Dentro da página de "Mentoria", clique no botão "Solicitar Aprendiz".</li>
       </ul>
-      <p>Caso alguma aprendiz tenha solicitado um mentor, ela poderá ser atribuída a você</p>
+      <p>Caso alguma aprendiz tenha solicitado um mentor, ela poderá ser atribuída a você.</p>
       <p>Caso não deseje ser vinculada(o) à outra aprendiz, clique no botão "Ficar indisponível".
-        Dessa forma não serão atribuídas outras aprendizes à sua monitoria.</p>`;
+        Dessa forma, não serão atribuídas outras aprendizes à sua mentoria.</p>`;
     return mailBuilder(email, 'Cancelamento de Mentoria', message);
   },
 
   assignMentor(email, mentor) {
     const message = `<p>Agora você possui um(a) mentor(a) chamado(a) ${mentor}.</p>
-    <p>Caso caso tenha dificuldades para continuar o tutorial, ou alguma dúvida, ou qualquer outra coisa que ache necessário o auxílio de um mentor(a)
-    você pode entrar em contato com seu mentor(a) a qualquer momento pelo ícone de chat que estará visível no canto inferior direito em toda a plataforma, desde que esteja vinculada a um mentor.</p>
+    <p>Caso caso tenha dificuldades para continuar o tutorial, ou alguma dúvida, ou qualquer outra coisa que torne necessário o auxílio de um mentor
+    você pode entrar em contato com seu mentor a qualquer momento pelo ícone de chat que estará visível no canto inferior direito em toda a plataforma, desde que esteja vinculada a um mentor.</p>
     <p>Caso deseje saber mais informações sobre seu(a) mentor(a) você pode clicar na guia "Mentoria" ou ainda 
-    clicando na guia "Dashboard" e acesse o link "monitoria" na área de mentoria.</p>
-    <p>Dentro da página de "Mentoria" você tem acesso as informações do nome e email do seu mentor</p>
-    <p>Caso deseje cancelar a mentoria, você pode, dentro da página de mentoria clicar no botão "Desvincular" para se desvincular do seu monitor atual.</p>
+    clicando na guia "Dashboard" e acesse o link "mentoria" na área de mentoria.</p>
+    <p>Dentro da página de "Mentoria" você tem acesso as informações do nome e email do seu mentor.</p>
+    <p>Caso deseje cancelar a mentoria, você pode, dentro da página de mentoria, clicar no botão "Desvincular" para se desvincular do seu mentor atual.</p>
     `;
     return mailBuilder(email, 'Vinculação de Mentor', message);
   },
@@ -161,7 +156,7 @@ module.exports = {
       mentoria, comprovando que você a auxiliou na conclusão do tutorial.</p>
     <p>Caso deseje saber mais informações sobre suas aprendizes você pode clicar na guia "Mentoria" ou ainda 
       clicando na guia "Dashboard" e acesse o link "acessar mentoria" na área de mentoria. Lá você terá acesso ao nome, email e progresso de cada aprendiz que está vinculado(a).</p>
-    <p>Dentro da página de Mentoria ainda é possível se desvincular de qualquer aprendiz, clicando no botão "Desvincular" associado à cada aprendiz.</p>
+    <p>Dentro da página de Mentoria ainda é possível se desvincular de qualquer aprendiz, clicando no botão "Desvincular" associado a cada aprendiz.</p>
     `;
     return mailBuilder(email, 'Vinculação de Aprendiz', message);
   },
