@@ -62,7 +62,8 @@ module.exports = {
             mentor.email,
             mentorCertificate._id,
             mentor.name,
-            `${user.name} ${user.lastname}`);
+            `${user.name} ${user.lastname}`,
+          );
           await transport.sendMail(mentorData);
         }
 
