@@ -1,4 +1,4 @@
-const link = 'http://localhost:3000';
+const link = process.env.FRONT_ENV_URL;
 const from = 'minAcademy@minAcademy.com';
 
 const mailBuilder = (email, subject, message) => { // eslint-disable-line arrow-body-style
