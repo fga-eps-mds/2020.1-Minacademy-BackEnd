@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const CourseCertificate = require('../models/CourseCertificate');
 const userAuth = require('../config/userAuth');
-const User = require('../models/User');
 const transport = require('../mail');
 const mail = require('../mail/data');
 
@@ -37,37 +36,11 @@ module.exports = {
         courseType: user.userType,
         key: jwt.sign({ _id: user._id }, userAuth.secret),
       };
-        const certificate = await CourseCertificate.create(certificateData);
-        user.courseCertificates.push(certificate._id);
-        await certificate.save();
-        await user.save();
-        const data = mail.courseConcluded(user.email, certificate._id, user.name);
-        await transport.sendMail(data);
+      
+      const data = mail.courseConcluded(user.email, certificate._id, user.name);
+      await transport.sendMail(data);
 
-        const mentor = await user
-          .populate('mentor')
-          .execPopulate()
-          .then((userData) => userData.mentor);
-        if (mentor) {
-          const mentorCertificateData = {
-            user: mentor._id,
-            courseType: `Mentor ${user._id}`,
-            key: jwt.sign({ _id: `${mentor._id} ${user._id}` }, userAuth.secret),
-          };
-          const mentorCertificate = await CourseCertificate.create(mentorCertificateData);
-          mentor.courseCertificates.push(mentorCertificate._id);
-          await mentorCertificate.save();
-          await mentor.save();
-          const mentorData = mail.courseConcludedForMentor(
-            mentor.email,
-            mentorCertificate._id,
-            mentor.name,
-            `${user.name} ${user.lastname}`,
-          );
-          await transport.sendMail(mentorData);
-        }
-
-      if (mentor) {
+     if (mentor) {
         certificateData.assignedPartner = mentor._id;
         const mentorCertificateData = {
           user: mentor._id,
@@ -84,6 +57,13 @@ module.exports = {
         mentor.courseCertificates.push(mentorCertificate._id);
         await mentorCertificate.save();
         await mentor.save();
+        const mentorData = mail.courseConcludedForMentor(
+          mentor.email,
+          mentorCertificate._id,
+          mentor.name,
+          `${user.name} ${user.lastname}`,
+        );
+        await transport.sendMail(mentorData);
       }
 
       const certificate = await new CourseCertificate(certificateData);
