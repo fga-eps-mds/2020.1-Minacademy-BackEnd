@@ -1,14 +1,15 @@
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
-var transport;
 
-if ( process.env.NODE_ENV === 'production' ){
+let transport;
+
+if (process.env.NODE_ENV === 'production') {
   transport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: 'mail.minacademy@gmail.com',
-      pass: process.env.MAIL_PASSWORD
-    }
+      pass: process.env.MAIL_PASSWORD,
+    },
   });
 } else {
   transport = nodemailer.createTransport({
