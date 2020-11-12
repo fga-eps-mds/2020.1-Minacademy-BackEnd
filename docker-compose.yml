@@ -13,7 +13,7 @@ services:
       PORT: 9000
       WAIT_HOSTS: mongo:27017
       MAILHOG_HOST: mailhog
-      ENV_URL: http://localhost:9000/
+      FRONT_ENV_URL: http://localhost:3000/
     depends_on:
       - mongo
     ports:
