@@ -21,8 +21,6 @@ module.exports = {
     try {
       if (req.body.gender === 'Male') req.body.userType = 'Mentor';
       const user = await User.create(req.body);
-      const accessToken = jwt.sign({ id: user._id }, userAuth.secret);
-      user.tokens = user.tokens.concat({ accessToken });
       const registerLink = jwt.sign(
         { _id: user._id },
         userAuth.secretRegister,
@@ -30,10 +28,9 @@ module.exports = {
       );
       user.registerLink = registerLink;
       await user.save();
-      res.cookie('auth_token', accessToken);
       const data = mail.registerConfirm(user.email, user.name, registerLink);
       await transport.sendMail(data);
-      return res.status(201).send({ user, accessToken });
+      return res.status(201).send({ user });
     } catch (err) {
       console.log('ERROR:', err); // eslint-disable-line no-console
       return res.status(400).send({ error: err.message });
@@ -44,6 +41,9 @@ module.exports = {
     const { email, password } = req.body;
     try {
       const user = await User.findOne({ email });
+      if (!user.isRegistered) {
+        throw new Error('User not confirm registered');
+      }
       if (!user) {
         throw new Error('Invalid Email or Password');
       }
@@ -179,6 +179,23 @@ module.exports = {
       user.showMessageConfirm = false;
       await user.save();
       res.send(user);
+    } catch (error) {
+      res.status(400).send({ error: error.message });
+    }
+  },
+
+  async registerUser(req, res) {
+    try {
+      const { registerLink } = req.body;
+      const decodeID = jwt.verify(registerLink, userAuth.secretRegister);
+      const user = await User.findOneAndUpdate({ _id: decodeID }, {
+        isRegistered: true,
+        registerLink: '',
+      });
+      if (!user) throw new Error('User does not registered');
+      if (!user.registerLink) throw new Error('User already confirm register');
+      user.save();
+      res.send({ message: 'You now registered' });
     } catch (error) {
       res.status(400).send({ error: error.message });
     }

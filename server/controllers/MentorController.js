@@ -61,13 +61,13 @@ module.exports = {
     try {
       if (!learnerID) throw new Error('Invalid learner ID');
       user.learners = user.learners.filter(
-        (learner) => learner.toString() !== learnerID,
+        (learnerToFind) => learnerToFind.toString() !== learnerID,
       );
-      await Learner.findByIdAndUpdate(learnerID, {
+      const learner = await Learner.findByIdAndUpdate(learnerID, {
         mentor: null,
         mentor_request: false,
-      });
-      const learner = await Learner.findById(learnerID);
+      },
+      { new: true });
       await user.save();
       await user.execPopulate('learners');
       const data = mail.unassignMentor(learner.email, learner.name, user.name, user.gender);
