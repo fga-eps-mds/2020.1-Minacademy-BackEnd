@@ -7,6 +7,12 @@ const { userOne, userTwo } = require('./fixtures/db');
 const User = require('../models/User');
 const request = supertest(app);
 
+<<<<<<< HEAD
+=======
+/* jest.mock("nodemailer");
+nodemailer.createTransport.mockReturnValue({ "sendMail": jest.fn() });
+ */
+>>>>>>> Mockando o nodemailer para fazer os testes passar
 describe('Users', () => {
   beforeAll(async () => {
     mongoose.connect(process.env.MONGO_URL, {
@@ -19,6 +25,14 @@ describe('Users', () => {
     await new User(userTwo).save();
   });
 
+<<<<<<< HEAD
+=======
+  /* beforeEach(() => {
+    sendMailMock.mockClear();
+    nodemailer.createTransport.mockClear();
+  }); */
+
+>>>>>>> Mockando o nodemailer para fazer os testes passar
   afterAll(async (done) => {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();

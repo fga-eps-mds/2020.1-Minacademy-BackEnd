@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars');
 
 let transport;
 
@@ -11,20 +10,21 @@ if (process.env.NODE_ENV === 'production') {
       pass: process.env.MAIL_PASSWORD,
     },
   });
-} else {
+} else if(process.env.NODE_ENV === 'test'){
+  const nodemailerMock = require('nodemailer-mock');
+  transport = nodemailerMock.createTransport({
+    host: 'qualquerhost',
+    port: 'qualquerporta',
+    auth: null,
+  });
+} 
+else {
   transport = nodemailer.createTransport({
     host: process.env.MAILHOG_HOST,
     port: '1025',
     auth: null,
   });
+  console.log("Entrou no ELSE DO MAILLLHOOOG");
 }
-
-const handlebarsOptions = {
-  viewEngine: 'express-handlebars',
-  viewPath: './templates/',
-  // extName: '.html'
-};
-
-transport.use('compile', hbs(handlebarsOptions));
 
 module.exports = transport;

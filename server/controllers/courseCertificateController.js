@@ -65,10 +65,10 @@ module.exports = {
 
       const certificate = await new CourseCertificate(certificateData);
       user.courseCertificates.push(certificate._id);
-      const data = mail.courseConcluded(user.email, certificate._id, user.name);
-      await transport.sendMail(data);
       await certificate.save();
       await user.save();
+      const data = mail.courseConcluded(user.email, certificate._id, user.name);
+      await transport.sendMail(data);
 
       res.send(certificate);
     } catch (error) {
