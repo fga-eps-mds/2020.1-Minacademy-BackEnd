@@ -144,7 +144,7 @@ module.exports = {
 
   unassignLearner(email, name, learner) {
     const message = `<p>Olá ${name}</p>
-      <p>A aprendiz ${learner} foi desvinculada de sua mentoria. Portanto, não há mais a necessidade de mentoreara-la.</p>
+      <p>A aprendiz ${learner} foi desvinculada de sua mentoria. Portanto, não há mais a necessidade de dar suporte a ela.</p>
       <p>Caso deseje receber mais aprendizes, você pode solicitar uma nova aprendiz com os seguintes passos:</p>
       <ul>
       <li>Acesse sua conta de usuário;</li>
