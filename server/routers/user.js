@@ -14,5 +14,6 @@ router.put('/forgotPassword', UserController.forgotPassword);
 router.put('/resetPassword', UserController.resetPassword);
 router.patch('/users', auth, UserController.editUser);
 router.put('/changeEmail', UserController.changeEmail);
+router.put('/users', UserController.registerUser);
 
 module.exports = router;

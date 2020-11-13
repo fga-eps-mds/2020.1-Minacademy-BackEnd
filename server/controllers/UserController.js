@@ -183,4 +183,21 @@ module.exports = {
       res.status(400).send({ error: error.message });
     }
   },
+
+  async registerUser(req, res) {
+    try {
+      const { registerLink } = req.body;
+      const decodeID = jwt.verify(registerLink, userAuth.secretRegister);
+      const user = await User.findOneAndUpdate({_id: decodeID,}, {
+        isRegistered: true,
+        registerLink: '',
+      });
+      if (!user) throw new Error ('User does not registered');
+      if (!user.registerLink) throw new Error ('User already confirm register');
+      user.save();
+      res.send({ message: 'You now registered' });
+    } catch (error) {
+      res.status(400).send({ error: error.message });
+    }
+  },
 };
