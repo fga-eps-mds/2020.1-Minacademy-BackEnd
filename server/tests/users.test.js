@@ -53,6 +53,33 @@ describe('Users', () => {
     expect(response.status).toEqual(200);
   });
 
+  it('should not be able to login', async () => {
+    const response = await request
+    .post('/api/users/login').send({
+      email: userOne.email,
+      password: userOne.password,
+    });
+    expect(response.status).toEqual(400);
+  });
+
+  it('Should not be able to confirm register', async () => {
+    const response = await request
+    .put('/api/users')
+    .send({
+      registerLink: 'invalid confirm',
+    });
+    expect(response.status).toEqual(400);
+  });
+
+  it('Should be able to confirm register', async () => {
+    const response = await request
+    .put('/api/users')
+    .send({
+      registerLink: userOne.registerLink,
+    });
+    expect(response.status).toEqual(200);
+  });
+
   it('should be able to login', async () => {
     const response = await request.post('/api/users/login').send({
       email: userOne.email,
