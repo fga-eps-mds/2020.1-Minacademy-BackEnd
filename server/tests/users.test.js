@@ -5,11 +5,7 @@ const app = require('../app');
 const userAuth = require('../config/userAuth');
 const { userOne, userTwo } = require('./fixtures/db');
 const User = require('../models/User');
-const nodemailer = require("nodemailer");
 const request = supertest(app);
-
-jest.mock("nodemailer");
-nodemailer.createTransport.mockReturnValue({ "sendMail": jest.fn() });
 
 describe('Users', () => {
   beforeAll(async () => {
@@ -21,11 +17,6 @@ describe('Users', () => {
     });
     await new User(userOne).save();
     await new User(userTwo).save();
-  });
-
-  beforeEach(() => {
-    sendMailMock.mockClear();
-    nodemailer.createTransport.mockClear();
   });
 
   afterAll(async (done) => {
@@ -89,7 +80,6 @@ describe('Users', () => {
       })
     expect(response.status).toEqual(200);
     expect(response.body.email).toEqual('new@email.com');
-    expect(sendMailMock).toHaveBeenCalled();
   });
 
   it('Should not be able to change email', async () => {
