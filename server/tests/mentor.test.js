@@ -142,6 +142,17 @@ describe('Mentor', () => {
       .expect(400);
 
     expect(response.body.user.isValidated).toBe(false);
-    expect(response.body.user.attempts).toBe(2);
+    expect(response.body.user.attempts).toBe(1);
+  });
+
+  it('Should not validate mentor two', async () => {
+    const response = await request
+      .patch('/api/mentors/validation')
+      .send()
+      .set('Cookie', [`auth_token=${mentorTwo.tokens[0].accessToken}`])
+      .expect(400);
+
+    expect(response.body.user.isValidated).toBe(false);
+    expect(response.body.user.attempts).toBe(0);
   });
 });

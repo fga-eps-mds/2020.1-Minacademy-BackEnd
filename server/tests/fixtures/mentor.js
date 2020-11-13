@@ -30,6 +30,7 @@ const mentorTwoId = new mongoose.Types.ObjectId();
 const mentorTwo = {
   isValidated: true,
   isAvailable: true,
+  attempts: 2,
   _id: mentorTwoId,
   learners: [learnerFiveId],
   name: 'Ana',
