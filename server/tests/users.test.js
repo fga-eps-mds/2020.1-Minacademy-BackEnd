@@ -5,8 +5,11 @@ const app = require('../app');
 const userAuth = require('../config/userAuth');
 const { userOne, userTwo } = require('./fixtures/db');
 const User = require('../models/User');
-
+const nodemailer = require("nodemailer");
 const request = supertest(app);
+
+jest.mock("nodemailer");
+nodemailer.createTransport.mockReturnValue({ "sendMail": jest.fn() });
 
 describe('Users', () => {
   beforeAll(async () => {
@@ -18,6 +21,11 @@ describe('Users', () => {
     });
     await new User(userOne).save();
     await new User(userTwo).save();
+  });
+
+  beforeEach(() => {
+    sendMailMock.mockClear();
+    nodemailer.createTransport.mockClear();
   });
 
   afterAll(async (done) => {
@@ -77,17 +85,18 @@ describe('Users', () => {
     const response = await request
       .put('/api/changeEmail')
       .send({
-        changeEmailLink : userOne.changeEmailLink,
+        changeEmailLink: userOne.changeEmailLink,
       })
     expect(response.status).toEqual(200);
     expect(response.body.email).toEqual('new@email.com');
+    expect(sendMailMock).toHaveBeenCalled();
   });
 
   it('Should not be able to change email', async () => {
     const response = await request
       .put('/api/changeEmail')
       .send({
-        changeEmailLink : userTwo.changeEmailLink,
+        changeEmailLink: userTwo.changeEmailLink,
       })
     expect(response.status).toEqual(400);
   });
@@ -179,42 +188,42 @@ describe('Users', () => {
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
       .expect(401);
 
-      expect(response.body.error).toEqual('Unauthorized');
+    expect(response.body.error).toEqual('Unauthorized');
   });
 
   it('Should not be able to request a password change', async () => {
     const response = await request.put('/api/forgotPassword')
-    .send({
-      email: 'invalid',
-    });
+      .send({
+        email: 'invalid',
+      });
     expect(response.status).toEqual(400);
   });
 
   it('Should be able to request password change', async () => {
     const response = await request.put('/api/forgotPassword')
-    .send({
-      email: userTwo.email,
-    });
+      .send({
+        email: userTwo.email,
+      });
     expect(response.status).toEqual(200);
   });
 
   it('Should not be able to change password', async () => {
     const response = await request.put('/api/resetPassword')
-    .send({
-      resetLink: userTwo.resetLink,
-      password: 'NewPassword123',
-      confirmPassword: 'NewPassword321',
-    });
+      .send({
+        resetLink: userTwo.resetLink,
+        password: 'NewPassword123',
+        confirmPassword: 'NewPassword321',
+      });
     expect(response.status).toEqual(400);
   });
 
   it('Should be able to change password', async () => {
     const response = await request.put('/api/resetPassword')
-    .send({
-      resetLink: userTwo.resetLink,
-      password: 'NewPassword123',
-      confirmPassword: 'NewPassword123',
-    });
+      .send({
+        resetLink: userTwo.resetLink,
+        password: 'NewPassword123',
+        confirmPassword: 'NewPassword123',
+      });
     expect(response.status).toEqual(200);
   });
 });
