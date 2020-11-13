@@ -21,8 +21,6 @@ module.exports = {
     try {
       if (req.body.gender === 'Male') req.body.userType = 'Mentor';
       const user = await User.create(req.body);
-      const accessToken = jwt.sign({ id: user._id }, userAuth.secret);
-      user.tokens = user.tokens.concat({ accessToken });
       const registerLink = jwt.sign(
         { _id: user._id },
         userAuth.secretRegister,
@@ -30,10 +28,9 @@ module.exports = {
       );
       user.registerLink = registerLink;
       await user.save();
-      res.cookie('auth_token', accessToken);
       const data = mail.registerConfirm(user.email, user.name, registerLink);
       await transport.sendMail(data);
-      return res.status(201).send({ user, accessToken });
+      return res.status(201).send({ user });
     } catch (err) {
       console.log('ERROR:', err); // eslint-disable-line no-console
       return res.status(400).send({ error: err.message });
