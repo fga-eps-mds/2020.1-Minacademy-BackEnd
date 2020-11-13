@@ -19,6 +19,7 @@ const userOne = {
   ],
   resetLink: jwt.sign({ id: 'maria@gmail.com' }, userAuth.secretResetPassword),
   changeEmailLink : jwt.sign({ _id: userOneId},userAuth.secretChangeEmail),
+  registerLink : jwt.sign({ _id: userOneId},userAuth.secretRegister),
   changeEmail: 'new@email.com',
 };
 
@@ -47,7 +48,7 @@ const userTwo = {
       accessToken: jwt.sign({ id: userTwoId }, userAuth.secret),
     },
   ],
-  resetLink: jwt.sign({ id: 'joao@mail.com' }, userAuth.secretResetPassword),
+  resetLink: jwt.sign({ _id: userTwoId }, userAuth.secretResetPassword),
 };
 
 module.exports = {

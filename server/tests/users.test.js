@@ -5,7 +5,6 @@ const app = require('../app');
 const userAuth = require('../config/userAuth');
 const { userOne, userTwo } = require('./fixtures/db');
 const User = require('../models/User');
-
 const request = supertest(app);
 
 describe('Users', () => {
@@ -35,6 +34,7 @@ describe('Users', () => {
       password: '44444dsasa',
       userType: 'Learner',
     });
+    // expect(response.status).toEqual(201);
     expect(response.status).toEqual(201);
   });
 
@@ -50,6 +50,33 @@ describe('Users', () => {
 
   it('should be able to get all users', async () => {
     const response = await request.get('/api/users');
+    expect(response.status).toEqual(200);
+  });
+
+  it('should not be able to login', async () => {
+    const response = await request
+    .post('/api/users/login').send({
+      email: userOne.email,
+      password: userOne.password,
+    });
+    expect(response.status).toEqual(400);
+  });
+
+  it('Should not be able to confirm register', async () => {
+    const response = await request
+    .put('/api/users')
+    .send({
+      registerLink: 'invalid confirm',
+    });
+    expect(response.status).toEqual(400);
+  });
+
+  it('Should be able to confirm register', async () => {
+    const response = await request
+    .put('/api/users')
+    .send({
+      registerLink: userOne.registerLink,
+    });
     expect(response.status).toEqual(200);
   });
 
@@ -70,14 +97,15 @@ describe('Users', () => {
         email: 'change@email.com',
       })
       .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`]);
-    expect(response.status).toEqual(400)
+    // expect(response.status).toEqual(200);
+    expect(response.status).toEqual(200)
   });
 
   it('Should be able to change email', async () => {
     const response = await request
       .put('/api/changeEmail')
       .send({
-        changeEmailLink : userOne.changeEmailLink,
+        changeEmailLink: userOne.changeEmailLink,
       })
     expect(response.status).toEqual(200);
     expect(response.body.email).toEqual('new@email.com');
@@ -87,7 +115,7 @@ describe('Users', () => {
     const response = await request
       .put('/api/changeEmail')
       .send({
-        changeEmailLink : userTwo.changeEmailLink,
+        changeEmailLink: userTwo.changeEmailLink,
       })
     expect(response.status).toEqual(400);
   });
@@ -179,14 +207,43 @@ describe('Users', () => {
       .set('Cookie', [`auth_token=${userOne.tokens[0].accessToken}`])
       .expect(401);
 
-      expect(response.body.error).toEqual('Unauthorized');
+    expect(response.body.error).toEqual('Unauthorized');
   });
 
   it('Should not be able to request a password change', async () => {
     const response = await request.put('/api/forgotPassword')
-    .send({
-      email: 'invalid',
-    });
+      .send({
+        email: 'invalid',
+      });
     expect(response.status).toEqual(400);
+  });
+
+  it('Should be able to request password change', async () => {
+    const response = await request.put('/api/forgotPassword')
+      .send({
+        email: userTwo.email,
+      });
+    // expect(response.status).toEqual(200);
+    expect(response.status).toEqual(200);
+  });
+
+  it('Should not be able to change password', async () => {
+    const response = await request.put('/api/resetPassword')
+      .send({
+        resetLink: userTwo.resetLink,
+        password: 'NewPassword123',
+        confirmPassword: 'NewPassword321',
+      });
+    expect(response.status).toEqual(400);
+  });
+
+  it('Should be able to change password', async () => {
+    const response = await request.put('/api/resetPassword')
+      .send({
+        resetLink: userTwo.resetLink,
+        password: 'NewPassword123',
+        confirmPassword: 'NewPassword123',
+      });
+    expect(response.status).toEqual(200);
   });
 });

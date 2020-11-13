@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars');
 
 let transport;
 
@@ -11,6 +10,13 @@ if (process.env.NODE_ENV === 'production') {
       pass: process.env.MAIL_PASSWORD,
     },
   });
+} else if (process.env.NODE_ENV === 'test') {
+  const nodemailerMock = require('nodemailer-mock'); // eslint-disable-line global-require
+  transport = nodemailerMock.createTransport({
+    host: 'qualquerhost',
+    port: 'qualquerporta',
+    auth: null,
+  });
 } else {
   transport = nodemailer.createTransport({
     host: process.env.MAILHOG_HOST,
@@ -18,13 +24,5 @@ if (process.env.NODE_ENV === 'production') {
     auth: null,
   });
 }
-
-const handlebarsOptions = {
-  viewEngine: 'express-handlebars',
-  viewPath: './templates/',
-  // extName: '.html'
-};
-
-transport.use('compile', hbs(handlebarsOptions));
 
 module.exports = transport;

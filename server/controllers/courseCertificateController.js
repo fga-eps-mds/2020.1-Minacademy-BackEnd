@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const CourseCertificate = require('../models/CourseCertificate');
 const userAuth = require('../config/userAuth');
+const transport = require('../mail');
+const mail = require('../mail/data');
 
 module.exports = {
   async generateCertificate(req, res) {
@@ -52,12 +54,21 @@ module.exports = {
         mentor.courseCertificates.push(mentorCertificate._id);
         await mentorCertificate.save();
         await mentor.save();
+        const mentorData = mail.courseConcludedForMentor(
+          mentor.email,
+          mentorCertificate._id,
+          mentor.name,
+          `${user.name} ${user.lastname}`,
+        );
+        await transport.sendMail(mentorData);
       }
 
       const certificate = await new CourseCertificate(certificateData);
       user.courseCertificates.push(certificate._id);
       await certificate.save();
       await user.save();
+      const data = mail.courseConcluded(user.email, certificate._id, user.name);
+      await transport.sendMail(data);
 
       res.send(certificate);
     } catch (error) {

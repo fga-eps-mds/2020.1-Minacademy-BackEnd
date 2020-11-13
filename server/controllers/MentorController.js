@@ -3,6 +3,8 @@ const Question = require('../models/Question');
 const { populateAnswerKeys } = require('../utils/answerKeysUtils');
 const { EXAM } = require('../utils/questionTypes');
 const { createChat } = require('./ChatController');
+const transport = require('../mail/index');
+const mail = require('../mail/data');
 
 module.exports = {
   async getLearners(req, res) {
@@ -36,6 +38,10 @@ module.exports = {
       await learner.save();
       await user.execPopulate('learners');
       await createChat([learner._id, user._id]);
+      const data = mail.assignMentor(learner.email, learner.name, user.name, user.gender);
+      const data2 = mail.assignLearner(user.email, learner.name);
+      await transport.sendMail(data);
+      await transport.sendMail(data2);
       /* eslint-disable no-unused-expressions */
       res.send({
         learner: user.learners[user.learners.length - 1],
@@ -55,14 +61,19 @@ module.exports = {
     try {
       if (!learnerID) throw new Error('Invalid learner ID');
       user.learners = user.learners.filter(
-        (learner) => learner.toString() !== learnerID,
+        (learnerToFind) => learnerToFind.toString() !== learnerID,
       );
-      await Learner.findByIdAndUpdate(learnerID, {
+      const learner = await Learner.findByIdAndUpdate(learnerID, {
         mentor: null,
         mentor_request: false,
-      });
+      },
+      { new: true });
       await user.save();
       await user.execPopulate('learners');
+      const data = mail.unassignMentor(learner.email, learner.name, user.name, user.gender);
+      const data2 = mail.unassignLearner(user.email, user.name, learner.name);
+      await transport.sendMail(data);
+      await transport.sendMail(data2);
       res.send(user.learners);
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
@@ -104,6 +115,8 @@ module.exports = {
       }
       await user.answers.save();
       await user.save();
+      const data = mail.validateMentor(user);
+      await transport.sendMail(data);
       if (!user.isValidated) throw new Error('Mentor does not have score to validate');
       res.status(200).send({ user, result: examResult.length, attempts: user.attempts });
     } catch (error) {

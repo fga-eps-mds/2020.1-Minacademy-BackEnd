@@ -1,6 +1,8 @@
 const Mentor = require('../models/Mentor');
 const User = require('../models/User');
 const { createChat } = require('./ChatController');
+const transport = require('../mail/index');
+const mail = require('../mail/data');
 
 module.exports = {
   async getMentor(req, res) {
@@ -44,6 +46,11 @@ module.exports = {
       await mentor.save();
       await createChat([learner._id, mentor._id]);
 
+      const data = mail.assignMentor(req.user.email, req.user.name, mentor.name, mentor.gender);
+      const data2 = mail.assignLearner(mentor.email, req.user.name);
+      await transport.sendMail(data);
+      await transport.sendMail(data2);
+
       return res.status(200).send({ mentorRequest: learner.mentor_request, mentor });
     } catch (err) {
       console.log(err); // eslint-disable-line no-console
@@ -73,8 +80,13 @@ module.exports = {
         isAvailable: false,
       });
       const oldMentor = learner.mentor;
+      const mentorMail = await Mentor.findById(learner.mentor);
       learner.mentor = null;
       await learner.save();
+      const data = mail.unassignMentor(req.user.email, req.user.name, mentorMail.name, mentorMail.gender); // eslint-disable-line max-len
+      const data2 = mail.unassignLearner(mentorMail.email, mentorMail.name, req.user.name);
+      await transport.sendMail(data);
+      await transport.sendMail(data2);
       res.send({ mentorRequest: learner.mentor_request, mentor: learner.mentor, oldMentor });
     } catch (error) {
       console.log(error); // eslint-disable-line no-console
@@ -97,6 +109,8 @@ module.exports = {
       user.isValidated = true;
       user.mentor_request = false;
       user.save();
+      const data = mail.learnerPromotion(user.email, user.name);
+      await transport.sendMail(data);
 
       res.status(200).send({ user });
     } catch (error) {
