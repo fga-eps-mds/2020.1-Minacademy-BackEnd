@@ -35,7 +35,7 @@ describe('Users', () => {
       userType: 'Learner',
     });
     // expect(response.status).toEqual(201);
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(201);
   });
 
   it('Should not be able to create user', async () => {
@@ -71,7 +71,7 @@ describe('Users', () => {
       })
       .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`]);
     // expect(response.status).toEqual(200);
-    expect(response.status).toEqual(400)
+    expect(response.status).toEqual(200)
   });
 
   it('Should be able to change email', async () => {
@@ -197,7 +197,7 @@ describe('Users', () => {
         email: userTwo.email,
       });
     // expect(response.status).toEqual(200);
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(200);
   });
 
   it('Should not be able to change password', async () => {

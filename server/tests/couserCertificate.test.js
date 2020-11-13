@@ -39,7 +39,7 @@ describe('CurserCertificate', ()=>{
       .set('Cookie', [`auth_token=${learnerTwo.tokens[0].accessToken}`])
     // expect(response.status).toEqual(200);
     // expect(response.body.user).toEqual(String(learnerTwo._id));
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(200);
     }
   );
 
@@ -54,7 +54,7 @@ describe('CurserCertificate', ()=>{
       .set('Cookie', [`auth_token=${learnerFour.tokens[0].accessToken}`])
     // expect(response.status).toEqual(200);
     // expect(response.body.user).toEqual(String(learnerFour._id));
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(200);
   })
 
   it('Should not generate a new certificate to a learner', async () =>{

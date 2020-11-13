@@ -78,7 +78,7 @@ describe('Mentor', () => {
       // .expect(200);
 
     // expect(response.body.learner).not.toBeNull();
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(200);
   });
 
   it('Should not assign a learner to mentor one', async () => {
@@ -100,7 +100,7 @@ describe('Mentor', () => {
 
     // const removed = response.body.some((item) => item.id === learnerOne._id);
     // expect(removed).toBeFalsy();
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(200);
   });
 
   it('Should not unassign a learner to mentor one', async () => {
@@ -129,7 +129,7 @@ describe('Mentor', () => {
       .send()
       .set('Cookie', [`auth_token=${mentorOne.tokens[0].accessToken}`])
       // .expect(200);
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(200);
     // expect(response.body.user.isValidated).toBe(true);
     // expect(response.body.result).toBe(10)
   });

@@ -57,7 +57,7 @@ describe('Learner', () => {
       .set('Cookie', [`auth_token=${learnerOne.tokens[0].accessToken}`]);
     // expect(response.status).toEqual(200);
     // expect(response.body).not.toBeNull();
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(200);
   });
 
   it('Should not be able to assign a mentor to learnerOne', async () => {
@@ -128,7 +128,7 @@ describe('Learner', () => {
       // .expect(200);
 
     // expect(response.body.mentor).toBeNull();
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(200);
   });
 
   it("Should not be able to unassign learnerTwo's mentor", async () => {
@@ -165,7 +165,7 @@ describe('Learner', () => {
       .send()
       .set('Cookie', [`auth_token=${learnerSix.tokens[0].accessToken}`]);
     // expect(response.status).toEqual(200);
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(200);
   });
 
 });
