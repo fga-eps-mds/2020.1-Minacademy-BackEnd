@@ -1,61 +1,29 @@
 const link = process.env.FRONT_ENV_URL;
 
 const mailBuilder = (email, subject, message) => { // eslint-disable-line arrow-body-style
+  const styledMessage = message.replace(/<p>/g, '<p style="color: #675775;font-weight: 300;font-family: Overpass;text-align: left;font-size: 1.5vw;">').replace(/<li>/g, '<li style="color: #675775;font-weight: 300;font-family: Overpass;text-align: left;font-size: 1.5vw;">')
   return {
     from: 'minAcademy@minAcademy.com',
     to: email,
     subject,
     html: `
       <html>
-        <body>
+        <body style="background-color: #F5F5F5;">
           <style>
             @import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
-            body {
-              background-color: #F5F5F5;
-            }
-            .box_text {
-              min-height: 50vh;
-              padding: 3em;
-              background: #FFFFFF;
-              box-shadow: 0px 5px 10px rgba(43, 43, 43, 0.05), 0px 15px 40px rgba(0, 0, 0, 0.02);
-              border-radius: 10px;
-              margin-bottom: 3rem;
-            }
-            hr {
-              border: 1px solid #9241C0;
-            }
-            h1 {
-              color: #9241C0;
-              box-sizing: border-box;
-              font-family: Overpass;
-            }
-            p {
-              color: #675775;
-              font-weight: 300;
-              font-family: Overpass;
-              text-align: left;
-              font-size: 1.5vw;
-            }
-            li {
-              color: #675775;
-              font-weight: 300;
-              font-family: Overpass;
-              text-align: left;
-              font-size: 1.5vw;
-            }
             img {
               position: absolute;
               right: 50px;
             }
           </style>
-          <div class="box_text">
+          <div class="box_text" style="min-height: 50vh;padding: 3em;background: #FFFFFF;box-shadow: 0px 5px 10px rgba(43, 43, 43, 0.05), 0px 15px 40px rgba(0, 0, 0, 0.02);border-radius: 10px;margin-bottom: 3rem;">
             <div class="email-header">
-              <img src='https://raw.githubusercontent.com/fga-eps-mds/2020.1-Minacademy-FrontEnd/0395eb8b413765722f8b9c766020562608276217/src/assets/images/minacademyLogo.svg'>
-              <h1>${subject}</h1>
+              <img src="https://raw.githubusercontent.com/fga-eps-mds/2020.1-Minacademy-FrontEnd/develop/src/assets/images/minademyLogo.png" alt="logo">
+              <h1 style="color: #9241C0;box-sizing: border-box;font-family: Overpass;">${subject}</h1>
             </div>
-            <hr>
-            ${message}
-            <p>Att.</p><p>Minacademy</p>
+            <hr style="border: 1px solid #9241C0;">
+            ${styledMessage}
+            <p style="color: #675775;font-weight: 300;font-family: Overpass;text-align: left;font-size: 1.5vw;">Att., equipe Minacademy</p>
           </div>
         </body>
       </html>`,
