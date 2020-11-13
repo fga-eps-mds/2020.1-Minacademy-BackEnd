@@ -70,7 +70,7 @@ module.exports = {
       const learner = await Learner.findById(learnerID);
       await user.save();
       await user.execPopulate('learners');
-      const data = mail.unassignMentor(learner.email,learner.name, user.name, user.gender);
+      const data = mail.unassignMentor(learner.email, learner.name, user.name, user.gender);
       const data2 = mail.unassignLearner(user.email, user.name, learner.name);
       await transport.sendMail(data);
       await transport.sendMail(data2);

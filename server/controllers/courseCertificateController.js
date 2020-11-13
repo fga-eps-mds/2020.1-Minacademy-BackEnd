@@ -36,11 +36,8 @@ module.exports = {
         courseType: user.userType,
         key: jwt.sign({ _id: user._id }, userAuth.secret),
       };
-      
-      const data = mail.courseConcluded(user.email, certificate._id, user.name);
-      await transport.sendMail(data);
 
-     if (mentor) {
+      if (mentor) {
         certificateData.assignedPartner = mentor._id;
         const mentorCertificateData = {
           user: mentor._id,
@@ -68,6 +65,8 @@ module.exports = {
 
       const certificate = await new CourseCertificate(certificateData);
       user.courseCertificates.push(certificate._id);
+      const data = mail.courseConcluded(user.email, certificate._id, user.name);
+      await transport.sendMail(data);
       await certificate.save();
       await user.save();
 

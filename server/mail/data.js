@@ -1,6 +1,6 @@
 const link = process.env.FRONT_ENV_URL;
-const from = 'minAcademy@minAcademy.com';
-const endMail = `<p>Att.</p><p>Minacademy</p>`
+// const from = 'minAcademy@minAcademy.com';
+const endMail = '<p>Att.</p><p>Minacademy</p>';
 
 const mailBuilder = (email, subject, message) => { // eslint-disable-line arrow-body-style
   return {
@@ -70,12 +70,7 @@ module.exports = {
       <p>Para efetivar a mudança, clique <a href="${link}/confirma-mudanca-email/${changeEmailLink}">aqui</a>.</p>
       <p>Caso você não tenha requisitado essa alteração, ignore essa mensagem.</p>
       ${endMail}`;
-    return {
-      from,
-      to: email,
-      subject: 'Redefinição de Email',
-      html: html('Redefinição de Email', message),
-    };
+    return mailBuilder(email, 'Redefinição de Email', message);
   },
 
   resetLink(email, resetLink) {
@@ -87,7 +82,7 @@ module.exports = {
   },
 
   learnerPromotion(email, name) {
-      const message = `
+    const message = `
         <p>Parabéns ${name}! Você foi promovida a Mentora na plataforma Minacademy. O que muda agora?</p>
         <p>A mentoria é um serviço voluntário, no qual aqueles que já tem conhecimento em Django se dispõem a ajudar quem está fazendo o tutorial. 
         O contato é feito a partir de um chat na própria plataforma.</p>
@@ -95,7 +90,7 @@ module.exports = {
         <p>Quando suas aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consultá-lo na página de "Certificados".</p>
         <p>O seu histórico como Aprendiz ainda poderá ser consultado, assim como seu certificado. Porém, agora você pode ajudar outras aprendizes sendo mentora delas.</p>
         ${endMail}`;
-    
+
     return mailBuilder(email, 'Você foi promovida para Mentora', message);
   },
 
@@ -119,9 +114,10 @@ module.exports = {
     return mailBuilder(email, 'Aprendiz Concluiu o Tutorial', message);
   },
 
-  unassignMentor(email,name, mentor, mentorGender) {
-    if(mentorGender==="Female"){
-      const message = `<p>Olá ${name}</p>
+  unassignMentor(email, name, mentor, mentorGender) {
+    let message;
+    if (mentorGender === 'Female') {
+      message = `<p>Olá ${name}</p>
         <p>Você se desvinculou da mentora ${mentor}. Com isso, não será mais possível tirar dúvidas ou receber mentoria caso precise.</p>
         <p>Caso mude de idéia, você pode solicitar novamente um novo mentor com os seguintes passos:</p>
         <ul>
@@ -132,7 +128,7 @@ module.exports = {
         <p>Assim que possível você receberá um novo monitor para te ajudar no que precisar para concluir o tutorial e adquirir seu certificado.</p>
         ${endMail}`;
     } else {
-      const message = `<p>Olá ${name}</p>
+      message = `<p>Olá ${name}</p>
         <p>Você se desvinculou do mentor ${mentor}. Com isso, não será mais possível tirar dúvidas ou receber mentoria caso precise.</p>
         <p>Caso mude de idéia, você pode solicitar novamente um novo mentor com os seguintes passos:</p>
         <ul>
@@ -162,9 +158,10 @@ module.exports = {
     return mailBuilder(email, 'Cancelamento de Mentoria', message);
   },
 
-  assignMentor(email,name, mentor, mentorGender) {
-    if(mentorGender==="Female"){
-      const message = `<p>Olá ${name}</p>
+  assignMentor(email, name, mentor, mentorGender) {
+    let message;
+    if (mentorGender === 'Female') {
+      message = `<p>Olá ${name}</p>
       <p>Agora você possui uma mentora chamada ${mentor}.</p>
       <p>Caso caso tenha dificuldades para continuar o tutorial, ou alguma dúvida, ou qualquer outra coisa que torne necessário o auxílio de um mentor
       você pode entrar em contato com sua mentora a qualquer momento pelo ícone de chat que estará visível no canto inferior direito em toda a plataforma, desde que esteja vinculada a um mentor.</p>
@@ -174,7 +171,7 @@ module.exports = {
       <p>Caso deseje cancelar a mentoria, você pode, dentro da página de mentoria, clicar no botão "Desvincular" para se desvincular da sua mentora atual.</p>
       ${endMail}`;
     } else {
-      const message = `<p>Olá ${name}</p>
+      message = `<p>Olá ${name}</p>
       <p>Agora você possui um mentor chamado ${mentor}.</p>
       <p>Caso caso tenha dificuldades para continuar o tutorial, ou alguma dúvida, ou qualquer outra coisa que torne necessário o auxílio de um mentor
       você pode entrar em contato com seu mentor a qualquer momento pelo ícone de chat que estará visível no canto inferior direito em toda a plataforma, desde que esteja vinculada a um mentor.</p>
@@ -198,12 +195,11 @@ module.exports = {
     ${endMail}`;
     return mailBuilder(email, 'Vinculação de Aprendiz', message);
   },
-  
-  
+
   validateMentor(user) {
     let message;
     if (user.isValidated) {
-      if(user.gender ==="Female"){
+      if (user.gender === 'Female') {
         message = `
         <p>Parabéns, você foi aprovada como mentora em nossa plataforma.</p>
         <p>A mentoria é um serviço voluntário, no qual aqueles que já tem conhecimento em Django se dispõem a ajudar quem está fazendo o tutorial. 
@@ -211,8 +207,7 @@ module.exports = {
         <p>Caso queira procurar por aprendizes, basta ir à página de Mentoria e clicar em solicitar aprendizes.</p>
         <p>Quando suas aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consultá-lo na página de Certificados.</p>
         ${endMail}`;
-
-      }else {
+      } else {
         message = `
         <p>Parabéns, você foi aprovado como mentor em nossa plataforma.</p>
         <p>A mentoria é um serviço voluntário, no qual aqueles que já tem conhecimento em Django se dispõem a ajudar quem está fazendo o tutorial. 
@@ -223,7 +218,7 @@ module.exports = {
       }
     } else {
       if (user.attempts > 0) { // eslint-disable-line no-lonely-if
-        if(user.gender ==="Female"){
+        if (user.gender === 'Female') {
           message = `
           <p>Infelizmente, você não foi aprovada como mentora em nossa plataforma.</p>
           <p>Mas não se preocupe, você ainda possui ${user.attempts} tentativa(s) para fazer a prova.</p>
@@ -237,15 +232,15 @@ module.exports = {
           ${endMail}`;
         }
       } else {
-        if(user.gender ==="Female"){
+        if (user.gender === 'Female') { // eslint-disable-line no-lonely-if
           message = `
           <p>Infelizmente, você não foi aprovada como mentora em nossa plataforma.</p>
           <p>Não te restam mais tentativas, logo não será possível que você se torne mentora. =(</p>
             ${endMail}`;
         } else {
           message = `
-          <p>Infelizmente, você não foi aprovada como mentora em nossa plataforma.</p>
-          <p>Não te restam mais tentativas, logo não será possível que você se torne mentora. =(</p>
+          <p>Infelizmente, você não foi aprovado como mentor em nossa plataforma.</p>
+          <p>Não te restam mais tentativas, logo não será possível que você se torne mentor. =(</p>
             ${endMail}`;
         }
       }

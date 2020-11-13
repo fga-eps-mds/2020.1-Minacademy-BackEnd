@@ -83,7 +83,7 @@ module.exports = {
       const mentorMail = await Mentor.findById(learner.mentor);
       learner.mentor = null;
       await learner.save();
-      const data = mail.unassignMentor(req.user.email,req.user.name, mentorMail.name, mentorMail.gender);
+      const data = mail.unassignMentor(req.user.email, req.user.name, mentorMail.name, mentorMail.gender); // eslint-disable-line max-len
       const data2 = mail.unassignLearner(mentorMail.email, mentorMail.name, req.user.name);
       await transport.sendMail(data);
       await transport.sendMail(data2);

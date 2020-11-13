@@ -23,21 +23,21 @@ module.exports = {
       const user = await User.create(req.body);
       const accessToken = jwt.sign({ id: user._id }, userAuth.secret);
       user.tokens = user.tokens.concat({ accessToken });
-      console.log("secretRegister", userAuth.secretRegister);
+      console.log('secretRegister', userAuth.secretRegister); // eslint-disable-line no-console
       const registerLink = jwt.sign(
         { _id: user._id },
         userAuth.secretRegister,
         { expiresIn: '60m' },
       );
       user.registerLink = registerLink;
-      console.log("USUARIOOOOOO:", user);
+      console.log('USUARIO:', user); // eslint-disable-line no-console
       await user.save();
       res.cookie('auth_token', accessToken);
       const data = mail.registerConfirm(user.email, user.name, registerLink);
       await transport.sendMail(data);
       return res.status(201).send({ user, accessToken });
     } catch (err) {
-      console.log("ERRRRROOORR",err);
+      console.log('ERROR:', err); // eslint-disable-line no-console
       return res.status(400).send({ error: err.message });
     }
   },
@@ -103,7 +103,6 @@ module.exports = {
       if (req.body.email !== req.user.email) {
         const index = updates.indexOf('email');
         if (index > -1) updates.splice(index, 1);
-        const { email } = req.user;
         const newEmail = req.body.email;
         req.user.changeEmail = newEmail;
         const changeEmailLink = jwt.sign(
