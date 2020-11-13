@@ -112,7 +112,7 @@ module.exports = {
           { expiresIn: '60m' },
         );
         req.user.changeEmailLink = changeEmailLink;
-        const data = mail.changeEmailLink(email, changeEmailLink);
+        const data = mail.changeEmailLink(newEmail, changeEmailLink);
         req.user.showMessageConfirm = true;
         await transport.sendMail(data);
       }

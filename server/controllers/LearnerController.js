@@ -46,7 +46,7 @@ module.exports = {
       await mentor.save();
       await createChat([learner._id, mentor._id]);
 
-      const data = mail.assignMentor(req.user.email, mentor.name);
+      const data = mail.assignMentor(req.user.email, req.user.name, mentor.name, mentor.gender);
       const data2 = mail.assignLearner(mentor.email, req.user.name);
       await transport.sendMail(data);
       await transport.sendMail(data2);
@@ -83,8 +83,8 @@ module.exports = {
       const mentorMail = await Mentor.findById(learner.mentor);
       learner.mentor = null;
       await learner.save();
-      const data = mail.unassignMentor(req.user.email, mentorMail.name);
-      const data2 = mail.unassignLearner(mentorMail.email, req.user.name);
+      const data = mail.unassignMentor(req.user.email,req.user.name, mentorMail.name, mentorMail.gender);
+      const data2 = mail.unassignLearner(mentorMail.email, mentorMail.name, req.user.name);
       await transport.sendMail(data);
       await transport.sendMail(data2);
       res.send({ mentorRequest: learner.mentor_request, mentor: learner.mentor, oldMentor });
@@ -109,7 +109,7 @@ module.exports = {
       user.isValidated = true;
       user.mentor_request = false;
       user.save();
-      const data = mail.learnerPromotion(user.email);
+      const data = mail.learnerPromotion(user.email, user.name);
       await transport.sendMail(data);
 
       res.status(200).send({ user });

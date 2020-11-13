@@ -38,7 +38,7 @@ module.exports = {
       await learner.save();
       await user.execPopulate('learners');
       await createChat([learner._id, user._id]);
-      const data = mail.assignMentor(learner.email, user.name);
+      const data = mail.assignMentor(learner.email, learner.name, user.name, user.gender);
       const data2 = mail.assignLearner(user.email, learner.name);
       await transport.sendMail(data);
       await transport.sendMail(data2);
@@ -70,8 +70,8 @@ module.exports = {
       const learner = await Learner.findById(learnerID);
       await user.save();
       await user.execPopulate('learners');
-      const data = mail.unassignMentor(learner.email, user.name);
-      const data2 = mail.unassignLearner(user.email, learner.name);
+      const data = mail.unassignMentor(learner.email,learner.name, user.name, user.gender);
+      const data2 = mail.unassignLearner(user.email, user.name, learner.name);
       await transport.sendMail(data);
       await transport.sendMail(data2);
       res.send(user.learners);
