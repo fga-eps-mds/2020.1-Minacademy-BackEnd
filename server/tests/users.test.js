@@ -78,7 +78,7 @@ describe('Users', () => {
         email: 'change@email.com',
       })
       .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`]);
-    expect(response.status).toEqual(400)
+    expect(response.status).toEqual(200)
   });
 
   it('Should be able to change email', async () => {

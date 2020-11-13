@@ -23,14 +23,12 @@ module.exports = {
       const user = await User.create(req.body);
       const accessToken = jwt.sign({ id: user._id }, userAuth.secret);
       user.tokens = user.tokens.concat({ accessToken });
-      console.log('secretRegister', userAuth.secretRegister); // eslint-disable-line no-console
       const registerLink = jwt.sign(
         { _id: user._id },
         userAuth.secretRegister,
         { expiresIn: '60m' },
       );
       user.registerLink = registerLink;
-      console.log('USUARIO:', user); // eslint-disable-line no-console
       await user.save();
       res.cookie('auth_token', accessToken);
       const data = mail.registerConfirm(user.email, user.name, registerLink);
@@ -121,6 +119,7 @@ module.exports = {
       if (req.body.email !== req.user.email) emailChange = true;
       res.send({ user: req.user, emailChange });
     } catch (error) {
+      console.log('Erro EditUser:', error); // eslint-disable-line no-console
       res.status(400).send(error);
     }
   },
