@@ -1,6 +1,10 @@
 # Minacademy Backend
 [![Maintainability](https://api.codeclimate.com/v1/badges/7e9dd952c8498b2ecdf8/maintainability)](https://codeclimate.com/github/fga-eps-mds/2020.1-Minacademy-BackEnd/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/7e9dd952c8498b2ecdf8/test_coverage)](https://codeclimate.com/github/fga-eps-mds/2020.1-Minacademy-BackEnd/test_coverage)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2020.1-Minacademy-BackEnd&metric=alert_status)](https://sonarcloud.io/dashboard?id=fga-eps-mds_2020.1-Minacademy-BackEnd) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2020.1-Minacademy-BackEnd&metric=code_smells)](https://sonarcloud.io/dashboard?id=fga-eps-mds_2020.1-Minacademy-BackEnd) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2020.1-Minacademy-BackEnd&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=fga-eps-mds_2020.1-Minacademy-BackEnd) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2020.1-Minacademy-BackEnd&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=fga-eps-mds_2020.1-Minacademy-BackEnd) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2020.1-Minacademy-BackEnd&metric=security_rating)](https://sonarcloud.io/dashboard?id=fga-eps-mds_2020.1-Minacademy-BackEnd)
+
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2020.1-Minacademy-BackEnd&metric=ncloc)](https://sonarcloud.io/dashboard?id=fga-eps-mds_2020.1-Minacademy-BackEnd) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2020.1-Minacademy-BackEnd&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=fga-eps-mds_2020.1-Minacademy-BackEnd)
+
 Repositório do BackEnd do projeto [Minacademy](https://github.com/fga-eps-mds/2020.1-Grupo4).
 
 ## Executando o projeto
