@@ -77,10 +77,12 @@ module.exports = {
       if (!learner.mentor) throw new Error('Learner does not have a mentor');
       await Mentor.findByIdAndUpdate(learner.mentor, {
         $pull: { learners: learner._id },
+        $push: { blacklist: learner._id},
         isAvailable: false,
       });
       const oldMentor = learner.mentor;
       const mentorMail = await Mentor.findById(learner.mentor);
+      learner.blacklist.push(learner.mentor);
       learner.mentor = null;
       await learner.save();
       const data = mail.unassignMentor(req.user.email, req.user.name, mentorMail.name, mentorMail.gender); // eslint-disable-line max-len

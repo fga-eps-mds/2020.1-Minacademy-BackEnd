@@ -66,8 +66,10 @@ module.exports = {
       const learner = await Learner.findByIdAndUpdate(learnerID, {
         mentor: null,
         mentor_request: false,
+        $push: { blacklist: user._id},
       },
       { new: true });
+      user.blacklist.push(learnerID);
       await user.save();
       await user.execPopulate('learners');
       const data = mail.unassignMentor(learner.email, learner.name, user.name, user.gender);
