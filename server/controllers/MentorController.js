@@ -21,11 +21,12 @@ module.exports = {
 
   async assignLearner(req, res) {
     const { user } = req;
+    if (!user.isValidated) throw new Error('Mentor not validated');
     user.isAvailable = true;
     try {
       await user.save();
       const learner = (
-        await Learner.find({ mentor_request: true, mentor: null }).sort({
+        await Learner.find({ mentor_request: true, mentor: null, _id: { $nin: user.blacklist } }).sort({
           createdAt: 'asc',
         })
       )[0];
