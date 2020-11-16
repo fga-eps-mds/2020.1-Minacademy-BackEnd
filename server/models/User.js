@@ -79,6 +79,10 @@ const UserSchema = new Schema(
     registerLink: {
       type: String,
     },
+    blacklist: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'blacklistedUser',
+    }],
 
   },
   { timestamps: true, discriminatorKey: 'userType' } // eslint-disable-line comma-dangle
