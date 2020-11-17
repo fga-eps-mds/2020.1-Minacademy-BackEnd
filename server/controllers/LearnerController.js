@@ -77,7 +77,7 @@ module.exports = {
       if (!learner.mentor) throw new Error('Learner does not have a mentor');
       await Mentor.findByIdAndUpdate(learner.mentor, {
         $pull: { learners: learner._id },
-        $push: { noAssociations: learner._id},
+        $push: { noAssociations: learner._id },
         isAvailable: false,
       });
       const oldMentor = learner.mentor;
@@ -103,13 +103,24 @@ module.exports = {
       const hasLearnerCertificate = reqUser.courseCertificates.length > 0;
 
       if (!hasLearnerCertificate) throw new Error('User did not conclude Tutorial');
-
-      const user = await User.findOneAndUpdate(
-        { _id },
-        { $set: { userType: 'Mentor' } }, { new: true },
+      if (reqUser.mentor) {
+        await User.findOneAndUpdate({ _id }, {
+          $pull: { learners: reqUser._id },
+          $push: { noAssociations: reqUser._id },
+          isAvailable: false,
+        });
+        reqUser.noAssociations.push(reqUser.mentor);
+        reqUser.mentor = null;
+        reqUser.save();
+      }
+      const user = await User.findByIdAndUpdate(
+        _id,
+        {
+          $set: { userType: 'Mentor' },
+          mentor_request: false,
+        }, { new: true },
       );
       user.isValidated = true;
-      user.mentor_request = false;
       user.save();
       const data = mail.learnerPromotion(user.email, user.name);
       await transport.sendMail(data);
