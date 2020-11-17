@@ -26,7 +26,7 @@ module.exports = {
     try {
       await user.save();
       const learner = (
-        await Learner.find({ mentor_request: true, mentor: null, _id: { $nin: user.blacklist } }).sort({
+        await Learner.find({ mentor_request: true, mentor: null, _id: { $nin: user.noAssociations } }).sort({
           createdAt: 'asc',
         })
       )[0];
@@ -67,10 +67,10 @@ module.exports = {
       const learner = await Learner.findByIdAndUpdate(learnerID, {
         mentor: null,
         mentor_request: false,
-        $push: { blacklist: user._id},
+        $push: { noAssociations: user._id},
       },
       { new: true });
-      user.blacklist.push(learnerID);
+      user.noAssociations.push(learnerID);
       await user.save();
       await user.execPopulate('learners');
       const data = mail.unassignMentor(learner.email, learner.name, user.name, user.gender);
