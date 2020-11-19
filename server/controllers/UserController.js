@@ -41,11 +41,11 @@ module.exports = {
     const { email, password } = req.body;
     try {
       const user = await User.findOne({ email });
-      if (!user.isRegistered) {
-        throw new Error('User not confirm registered');
-      }
       if (!user) {
         throw new Error('Invalid Email or Password');
+      }
+      if (!user.isRegistered) {
+        throw new Error('User not confirm registered');
       }
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
