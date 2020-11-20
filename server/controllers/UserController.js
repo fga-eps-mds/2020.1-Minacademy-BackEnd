@@ -194,8 +194,11 @@ module.exports = {
       });
       if (!user) throw new Error('User does not registered');
       if (!user.registerLink) throw new Error('User already confirm register');
-      user.save();
-      res.send({ message: 'You now registered' });
+      const accessToken = jwt.sign({ id: decodeID }, userAuth.secret);
+      user.tokens = user.tokens.concat({ accessToken });
+      await user.save();
+      res.cookie('auth_token', accessToken, { httpOnly: true });
+      res.send({ message: 'You now registered', user, accessToken });
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
