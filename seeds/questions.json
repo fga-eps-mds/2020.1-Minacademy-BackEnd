@@ -46,11 +46,11 @@
         "description": "Qual das alternativas abaixo não é um sistema operacional?",
         "alternatives": {
             "a": "Windows;",
-            "b": "Linux;",
-            "c": "IBM;",
+            "b": "IBM;",
+            "c": "Linux;",
             "d": "Mac OS X."
         },
-        "answer": "c",
+        "answer": "b",
         "type": "Tutorial"
     },
     {
@@ -137,10 +137,10 @@
         "alternatives": {
             "a": "Editar textos, como o Word, Google Docs, Bloco de Notas e afins;",
             "b": "Para dar comandos ao computador;",
-            "c": "Para visualizar, manipular e manusear arquivos;",
-            "d": "Para exportar arquivos com uma interface gráfica mais prática."
+            "c": "Para exportar arquivos com uma interface gráfica mais prática;",
+            "d": "Para ver e manipular arquivos em seu computador através de uma aplicação de texto."
         },
-        "answer": "c",
+        "answer": "d",
         "type": "Tutorial"
     },
     {
@@ -173,10 +173,10 @@
         "alternatives": {
             "a": "do réptil de mesmo nome;",
             "b": "do sobrenome de seu criador;",
-            "c": "do grupo humorístico britânico Monty Python;",
-            "d": "da versatilidade da linguagem de programação."
+            "c": "da versatilidade da linguagem de programação.",
+            "d": "do grupo humorístico britânico Monty Python;"
         },
-        "answer": "c",
+        "answer": "d",
         "type": "Tutorial"
     },
     {
@@ -226,11 +226,11 @@
         "description": "Julgue as seguintes assertivas diante do conhecimento sobre Strings. \nI. String é um vetor de caracteres. \nII. Como cada string é um vetor de caracteres, um vetor de strings é uma matriz de caracteres. \nÉ correto o que se afirma somente em:",
         "alternatives": {
             "a": "I;",
-            "b": "II;",
-            "c": "Ambas as alternativas, sendo II um complemento de I;",
-            "d": "Ambas as alternativas, porém II não complementa I."
+            "b": "Ambas as alternativas, sendo II um complemento de I;",
+            "c": "Ambas as alternativas, porém II não complementa I.",
+            "d": "II;"
         },
-        "answer": "c",
+        "answer": "b",
         "type": "Tutorial"
     },
     {
@@ -262,11 +262,11 @@
         "description": "O que é um Framework?",
         "alternatives": {
             "a": "Uma parte do trabalho do programador;",
-            "b": "Uma coleção organizada de funcionalidade úteis;",
-            "c": "Uma abstração que une códigos comuns entre vários projetos de software provendo uma funcionalidade genérica;",
+            "b": "Uma abstração que une códigos comuns entre vários projetos de software provendo uma funcionalidade genérica;",
+            "c": "Uma coleção organizada de funcionalidade úteis;",
             "d": "O que faz o FPS ficar alto."
         },
-        "answer": "c",
+        "answer": "b",
         "type": "Tutorial"
     },
     {
@@ -297,12 +297,12 @@
         },
         "description": "Qual é o banco de dados padrão do Django?",
         "alternatives": {
-            "a": "MySQL;",
+            "a": "SQLite3;",
             "b": "MongoDB;",
-            "c": "SQLite3;",
+            "c": "MySQL;",
             "d": "Banco de Dados Oracle."
         },
-        "answer": "c",
+        "answer": "a",
         "type": "Tutorial"
     },
     {
@@ -370,11 +370,11 @@
         "description": "Julgue os itens abaixo\n    I. Superuser é o(a) administrador(a) do site.\n    II. É possível ver a senha ao criar superuser.\n    III. O painel de controle de administração mostra todas as models criadas da sua aplicação Django",
         "alternatives": {
             "a": "Somente I é verdadeira",
-            "b": "Somente II é verdadeira",
-            "c": "Somente II é falsa",
+            "b": "Somente II é falsa",
+            "c": "Somente II é verdadeira",
             "d": "II e III são verdadeiras"
         },
-        "answer": "c",
+        "answer": "b",
         "type": "Tutorial"
     },
     {
@@ -406,11 +406,11 @@
         "description": "Dentre as seguintes opções, qual *não* é uma causa comum de erro no `pa_autoconfigure_django.py?`",
         "alternatives": {
             "a": "Esquecer de criar um token de API do PythonAnywhere",
-            "b": "Digitar a URL do seu GitHub incorretamente",
-            "c": "Ter o pip install em uma versão antiga",
+            "b": "Ter o pip install em uma versão antiga",
+            "c": "Digitar a URL do seu GitHub incorretamente",
             "d": "Não adicionar todos os seus arquivos ao Git e/ou você não fez o push deles para o GitHub"
         },
-        "answer": "c",
+        "answer": "b",
         "type": "Tutorial"
     },
     {
@@ -439,12 +439,12 @@
         "module": {
             "$oid":"5f652249fc13ae49f000000e"
         },
-        "description": "O que quer dizer o erro ao fim deste módulo?",
+        "description": "O que quer dizer o erro 'AtributeError: module object has no attribute post_list'",
         "alternatives": {
             "a": "Que você executou errado o código",
             "b": "Que o PythonAnywhere não achou o seu repositório no GitHub",
             "c": "Não existe nenhum atributo `post_list` no módulo views",
-            "d": "Que você não sabe programar"
+            "d": "Que post_list não é uma função"
         },
         "answer": "c",
         "type": "Tutorial"
@@ -461,10 +461,10 @@
         "alternatives": {
             "a": "Você esquecer de criar a view",
             "b": "A view não foi renderizada",
-            "c": "Ainda não existe o Template",
-            "d": "Que você não sabe programar"
+            "c": "Que você não sabe programar",
+            "d": "Ainda não existe o Template"
         },
-        "answer": "c",
+        "answer": "d",
         "type": "Tutorial"
     },
     {
@@ -497,8 +497,8 @@
         "alternatives": {
             "a": "Não possui argumento no head",
             "b": "Não possui argumento no body",
-            "c": "HTML não está sendo fechado",
-            "d": "Não possui </br>"
+            "c": "Não possui </br>",
+            "d": "HTML não está sendo fechado"
         },
         "answer": "c",
         "type": "Tutorial"
@@ -515,10 +515,10 @@
         "alternatives": {
             "a": "<Model>.objects.order_by()",
             "b": "<Model>.objects.order()",
-            "c": "<Model>.objects.order_by(‘atributo’)",
-            "d": "<Model>.objects.order(‘atributo’)"
+            "c": "<Model>.objects.order(‘atributo’)",
+            "d": "<Model>.objects.order_by(‘atributo’)"
         },
-        "answer": "c",
+        "answer": "d",
         "type": "Tutorial"
     },
     {
@@ -531,12 +531,12 @@
         },
         "description": "Qual o objetivo da views?",
         "alternatives": {
-            "a": "Conectar o banco de dados e templates",
+            "a": "Conectar modelos e templates",
             "b": "Conectar repositório e banco de dados",
-            "c": "Conectar modelos e templates",
+            "c": "Conectar o banco de dados e templates",
             "d": "Somente renderizar a interface de usuário"
         },
-        "answer": "c",
+        "answer": "a",
         "type": "Tutorial"
     },
     {
@@ -568,11 +568,11 @@
         "description": "O que são tags de template Django",
         "alternatives": {
             "a": "São tag usadas para utilizar parâmetros dentro do HTML",
-            "b": "São tags para transformar o HTML em python",
-            "c": "São tags usadas para exibir informações dinamicamente no HTML, utilizando Python",
+            "b": "São tags usadas para exibir informações dinamicamente no HTML, utilizando Python",
+            "c": "São tags para transformar o HTML em python",
             "d": "São tags para deixar usar HTML5, em vez de HTML"
         },
-        "answer": "c",
+        "answer": "b",
         "type": "Tutorial"
     },
     {
@@ -587,10 +587,10 @@
         "alternatives": {
             "a": "Apenas I está correta",
             "b": "Apenas II está correta",
-            "c": "I e II estão corretas",
-            "d": "I e II estão erradas"
+            "c": "I e II estão erradas",
+            "d": "I e II estão corretas"
         },
-        "answer": "c",
+        "answer": "d",
         "type": "Tutorial"
     },
     {
@@ -603,12 +603,12 @@
         },
         "description": "O que são blocos?",
         "alternatives": {
-            "a": "Tudo que está dentro de uma função",
+            "a": "Uma parte do código, que pode ser reaproveitada, sem a necessidade de repetir o código",
             "b": "Uma parte do código, que é estática, ou seja, não irá sofrer mundanças na aplicação",
-            "c": "Uma parte do código, que pode ser reaproveitada, sem a necessidade de repetir o código",
+            "c": "Tudo que está dentro de uma função",
             "d": "Uma parte do código que pode ser descartada, sem causar impactos no site"
         },
-        "answer": "c",
+        "answer": "a",
         "type": "Tutorial"
     },
     {
@@ -621,12 +621,12 @@
         },
         "description": "O que é PK",
         "alternatives": {
-            "a": "Principal Key, a chave principal do Django para acessar superuser",
-            "b": "Post Key, uma chave para poder acessar cada Post",
-            "c": "Primary Key, um identificador único de cada entrada do Banco de Dados",
+            "a": "Primary Key, um identificador único de cada entrada do Banco de Dados",
+            "b": "Principal Key, a chave principal do Django para acessar superuser",
+            "c": "Post Key, uma chave para poder acessar cada Post",
             "d": "Perma Key, um identificador imútavel do Django"
         },
-        "answer": "c",
+        "answer": "a",
         "type": "Tutorial"
     },
     {
@@ -641,10 +641,10 @@
         "alternatives": {
             "a": "Automatizar a postagem do blog",
             "b": "Fazer o trabalho do admin de criar posts",
-            "c": "Adicionar ou editar uma Model, de acordo com os inputs do usuário",
-            "d": "Adicionar ou editar um Post, de acordo com os inputs do usuário"
+            "c": "Adicionar ou editar um Post, de acordo com os inputs do usuário",
+            "d": "Adicionar ou editar uma Model, de acordo com os inputs do usuário"
         },
-        "answer": "c",
+        "answer": "d",
         "type": "Tutorial"
     },
     {
