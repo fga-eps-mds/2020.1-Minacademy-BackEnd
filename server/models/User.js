@@ -45,10 +45,11 @@ const UserSchema = new Schema(
       type: Boolean,
       select: false,
     },
-    noAssociations: {
-      type: [String],
+    noAssociations: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'blacklistedUser',
       select: false,
-    },
+    }],
     courseCertificates: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'courseCertificate',
