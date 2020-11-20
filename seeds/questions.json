@@ -137,8 +137,8 @@
         "alternatives": {
             "a": "Editar textos, como o Word, Google Docs, Bloco de Notas e afins;",
             "b": "Para dar comandos ao computador;",
-            "c": "Para exportar arquivos com uma interface gráfica mais prática.",
-            "d": "Para visualizar, manipular e manusear arquivos;"
+            "c": "Para exportar arquivos com uma interface gráfica mais prática;",
+            "d": "Para ver e manipular arquivos em seu computador através de uma aplicação de texto."
         },
         "answer": "d",
         "type": "Tutorial"
@@ -439,12 +439,12 @@
         "module": {
             "$oid":"5f652249fc13ae49f000000e"
         },
-        "description": "O que quer dizer o erro ao fim deste módulo?",
+        "description": "O que quer dizer o erro 'AtributeError: module object has no attribute post_list'",
         "alternatives": {
             "a": "Que você executou errado o código",
             "b": "Que o PythonAnywhere não achou o seu repositório no GitHub",
             "c": "Não existe nenhum atributo `post_list` no módulo views",
-            "d": "Que você não sabe programar"
+            "d": "Que post_list não é uma função"
         },
         "answer": "c",
         "type": "Tutorial"
