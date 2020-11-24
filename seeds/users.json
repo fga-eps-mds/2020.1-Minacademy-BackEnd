@@ -1,0 +1,92 @@
+[
+    {
+        "_id": {
+            "$oid": "5f4fedaefc13ae5380000000"
+        },
+        "name": "Rosalyn",
+        "email": "rosalyn@email.com",
+        "password": "teste123"
+    },
+    {
+        "_id": {
+            "$oid": "5f4fedaefc13ae5380000001"
+        },
+        "name": "Jacquie",
+        "email": "jacquie@email.com"
+    },
+    {
+        "_id": {
+            "$oid": "5f4fedaefc13ae5380000002"
+        },
+        "name": "Ami",
+        "email": "ami@email.com"
+    },
+    {
+        "_id": {
+            "$oid": "5f4fedaefc13ae5380000003"
+        },
+        "name": "Vassili",
+        "email": "vassili@email.com"
+    },
+    {
+        "_id": {
+            "$oid": "5f4fedaefc13ae5380000004"
+        },
+        "name": "Ag",
+        "email": "ag@email.com"
+    },
+    {
+        "_id" : {
+            "$oid": "5f90d06cc0761408c778ec06"
+        },
+        "completedModules" : [
+            "5f652249fc13ae49f0000000",
+            "5f652249fc13ae49f0000001", 
+            "5f652249fc13ae49f0000002",
+            "5f652249fc13ae49f0000003", 
+            "5f652249fc13ae49f0000004", 
+            "5f652249fc13ae49f0000005", 
+            "5f652249fc13ae49f0000006", 
+            "5f652249fc13ae49f0000007", 
+            "5f652249fc13ae49f0000008", 
+            "5f652249fc13ae49f0000009", 
+            "5f652249fc13ae49f000000b", 
+            "5f652249fc13ae49f000000c", 
+            "5f652249fc13ae49f000000a", 
+            "5f652249fc13ae49f000000d", 
+            "5f652249fc13ae49f000000e", 
+            "5f652249fc13ae49f000000f", 
+            "5f652249fc13ae49f0000010", 
+            "5f652249fc13ae49f0000011", 
+            "5f652249fc13ae49f0000012", 
+            "5f652249fc13ae49f0000013", 
+            "5f652249fc13ae49f0000014", 
+            "5f652249fc13ae49f0000015", 
+            "5f652249fc13ae49f0000016", 
+            "5f652249fc13ae49f0000017", 
+            "5f652249fc13ae49f0000018"
+        ],
+        "mentor_request" : false,
+        "mentor" : "5f93356c2a8adb116f2eff4e",
+        "about" : "",
+        "noAssociations" : [],
+        "courseCertificates" : [ 
+            "5f9b0e2dd7eedf019c17c763"
+        ],
+        "userType" : "Learner",
+        "email" : "teste7@teste.com",
+        "name" : "aprendiz7",
+        "lastname" : "aprendiz7",
+        "gender" : "Female",
+        "password" : "$2a$10$51fg1fyzOuM7WiDHMLgMSOQkd0z1Fyoabp3vuOubx7Tj/0Voz9fee",
+        "tokens" : [ 
+            {
+                "_id" : "5f90d06cc0761408c778ec07",
+                "accessToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmOTBkMDZjYzA3NjE0MDhjNzc4ZWMwNiIsImlhdCI6MTYwMzMyNjA2MH0.F6ScYAM9JbbLgwTsGK2gOzCHgUFGz1vSR61DbJXZWYo"
+            }
+        ],
+        "createdAt" : "2020-10-22T00:21:00.610Z",
+        "updatedAt" : "2020-10-29T18:47:09.534Z",
+        "__v" : 111
+    }
+]

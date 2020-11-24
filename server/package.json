@@ -1,0 +1,52 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@shelf/jest-mongodb": "^1.2.3",
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2",
+    "nodemailer": "^6.4.13",
+    "nodemailer-express-handlebars": "^4.0.0",
+    "nodemailer-mock": "^1.5.3",
+    "path": "^0.12.7",
+    "socket.io": "^2.3.0",
+    "socketio-jwt": "^4.6.2",
+    "validator": "^13.1.17"
+  },
+  "devDependencies": {
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.13.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.21.2",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.2",
+    "supertest": "^4.0.2"
+  },
+  "scripts": {
+    "test": "jest --detectOpenHandles --testTimeout=10000 --coverage",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

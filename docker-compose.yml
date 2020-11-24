@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+
+  server:
+    build: ./server
+    volumes:
+      - ./server:/node-app
+      - /node-app/node_modules
+    environment:
+      NODE_ENV: development
+      MONGO_URL: mongodb://admin:admin@mongo:27017/db?authSource=admin
+      PORT: 9000
+      WAIT_HOSTS: mongo:27017
+      MAILHOG_HOST: mailhog
+      FRONT_ENV_URL: http://localhost:3000/
+    depends_on:
+      - mongo
+    ports:
+      - '9000:9000'
+
+  mongo:
+    image: mongo:4.2.9
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    volumes:
+      - db:/data/db
+      - dump:/dump
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: db
+  
+  seeder:
+    build: ./seeds
+    volumes:
+        - ./seeds:/seeds
+
+  mailhog:
+    image: mailhog/mailhog
+    ports: 
+      - 1025:1025
+      - 8025:8025
+
+
+volumes:
+  db:
+  dump:
+
+
