@@ -9,6 +9,7 @@ const { modules, questions } = require('./fixtures/tutorial');
 const { userOne, userTwo } = require('./fixtures/db');
 const { learnerOne } = require('./fixtures/learner')
 const {answerKeyOne, answerKeyTwo} = require('./fixtures/answerKey');
+const { module2 } = require('./fixtures/module');
 
 describe('Modules', () => {
   beforeAll(async () => {
@@ -59,5 +60,6 @@ describe('Modules', () => {
       .send()
       .set('Cookie', [`auth_token=${userTwo.tokens[0].accessToken}`])
       .expect(200);
+    expect(response.body[1]).toEqual(module2);
   });
 });
