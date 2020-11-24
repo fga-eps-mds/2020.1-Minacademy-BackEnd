@@ -7,7 +7,6 @@ const mailBuilder = (email, subject, message) => { // eslint-disable-line arrow-
     to: email,
     subject,
     html: `
-      <html>
         <body style="background-color: #F5F5F5;">
           <style>
             @import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
@@ -25,8 +24,7 @@ const mailBuilder = (email, subject, message) => { // eslint-disable-line arrow-
             ${styledMessage}
             <p style="color: #675775;font-weight: 300;font-family: Overpass;text-align: left;font-size: 1.5vw;">Att., equipe Minacademy</p>
           </div>
-        </body>
-      </html>`,
+        </body>`,
   };
 };
 
