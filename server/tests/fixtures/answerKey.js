@@ -125,13 +125,13 @@ const answerKeyFour={
     },
     { // 03
       question: mongoose.Types.ObjectId('5f961e56fc13ae454d000016'),
-      alternative: 'a',
-      isCorrect: true,
+      alternative: 'b',
+      isCorrect: false,
     },
     { // 04
       question: mongoose.Types.ObjectId('5f961e56fc13ae454d000017'),
-      alternative: 'd',
-      isCorrect: true,
+      alternative: 'c',
+      isCorrect: false,
     },
     { // 05
       question: mongoose.Types.ObjectId('5f961e56fc13ae454d000018'),
