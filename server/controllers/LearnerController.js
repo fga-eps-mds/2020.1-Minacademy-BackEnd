@@ -16,6 +16,7 @@ module.exports = {
     }
   },
 
+  /* eslint-disable max-len */
   async assignMentor(req, res) {
     const learner = req.user;
 
@@ -23,14 +24,8 @@ module.exports = {
       learner.mentor_request = true;
       await learner.save();
       if (learner.mentor) throw new Error('Learner already has a mentor');
-      let mentor = (await Mentor.aggregate()
-        .match({ isAvailable: true, isValidated: true, _id: { $nin: learner.noAssociations } })
-        .group({
-          _id: '$_id',
-          size: { $max: '$learners' },
-          createdAt: { $min: '$createdAt' } // eslint-disable-line comma-dangle
-        })
-        .sort({ createdAt: 'asc', size: 1 }))[0];
+      let mentor = (await Mentor.aggregate().match({ isAvailable: true, isValidated: true, _id: { $nin: learner.noAssociations } })
+        .group({ _id: '$_id', size: { $max: '$learners' }, createdAt: { $min: '$createdAt' } }).sort({ createdAt: 'asc', size: 1 }))[0]; // eslint-disable-line comma-dangle
       /* eslint-disable quotes */
       /* eslint-disable quote-props */
       if (!mentor) throw new Error('There are no available mentors');
