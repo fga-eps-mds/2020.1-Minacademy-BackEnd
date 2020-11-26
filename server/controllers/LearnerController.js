@@ -104,21 +104,14 @@ module.exports = {
 
       if (!hasLearnerCertificate) throw new Error('User did not conclude Tutorial');
       if (reqUser.mentor) {
-        await User.findOneAndUpdate({ _id }, {
-          $pull: { learners: reqUser._id },
-          $push: { noAssociations: reqUser._id },
-          isAvailable: false,
-        });
+        await User.findOneAndUpdate({ _id }, { $pull: { learners: reqUser._id }, $push: { noAssociations: reqUser._id }, isAvailable: false, });
         reqUser.noAssociations.push(reqUser.mentor);
         reqUser.mentor = null;
         reqUser.save();
       }
       const user = await User.findByIdAndUpdate(
         _id,
-        {
-          $set: { userType: 'Mentor' },
-          mentor_request: false,
-        }, { new: true },
+        { $set: { userType: 'Mentor' }, mentor_request: false, }, { new: true },
       );
       user.isValidated = true;
       user.save();
