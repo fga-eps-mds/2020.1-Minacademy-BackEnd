@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const {userOne, userTwo} = require('./db');
 const {mentorOne, mentorTwo} = require ('./mentor');
-
 const answerKeyOneId = new mongoose.Types.ObjectId();
-
 const answerKeyOne={
   _id: answerKeyOneId,
   user: userOne._id,
@@ -26,7 +24,6 @@ const answerKeyOne={
   ],
   
 };
-
 const answerKeyTwoId = new mongoose.Types.ObjectId();
 const answerKeyTwo={
   _id: answerKeyTwoId,
@@ -49,7 +46,6 @@ const answerKeyTwo={
     },
   ],
 }
-
 const answerKeyThreeId = new mongoose.Types.ObjectId();
 const answerKeyThree={
   _id: answerKeyThreeId,
@@ -107,7 +103,6 @@ const answerKeyThree={
     },
   ]
 };
-
 const answerKeyFourId = new mongoose.Types.ObjectId();
 const answerKeyFour={
   _id: answerKeyFourId,
@@ -125,13 +120,13 @@ const answerKeyFour={
     },
     { // 03
       question: mongoose.Types.ObjectId('5f961e56fc13ae454d000016'),
-      alternative: 'b',
-      isCorrect: false,
+      alternative: 'a',
+      isCorrect: true,
     },
     { // 04
       question: mongoose.Types.ObjectId('5f961e56fc13ae454d000017'),
-      alternative: 'c',
-      isCorrect: false,
+      alternative: 'd',
+      isCorrect: true,
     },
     { // 05
       question: mongoose.Types.ObjectId('5f961e56fc13ae454d000018'),
@@ -165,8 +160,6 @@ const answerKeyFour={
     },
   ]
 };
-
-
 module.exports = {
   answerKeyOne,
   answerKeyOneId,
