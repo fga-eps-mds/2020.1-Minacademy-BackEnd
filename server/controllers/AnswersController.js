@@ -2,6 +2,7 @@ const Question = require('../models/Question');
 const AnswerKeys = require('../models/AnswerKey');
 const { isCorrect } = require('../utils/answerKeysUtils');
 
+/* eslint-disable max-len */
 module.exports = {
   async answerQuestion(req, res) {
     try {
