@@ -44,13 +44,13 @@ O contato é feito a partir de um chat na própria plataforma.</p>
 <p>Quando suas aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consultá-lo na página de Certificados.</p>
 `;
 
-const unvalidatedFemale = user => `
+const unvalidatedFemale = (user) => `
 <p>Infelizmente, você não foi aprovada como mentora em nossa plataforma.</p>
 <p>Mas não se preocupe, você ainda possui ${user.attempts} tentativa(s) para fazer a prova.</p>
 <p>Estamos torcendo por você!</p>
 `;
 
-const unvalidatedMale = user => `
+const unvalidatedMale = (user) => `
 <p>Infelizmente, você não foi aprovado como mentor em nossa plataforma.</p>
 <p>Mas não se preocupe, você ainda possui ${user.attempts} tentativa(s) para fazer a prova.</p>
 <p>Estamos torcendo por você!</p>
@@ -207,7 +207,7 @@ module.exports = {
     else if (!user.isValidated && user.gender === 'Male' && user.attempts > 0) message = unvalidatedMale(user);
     else if (!user.isValidated && user.gender === 'Male' && user.attempts === 0) message = unvalidatedMaleNoAttempts;
     else if (!user.isValidated && user.gender === 'Female' && user.attempts === 0) message = unvalidatedFemaleNoAttempts;
-  
+
     return mailBuilder(user.email, 'Validação de Mentor', message);
   },
 
