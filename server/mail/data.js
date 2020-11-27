@@ -7,7 +7,6 @@ const mailBuilder = (email, subject, message) => { // eslint-disable-line arrow-
     to: email,
     subject,
     html: `
-      <html>
         <body style="background-color: #F5F5F5;">
           <style>
             @import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
@@ -25,10 +24,47 @@ const mailBuilder = (email, subject, message) => { // eslint-disable-line arrow-
             ${styledMessage}
             <p style="color: #675775;font-weight: 300;font-family: Overpass;text-align: left;font-size: 1.5vw;">Att., equipe Minacademy</p>
           </div>
-        </body>
-      </html>`,
+        </body>`,
   };
 };
+
+const validatedFemale = `
+<p>Parabéns, você foi aprovada como mentora em nossa plataforma.</p>
+<p>A mentoria é um serviço voluntário, no qual aqueles que já tem conhecimento em Django se dispõem a ajudar quem está fazendo o tutorial. 
+O contato é feito a partir de um chat na própria plataforma.</p>
+<p>Caso queira procurar por aprendizes, basta ir à página de Mentoria e clicar em solicitar aprendizes.</p>
+<p>Quando suas aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consultá-lo na página de Certificados.</p>
+`;
+
+const validatedMale = `
+<p>Parabéns, você foi aprovado como mentor em nossa plataforma.</p>
+<p>A mentoria é um serviço voluntário, no qual aqueles que já tem conhecimento em Django se dispõem a ajudar quem está fazendo o tutorial. 
+O contato é feito a partir de um chat na própria plataforma.</p>
+<p>Caso queira procurar por aprendizes, basta ir à página de Mentoria e clicar em solicitar aprendizes.</p>
+<p>Quando suas aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consultá-lo na página de Certificados.</p>
+`;
+
+const unvalidatedFemale = (user) => `
+<p>Infelizmente, você não foi aprovada como mentora em nossa plataforma.</p>
+<p>Mas não se preocupe, você ainda possui ${user.attempts} tentativa(s) para fazer a prova.</p>
+<p>Estamos torcendo por você!</p>
+`;
+
+const unvalidatedMale = (user) => `
+<p>Infelizmente, você não foi aprovado como mentor em nossa plataforma.</p>
+<p>Mas não se preocupe, você ainda possui ${user.attempts} tentativa(s) para fazer a prova.</p>
+<p>Estamos torcendo por você!</p>
+`;
+
+const unvalidatedFemaleNoAttempts = `
+<p>Infelizmente, você não foi aprovada como mentora em nossa plataforma.</p>
+<p>Não te restam mais tentativas, logo não será possível que você se torne mentora. =(</p>
+`;
+
+const unvalidatedMaleNoAttempts = `
+<p>Infelizmente, você não foi aprovado como mentor em nossa plataforma.</p>
+<p>Não te restam mais tentativas, logo não será possível que você se torne mentor. =(</p>
+`;
 
 module.exports = {
   changeEmailLink(email, changeEmailLink) {
@@ -165,53 +201,13 @@ module.exports = {
 
   validateMentor(user) {
     let message;
-    if (user.isValidated) {
-      if (user.gender === 'Female') {
-        message = `
-        <p>Parabéns, você foi aprovada como mentora em nossa plataforma.</p>
-        <p>A mentoria é um serviço voluntário, no qual aqueles que já tem conhecimento em Django se dispõem a ajudar quem está fazendo o tutorial. 
-        O contato é feito a partir de um chat na própria plataforma.</p>
-        <p>Caso queira procurar por aprendizes, basta ir à página de Mentoria e clicar em solicitar aprendizes.</p>
-        <p>Quando suas aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consultá-lo na página de Certificados.</p>
-        `;
-      } else {
-        message = `
-        <p>Parabéns, você foi aprovado como mentor em nossa plataforma.</p>
-        <p>A mentoria é um serviço voluntário, no qual aqueles que já tem conhecimento em Django se dispõem a ajudar quem está fazendo o tutorial. 
-        O contato é feito a partir de um chat na própria plataforma.</p>
-        <p>Caso queira procurar por aprendizes, basta ir à página de Mentoria e clicar em solicitar aprendizes.</p>
-        <p>Quando suas aprendizes finalizarem o tutorial, você receberá um certificado de mentoria, e poderá consultá-lo na página de Certificados.</p>
-        `;
-      }
-    } else {
-      if (user.attempts > 0) { // eslint-disable-line no-lonely-if
-        if (user.gender === 'Female') {
-          message = `
-          <p>Infelizmente, você não foi aprovada como mentora em nossa plataforma.</p>
-          <p>Mas não se preocupe, você ainda possui ${user.attempts} tentativa(s) para fazer a prova.</p>
-          <p>Estamos torcendo por você!</p>
-          `;
-        } else {
-          message = `
-          <p>Infelizmente, você não foi aprovado como mentor em nossa plataforma.</p>
-          <p>Mas não se preocupe, você ainda possui ${user.attempts} tentativa(s) para fazer a prova.</p>
-          <p>Estamos torcendo por você!</p>
-          `;
-        }
-      } else {
-        if (user.gender === 'Female') { // eslint-disable-line no-lonely-if
-          message = `
-          <p>Infelizmente, você não foi aprovada como mentora em nossa plataforma.</p>
-          <p>Não te restam mais tentativas, logo não será possível que você se torne mentora. =(</p>
-            `;
-        } else {
-          message = `
-          <p>Infelizmente, você não foi aprovado como mentor em nossa plataforma.</p>
-          <p>Não te restam mais tentativas, logo não será possível que você se torne mentor. =(</p>
-            `;
-        }
-      }
-    }
+    if (user.isValidated && user.gender === 'Female') message = validatedFemale;
+    else if (user.isValidated && user.gender === 'Male') message = validatedMale;
+    else if (!user.isValidated && user.gender === 'Female' && user.attempts > 0) message = unvalidatedFemale(user);
+    else if (!user.isValidated && user.gender === 'Male' && user.attempts > 0) message = unvalidatedMale(user);
+    else if (!user.isValidated && user.gender === 'Male' && user.attempts === 0) message = unvalidatedMaleNoAttempts;
+    else if (!user.isValidated && user.gender === 'Female' && user.attempts === 0) message = unvalidatedFemaleNoAttempts;
+
     return mailBuilder(user.email, 'Validação de Mentor', message);
   },
 
