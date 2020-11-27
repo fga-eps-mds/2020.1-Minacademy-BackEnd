@@ -29,7 +29,9 @@
         "mentor_request" : true,
         "mentor" : null,
         "noAssociations" : [],
-        "courseCertificates" : [],
+        "courseCertificates" : [{
+                "$oid": "5fc07ddb1c18fa00154e0130"
+        }],
         "showMessageConfirm" : false,
         "isRegistered" : true,
         "userType" : "Learner",
@@ -38,14 +40,7 @@
         "email" : "user@email.com",
         "gender" : "Female",
         "password" : "$2a$10$tal0QZcxBwMjKuUEkKY8SORjbKsYobQFmtf9oNWUfSpls5pb.zIsC",
-        "tokens" : [ 
-            {
-                "_id" : {
-                "$oid": "5fb835bf5acb1c0015506210"
-                },
-                "accessToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJfaWQiOiI1ZmI4MzViMDVhY2IxYzAwMTU1MDYyMGYiLCJpYXQiOjE2MDU5MDc4ODgsImV4cCI6MTYwNTkxMTQ4OH0sImlhdCI6MTYwNTkwNzkwM30.sih0z4phSkwdkowhYhKKxVHWB25PtQ6VJ7CAChoCGXo"
-            }
-        ],
+        "tokens" : [],
         "__v" : 4,
         "registerLink" : ""
     }, 
@@ -70,25 +65,12 @@
         "isRegistered" : true,
         "gender" : "Female",
         "password" : "$2a$10$cfzgMfS.TqrYAo95.ChTNOGzbCt/y3XZyKPETncjeUSjr//p863g2",
-        "tokens" : [ 
-            {
-                "_id" : {
-                    "$oid": "5fb52c5dc519d10015f9790c"
-                }, 
-                "accessToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjUyYzA0YzUxOWQxMDAxNWY5NzkwYiIsImlhdCI6MTYwNTcwODg5M30.6hCxDaCoQ-oWXmMtC6xpkcR-hZnQ9o9GCA_7x5H3HEI"
-            }, 
-            {
-                "_id" : {
-                    "$oid": "5fb52d17c519d10015f97911"
-                },
-                "accessToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjUyYzA0YzUxOWQxMDAxNWY5NzkwYiIsImlhdCI6MTYwNTcwOTA3OX0.v7Rs4EimyUz9gai-cuZp4_wLjbDqWeCYh5H_DrwWgnA"
-            }
-        ],
+        "tokens" : [],
         "__v" : 7,
-        "registerLink" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI1MmMwNGM1MTlkMTAwMTVmOTc5MGIiLCJpYXQiOjE2MDU3MDg4MDQsImV4cCI6MTYwNTcxMjQwNH0.aZJ8esVm2veXdGlhDlSpDhy8peuPyIvhNSXIebO7-VU",
+        "registerLink" : "",
         "attempts" : 3,
-        "isAvailable" : true,
-        "isValidated" : true,
+        "isAvailable" : false,
+        "isValidated" : false,
         "learners" : []
     }
 ]
