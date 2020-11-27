@@ -5,7 +5,7 @@
 
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2020.1-Minacademy-BackEnd&metric=ncloc)](https://sonarcloud.io/dashboard?id=fga-eps-mds_2020.1-Minacademy-BackEnd) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2020.1-Minacademy-BackEnd&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=fga-eps-mds_2020.1-Minacademy-BackEnd)
 
-Repositório do BackEnd do projeto [Minacademy](https://github.com/fga-eps-mds/2020.1-Grupo4).
+Repositório do BackEnd do projeto [Minacademy](https://github.com/fga-eps-mds/2020.1-Minacademy-Wiki).
 
 ## Executando o projeto
 
