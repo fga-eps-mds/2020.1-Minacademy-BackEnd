@@ -1,0 +1,17 @@
+[
+  {
+    "_id" : "5fc07ddb1c18fa00154e0130",
+    "assignedPartner" : null,
+    "workload" : 6,
+    "user" : "5fb835b05acb1c001550620f",
+    "courseType" : "Learner",
+    "key" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI4MzViMDVhY2IxYzAwMTU1MDYyMGYiLCJpYXQiOjE2MDY0NTA2NTF9.Q1GTDeWMNTfoQS1naHGlOlAShuj5Z0st55B1sKh-PcE",
+    "createdAt" : {
+      "$date" : "2020-11-27T04:17:31.941Z"
+    },
+    "updatedAt" : {
+      "$date" : "2020-11-27T04:17:31.941Z"
+    },
+    "__v" : 0
+  }
+]
