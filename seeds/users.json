@@ -1,27 +1,5 @@
 [
     {
-        "_id": {
-            "$oid": "5f4fedaefc13ae5380000000"
-        },
-        "name": "Rosalyn",
-        "email": "rosalyn@email.com",
-        "password": "teste123"
-    },
-    {
-        "_id": {
-            "$oid": "5f4fedaefc13ae5380000001"
-        },
-        "name": "Jacquie",
-        "email": "jacquie@email.com"
-    },
-    {
-        "_id": {
-            "$oid": "5f4fedaefc13ae5380000002"
-        },
-        "name": "Ami",
-        "email": "ami@email.com"
-    },
-    {
         "_id" : {
             "$oid": "5fb835b05acb1c001550620f"
         },
@@ -29,9 +7,7 @@
         "mentor_request" : true,
         "mentor" : null,
         "noAssociations" : [],
-        "courseCertificates" : [{
-                "$oid": "5fc07ddb1c18fa00154e0130"
-        }],
+        "courseCertificates" : ["5fc07ddb1c18fa00154e0130"],
         "showMessageConfirm" : false,
         "isRegistered" : true,
         "userType" : "Learner",
@@ -43,20 +19,15 @@
         "tokens" : [],
         "__v" : 4,
         "registerLink" : ""
-    }, 
+    },
     {
         "_id" : {
             "$oid" : "5fb52c04c519d10015f9790b"
         },
         "completedModules" : [],
         "mentor_request" : false,
-        "mentor" : null,
         "noAssociations" : [],
-        "courseCertificates" : [ 
-            {
-                "$oid": "5fb835bf5acb1c0015506210"
-            }
-        ],
+        "courseCertificates" : ["5fb835bf5acb1c0015506210"],
         "showMessageConfirm" : false,
         "userType" : "Mentor",
         "name" : "mentor",
@@ -72,5 +43,52 @@
         "isAvailable" : false,
         "isValidated" : false,
         "learners" : []
+    },
+    {
+        "_id" : {
+            "$oid": "5fb835b05acb1c001550621e"
+        },
+        "completedModules" : [],
+        "mentor_request" : false,
+        "mentor" : {
+            "$oid" : "5fb52c04c519d10015f9791c"
+        },
+        "noAssociations" : [],
+        "courseCertificates" : [],
+        "showMessageConfirm" : false,
+        "isRegistered" : true,
+        "userType" : "Learner",
+        "name" : "chatTest",
+        "lastname" : "cypress",
+        "email" : "chatTest@email.com",
+        "gender" : "Female",
+        "password" : "$2a$10$tal0QZcxBwMjKuUEkKY8SORjbKsYobQFmtf9oNWUfSpls5pb.zIsC",
+        "tokens" : [],
+        "__v" : 4,
+        "registerLink" : ""
+    },
+    {
+        "_id" : {
+            "$oid" : "5fb52c04c519d10015f9791c"
+        },
+        "completedModules" : [],
+        "mentor_request" : false,
+        "noAssociations" : [],
+        "courseCertificates" : [],
+        "showMessageConfirm" : false,
+        "userType" : "Mentor",
+        "name" : "chatTest",
+        "lastname" : "cypress",
+        "email" : "chat@mentor.com",
+        "isRegistered" : true,
+        "gender" : "Female",
+        "password" : "$2a$10$cfzgMfS.TqrYAo95.ChTNOGzbCt/y3XZyKPETncjeUSjr//p863g2",
+        "tokens" : [],
+        "__v" : 7,
+        "registerLink" : "",
+        "attempts" : 2,
+        "isAvailable" : false,
+        "isValidated" : true,
+        "learners" : [{ "$oid": "5fb835b05acb1c001550621e" }]
     }
 ]
