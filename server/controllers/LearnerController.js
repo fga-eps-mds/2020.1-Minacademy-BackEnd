@@ -16,6 +16,7 @@ module.exports = {
     }
   },
 
+  /* eslint-disable max-len */
   async assignMentor(req, res) {
     const learner = req.user;
 
@@ -23,14 +24,8 @@ module.exports = {
       learner.mentor_request = true;
       await learner.save();
       if (learner.mentor) throw new Error('Learner already has a mentor');
-      let mentor = (await Mentor.aggregate()
-        .match({ isAvailable: true, isValidated: true, _id: { $nin: learner.noAssociations } })
-        .group({
-          _id: '$_id',
-          size: { $max: '$learners' },
-          createdAt: { $min: '$createdAt' } // eslint-disable-line comma-dangle
-        })
-        .sort({ createdAt: 'asc', size: 1 }))[0];
+      let mentor = (await Mentor.aggregate().match({ isAvailable: true, isValidated: true, _id: { $nin: learner.noAssociations } })
+        .group({ _id: '$_id', size: { $max: '$learners' }, createdAt: { $min: '$createdAt' } }).sort({ createdAt: 'asc', size: 1 }))[0]; // eslint-disable-line comma-dangle
       /* eslint-disable quotes */
       /* eslint-disable quote-props */
       if (!mentor) throw new Error('There are no available mentors');
@@ -95,7 +90,7 @@ module.exports = {
       res.status(400).send({ mentor: learner.mentor, error: error.message });
     }
   },
-
+  /* eslint-disable max-len */
   async promoteToMentor(req, res) {
     const { _id } = req.user;
     const reqUser = req.user;
@@ -104,21 +99,14 @@ module.exports = {
 
       if (!hasLearnerCertificate) throw new Error('User did not conclude Tutorial');
       if (reqUser.mentor) {
-        await User.findOneAndUpdate({ _id }, {
-          $pull: { learners: reqUser._id },
-          $push: { noAssociations: reqUser._id },
-          isAvailable: false,
-        });
+        await User.findOneAndUpdate({ _id }, { $pull: { learners: reqUser._id }, $push: { noAssociations: reqUser._id }, isAvailable: false });
         reqUser.noAssociations.push(reqUser.mentor);
         reqUser.mentor = null;
         reqUser.save();
       }
       const user = await User.findByIdAndUpdate(
         _id,
-        {
-          $set: { userType: 'Mentor' },
-          mentor_request: false,
-        }, { new: true },
+        { $set: { userType: 'Mentor' }, mentor_request: false }, { new: true },
       );
       user.isValidated = true;
       user.save();

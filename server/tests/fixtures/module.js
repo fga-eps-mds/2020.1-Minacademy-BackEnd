@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
 const module2 = {
-  _id: mongoose.Types.ObjectId('5f652249fc13ae49f0000001'),
-  titile: "Instalação",
+  __v: 0,
+  _id: '5f652249fc13ae49f0000001',
+  title: "Instalação",
   moduleNumber: 2,
+  completed: false,
 }
 
 module.exports = {
